@@ -1,0 +1,16 @@
+{
+  "name": "curriculoeu",
+  "version": "1.0.0",
+  "description": "Gerador de currículos para imigrantes brasileiros na Europa",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@vercel/node": "^3.0.0"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  }
+}

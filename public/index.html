@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CurrículoEU — Currículo profissional para trabalhar na Europa</title>
+  <meta name="description" content="Crie seu currículo adaptado para Portugal, Espanha, Reino Unido ou Alemanha em menos de 5 minutos. Feito para brasileiros imigrantes."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --g: #1a6b4a; --gl: #e8f5ef; --gm: #2d9e72;
+      --ink: #1a1a1a; --ink2: #4a4a4a; --ink3: #8a8a8a;
+      --line: #e8e8e0; --surf: #fafaf8; --white: #fff;
+      --r: 12px; --rs: 8px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--surf); color: var(--ink); }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,248,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: var(--g); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-dot { width: 8px; height: 8px; background: var(--g); border-radius: 50%; }
+    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-links a { font-size: 13px; color: var(--ink2); text-decoration: none; }
+    .nav-links a:hover { color: var(--g); }
+    .nav-cta { background: var(--g) !important; color: var(--white) !important; padding: 8px 18px; border-radius: 20px; font-weight: 500 !important; }
+    .nav-cta:hover { background: var(--gm) !important; }
+
+    /* HERO */
+    .hero { max-width: 760px; margin: 0 auto; padding: 80px 24px 60px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--gl); color: var(--g); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 24px; border: 1px solid #b8dece; }
+    .hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(28px, 5vw, 46px); font-weight: 700; line-height: 1.15; letter-spacing: -0.8px; margin-bottom: 18px; }
+    .hero h1 em { color: var(--g); font-style: normal; }
+    .hero p { font-size: 17px; color: var(--ink2); line-height: 1.7; max-width: 520px; margin: 0 auto 32px; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--g); color: var(--white); padding: 14px 28px; border-radius: var(--rs); font-size: 15px; font-weight: 600; font-family: 'Sora', sans-serif; text-decoration: none; border: none; cursor: pointer; transition: background .2s; }
+    .btn-primary:hover { background: var(--gm); }
+    .btn-ghost { background: var(--white); color: var(--ink2); padding: 14px 28px; border-radius: var(--rs); font-size: 15px; font-family: 'Sora', sans-serif; text-decoration: none; border: 1px solid var(--line); cursor: pointer; }
+    .btn-ghost:hover { border-color: var(--ink3); }
+    .hero-trust { margin-top: 32px; font-size: 13px; color: var(--ink3); display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+    /* COUNTRIES */
+    .countries { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 18px 24px; display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .c-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink2); font-weight: 500; }
+
+    /* SECTIONS */
+    .section { padding: 72px 24px; max-width: 960px; margin: 0 auto; }
+    .section-label { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g); margin-bottom: 10px; }
+    .section-title { font-family: 'Sora', sans-serif; font-size: clamp(22px, 3.5vw, 32px); font-weight: 700; letter-spacing: -.4px; margin-bottom: 12px; }
+    .section-sub { font-size: 15px; color: var(--ink2); line-height: 1.7; max-width: 500px; margin-bottom: 48px; }
+    .bg-white { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+    /* STEPS */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+    .step-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; }
+    .step-num { width: 36px; height: 36px; background: var(--gl); border-radius: 50%; font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; color: var(--g); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .step-card h3 { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .step-card p { font-size: 13px; color: var(--ink2); line-height: 1.6; }
+
+    /* SECTORS */
+    .sector-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .sector-card { border: 1px solid var(--line); border-radius: var(--rs); padding: 16px; background: var(--surf); text-align: center; }
+    .sector-icon { font-size: 28px; margin-bottom: 8px; }
+    .sector-name { font-size: 13px; font-weight: 500; }
+
+    /* PRICING */
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 640px; }
+    @media (max-width: 520px) { .pricing-grid { grid-template-columns: 1fr; } }
+    .price-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; }
+    .price-card.featured { border: 2px solid var(--g); }
+    .price-badge { display: inline-block; background: var(--g); color: var(--white); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; margin-bottom: 14px; }
+    .price-name { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .price-val { font-family: 'Sora', sans-serif; font-size: 32px; font-weight: 700; margin-bottom: 4px; }
+    .price-val span { font-size: 14px; font-weight: 400; color: var(--ink3); }
+    .price-sub { font-size: 12px; color: var(--ink3); margin-bottom: 20px; }
+    .price-list { list-style: none; margin-bottom: 24px; }
+    .price-list li { font-size: 13px; color: var(--ink2); padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+    .price-list li::before { content: '✓'; color: var(--g); font-weight: 700; flex-shrink: 0; }
+    .price-list li.off { color: var(--ink3); }
+    .price-list li.off::before { content: '×'; color: var(--ink3); }
+    .price-btn { display: block; width: 100%; padding: 12px; border-radius: var(--rs); font-size: 14px; font-family: 'Sora', sans-serif; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; border: none; }
+    .price-btn-free { background: var(--surf); color: var(--ink2); border: 1px solid var(--line); }
+    .price-btn-paid { background: var(--g); color: var(--white); }
+    .price-btn-paid:hover { background: var(--gm); }
+
+    /* FAQ */
+    .faq-list { max-width: 640px; }
+    .faq-item { border-bottom: 1px solid var(--line); padding: 20px 0; cursor: pointer; }
+    .faq-q { font-size: 15px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .faq-arrow { font-size: 18px; color: var(--ink3); transition: transform .2s; flex-shrink: 0; }
+    .faq-a { font-size: 14px; color: var(--ink2); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .2s; }
+    .faq-item.open .faq-arrow { transform: rotate(45deg); }
+    .faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: #aaa; padding: 40px 24px; text-align: center; font-size: 13px; line-height: 1.8; }
+    footer a { color: #ccc; text-decoration: none; }
+    .footer-logo { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+
+    /* MODAL */
+    #overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(10,10,10,0.55); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 16px; }
+    #overlay.open { display: flex; }
+    #modal { background: var(--white); border-radius: 16px; width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,0.2); }
+    .modal-close { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 22px; color: var(--ink3); cursor: pointer; z-index: 10; }
+    .modal-close:hover { color: var(--ink); }
+    .modal-inner { padding: 32px 28px 28px; }
+
+    /* FORM */
+    .pips { display: flex; gap: 5px; margin-bottom: 8px; }
+    .pip { height: 3px; flex: 1; background: var(--line); border-radius: 2px; transition: background .3s; }
+    .pip.on { background: var(--g); }
+    .step-lbl { font-size: 12px; color: var(--ink3); margin-bottom: 20px; }
+    .scr { display: none; }
+    .scr.on { display: block; }
+    .stitle { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -.3px; line-height: 1.25; margin-bottom: 5px; }
+    .ssub { font-size: 13px; color: var(--ink2); margin-bottom: 20px; line-height: 1.6; }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 12px; font-weight: 500; color: var(--ink2); margin-bottom: 5px; }
+    .field input, .field textarea { width: 100%; padding: 10px 13px; border: 1px solid var(--line); border-radius: var(--rs); font-size: 13px; font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); outline: none; transition: border .2s; }
+    .field input:focus, .field textarea:focus { border-color: var(--g); }
+    .field textarea { min-height: 72px; resize: vertical; line-height: 1.6; }
+    .hint { font-size: 11px; color: var(--ink3); margin-top: 4px; line-height: 1.5; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+    .chip { padding: 6px 12px; border: 1px solid var(--line); border-radius: 16px; font-size: 12px; color: var(--ink2); cursor: pointer; background: var(--white); transition: all .15s; font-family: 'Inter', sans-serif; }
+    .chip:hover { border-color: var(--gm); color: var(--g); }
+    .chip.on { background: var(--gl); border-color: var(--g); color: var(--g); font-weight: 500; }
+    .flag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .fcell { padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--rs); font-size: 13px; color: var(--ink2); cursor: pointer; background: var(--white); display: flex; align-items: center; gap: 8px; transition: all .15s; }
+    .fcell:hover { border-color: var(--gm); }
+    .fcell.on { background: var(--gl); border-color: var(--g); color: var(--g); font-weight: 500; }
+    .btnrow { display: flex; gap: 8px; margin-top: 20px; }
+    .bback { padding: 10px 16px; border: 1px solid var(--line); border-radius: var(--rs); font-size: 13px; font-family: 'Inter', sans-serif; color: var(--ink2); background: var(--white); cursor: pointer; }
+    .bback:hover { border-color: var(--ink3); }
+    .bnext { flex: 1; padding: 11px; border: none; border-radius: var(--rs); font-size: 14px; font-family: 'Sora', sans-serif; font-weight: 600; color: var(--white); background: var(--g); cursor: pointer; }
+    .bnext:hover { background: var(--gm); }
+    .bnext:disabled { background: var(--line); color: var(--ink3); cursor: default; }
+    .spinner { width: 38px; height: 38px; border: 3px solid var(--gl); border-top-color: var(--g); border-radius: 50%; animation: spin .75s linear infinite; margin: 0 auto 14px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .gen-wrap { text-align: center; padding: 36px 0; }
+    .result-tabs { display: flex; border: 1px solid var(--line); border-radius: var(--rs); overflow: hidden; margin-bottom: 14px; }
+    .rtab { flex: 1; padding: 8px; font-size: 12px; cursor: pointer; border: none; background: var(--white); color: var(--ink2); border-right: 1px solid var(--line); font-family: 'Inter', sans-serif; }
+    .rtab:last-child { border-right: none; }
+    .rtab.on { background: var(--g); color: var(--white); font-weight: 500; }
+    .cv-box { background: var(--surf); border: 1px solid var(--line); border-radius: var(--rs); padding: 18px; font-size: 12px; line-height: 1.85; min-height: 180px; white-space: pre-wrap; word-break: break-word; }
+    .cv-name { font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700; color: var(--g); margin-bottom: 3px; }
+    .cv-contact { font-size: 11px; color: var(--ink3); margin-bottom: 12px; }
+    .cv-sec { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g); margin: 12px 0 5px; padding-bottom: 4px; border-bottom: 1.5px solid var(--gl); }
+    .cv-txt { color: var(--ink2); font-size: 12px; line-height: 1.75; }
+    .prompt-box { background: #f5f3ee; border-radius: var(--rs); padding: 12px; font-size: 11px; color: var(--ink2); line-height: 1.8; font-family: monospace; white-space: pre-wrap; word-break: break-word; border: 1px solid var(--line); max-height: 280px; overflow-y: auto; }
+    .dl-btn { width: 100%; padding: 12px; border: none; border-radius: var(--rs); font-size: 14px; font-family: 'Sora', sans-serif; font-weight: 600; color: var(--white); background: var(--g); cursor: pointer; margin-top: 12px; }
+    .dl-btn:hover { background: var(--gm); }
+    .upsell { background: var(--gl); border-radius: var(--rs); padding: 12px 14px; margin-top: 10px; font-size: 12px; color: var(--g); line-height: 1.65; }
+    .err-box { background: #fff3f3; border: 1px solid #fbb; border-radius: var(--rs); padding: 11px 13px; font-size: 12px; color: #c33; line-height: 1.6; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo"><span class="logo-dot"></span>CurrículoEU</a>
+  <div class="nav-links">
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#precos">Preços</a>
+    <a href="#" class="nav-cta" onclick="openApp(event)">Criar grátis</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">🇧🇷 Para brasileiros que querem trabalhar na Europa</div>
+  <h1>O currículo certo para<br/><em>cada país europeu</em></h1>
+  <p>Adaptamos seu currículo ao formato, idioma e expectativas dos recrutadores em Portugal, Espanha, Reino Unido e Alemanha.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="openApp(event)">Criar meu currículo — grátis</button>
+    <a href="#como-funciona" class="btn-ghost">Como funciona</a>
+  </div>
+  <div class="hero-trust">
+    <span>✓ Sem necessidade de conta</span>
+    <span>✓ Resultado em 30 segundos</span>
+    <span>✓ Adaptado por setor</span>
+  </div>
+</section>
+
+<div class="countries">
+  <div class="c-item">🇵🇹 Portugal</div>
+  <div class="c-item">🇪🇸 Espanha</div>
+  <div class="c-item">🇬🇧 Reino Unido</div>
+  <div class="c-item">🇩🇪 Alemanha</div>
+</div>
+
+<section class="section" id="como-funciona">
+  <div class="section-label">Como funciona</div>
+  <h2 class="section-title">Simples como conversar<br/>com um especialista</h2>
+  <p class="section-sub">Você responde perguntas sobre sua experiência. A IA monta o currículo com as palavras certas para o mercado local.</p>
+  <div class="steps">
+    <div class="step-card"><div class="step-num">1</div><h3>Escolha país e setor</h3><p>Portugal, Espanha, Reino Unido ou Alemanha. Restaurante, hotel, limpeza, construção e mais.</p></div>
+    <div class="step-card"><div class="step-num">2</div><h3>Conta sua experiência</h3><p>Sem experiência formal? Trabalhos informais, ajuda familiar e cursos também contam.</p></div>
+    <div class="step-card"><div class="step-num">3</div><h3>A IA escreve por você</h3><p>Em segundos, seu currículo fica pronto no formato e idioma que os recrutadores locais esperam.</p></div>
+    <div class="step-card"><div class="step-num">4</div><h3>Baixe e envie</h3><p>PDF pronto para enviar por email ou anexar em portais de emprego europeus.</p></div>
+  </div>
+</section>
+
+<div class="bg-white">
+  <section class="section">
+    <div class="section-label">Setores</div>
+    <h2 class="section-title">Para o trabalho que você busca</h2>
+    <p class="section-sub">Cada setor tem prompts especializados que destacam o que os recrutadores locais mais valorizam.</p>
+    <div class="sector-grid">
+      <div class="sector-card"><div class="sector-icon">🍽️</div><div class="sector-name">Restaurante / café</div></div>
+      <div class="sector-card"><div class="sector-icon">🏨</div><div class="sector-name">Hotel / turismo</div></div>
+      <div class="sector-card"><div class="sector-icon">🧹</div><div class="sector-name">Limpeza</div></div>
+      <div class="sector-card"><div class="sector-icon">🏗️</div><div class="sector-name">Construção</div></div>
+      <div class="sector-card"><div class="sector-icon">🏠</div><div class="sector-name">Serviço doméstico</div></div>
+      <div class="sector-card"><div class="sector-icon">❤️</div><div class="sector-name">Cuidados / saúde</div></div>
+      <div class="sector-card"><div class="sector-icon">📦</div><div class="sector-name">Armazém / logística</div></div>
+      <div class="sector-card"><div class="sector-icon">🛍️</div><div class="sector-name">Comércio / loja</div></div>
+    </div>
+  </section>
+</div>
+
+<section class="section" id="precos">
+  <div class="section-label">Planos</div>
+  <h2 class="section-title">Comece grátis,<br/>cresça com o premium</h2>
+  <p class="section-sub">Um currículo grátis para experimentar. Assine o premium para carta de apresentação, Word editável e muito mais.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Gratuito</div>
+      <div class="price-val">R$0<span>/mês</span></div>
+      <div class="price-sub">Sem cartão, sem conta</div>
+      <ul class="price-list">
+        <li>1 currículo por sessão</li>
+        <li>4 países disponíveis</li>
+        <li>8 setores disponíveis</li>
+        <li class="off">Sem marca d'água</li>
+        <li class="off">Word editável</li>
+        <li class="off">Carta de apresentação</li>
+        <li class="off">LinkedIn adaptado</li>
+      </ul>
+      <button class="price-btn price-btn-free" onclick="openApp(event)">Começar grátis</button>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">Mais popular</div>
+      <div class="price-name">Premium</div>
+      <div class="price-val">R$19<span>,90/mês</span></div>
+      <div class="price-sub">Cancele quando quiser</div>
+      <ul class="price-list">
+        <li>Currículos ilimitados</li>
+        <li>4 países disponíveis</li>
+        <li>8 setores disponíveis</li>
+        <li>PDF sem marca d'água</li>
+        <li>Word editável</li>
+        <li>Carta de apresentação</li>
+        <li>LinkedIn adaptado</li>
+      </ul>
+      <!-- IMPORTANTE: troque pelo seu link real do Hotmart -->
+      <a href="https://pay.hotmart.com/SEU-LINK-AQUI" target="_blank" class="price-btn price-btn-paid">Assinar premium</a>
+    </div>
+  </div>
+</section>
+
+<div class="bg-white">
+  <section class="section">
+    <div class="section-label">Dúvidas</div>
+    <h2 class="section-title">Perguntas frequentes</h2>
+    <div class="faq-list" id="faq">
+      <div class="faq-item">
+        <div class="faq-q">O currículo vai estar no idioma do país? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Sim. Portugal em português europeu, Espanha em espanhol, Reino Unido em inglês, Alemanha em alemão — com o formato e vocabulário que os recrutadores locais esperam.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">E se eu não tiver experiência formal? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Sem problema. Você pode descrever trabalhos informais, ajuda familiar ou voluntariado. A IA valoriza essas experiências da forma mais profissional possível.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Preciso criar conta para usar? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Não. No plano gratuito, você gera seu currículo sem criar conta e sem cartão de crédito. O plano premium é ativado por email após o pagamento.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso criar currículos para mais de um país? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">No plano gratuito você gera 1 currículo por sessão. Com o premium, pode gerar quantos quiser — para países e setores diferentes — sem limite.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-logo">CurrículoEU</div>
+  <p>Feito para brasileiros que querem trabalhar com dignidade na Europa.</p>
+  <p style="margin-top:16px">
+    <!-- IMPORTANTE: troque pelo seu email real -->
+    <a href="mailto:oi@curriculoeu.com">oi@curriculoeu.com</a> &nbsp;·&nbsp;
+    <a href="#">Termos de uso</a> &nbsp;·&nbsp;
+    <a href="#">Privacidade</a>
+  </p>
+  <p style="margin-top:16px;font-size:12px;opacity:.5">© 2025 CurrículoEU</p>
+</footer>
+
+<!-- MODAL DO APP -->
+<div id="overlay" onclick="closeBg(event)">
+  <div id="modal">
+    <button class="modal-close" onclick="closeApp()">×</button>
+    <div class="modal-inner">
+      <div class="pips">
+        <div class="pip on" id="p0"></div><div class="pip" id="p1"></div>
+        <div class="pip" id="p2"></div><div class="pip" id="p3"></div>
+        <div class="pip" id="p4"></div>
+      </div>
+      <div class="step-lbl" id="slbl">Passo 1 de 5 — Dados pessoais</div>
+
+      <!-- S0 dados pessoais -->
+      <div class="scr on" id="s0">
+        <div class="stitle">Vamos criar seu currículo.</div>
+        <div class="ssub">5 minutos. Adaptado ao país e setor que você escolher.</div>
+        <div class="field"><label>Nome completo</label><input id="v-nome" placeholder="Maria da Silva" oninput="chk(0)"/></div>
+        <div class="row2">
+          <div class="field"><label>Idade</label><input id="v-idade" type="number" min="16" max="70" placeholder="28"/></div>
+          <div class="field"><label>WhatsApp / Tel</label><input id="v-tel" placeholder="+351 912 000 000"/></div>
+        </div>
+        <div class="field"><label>E-mail</label><input id="v-email" type="email" placeholder="seu@email.com" oninput="chk(0)"/></div>
+        <div class="btnrow"><button class="bnext" id="b0" disabled onclick="go(1)">Continuar</button></div>
+      </div>
+
+      <!-- S1 país -->
+      <div class="scr" id="s1">
+        <div class="stitle">Para qual país?</div>
+        <div class="ssub">O formato e idioma mudam conforme o destino.</div>
+        <div class="flag-grid">
+          <div class="fcell" data-c="pt" onclick="selC(this)"><span style="font-size:20px">🇵🇹</span>Portugal</div>
+          <div class="fcell" data-c="es" onclick="selC(this)"><span style="font-size:20px">🇪🇸</span>Espanha</div>
+          <div class="fcell" data-c="uk" onclick="selC(this)"><span style="font-size:20px">🇬🇧</span>Reino Unido</div>
+          <div class="fcell" data-c="de" onclick="selC(this)"><span style="font-size:20px">🇩🇪</span>Alemanha</div>
+        </div>
+        <div class="field" style="margin-top:12px"><label>Cidade de destino</label><input id="v-cidade" placeholder="Lisboa, Barcelona, Londres..."/></div>
+        <div class="field" style="margin-top:12px">
+          <label>Situação de visto / documento</label>
+          <div class="chips" id="chips-visto" style="margin-bottom:8px">
+            <div class="chip" data-v="Cidadania europeia" onclick="selV(this)">Cidadania europeia</div>
+            <div class="chip" data-v="Visto de trabalho" onclick="selV(this)">Visto de trabalho</div>
+            <div class="chip" data-v="Visto de procura de emprego" onclick="selV(this)">Procura de emprego</div>
+            <div class="chip" data-v="Autorização de residência" onclick="selV(this)">Autorização de residência</div>
+            <div class="chip" data-v="Em processo de regularização" onclick="selV(this)">Em regularização</div>
+          </div>
+          <input id="v-visto" placeholder="Ex: Cidadania italiana · Visto stamp 4 IE · AR PT..." style="margin-top:4px"/>
+          <div class="hint">Este dado aparece no topo do currículo — é a primeira coisa que o recrutador europeu verifica.</div>
+        </div>
+        <div class="btnrow"><button class="bback" onclick="go(0)">Voltar</button><button class="bnext" id="b1" disabled onclick="go(2)">Continuar</button></div>
+      </div>
+
+      <!-- S2 setor -->
+      <div class="scr" id="s2">
+        <div class="stitle">Setor e cargo</div>
+        <div class="ssub">O currículo será escrito com as palavras certas para esse mercado.</div>
+        <div class="field"><label>Setor</label>
+          <div class="chips" id="chips-s">
+            <div class="chip" data-s="restaurante" onclick="selS(this)">Restaurante / café</div>
+            <div class="chip" data-s="hotel" onclick="selS(this)">Hotel / turismo</div>
+            <div class="chip" data-s="limpeza" onclick="selS(this)">Limpeza</div>
+            <div class="chip" data-s="construcao" onclick="selS(this)">Construção</div>
+            <div class="chip" data-s="domestico" onclick="selS(this)">Serviço doméstico</div>
+            <div class="chip" data-s="cuidados" onclick="selS(this)">Cuidados / saúde</div>
+            <div class="chip" data-s="armazem" onclick="selS(this)">Armazém / logística</div>
+            <div class="chip" data-s="comercio" onclick="selS(this)">Comércio / loja</div>
+          </div>
+        </div>
+        <div class="field"><label>Cargo específico que busca</label><input id="v-cargo" placeholder="Garçom, Camareira, Auxiliar de cozinha..." oninput="chk(2)"/></div>
+        <div class="btnrow"><button class="bback" onclick="go(1)">Voltar</button><button class="bnext" id="b2" disabled onclick="go(3)">Continuar</button></div>
+      </div>
+
+      <!-- S3 experiência -->
+      <div class="scr" id="s3">
+        <div class="stitle">Experiência e habilidades</div>
+        <div class="ssub">Quanto mais detalhes, melhor o resultado.</div>
+        <div class="field">
+          <label>Experiências de trabalho</label>
+          <textarea id="v-exp" placeholder="Ex: Trabalhei 2 anos como garçom em São Paulo. Fiz 6 meses como auxiliar de cozinha em restaurante familiar." oninput="chk(3)"></textarea>
+          <div class="hint">Sem experiência formal? Mencione trabalhos informais, ajuda familiar ou voluntariado.</div>
+        </div>
+        <div class="field"><label>Idiomas</label>
+          <div class="chips" id="chips-l">
+            <div class="chip on" data-l="Português (nativo)">Português</div>
+            <div class="chip" data-l="Inglês" onclick="togL(this)">Inglês</div>
+            <div class="chip" data-l="Espanhol" onclick="togL(this)">Espanhol</div>
+            <div class="chip" data-l="Francês" onclick="togL(this)">Francês</div>
+            <div class="chip" data-l="Alemão" onclick="togL(this)">Alemão</div>
+          </div>
+        </div>
+        <div class="field"><label>Formação / estudos</label><input id="v-form" placeholder="Ensino médio completo, curso técnico..."/></div>
+        <div class="field"><label>Disponibilidade</label>
+          <div class="chips" id="chips-a">
+            <div class="chip" data-a="Manhã" onclick="tog(this)">Manhã</div>
+            <div class="chip" data-a="Tarde" onclick="tog(this)">Tarde</div>
+            <div class="chip" data-a="Noite" onclick="tog(this)">Noite</div>
+            <div class="chip" data-a="Fins de semana" onclick="tog(this)">Fins de semana</div>
+            <div class="chip" data-a="Tempo integral" onclick="tog(this)">Tempo integral</div>
+          </div>
+        </div>
+        <div class="btnrow"><button class="bback" onclick="go(2)">Voltar</button><button class="bnext" id="b3" disabled onclick="generate()">Gerar currículo com IA</button></div>
+      </div>
+
+      <!-- S4 resultado -->
+      <div class="scr" id="s4">
+        <div id="gen-wrap" class="gen-wrap">
+          <div class="spinner"></div>
+          <div style="font-size:14px;color:var(--ink2);margin-bottom:6px">Gerando seu currículo...</div>
+          <div style="font-size:12px;color:var(--ink3)" id="gen-step">Analisando setor e país de destino</div>
+        </div>
+        <div id="res-wrap" style="display:none">
+          <div class="stitle" style="margin-bottom:4px">Pronto! 🎉</div>
+          <div class="ssub" style="margin-bottom:14px">Adaptado para <span id="rlbl"></span> · <span id="rset"></span></div>
+          <div class="result-tabs">
+            <button class="rtab on" onclick="showTab('cv',this)">Currículo</button>
+            <button class="rtab" onclick="showTab('prompt',this)">Prompt usado</button>
+          </div>
+          <div id="tab-cv" class="cv-box">
+            <div class="cv-name" id="r-nome"></div>
+            <div class="cv-contact" id="r-contact"></div>
+            <div class="cv-sec" id="r-obj-lbl"></div>
+            <div class="cv-txt" id="r-obj"></div>
+            <div class="cv-sec" id="r-exp-lbl"></div>
+            <div class="cv-txt" id="r-exp-txt"></div>
+            <div class="cv-sec" id="r-edu-lbl"></div>
+            <div class="cv-txt" id="r-edu"></div>
+            <div class="cv-sec" id="r-sk-lbl"></div>
+            <div class="cv-txt" id="r-sk"></div>
+          </div>
+          <div id="tab-prompt" class="prompt-box" style="display:none"></div>
+          <div id="err-area"></div>
+          <button class="dl-btn" onclick="alert('No plano gratuito o PDF tem marca d\'água. Assine o Premium para versão limpa!')">Baixar PDF — versão gratuita</button>
+          <div class="upsell"><strong>Premium — R$19,90/mês</strong><br>PDF sem marca d'água · Word editável · Carta de apresentação · LinkedIn adaptado</div>
+          <div style="margin-top:12px;text-align:center"><button class="bback" onclick="restart()">Criar outro currículo</button></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const D = { nome:'',idade:'',tel:'',email:'',country:'',cidade:'',visto:'',setor:'',cargo:'',exp:'',langs:['Português (nativo)'],avail:[],form:'' };
+  const STEPS = ['Dados pessoais','País de destino','Setor e cargo','Experiência','Resultado'];
+  const CN = { pt:'Portugal', es:'Espanha', uk:'Reino Unido', de:'Alemanha' };
+  const FMT = {
+    pt:{ obj:'Objetivo Profissional', exp:'Experiência Profissional', edu:'Formação Académica', sk:'Competências' },
+    es:{ obj:'Perfil Profesional', exp:'Experiencia Laboral', edu:'Formación', sk:'Competencias' },
+    uk:{ obj:'Personal Statement', exp:'Work Experience', edu:'Education', sk:'Skills' },
+    de:{ obj:'Berufsprofil', exp:'Berufserfahrung', edu:'Ausbildung', sk:'Kenntnisse' }
+  };
+
+  function openApp(e) { e.preventDefault(); document.getElementById('overlay').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeApp() { document.getElementById('overlay').classList.remove('open'); document.body.style.overflow=''; }
+  function closeBg(e) { if(e.target===document.getElementById('overlay')) closeApp(); }
+
+  function chk(s) {
+    if(s===0) document.getElementById('b0').disabled=!(document.getElementById('v-nome').value.trim()&&document.getElementById('v-email').value.includes('@'));
+    if(s===2) document.getElementById('b2').disabled=!(D.country&&D.setor&&document.getElementById('v-cargo').value.trim());
+    if(s===3) document.getElementById('b3').disabled=document.getElementById('v-exp').value.trim().length<10;
+  }
+  function go(n) {
+    if(n===1){D.nome=document.getElementById('v-nome').value.trim();D.idade=document.getElementById('v-idade').value;D.tel=document.getElementById('v-tel').value.trim();D.email=document.getElementById('v-email').value.trim();}
+    if(n===3){D.cidade=document.getElementById('v-cidade').value.trim();D.visto=document.getElementById('v-visto').value.trim();}
+    document.querySelectorAll('.scr').forEach((s,i)=>s.classList.toggle('on',i===n));
+    for(let i=0;i<5;i++) document.getElementById('p'+i).classList.toggle('on',i<=n);
+    document.getElementById('slbl').textContent='Passo '+(n+1)+' de 5 — '+STEPS[n];
+    document.getElementById('modal').scrollTop=0;
+  }
+  function selC(el){document.querySelectorAll('.fcell').forEach(c=>c.classList.remove('on'));el.classList.add('on');D.country=el.dataset.c;document.getElementById('b1').disabled=false;}
+  function selS(el){document.querySelectorAll('#chips-s .chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');D.setor=el.dataset.s;chk(2);}
+  function togL(el){el.classList.toggle('on');D.langs=['Português (nativo)',...[...document.querySelectorAll('#chips-l .chip.on')].filter(c=>c.dataset.l!=='Português (nativo)').map(c=>c.dataset.l)];}
+  function selV(el){
+    document.querySelectorAll('#chips-visto .chip').forEach(c=>c.classList.remove('on'));
+    el.classList.add('on');
+    document.getElementById('v-visto').value=el.dataset.v;
+  }
+  function tog(el){el.classList.toggle('on');}
+
+  const MSGS=['Analisando setor e país','Adaptando formato local','Escrevendo objetivo profissional','Redigindo experiências','Revisando e finalizando'];
+
+  async function generate(){
+    D.cargo=document.getElementById('v-cargo').value.trim();
+    D.exp=document.getElementById('v-exp').value.trim();
+    D.form=document.getElementById('v-form').value.trim()||'Ensino médio completo';
+    D.avail=[...document.querySelectorAll('#chips-a .chip.on')].map(c=>c.dataset.a);
+    go(4);
+    document.getElementById('gen-wrap').style.display='block';
+    document.getElementById('res-wrap').style.display='none';
+    let mi=0;
+    const tick=setInterval(()=>{document.getElementById('gen-step').textContent=MSGS[Math.min(mi++,MSGS.length-1)];},1800);
+    const token=localStorage.getItem('cev_token')||'';
+    try{
+      const res=await fetch('/api/generate',{
+        method:'POST',
+        headers:{'Content-Type':'application/json',...(token?{'Authorization':'Bearer '+token}:{})},
+        body:JSON.stringify({nome:D.nome,idade:D.idade,tel:D.tel,email:D.email,country:D.country,cidade:D.cidade,visto:D.visto,setor:D.setor,cargo:D.cargo,exp:D.exp,langs:D.langs,avail:D.avail,form:D.form})
+      });
+      clearInterval(tick);
+      const data=await res.json();
+      if(!res.ok) throw new Error(data.error||'Erro '+res.status);
+      showResult(data.curriculo,data.plan);
+    }catch(err){clearInterval(tick);showResult(null,'free',err.message);}
+  }
+
+  function showResult(txt,plan,err){
+    document.getElementById('gen-wrap').style.display='none';
+    document.getElementById('res-wrap').style.display='block';
+    document.getElementById('rlbl').textContent=CN[D.country];
+    document.getElementById('rset').textContent=D.setor;
+    const f=FMT[D.country]||FMT.pt;
+    document.getElementById('r-nome').textContent=D.nome;
+    document.getElementById('r-contact').textContent=D.email+(D.tel?' · '+D.tel:'')+(D.cidade?' · '+D.cidade:'')+(D.visto?' · '+D.visto:'');
+    document.getElementById('r-obj-lbl').textContent=f.obj;
+    document.getElementById('r-exp-lbl').textContent=f.exp;
+    document.getElementById('r-edu-lbl').textContent=f.edu;
+    document.getElementById('r-sk-lbl').textContent=f.sk;
+    if(err||!txt){
+      document.getElementById('err-area').innerHTML='<div class="err-box">Não foi possível conectar à API. Verifique sua conexão e tente novamente.<br><small>'+( err||'Resposta vazia')+'</small></div>';
+      document.getElementById('r-obj').textContent='Profissional brasileiro(a) com experiência em '+D.setor+', buscando oportunidade como '+D.cargo+' em '+CN[D.country]+'.';
+      document.getElementById('r-exp-txt').textContent=D.exp;
+      document.getElementById('r-edu').textContent=D.form;
+      document.getElementById('r-sk').textContent='Idiomas: '+D.langs.join(', ')+(D.avail.length?'\nDisponibilidade: '+D.avail.join(', '):'');
+    }else{
+      document.getElementById('err-area').innerHTML='';
+      parseCV(txt,f);
+      document.getElementById('tab-prompt').textContent=txt;
+    }
+  }
+
+  function parseCV(txt,f){
+    const lines=txt.split('\n').filter(l=>l.trim());
+    let obj=[],exp=[],edu=[],sk=[],cur=obj;
+    for(const l of lines){
+      const ll=l.toLowerCase();
+      if(ll.includes('experiên')||ll.includes('experiencia')||ll.includes('work exp')||ll.includes('berufserf')){cur=exp;continue;}
+      if(ll.includes('forma')||ll.includes('education')||ll.includes('ausbildung')){cur=edu;continue;}
+      if(ll.includes('compet')||ll.includes('skills')||ll.includes('kenntnis')||ll.includes('idioma')||ll.includes('sprach')){cur=sk;continue;}
+      if(ll.includes('objetivo')||ll.includes('perfil')||ll.includes('statement')||ll.includes('profil')){cur=obj;continue;}
+      cur.push(l);
+    }
+    document.getElementById('r-obj').textContent=obj.join('\n')||txt.slice(0,250);
+    document.getElementById('r-exp-txt').textContent=exp.join('\n');
+    document.getElementById('r-edu').textContent=edu.join('\n')||D.form;
+    document.getElementById('r-sk').textContent=sk.join('\n')||D.langs.join(', ');
+  }
+
+  function showTab(t,btn){
+    document.querySelectorAll('.rtab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
+    document.getElementById('tab-cv').style.display=t==='cv'?'block':'none';
+    document.getElementById('tab-prompt').style.display=t==='prompt'?'block':'none';
+  }
+
+  function restart(){
+    document.querySelectorAll('.scr').forEach((s,i)=>s.classList.toggle('on',i===0));
+    for(let i=0;i<5;i++) document.getElementById('p'+i).classList.toggle('on',i===0);
+    document.getElementById('slbl').textContent='Passo 1 de 5 — Dados pessoais';
+    document.getElementById('modal').scrollTop=0;
+  }
+
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.addEventListener('click',()=>{
+      const open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!open) item.classList.add('open');
+    });
+  });
+
+  // Ativa token premium via URL ?token=...
+  const urlToken=new URLSearchParams(location.search).get('token');
+  if(urlToken){localStorage.setItem('cev_token',urlToken);history.replaceState({},'','/');}
+</script>
+</body>
+</html>
