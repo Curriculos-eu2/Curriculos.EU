@@ -1,3 +1,4 @@
+admin@macbookpro ~ % cat ~/Downloads/index.html
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -154,6 +155,20 @@
     .dl-btn:hover { background: var(--gm); }
     .upsell { background: var(--gl); border-radius: var(--rs); padding: 12px 14px; margin-top: 10px; font-size: 12px; color: var(--g); line-height: 1.65; }
     .err-box { background: #fff3f3; border: 1px solid #fbb; border-radius: var(--rs); padding: 11px 13px; font-size: 12px; color: #c33; line-height: 1.6; margin-top: 10px; }
+    .upsell-section { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .upsell-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--rs); padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .upsell-card.upsell-premium { border-color: var(--g); background: var(--gl); }
+    .upsell-left { display: flex; align-items: flex-start; gap: 9px; flex: 1; min-width: 0; }
+    .upsell-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .upsell-title { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+    .upsell-desc { font-size: 11px; color: var(--ink3); line-height: 1.4; }
+    .upsell-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .upsell-price { font-size: 13px; font-weight: 600; color: var(--ink2); white-space: nowrap; }
+    .upsell-price small { font-size: 10px; font-weight: 400; }
+    .upsell-btn { padding: 6px 12px; border: none; border-radius: 6px; font-size: 12px; font-family: 'Sora', sans-serif; font-weight: 600; cursor: pointer; background: var(--ink); color: #fff; white-space: nowrap; text-decoration: none; display: inline-block; }
+    .upsell-btn:hover { opacity: .85; }
+    .upsell-btn:disabled { background: var(--line); color: var(--ink3); cursor: default; }
+    .upsell-btn-green { background: var(--g); }
   </style>
 </head>
 <body>
@@ -426,9 +441,72 @@
           </div>
           <div id="tab-prompt" class="prompt-box" style="display:none"></div>
           <div id="err-area"></div>
+
           <button class="dl-btn" onclick="alert('No plano gratuito o PDF tem marca d\'água. Assine o Premium para versão limpa!')">Baixar PDF — versão gratuita</button>
-          <div class="upsell"><strong>Premium — R$19,90/mês</strong><br>PDF sem marca d'água · Word editável · Carta de apresentação · LinkedIn adaptado</div>
-          <div style="margin-top:12px;text-align:center"><button class="bback" onclick="restart()">Criar outro currículo</button></div>
+
+          <div class="upsell-section">
+
+            <div class="upsell-card" id="ups-carta">
+              <div class="upsell-left">
+                <div class="upsell-icon">✉️</div>
+                <div>
+                  <div class="upsell-title">Carta de apresentação</div>
+                  <div class="upsell-desc">Gerada para o mesmo cargo e país. Muitas vagas exigem.</div>
+                </div>
+              </div>
+              <div class="upsell-right">
+                <span class="upsell-price">€2,90</span>
+                <button class="upsell-btn" id="btn-carta" onclick="gerarCarta()">Gerar</button>
+              </div>
+            </div>
+
+            <div class="upsell-card" id="ups-idioma">
+              <div class="upsell-left">
+                <div class="upsell-icon">🌍</div>
+                <div>
+                  <div class="upsell-title">Versão em segundo idioma</div>
+                  <div class="upsell-desc">Candidature em outro país com um clique.</div>
+                </div>
+              </div>
+              <div class="upsell-right">
+                <select id="sel-idioma" style="font-size:11px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--white);color:var(--ink2);margin-right:6px">
+                  <option value="uk">Inglês (UK)</option>
+                  <option value="es">Espanhol</option>
+                  <option value="de">Alemão</option>
+                  <option value="pt">Português (PT)</option>
+                </select>
+                <span class="upsell-price">€1,90</span>
+                <button class="upsell-btn" id="btn-idioma" onclick="gerarSegundoIdioma()">Gerar</button>
+              </div>
+            </div>
+
+            <div class="upsell-card upsell-premium">
+              <div class="upsell-left">
+                <div class="upsell-icon">⭐</div>
+                <div>
+                  <div class="upsell-title">Premium — tudo ilimitado</div>
+                  <div class="upsell-desc">Currículos · Cartas · Word sem marca d'água · LinkedIn</div>
+                </div>
+              </div>
+              <div class="upsell-right">
+                <span class="upsell-price" style="color:var(--g)">€4,90<small>/mês</small></span>
+                <a href="https://pay.hotmart.com/SEU-LINK-AQUI" target="_blank" class="upsell-btn upsell-btn-green">Assinar</a>
+              </div>
+            </div>
+
+          </div>
+
+          <div id="carta-result" style="display:none;margin-top:14px">
+            <div style="font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:6px">Carta de apresentação gerada:</div>
+            <div class="cv-box" id="carta-box" style="white-space:pre-wrap"></div>
+          </div>
+
+          <div id="idioma-result" style="display:none;margin-top:14px">
+            <div style="font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:6px" id="idioma-lbl">Versão em inglês:</div>
+            <div class="cv-box" id="idioma-box" style="white-space:pre-wrap"></div>
+          </div>
+
+          <div style="margin-top:14px;text-align:center"><button class="bback" onclick="restart()">Criar outro currículo</button></div>
         </div>
       </div>
 
@@ -553,6 +631,61 @@
     for(let i=0;i<5;i++) document.getElementById('p'+i).classList.toggle('on',i===0);
     document.getElementById('slbl').textContent='Passo 1 de 5 — Dados pessoais';
     document.getElementById('modal').scrollTop=0;
+    document.getElementById('carta-result').style.display='none';
+    document.getElementById('idioma-result').style.display='none';
+  }
+
+  async function gerarCarta(){
+    const btn=document.getElementById('btn-carta');
+    btn.disabled=true; btn.textContent='Gerando...';
+    const token=localStorage.getItem('cev_token')||'';
+    const CN2=CN[D.country];
+    const langMap={pt:'português europeu',es:'espanhol',uk:'English',de:'Deutsch'};
+    const systemPrompt=`Você é especialista em recrutamento em ${CN2}. Escreva uma carta de apresentação profissional em ${langMap[D.country]} para uma vaga de ${D.cargo} no setor de ${D.setor}. Tom adequado ao mercado local. Máximo 3 parágrafos. Escreva APENAS o texto da carta.`;
+    const userPrompt=`Candidato: ${D.nome}
+Cargo: ${D.cargo} | Setor: ${D.setor} | País: ${CN2}
+Experiência: ${D.exp}
+Idiomas: ${D.langs.join(', ')}
+${D.visto?'Visto: '+D.visto:''}`;
+    try{
+      const res=await fetch('/api/generate',{
+        method:'POST',
+        headers:{'Content-Type':'application/json',...(token?{'Authorization':'Bearer '+token}:{})},
+        body:JSON.stringify({nome:D.nome,idade:D.idade,tel:D.tel,email:D.email,country:D.country,cidade:D.cidade,visto:D.visto,setor:D.setor,cargo:D.cargo,exp:D.exp,langs:D.langs,avail:D.avail,form:D.form,_override:{system:systemPrompt,user:userPrompt}})
+      });
+      const data=await res.json();
+      document.getElementById('carta-box').textContent=data.curriculo||data.error||'Erro ao gerar.';
+      document.getElementById('carta-result').style.display='block';
+      document.getElementById('modal').scrollTop=9999;
+    }catch(e){
+      document.getElementById('carta-box').textContent='Erro ao conectar. Tente novamente.';
+      document.getElementById('carta-result').style.display='block';
+    }
+    btn.disabled=false; btn.textContent='Gerar';
+  }
+
+  async function gerarSegundoIdioma(){
+    const btn=document.getElementById('btn-idioma');
+    const country2=document.getElementById('sel-idioma').value;
+    btn.disabled=true; btn.textContent='Gerando...';
+    const token=localStorage.getItem('cev_token')||'';
+    try{
+      const res=await fetch('/api/generate',{
+        method:'POST',
+        headers:{'Content-Type':'application/json',...(token?{'Authorization':'Bearer '+token}:{})},
+        body:JSON.stringify({nome:D.nome,idade:D.idade,tel:D.tel,email:D.email,country:country2,cidade:D.cidade,visto:D.visto,setor:D.setor,cargo:D.cargo,exp:D.exp,langs:D.langs,avail:D.avail,form:D.form})
+      });
+      const data=await res.json();
+      const nomes={pt:'Versão em português europeu:',es:'Versão em espanhol:',uk:'Versão em inglês:',de:'Versão em alemão:'};
+      document.getElementById('idioma-lbl').textContent=nomes[country2]||'Segunda versão:';
+      document.getElementById('idioma-box').textContent=data.curriculo||data.error||'Erro ao gerar.';
+      document.getElementById('idioma-result').style.display='block';
+      document.getElementById('modal').scrollTop=9999;
+    }catch(e){
+      document.getElementById('idioma-box').textContent='Erro ao conectar. Tente novamente.';
+      document.getElementById('idioma-result').style.display='block';
+    }
+    btn.disabled=false; btn.textContent='Gerar';
   }
 
   document.querySelectorAll('.faq-item').forEach(item=>{
@@ -569,3 +702,4 @@
 </script>
 </body>
 </html>
+admin@macbookpro ~ % 
