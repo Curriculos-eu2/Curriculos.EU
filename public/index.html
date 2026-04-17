@@ -181,6 +181,19 @@
     .prompt-box { background: #f0ede6; border-radius: var(--rs); padding: 13px; font-size: 11px; color: var(--ink2); line-height: 1.8; font-family: monospace; white-space: pre-wrap; word-break: break-word; border: 1px solid var(--line); max-height: 280px; overflow-y: auto; }
     .dl-btn { width: 100%; padding: 13px; border: none; border-radius: var(--rs); font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 700; color: #fff; background: var(--g); cursor: pointer; margin-top: 14px; transition: background .2s; }
     .dl-btn:hover { background: var(--gm); }
+
+    .carousel-wrap { position: relative; overflow: hidden; margin: 0 -8px; }
+    .carousel-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 8px 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-track 
+    .sector-carousel-wrap { overflow: hidden; margin: 0 -8px; }
+    .sector-carousel-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 8px 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .sector-carousel-track::-webkit-scrollbar { display: none; }
+    .sector-carousel-track .sector-card { min-width: 160px; scroll-snap-align: start; flex-shrink: 0; }
+    .portal-country { min-width: 220px; scroll-snap-align: start; flex-shrink: 0; }
+    .carousel-dots { display: flex; justify-content: center; gap: 6px; padding-top: 4px; }
+    .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); border: none; cursor: pointer; padding: 0; transition: background .2s; }
+    .carousel-dot.active { background: var(--g); width: 18px; border-radius: 3px; }
     .err-box { background: #fff3f3; border: 1px solid #fbb; border-radius: var(--rs); padding: 11px 13px; font-size: 12px; color: #c33; line-height: 1.6; margin-top: 10px; }
     .upsell-section { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
     .upsell-card { background: var(--white); border: 1.5px solid var(--line); border-radius: var(--rs); padding: 11px 13px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -214,6 +227,13 @@
 </nav>
 
 <div class="hero-wrap">
+  <div class="hero-slides" id="hero-slides">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1400&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1400&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1400&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1567684014761-b65e2e59b9eb?w=1400&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1538332576228-eb5b4c4de6f5?w=1400&q=80')"></div>
+  </div>
   <div class="hero-inner">
     <div>
       <div class="hero-badge">🇧🇷 Para brasileiros na Europa</div>
@@ -231,10 +251,10 @@
     </div>
     <div class="hero-mockup">
       <div class="mock-header">
-        <div class="mock-name">Maria da Silva</div>
-        <div class="mock-role">Empregada de Mesa · Restauração</div>
+        <div class="mock-name">João Costa</div>
+        <div class="mock-role">Cozinheiro · Restauração</div>
         <div class="mock-contacts">
-          <span class="mock-contact">maria@email.com</span>
+          <span class="mock-contact">joao@email.com</span>
           <span class="mock-contact">Lisboa, PT</span>
           <span class="mock-contact">AR Portugal</span>
         </div>
@@ -292,10 +312,10 @@
   <h2 class="section-title">Feito para quem<br/>vive essa realidade</h2>
   <p class="section-sub">Não importa se você já está na Europa ou ainda está se preparando para ir.</p>
   <div class="profiles-grid">
-    <div class="profile-card"><div class="profile-icon">✈️</div><div class="profile-title">Quem vai chegar</div><div class="profile-desc">Está no Brasil se preparando para emigrar e quer candidatar vagas antes de chegar.</div></div>
-    <div class="profile-card"><div class="profile-icon">🏠</div><div class="profile-title">Quem já está lá</div><div class="profile-desc">Vive na Europa mas ainda não conseguiu emprego formal. Sabe que o currículo brasileiro não funciona aqui.</div></div>
-    <div class="profile-card"><div class="profile-icon">🔄</div><div class="profile-title">Quem quer mudar de área</div><div class="profile-desc">Já trabalha mas quer tentar outro setor ou país. Precisa de um currículo novo adaptado.</div></div>
-    <div class="profile-card"><div class="profile-icon">🇪🇺</div><div class="profile-title">Quem tem cidadania europeia</div><div class="profile-desc">Tem passaporte europeu mas nunca trabalhou na Europa. Não sabe o formato certo do currículo local.</div></div>
+    <div class="profile-card"><div class="profile-icon">✈️</div><div class="profile-title">Quem vai chegar</div><div class="profile-desc">Sai do Brasil já com entrevistas marcadas. Chegue com emprego, não com esperança.</div></div>
+    <div class="profile-card"><div class="profile-icon">🏠</div><div class="profile-title">Quem já está lá</div><div class="profile-desc">O currículo brasileiro afasta recrutadores europeus. Um currículo adaptado muda tudo — e pode ser o seu próximo emprego.</div></div>
+    <div class="profile-card"><div class="profile-icon">🔄</div><div class="profile-title">Quem quer mudar de área</div><div class="profile-desc">Quer ganhar mais ou trabalhar em algo melhor? Um currículo novo no formato certo abre portas que você nem sabia que existiam.</div></div>
+    <div class="profile-card"><div class="profile-icon">🇪🇺</div><div class="profile-title">Quem tem cidadania europeia</div><div class="profile-desc">Você tem a maior vantagem possível — cidadania europeia. Falta só o currículo no formato que os recrutadores locais esperam.</div></div>
   </div>
 </section>
 
@@ -333,12 +353,23 @@
   <section class="section">
     <div class="section-label">Onde candidatar</div>
     <h2 class="section-title">Os melhores portais<br/>de emprego por país</h2>
-    <p class="section-sub">Com o currículo pronto, estes são os sites mais usados pelos recrutadores em cada país.</p>
-    <div class="portals-grid">
-      <div class="portal-country"><div class="portal-flag">🇵🇹</div><div class="portal-country-name">Portugal</div><ul class="portal-list"><li><a href="https://www.net-empregos.com" target="_blank">Net Empregos</a></li><li><a href="https://www.indeed.com/l-Portugal-jobs.html" target="_blank">Indeed Portugal</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li><li><a href="https://www.olx.pt/empregos" target="_blank">OLX Empregos</a></li></ul></div>
-      <div class="portal-country"><div class="portal-flag">🇪🇸</div><div class="portal-country-name">Espanha</div><ul class="portal-list"><li><a href="https://www.infojobs.net" target="_blank">InfoJobs</a></li><li><a href="https://www.indeed.es" target="_blank">Indeed España</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li><li><a href="https://www.milanuncios.com/ofertas-de-trabajo" target="_blank">Milanuncios</a></li></ul></div>
-      <div class="portal-country"><div class="portal-flag">🇬🇧</div><div class="portal-country-name">Reino Unido</div><ul class="portal-list"><li><a href="https://www.reed.co.uk" target="_blank">Reed</a></li><li><a href="https://www.indeed.co.uk" target="_blank">Indeed UK</a></li><li><a href="https://www.totaljobs.com" target="_blank">Totaljobs</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
-      <div class="portal-country"><div class="portal-flag">🇩🇪</div><div class="portal-country-name">Alemanha</div><ul class="portal-list"><li><a href="https://www.stepstone.de" target="_blank">StepStone</a></li><li><a href="https://www.indeed.de" target="_blank">Indeed Deutschland</a></li><li><a href="https://www.xing.com/jobs" target="_blank">XING Jobs</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+    <p class="section-sub">Com o currículo pronto, estes são os sites mais usados pelos recrutadores em cada país. Arraste para ver todos.</p>
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="portal-track">
+        <div class="portal-country"><div class="portal-flag">🇵🇹</div><div class="portal-country-name">Portugal</div><ul class="portal-list"><li><a href="https://www.net-empregos.com" target="_blank">Net Empregos</a></li><li><a href="https://www.indeed.com/l-Portugal-jobs.html" target="_blank">Indeed Portugal</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li><li><a href="https://www.olx.pt/empregos" target="_blank">OLX Empregos</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇪🇸</div><div class="portal-country-name">Espanha</div><ul class="portal-list"><li><a href="https://www.infojobs.net" target="_blank">InfoJobs</a></li><li><a href="https://www.indeed.es" target="_blank">Indeed España</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li><li><a href="https://www.milanuncios.com/ofertas-de-trabajo" target="_blank">Milanuncios</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇬🇧</div><div class="portal-country-name">Reino Unido</div><ul class="portal-list"><li><a href="https://www.reed.co.uk" target="_blank">Reed</a></li><li><a href="https://www.indeed.co.uk" target="_blank">Indeed UK</a></li><li><a href="https://www.totaljobs.com" target="_blank">Totaljobs</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇩🇪</div><div class="portal-country-name">Alemanha</div><ul class="portal-list"><li><a href="https://www.stepstone.de" target="_blank">StepStone</a></li><li><a href="https://www.indeed.de" target="_blank">Indeed Deutschland</a></li><li><a href="https://www.xing.com/jobs" target="_blank">XING Jobs</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇳🇱</div><div class="portal-country-name">Holanda</div><ul class="portal-list"><li><a href="https://www.nationalevacaturebank.nl" target="_blank">Nationale Vacaturebank</a></li><li><a href="https://www.indeed.nl" target="_blank">Indeed NL</a></li><li><a href="https://www.werk.nl" target="_blank">Werk.nl</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇫🇷</div><div class="portal-country-name">França</div><ul class="portal-list"><li><a href="https://www.pole-emploi.fr" target="_blank">France Travail</a></li><li><a href="https://www.indeed.fr" target="_blank">Indeed France</a></li><li><a href="https://www.cadremploi.fr" target="_blank">Cadremploi</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇮🇹</div><div class="portal-country-name">Itália</div><ul class="portal-list"><li><a href="https://www.infojobs.it" target="_blank">InfoJobs IT</a></li><li><a href="https://www.indeed.it" target="_blank">Indeed Italia</a></li><li><a href="https://www.monster.it" target="_blank">Monster IT</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇮🇪</div><div class="portal-country-name">Irlanda</div><ul class="portal-list"><li><a href="https://www.jobs.ie" target="_blank">Jobs.ie</a></li><li><a href="https://www.indeed.ie" target="_blank">Indeed Ireland</a></li><li><a href="https://www.irishjobs.ie" target="_blank">IrishJobs</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇨🇭</div><div class="portal-country-name">Suíça</div><ul class="portal-list"><li><a href="https://www.jobs.ch" target="_blank">Jobs.ch</a></li><li><a href="https://www.indeed.ch" target="_blank">Indeed Suisse</a></li><li><a href="https://www.jobscout24.ch" target="_blank">JobScout24</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇧🇪</div><div class="portal-country-name">Bélgica</div><ul class="portal-list"><li><a href="https://www.stepstone.be" target="_blank">StepStone BE</a></li><li><a href="https://www.indeed.be" target="_blank">Indeed Belgique</a></li><li><a href="https://www.jobat.be" target="_blank">Jobat</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇦🇹</div><div class="portal-country-name">Áustria</div><ul class="portal-list"><li><a href="https://www.karriere.at" target="_blank">Karriere.at</a></li><li><a href="https://www.indeed.at" target="_blank">Indeed Österreich</a></li><li><a href="https://www.stepstone.at" target="_blank">StepStone AT</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+        <div class="portal-country"><div class="portal-flag">🇸🇪</div><div class="portal-country-name">Suécia</div><ul class="portal-list"><li><a href="https://www.arbetsformedlingen.se" target="_blank">Arbetsförmedlingen</a></li><li><a href="https://www.indeed.com/l-Sweden-jobs.html" target="_blank">Indeed Sverige</a></li><li><a href="https://www.jobbsafari.se" target="_blank">Jobbsafari</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
+      </div>
+      <div class="carousel-dots" id="portal-dots"></div>
     </div>
   </section>
 </div>
@@ -389,31 +420,31 @@
     <div class="faq-wrap" id="faq">
       <div class="faq-group">
         <div class="faq-group-title">Sobre o produto</div>
-        <div class="faq-item"><div class="faq-q">O currículo fica em qual idioma? <span class="faq-arrow">+</span></div><div class="faq-a">Portugal gera em português europeu, Espanha em espanhol, Reino Unido em inglês e Alemanha em alemão — com o vocabulário e formato que os recrutadores locais esperam.</div></div>
-        <div class="faq-item"><div class="faq-q">O formato é diferente para cada país? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. Portugal usa duas colunas com sidebar, o Reino Unido começa com "Personal Statement", a Alemanha inclui data de nascimento e espaço para foto. Cada país tem o seu padrão e o produto aplica automaticamente.</div></div>
-        <div class="faq-item"><div class="faq-q">Funciona no telemóvel? <span class="faq-arrow">+</span></div><div class="faq-a">Sim, funciona em qualquer dispositivo — computador, telemóvel ou tablet. Não é necessário instalar nada.</div></div>
-        <div class="faq-item"><div class="faq-q">Preciso criar uma conta para usar? <span class="faq-arrow">+</span></div><div class="faq-a">Não. No plano gratuito, você gera o currículo sem criar conta e sem colocar cartão. O plano Premium é ativado por email após o pagamento.</div></div>
-        <div class="faq-item"><div class="faq-q">Quanto tempo leva para gerar o currículo? <span class="faq-arrow">+</span></div><div class="faq-a">Menos de 30 segundos. Você preenche o formulário em 5 minutos e o currículo é gerado instantaneamente pela IA.</div></div>
+        <div class="faq-item"><div class="faq-q">O currículo fica em qual idioma? <span class="faq-arrow">+</span></div><div class="faq-a">Cada país no seu idioma — Portugal em português europeu, Espanha em espanhol, Reino Unido e Irlanda em inglês, Alemanha, Áustria e Suíça em alemão, França e Bélgica em francês, e assim por diante. E não é só traduzir: o tom e o vocabulário são ajustados para soar natural para quem vai ler.</div></div>
+        <div class="faq-item"><div class="faq-q">O formato é diferente para cada país? <span class="faq-arrow">+</span></div><div class="faq-a">Muito diferente! Na Alemanha esperam foto e data de nascimento. No Reino Unido, nunca coloque foto. Em Portugal o formato é mais visual com sidebar lateral. Na Holanda valorizam objetividade acima de tudo. O produto aplica o formato certo automaticamente — você não precisa saber nada disso.</div></div>
+        <div class="faq-item"><div class="faq-q">Funciona no telemóvel? <span class="faq-arrow">+</span></div><div class="faq-a">Sim! Computador, telemóvel, tablet — o que você tiver na mão. Não precisa instalar nada, não precisa criar conta. É só abrir e usar.</div></div>
+        <div class="faq-item"><div class="faq-q">Preciso criar uma conta para usar? <span class="faq-arrow">+</span></div><div class="faq-a">Não. Entra no site, preenche os dados e gera — sem cadastro, sem senha, sem complicação. Se quiser o Premium, aí sim precisa de email para ativação, mas o gratuito funciona sem nada disso.</div></div>
+        <div class="faq-item"><div class="faq-q">Quanto tempo leva para gerar o currículo? <span class="faq-arrow">+</span></div><div class="faq-a">O formulário leva uns 5 minutinhos para preencher. O currículo em si sai em menos de 30 segundos. Dá para testar agora mesmo e ver com os próprios olhos.</div></div>
       </div>
       <div class="faq-group">
         <div class="faq-group-title">Sobre a situação do imigrante</div>
-        <div class="faq-item"><div class="faq-q">Funciona para quem ainda está no Brasil? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. Pode gerar o currículo ainda no Brasil e começar a candidatar vagas antes de chegar. Muitos empregadores europeus aceitam candidaturas internacionais.</div></div>
-        <div class="faq-item"><div class="faq-q">Funciona para quem não tem documentos regularizados? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. O campo de status de visto é opcional — você pode deixar em branco ou colocar "em processo de regularização". O currículo é gerado normalmente.</div></div>
-        <div class="faq-item"><div class="faq-q">E se eu não tiver experiência formal? <span class="faq-arrow">+</span></div><div class="faq-a">Sem problema. Pode descrever trabalhos informais, ajuda familiar, trabalho voluntário ou qualquer atividade. A IA valoriza essas experiências da forma mais profissional possível.</div></div>
-        <div class="faq-item"><div class="faq-q">Posso usar se tiver cidadania europeia mas nunca trabalhei na Europa? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. Inclua "Cidadania europeia" no campo de visto para aumentar as suas chances.</div></div>
+        <div class="faq-item"><div class="faq-q">Funciona para quem ainda está no Brasil? <span class="faq-arrow">+</span></div><div class="faq-a">Sim, e é uma ótima estratégia! Muita gente chega à Europa já com entrevistas agendadas. Você gera o currículo no Brasil, manda para as vagas online e chega com algo concreto na mão.</div></div>
+        <div class="faq-item"><div class="faq-q">Funciona para quem não tem documentos regularizados? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. O campo de visto é opcional — se não quiser colocar, não coloca. Muita gente em processo de regularização usa o produto normalmente. O currículo sai igual para todo mundo.</div></div>
+        <div class="faq-item"><div class="faq-q">E se eu não tiver experiência formal? <span class="faq-arrow">+</span></div><div class="faq-a">Sem problema nenhum. Trabalho informal, ajuda na loja da família, babysitter para os vizinhos — tudo conta. A IA sabe como apresentar isso de forma profissional para o mercado europeu. Você não precisa ter carteira assinada para ter um bom currículo.</div></div>
+        <div class="faq-item"><div class="faq-q">Posso usar se tiver cidadania europeia mas nunca trabalhei na Europa? <span class="faq-arrow">+</span></div><div class="faq-a">Com certeza — e você tem uma vantagem enorme que muita gente não tem. Coloca "Cidadania europeia" no campo de visto e o recrutador já sabe que não precisa de processo de contratação especial. Isso abre muitas portas.</div></div>
       </div>
       <div class="faq-group">
         <div class="faq-group-title">Sobre o plano Premium</div>
-        <div class="faq-item"><div class="faq-q">O que acontece depois dos 5 dias de teste? <span class="faq-arrow">+</span></div><div class="faq-a">Após os 5 dias, é cobrado automaticamente €7,90/mês. Pode cancelar a qualquer momento antes do fim do teste sem pagar nada.</div></div>
-        <div class="faq-item"><div class="faq-q">Posso cancelar quando quiser? <span class="faq-arrow">+</span></div><div class="faq-a">Sim, sem burocracia. Cancele diretamente no painel do Hotmart a qualquer momento.</div></div>
-        <div class="faq-item"><div class="faq-q">Aceita cartão brasileiro? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. O pagamento é processado pelo Hotmart, que aceita cartões brasileiros e internacionais, além de Pix.</div></div>
-        <div class="faq-item"><div class="faq-q">Posso gerar currículos para mais de um país na mesma assinatura? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. Com o Premium você pode gerar quantos currículos quiser, para quantos países e setores quiser, sem limite.</div></div>
+        <div class="faq-item"><div class="faq-q">O que acontece depois dos 5 dias de teste? <span class="faq-arrow">+</span></div><div class="faq-a">Após os 5 dias o cartão é cobrado automaticamente. Se cancelar antes disso, não paga nada — zero. E pode cancelar pelo painel do Hotmart, sem precisar falar com ninguém.</div></div>
+        <div class="faq-item"><div class="faq-q">Posso cancelar quando quiser? <span class="faq-arrow">+</span></div><div class="faq-a">Sim, quando quiser. É pelo painel do Hotmart, leva menos de 1 minuto e não tem nenhuma pergunta chata de "por que está cancelando".</div></div>
+        <div class="faq-item"><div class="faq-q">Aceita cartão brasileiro? <span class="faq-arrow">+</span></div><div class="faq-a">Sim! Cartão brasileiro, cartão europeu, Pix — o Hotmart aceita tudo. Muita gente paga com o cartão do Brasil mesmo morando na Europa, funciona normalmente.</div></div>
+        <div class="faq-item"><div class="faq-q">Posso gerar currículos para mais de um país na mesma assinatura? <span class="faq-arrow">+</span></div><div class="faq-a">Sim, ilimitado mesmo. Quer um currículo para Portugal e outro para a Alemanha? Faz os dois. Quer testar 3 setores diferentes? Vai em frente. Sem limite de uso.</div></div>
       </div>
       <div class="faq-group">
         <div class="faq-group-title">Sobre o currículo gerado</div>
-        <div class="faq-item"><div class="faq-q">O currículo passa nos sistemas automáticos de triagem (ATS)? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. Os currículos são gerados com palavras-chave relevantes para cada setor e país, otimizados para sistemas de triagem automática usados pela maioria dos portais europeus.</div></div>
-        <div class="faq-item"><div class="faq-q">Posso editar o currículo depois de gerado? <span class="faq-arrow">+</span></div><div class="faq-a">No plano Premium você recebe a versão Word editável — pode personalizar à vontade depois de baixar.</div></div>
-        <div class="faq-item"><div class="faq-q">Os recrutadores europeus aceitam esse formato? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. Os formatos foram desenhados especificamente para cada mercado — Portugal, Espanha, Reino Unido e Alemanha têm convenções diferentes e o produto aplica a certa em cada caso.</div></div>
+        <div class="faq-item"><div class="faq-q">O currículo passa nos sistemas automáticos de triagem (ATS)? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. A IA já inclui as palavras-chave certas para cada setor e país — que são exatamente o que os sistemas de triagem procuram. Não é garantia de passar em tudo, mas é muito melhor do que um currículo genérico sem essas palavras.</div></div>
+        <div class="faq-item"><div class="faq-q">Posso editar o currículo depois de gerado? <span class="faq-arrow">+</span></div><div class="faq-a">No Premium você baixa em Word e pode mexer à vontade — trocar uma palavra, adicionar um projeto, mudar a ordem das seções. É o seu currículo, você tem controle total.</div></div>
+        <div class="faq-item"><div class="faq-q">Os recrutadores europeus aceitam esse formato? <span class="faq-arrow">+</span></div><div class="faq-a">Sim. Os formatos foram desenhados com base no que recrutadores de cada país esperam ver. Um recrutador em Lisboa, um em Londres e um em Berlim têm expectativas completamente diferentes — e o produto sabe disso.</div></div>
       </div>
     </div>
   </section>
@@ -468,7 +499,7 @@
       <div class="scr on" id="s0">
         <div class="stitle">Vamos criar o seu currículo.</div>
         <div class="ssub">5 minutos. Adaptado ao país e setor que você escolher.</div>
-        <div class="field"><label>Nome completo</label><input id="v-nome" placeholder="Maria da Silva" oninput="chk(0)"/></div>
+        <div class="field"><label>Nome completo</label><input id="v-nome" placeholder="João Costa" oninput="chk(0)"/></div>
         <div class="row2">
           <div class="field"><label>Idade</label><input id="v-idade" type="number" min="16" max="70" placeholder="28"/></div>
           <div class="field"><label>WhatsApp / Tel</label><input id="v-tel" placeholder="+351 912 000 000"/></div>
@@ -529,6 +560,8 @@
             <div class="chip" data-s="bares" onclick="selS(this)">Bares / entretenimento</div>
             <div class="chip" data-s="seguranca" onclick="selS(this)">Segurança / vigilância</div>
             <div class="chip" data-s="educacao_infantil" onclick="selS(this)">Educação infantil</div>
+            <div class="chip" data-s="marketing" onclick="selS(this)">Marketing / redes sociais</div>
+            <div class="chip" data-s="eletricista" onclick="selS(this)">Eletricista</div>
           </div>
         </div>
         <div class="field"><label>Cargo específico que busca</label><input id="v-cargo" placeholder="Garçom, Camareira, Auxiliar de cozinha..." oninput="chk(2)"/></div>
@@ -641,6 +674,38 @@
   async function gerarCarta(){const btn=document.getElementById('btn-carta');btn.disabled=true;btn.textContent='Gerando...';const token=localStorage.getItem('cev_token')||'';const langMap={pt:'português europeu',es:'espanhol',uk:'English',de:'Deutsch'};const sys=`Você é especialista em recrutamento em ${CN[D.country]}. Escreva uma carta de apresentação profissional em ${langMap[D.country]} para uma vaga de ${D.cargo} no setor de ${D.setor}. Tom adequado ao mercado local. Máximo 3 parágrafos. Escreva APENAS o texto da carta.`;const usr=`Candidato: ${D.nome}\nCargo: ${D.cargo} | Setor: ${D.setor} | País: ${CN[D.country]}\nExperiência: ${D.exp}\nIdiomas: ${D.langs.join(', ')}${D.visto?'\nVisto: '+D.visto:''}`;try{const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json',...(token?{'Authorization':'Bearer '+token}:{})},body:JSON.stringify({nome:D.nome,idade:D.idade,tel:D.tel,email:D.email,country:D.country,cidade:D.cidade,visto:D.visto,setor:D.setor,cargo:D.cargo,exp:D.exp,langs:D.langs,avail:D.avail,form:D.form,_override:{system:sys,user:usr}})});const data=await res.json();document.getElementById('carta-box').textContent=data.curriculo||data.error||'Erro ao gerar.';document.getElementById('carta-result').style.display='block';document.getElementById('modal').scrollTop=9999;}catch(e){document.getElementById('carta-box').textContent='Erro ao conectar. Tente novamente.';document.getElementById('carta-result').style.display='block';}btn.disabled=false;btn.textContent='Gerar';}
   async function gerarSegundoIdioma(){const btn=document.getElementById('btn-idioma');const country2=document.getElementById('sel-idioma').value;btn.disabled=true;btn.textContent='Gerando...';const token=localStorage.getItem('cev_token')||'';try{const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json',...(token?{'Authorization':'Bearer '+token}:{})},body:JSON.stringify({nome:D.nome,idade:D.idade,tel:D.tel,email:D.email,country:country2,cidade:D.cidade,visto:D.visto,setor:D.setor,cargo:D.cargo,exp:D.exp,langs:D.langs,avail:D.avail,form:D.form})});const data=await res.json();const nomes={pt:'Versão em português europeu:',es:'Versão em espanhol:',uk:'Versão em inglês:',de:'Versão em alemão:'};document.getElementById('idioma-lbl').textContent=nomes[country2]||'Segunda versão:';document.getElementById('idioma-box').textContent=data.curriculo||data.error||'Erro ao gerar.';document.getElementById('idioma-result').style.display='block';document.getElementById('modal').scrollTop=9999;}catch(e){document.getElementById('idioma-box').textContent='Erro ao conectar. Tente novamente.';document.getElementById('idioma-result').style.display='block';}btn.disabled=false;btn.textContent='Gerar';}
   document.querySelectorAll('.faq-item').forEach(item=>{item.addEventListener('click',()=>{const open=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');});});
+
+
+  // Hero slideshow
+  (function(){
+    const slides = document.querySelectorAll('.hero-slide');
+    if(!slides.length) return;
+    let cur = 0;
+    setInterval(()=>{
+      slides[cur].classList.remove('active');
+      cur = (cur + 1) % slides.length;
+      slides[cur].classList.add('active');
+    }, 5000);
+  })();
+  // Carousel dots
+  (function(){
+    const track = document.getElementById('portal-track');
+    const dotsWrap = document.getElementById('portal-dots');
+    if(!track||!dotsWrap) return;
+    const cards = track.querySelectorAll('.portal-country');
+    cards.forEach((_,i)=>{
+      const d=document.createElement('button');
+      d.className='carousel-dot'+(i===0?' active':'');
+      d.onclick=()=>{ track.scrollTo({left: cards[i].offsetLeft - 8, behavior:'smooth'}); };
+      dotsWrap.appendChild(d);
+    });
+    track.addEventListener('scroll',()=>{
+      const dots=dotsWrap.querySelectorAll('.carousel-dot');
+      let closest=0, minDist=Infinity;
+      cards.forEach((c,i)=>{ const d=Math.abs(c.getBoundingClientRect().left - track.getBoundingClientRect().left); if(d<minDist){minDist=d;closest=i;} });
+      dots.forEach((d,i)=>d.classList.toggle('active',i===closest));
+    },{passive:true});
+  })();
   const urlToken=new URLSearchParams(location.search).get('token');
   if(urlToken){localStorage.setItem('cev_token',urlToken);history.replaceState({},'','/');}
 </script>
