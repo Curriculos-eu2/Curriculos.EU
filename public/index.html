@@ -191,9 +191,10 @@
     .sector-carousel-track::-webkit-scrollbar { display: none; }
     .sector-carousel-track .sector-card { min-width: 160px; scroll-snap-align: start; flex-shrink: 0; }
     .portal-country { min-width: 220px; scroll-snap-align: start; flex-shrink: 0; }
-    .carousel-dots { display: flex; justify-content: center; gap: 6px; padding-top: 4px; }
-    .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); border: none; cursor: pointer; padding: 0; transition: background .2s; }
-    .carousel-dot.active { background: var(--g); width: 18px; border-radius: 3px; }
+    .carousel-arrows { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+    .carousel-arrow { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--white); color: var(--ink2); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+    .carousel-arrow:hover { border-color: var(--g); color: var(--g); background: var(--gl); }
+    .sector-arrows { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
     .err-box { background: #fff3f3; border: 1px solid #fbb; border-radius: var(--rs); padding: 11px 13px; font-size: 12px; color: #c33; line-height: 1.6; margin-top: 10px; }
     .upsell-section { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
     .upsell-card { background: var(--white); border: 1.5px solid var(--line); border-radius: var(--rs); padding: 11px 13px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -226,7 +227,7 @@
   </div>
 </nav>
 
-<div class="hero-wrap" id="hw">
+<div class="hero-wrap">
   <div class="hero-slides" id="hero-slides">
     <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1400&q=80')"></div>
     <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1400&q=80')"></div>
@@ -337,17 +338,16 @@
   <div class="section-label">Setores</div>
   <h2 class="section-title">Para o trabalho<br/>que você busca</h2>
   <p class="section-sub">Cada setor tem prompts especializados que destacam o que os recrutadores locais mais valorizam.</p>
-  <div id="sector-track" style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 0 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none">
-    <div class="sector-card" style="scroll-snap-align:start;flex-shrink:0;min-width:160px"><div class="sector-icon">🍽️</div><div class="sector-name">Restaurante</div><div class="sector-sub">Garçom, cozinha, café</div></div>
-    <div class="sector-card" style="scroll-snap-align:start;flex-shrink:0;min-width:160px"><div class="sector-icon">🏨</div><div class="sector-name">Hotel</div><div class="sector-sub">Receção, turismo</div></div>
-    <div class="sector-card" style="scroll-snap-align:start;flex-shrink:0;min-width:160px"><div class="sector-icon">🧹</div><div class="sector-name">Limpeza</div><div class="sector-sub">Serviços, escritórios</div></div>
-    <div class="sector-card" style="scroll-snap-align:start;flex-shrink:0;min-width:160px"><div class="sector-icon">🏗️</div><div class="sector-name">Construção</div><div class="sector-sub">Obras, pedreiro</div></div>
-    <div class="sector-card" style="scroll-snap-align:start;flex-shrink:0;min-width:160px"><div class="sector-icon">🏠</div><div class="sector-name">Doméstico</div><div class="sector-sub">Babysitter, au pair</div></div>
-    <div class="sector-card" style="scroll-snap-align:start;flex-shrink:0;min-width:160px"><div class="sector-icon">❤️</div><div class="sector-name">Cuidados</div><div class="sector-sub">Idosos, saúde</div></div>
-    <div class="sector-card" style="scroll-snap-align:start;flex-shrink:0;min-width:160px"><div class="sector-icon">📦</div><div class="sector-name">Armazém</div><div class="sector-sub">Logística, picking</div></div>
-    <div class="sector-card" style="scroll-snap-align:start;flex-shrink:0;min-width:160px"><div class="sector-icon">🛍️</div><div class="sector-name">Comércio</div><div class="sector-sub">Loja, atendimento</div></div>
+  <div class="sectors-grid">
+    <div class="sector-card"><div class="sector-icon">🍽️</div><div class="sector-name">Restaurante</div><div class="sector-sub">Garçom, cozinha, café</div></div>
+    <div class="sector-card"><div class="sector-icon">🏨</div><div class="sector-name">Hotel</div><div class="sector-sub">Receção, turismo</div></div>
+    <div class="sector-card"><div class="sector-icon">🧹</div><div class="sector-name">Limpeza</div><div class="sector-sub">Serviços, escritórios</div></div>
+    <div class="sector-card"><div class="sector-icon">🏗️</div><div class="sector-name">Construção</div><div class="sector-sub">Obras, pedreiro</div></div>
+    <div class="sector-card"><div class="sector-icon">🏠</div><div class="sector-name">Doméstico</div><div class="sector-sub">Babysitter, au pair</div></div>
+    <div class="sector-card"><div class="sector-icon">❤️</div><div class="sector-name">Cuidados</div><div class="sector-sub">Idosos, saúde</div></div>
+    <div class="sector-card"><div class="sector-icon">📦</div><div class="sector-name">Armazém</div><div class="sector-sub">Logística, picking</div></div>
+    <div class="sector-card"><div class="sector-icon">🛍️</div><div class="sector-name">Comércio</div><div class="sector-sub">Loja, atendimento</div></div>
   </div>
-  <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px"><button onclick="document.getElementById('sector-track').scrollBy({left:-340,behavior:'smooth'})" style="width:36px;height:36px;border-radius:50%;border:1.5px solid #dde8e3;background:#fff;font-size:18px;cursor:pointer">←</button><button onclick="document.getElementById('sector-track').scrollBy({left:340,behavior:'smooth'})" style="width:36px;height:36px;border-radius:50%;border:1.5px solid #dde8e3;background:#fff;font-size:18px;cursor:pointer">→</button></div>
 </section>
 
 <div class="bg-white-sec">
@@ -370,7 +370,10 @@
         <div class="portal-country"><div class="portal-flag">🇦🇹</div><div class="portal-country-name">Áustria</div><ul class="portal-list"><li><a href="https://www.karriere.at" target="_blank">Karriere.at</a></li><li><a href="https://www.indeed.at" target="_blank">Indeed Österreich</a></li><li><a href="https://www.stepstone.at" target="_blank">StepStone AT</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
         <div class="portal-country"><div class="portal-flag">🇸🇪</div><div class="portal-country-name">Suécia</div><ul class="portal-list"><li><a href="https://www.arbetsformedlingen.se" target="_blank">Arbetsförmedlingen</a></li><li><a href="https://www.indeed.com/l-Sweden-jobs.html" target="_blank">Indeed Sverige</a></li><li><a href="https://www.jobbsafari.se" target="_blank">Jobbsafari</a></li><li><a href="https://www.linkedin.com/jobs" target="_blank">LinkedIn</a></li></ul></div>
       </div>
-      <div class="carousel-dots" id="portal-dots"></div>
+      <div class="carousel-arrows">
+      <button class="carousel-arrow" onclick="scrollCarousel('portal-track',-1)">←</button>
+      <button class="carousel-arrow" onclick="scrollCarousel('portal-track',1)">→</button>
+    </div>
     </div>
   </section>
 </div>
@@ -669,13 +672,7 @@
   const MSGS=['Analisando setor e país','Adaptando formato local','Escrevendo objetivo profissional','Redigindo experiências','Revisando e finalizando'];
   async function generate(){D.cargo=document.getElementById('v-cargo').value.trim();D.exp=document.getElementById('v-exp').value.trim();D.form=document.getElementById('v-form').value.trim()||'Ensino médio completo';D.avail=[...document.querySelectorAll('#chips-a .chip.on')].map(c=>c.dataset.a);go(4);document.getElementById('gen-wrap').style.display='block';document.getElementById('res-wrap').style.display='none';let mi=0;const tick=setInterval(()=>{document.getElementById('gen-step').textContent=MSGS[Math.min(mi++,MSGS.length-1)];},1800);const token=localStorage.getItem('cev_token')||'';try{const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json',...(token?{'Authorization':'Bearer '+token}:{})},body:JSON.stringify({nome:D.nome,idade:D.idade,tel:D.tel,email:D.email,country:D.country,cidade:D.cidade,visto:D.visto,setor:D.setor,cargo:D.cargo,exp:D.exp,langs:D.langs,avail:D.avail,form:D.form})});clearInterval(tick);const data=await res.json();if(!res.ok)throw new Error(data.error||'Erro '+res.status);showResult(data.curriculo,data.plan);}catch(err){clearInterval(tick);showResult(null,'free',err.message);}}
   function showResult(txt,plan,err){document.getElementById('gen-wrap').style.display='none';document.getElementById('res-wrap').style.display='block';document.getElementById('rlbl').textContent=CN[D.country];document.getElementById('rset').textContent=D.setor;const f=FMT[D.country]||FMT.pt;document.getElementById('r-nome').textContent=D.nome;document.getElementById('r-contact').textContent=D.email+(D.tel?' · '+D.tel:'')+(D.cidade?' · '+D.cidade:'')+(D.visto?' · '+D.visto:'');document.getElementById('r-obj-lbl').textContent=f.obj;document.getElementById('r-exp-lbl').textContent=f.exp;document.getElementById('r-edu-lbl').textContent=f.edu;document.getElementById('r-sk-lbl').textContent=f.sk;if(err||!txt){document.getElementById('err-area').innerHTML='<div class="err-box">Não foi possível conectar à API. Verifique a sua conexão e tente novamente.<br><small>'+(err||'Resposta vazia')+'</small></div>';document.getElementById('r-obj').textContent='Profissional brasileiro(a) com experiência em '+D.setor+', buscando oportunidade como '+D.cargo+' em '+CN[D.country]+'.';document.getElementById('r-exp-txt').textContent=D.exp;document.getElementById('r-edu').textContent=D.form;document.getElementById('r-sk').textContent='Idiomas: '+D.langs.join(', ')+(D.avail.length?'\nDisponibilidade: '+D.avail.join(', '):'');}else{document.getElementById('err-area').innerHTML='';parseCV(txt,f);document.getElementById('tab-prompt').textContent=txt;}}
-  function parseCV(txt,f){   document.getElementById('r-obj-lbl').textContent=f.obj;   document.getElementById('r-exp-lbl').textContent=f.exp;   document.getElementById('r-edu-lbl').textContent=f.edu;   document.getElementById('r-sk-lbl').textContent=f.sk;   const lines=txt.split('
-');   let sections={obj:[],exp:[],edu:[],sk:[]};   let cur='obj';   const isHeader=l=>{     const ll=l.toLowerCase().replace(/[*#:\-]/g,'').trim();     if(!ll||ll.length>60) return false;     if(ll.includes('experiên')||ll.includes('experiencia')||ll.includes('work exp')||ll.includes('berufserf')||ll.includes('werkervaring')||ll.includes('arbetslivs')) {cur='exp';return true;}     if(ll.includes('forma')||ll.includes('education')||ll.includes('ausbildung')||ll.includes('opleiding')||ll.includes('utbildning')||ll.includes('istruzione')) {cur='edu';return true;}     if(ll.includes('compet')||ll.includes('skills')||ll.includes('kenntnis')||ll.includes('vaardig')||ll.includes('färdig')||ll.includes('competenz')) {cur='sk';return true;}     if(ll.includes('objetivo')||ll.includes('perfil')||ll.includes('statement')||ll.includes('profil')||ll.includes('accroche')||ll.includes('profiel')) {cur='obj';return true;}     return false;   };   for(const l of lines){     const t=l.replace(/^[*#\-\s]+/,'').trim();     if(!t) continue;     if(isHeader(t)) continue;     sections[cur].push(t);   }   document.getElementById('r-obj').textContent=sections.obj.join('
-
-')||txt.slice(0,400);   document.getElementById('r-exp-txt').textContent=sections.exp.join('
-')||'';   document.getElementById('r-edu').textContent=sections.edu.join('
-')||D.form;   document.getElementById('r-sk').textContent=sections.sk.join('
-')||D.langs.join(', '); }const lines=txt.split('\n').filter(l=>l.trim());let obj=[],exp=[],edu=[],sk=[],cur=obj;for(const l of lines){const ll=l.toLowerCase();if(ll.includes('experiên')||ll.includes('experiencia')||ll.includes('work exp')||ll.includes('berufserf')){cur=exp;continue;}if(ll.includes('forma')||ll.includes('education')||ll.includes('ausbildung')){cur=edu;continue;}if(ll.includes('compet')||ll.includes('skills')||ll.includes('kenntnis')||ll.includes('idioma')||ll.includes('sprach')){cur=sk;continue;}if(ll.includes('objetivo')||ll.includes('perfil')||ll.includes('statement')||ll.includes('profil')){cur=obj;continue;}cur.push(l);}document.getElementById('r-obj').textContent=obj.join('\n')||txt.slice(0,250);document.getElementById('r-exp-txt').textContent=exp.join('\n');document.getElementById('r-edu').textContent=edu.join('\n')||D.form;document.getElementById('r-sk').textContent=sk.join('\n')||D.langs.join(', ');}
+  function parseCV(txt,f){const lines=txt.split('\n').filter(l=>l.trim());let obj=[],exp=[],edu=[],sk=[],cur=obj;for(const l of lines){const ll=l.toLowerCase();if(ll.includes('experiên')||ll.includes('experiencia')||ll.includes('work exp')||ll.includes('berufserf')){cur=exp;continue;}if(ll.includes('forma')||ll.includes('education')||ll.includes('ausbildung')){cur=edu;continue;}if(ll.includes('compet')||ll.includes('skills')||ll.includes('kenntnis')||ll.includes('idioma')||ll.includes('sprach')){cur=sk;continue;}if(ll.includes('objetivo')||ll.includes('perfil')||ll.includes('statement')||ll.includes('profil')){cur=obj;continue;}cur.push(l);}document.getElementById('r-obj').textContent=obj.join('\n')||txt.slice(0,250);document.getElementById('r-exp-txt').textContent=exp.join('\n');document.getElementById('r-edu').textContent=edu.join('\n')||D.form;document.getElementById('r-sk').textContent=sk.join('\n')||D.langs.join(', ');}
   function showTab(t,btn){document.querySelectorAll('.rtab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('tab-cv').style.display=t==='cv'?'block':'none';document.getElementById('tab-prompt').style.display=t==='prompt'?'block':'none';}
   function restart(){document.querySelectorAll('.scr').forEach((s,i)=>s.classList.toggle('on',i===0));for(let i=0;i<5;i++)document.getElementById('p'+i).classList.toggle('on',i===0);document.getElementById('slbl').textContent='Passo 1 de 5 — Dados pessoais';document.getElementById('modal').scrollTop=0;document.getElementById('carta-result').style.display='none';document.getElementById('idioma-result').style.display='none';}
   async function gerarCarta(){const btn=document.getElementById('btn-carta');btn.disabled=true;btn.textContent='Gerando...';const token=localStorage.getItem('cev_token')||'';const langMap={pt:'português europeu',es:'espanhol',uk:'English',de:'Deutsch'};const sys=`Você é especialista em recrutamento em ${CN[D.country]}. Escreva uma carta de apresentação profissional em ${langMap[D.country]} para uma vaga de ${D.cargo} no setor de ${D.setor}. Tom adequado ao mercado local. Máximo 3 parágrafos. Escreva APENAS o texto da carta.`;const usr=`Candidato: ${D.nome}\nCargo: ${D.cargo} | Setor: ${D.setor} | País: ${CN[D.country]}\nExperiência: ${D.exp}\nIdiomas: ${D.langs.join(', ')}${D.visto?'\nVisto: '+D.visto:''}`;try{const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json',...(token?{'Authorization':'Bearer '+token}:{})},body:JSON.stringify({nome:D.nome,idade:D.idade,tel:D.tel,email:D.email,country:D.country,cidade:D.cidade,visto:D.visto,setor:D.setor,cargo:D.cargo,exp:D.exp,langs:D.langs,avail:D.avail,form:D.form,_override:{system:sys,user:usr}})});const data=await res.json();document.getElementById('carta-box').textContent=data.curriculo||data.error||'Erro ao gerar.';document.getElementById('carta-result').style.display='block';document.getElementById('modal').scrollTop=9999;}catch(e){document.getElementById('carta-box').textContent='Erro ao conectar. Tente novamente.';document.getElementById('carta-result').style.display='block';}btn.disabled=false;btn.textContent='Gerar';}
@@ -694,26 +691,13 @@
       slides[cur].classList.add('active');
     }, 5000);
   })();
-  // Carousel dots
-  (function(){
-    const track = document.getElementById('portal-track');
-    const dotsWrap = document.getElementById('portal-dots');
-    if(!track||!dotsWrap) return;
-    const cards = track.querySelectorAll('.portal-country');
-    cards.forEach((_,i)=>{
-      const d=document.createElement('button');
-      d.className='carousel-dot'+(i===0?' active':'');
-      d.onclick=()=>{ track.scrollTo({left: cards[i].offsetLeft - 8, behavior:'smooth'}); };
-      dotsWrap.appendChild(d);
-    });
-    track.addEventListener('scroll',()=>{
-      const dots=dotsWrap.querySelectorAll('.carousel-dot');
-      let closest=0, minDist=Infinity;
-      cards.forEach((c,i)=>{ const d=Math.abs(c.getBoundingClientRect().left - track.getBoundingClientRect().left); if(d<minDist){minDist=d;closest=i;} });
-      dots.forEach((d,i)=>d.classList.toggle('active',i===closest));
-    },{passive:true});
-  })();
-  (function(){const imgs=['https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1400&q=80','https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1400&q=80','https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1400&q=80','https://images.unsplash.com/photo-1567684014761-b65e2e59b9eb?w=1400&q=80','https://images.unsplash.com/photo-1538332576228-eb5b4c4de6f5?w=1400&q=80'];const hw=document.getElementById('hw');if(!hw)return;hw.style.position='relative';hw.style.overflow='hidden';const wrap=document.createElement('div');wrap.style.cssText='position:absolute;inset:0;z-index:0';imgs.forEach((src,i)=>{const d=document.createElement('div');d.style.cssText='position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity 1.5s;opacity:'+(i===0?'1':'0');d.style.backgroundImage='url('+src+')';const ov=document.createElement('div');ov.style.cssText='position:absolute;inset:0;background:linear-gradient(150deg,rgba(10,30,18,0.82),rgba(15,74,51,0.72),rgba(20,100,70,0.6))';d.appendChild(ov);wrap.appendChild(d);});hw.insertBefore(wrap,hw.firstChild);const slides=wrap.children;let cur=0;setInterval(()=>{slides[cur].style.opacity='0';cur=(cur+1)%slides.length;slides[cur].style.opacity='1';},5000);})();
+  function scrollCarousel(id, dir) {
+    const track = document.getElementById(id);
+    if(!track) return;
+    const card = track.querySelector('.portal-country, .sector-card');
+    const w = card ? card.offsetWidth + 14 : 240;
+    track.scrollBy({left: dir * w * 2, behavior: 'smooth'});
+  }
   const urlToken=new URLSearchParams(location.search).get('token');
   if(urlToken){localStorage.setItem('cev_token',urlToken);history.replaceState({},'','/');}
 </script>
