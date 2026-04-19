@@ -195,6 +195,63 @@
   </div>
 </div>
 
+
+<div style="background:#fff;border-top:1px solid #dde8e3;padding:48px 24px">
+  <div style="max-width:700px;margin:0 auto">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#C4622D;margin-bottom:8px;text-align:center">Dúvidas</div>
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1B2820;text-align:center;margin-bottom:28px">Perguntas frequentes</div>
+    <div id="faq-ver">
+      <div class="faq-item">
+        <div class="faq-q">O verificador é mesmo grátis? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Sim, completamente grátis. Cola o teu currículo, escolhe o país e recebe a análise sem pagar nada, sem criar conta e sem colocar cartão.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Funciona com currículo em português brasileiro? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Exatamente para isso que foi feito. A IA sabe identificar os padrões tipicamente brasileiros — como endereço do Brasil, formato de data, vocabulário — e diz exatamente o que precisa mudar para o mercado europeu.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Funciona com qualquer formato de currículo? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Sim. Podes copiar o texto do Word, do PDF, de um email ou escrever diretamente. Quanto mais completo for o texto colado, mais precisa será a análise.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">O que significa a pontuação de compatibilidade? <span class="faq-arr">+</span></div>
+        <div class="faq-a">É uma avaliação de 0 a 100 de quão adequado o teu currículo está para o mercado do país escolhido. Abaixo de 50 significa problemas sérios que podem causar rejeição automática. Acima de 80 está bem adaptado.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">O que acontece depois da análise? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Podes usar a análise para corrigir o teu currículo manualmente, ou clicar em "Gerar currículo corrigido automaticamente" e a IA cria um currículo novo já no formato certo para o país — em menos de 30 segundos.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Os meus dados ficam guardados? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Não guardamos o conteúdo do teu currículo. O texto é enviado para a IA apenas para análise e não é armazenado nos nossos servidores.</div>
+      </div>
+      <div class="faq-item" style="border-bottom:none">
+        <div class="faq-q">Posso verificar currículos para países diferentes? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Sim! Cada país tem expectativas diferentes — o que funciona em Portugal pode não funcionar na Alemanha. Podes fazer a verificação para cada país separadamente e comparar os resultados.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.faq-item { border-bottom: 1px solid #dde8e3; }
+.faq-q { padding: 16px 0; font-size: 14px; font-weight: 600; color: #0f1a14; display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer; }
+.faq-arr { font-size: 18px; color: #7a9186; flex-shrink: 0; transition: transform .2s; }
+.faq-item.open .faq-arr { transform: rotate(45deg); color: #C4622D; }
+.faq-a { font-size: 13px; color: #3d5247; line-height: 1.75; padding-bottom: 16px; display: none; }
+.faq-item.open .faq-a { display: block; }
+</style>
+<script>
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+
 <footer>
   <div>
     <a href="/">Currículo</a>
