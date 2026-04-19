@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verificador de Currículo — CurrículoEU</title>
+  <meta name="description" content="Cole o seu currículo e descubra o que está errado para o mercado europeu. Grátis e instantâneo."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --g: #1a6b4a; --gl: #e8f5ef; --gm: #2d9e72;
+      --tc: #C4622D; --tcl: #fff8f5; --tcd: #1B2820;
+      --ink: #0f1a14; --ink2: #3d5247; --ink3: #7a9186;
+      --line: #dde8e3; --surf: #f7faf8; --white: #fff;
+      --r: 14px; --rs: 9px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--surf); color: var(--ink); }
+
+    /* NAV */
+    nav { background: var(--tcd); padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .logo-mark { width: 28px; height: 28px; background: var(--tc); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+    .nav-links { display: flex; align-items: center; gap: 16px; }
+    .nav-links a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--tc) !important; color: #fff !important; padding: 8px 18px; border-radius: 20px; font-weight: 600 !important; }
+
+    /* HERO */
+    .hero { background: var(--tcd); padding: 60px 24px 50px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(196,98,45,0.15); color: #E8A07A; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; border: 1px solid rgba(196,98,45,0.3); }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 4vw, 42px); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+    .hero h1 em { color: var(--tc); font-style: normal; }
+    .hero p { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 480px; margin: 0 auto; }
+
+    /* MAIN */
+    .main { max-width: 860px; margin: 0 auto; padding: 48px 24px; }
+    .form-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; margin-bottom: 24px; }
+    .form-card h2 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .form-card p { font-size: 13px; color: var(--ink2); margin-bottom: 18px; line-height: 1.65; }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 12px; font-weight: 600; color: var(--ink2); margin-bottom: 5px; }
+    .field select, .field textarea { width: 100%; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: var(--rs); font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--white); outline: none; transition: border .2s; }
+    .field select:focus, .field textarea:focus { border-color: var(--g); }
+    .field textarea { min-height: 200px; resize: vertical; line-height: 1.65; }
+    .hint { font-size: 11px; color: var(--ink3); margin-top: 5px; line-height: 1.5; }
+    .btn-verify { width: 100%; padding: 14px; border: none; border-radius: var(--rs); font-size: 15px; font-family: 'DM Sans', sans-serif; font-weight: 700; color: #fff; background: var(--tc); cursor: pointer; transition: background .2s; }
+    .btn-verify:hover { background: #b5561f; }
+    .btn-verify:disabled { background: var(--line); color: var(--ink3); cursor: default; }
+
+    /* LOADING */
+    .spinner { width: 36px; height: 36px; border: 3px solid var(--tcl); border-top-color: var(--tc); border-radius: 50%; animation: spin .75s linear infinite; margin: 0 auto 14px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* RESULT */
+    .result-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-bottom: 20px; display: none; }
+    .result-header { background: var(--tcd); padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    .score-circle { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 3px solid rgba(255,255,255,0.2); }
+    .score-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #fff; }
+    .score-info h3 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .score-info p { font-size: 12px; color: rgba(255,255,255,0.6); }
+    .result-body { padding: 20px 24px; }
+    .issues-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); margin-bottom: 12px; }
+    .issues { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .issue { border-radius: 8px; padding: 11px 14px; font-size: 13px; line-height: 1.6; display: flex; align-items: flex-start; gap: 10px; }
+    .issue-icon { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+    .issue.bad { background: #fff5f5; border: 1px solid #fdd; color: #7a1a1a; }
+    .issue.warn { background: #fffbf0; border: 1px solid #fde68a; color: #7a4a00; }
+    .issue.good { background: var(--gl); border: 1px solid #b8e8d0; color: #0f5a35; }
+    .cta-section { background: var(--gl); border-top: 1px solid var(--line); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .cta-text h3 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .cta-text p { font-size: 13px; color: var(--ink2); }
+    .btn-fix { background: var(--g); color: #fff; padding: 12px 24px; border-radius: var(--rs); font-size: 14px; font-weight: 700; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; white-space: nowrap; text-decoration: none; display: inline-block; transition: background .2s; }
+    .btn-fix:hover { background: var(--gm); }
+
+    /* HOW IT WORKS */
+    .how { max-width: 860px; margin: 0 auto; padding: 0 24px 60px; }
+    .how-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 24px; text-align: center; }
+    .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .how-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; }
+    .how-num { width: 36px; height: 36px; background: var(--tcl); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--tc); margin-bottom: 12px; }
+    .how-card h3 { font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 6px; }
+    .how-card p { font-size: 12px; color: var(--ink2); line-height: 1.65; }
+
+    /* ERROR */
+    .err-box { background: #fff3f3; border: 1px solid #fbb; border-radius: var(--rs); padding: 14px; font-size: 13px; color: #c33; line-height: 1.6; margin-top: 12px; display: none; }
+
+    footer { background: var(--tcd); padding: 24px; text-align: center; }
+    footer a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; margin: 0 12px; }
+    footer a:hover { color: #fff; }
+    footer p { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-mark">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="2" rx="1" fill="white"/><rect x="2" y="6" width="8" height="2" rx="1" fill="white" opacity=".7"/><rect x="2" y="10" width="10" height="2" rx="1" fill="white" opacity=".5"/></svg>
+    </div>
+    CurrículoEU
+  </a>
+  <div class="nav-links">
+    <a href="/">Currículo</a>
+    <a href="/panfleto">Panfleto</a>
+    <a href="/" class="nav-cta">Criar currículo</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Grátis · Resultado em segundos</div>
+  <h1>O seu currículo está pronto<br/>para o mercado <em>europeu?</em></h1>
+  <p>Cole o texto do seu currículo atual e a IA diz exactamente o que está errado — antes que o recrutador rejeite.</p>
+</div>
+
+<div class="main">
+  <div class="form-card">
+    <h2>Verificar o meu currículo</h2>
+    <p>Funciona com qualquer formato — copie do Word, PDF ou texto simples e cole aqui.</p>
+    <div class="field">
+      <label>País de destino</label>
+      <select id="v-pais">
+        <option value="pt">🇵🇹 Portugal</option>
+        <option value="es">🇪🇸 Espanha</option>
+        <option value="uk">🇬🇧 Reino Unido</option>
+        <option value="de">🇩🇪 Alemanha</option>
+        <option value="nl">🇳🇱 Holanda</option>
+        <option value="fr">🇫🇷 França</option>
+        <option value="it">🇮🇹 Itália</option>
+        <option value="ie">🇮🇪 Irlanda</option>
+        <option value="ch">🇨🇭 Suíça</option>
+        <option value="be">🇧🇪 Bélgica</option>
+        <option value="at">🇦🇹 Áustria</option>
+        <option value="se">🇸🇪 Suécia</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Cole o seu currículo aqui</label>
+      <textarea id="v-cv" placeholder="Maria Silva&#10;Rua das Flores, 123, São Paulo — SP&#10;maria@email.com | (11) 99999-9999&#10;&#10;Objetivo: Trabalhar na área de limpeza e serviços domésticos&#10;&#10;Experiência:&#10;- Empregada doméstica em família particular (2019-2023)&#10;..."></textarea>
+      <div class="hint">Mínimo 50 caracteres. Quanto mais completo, melhor a análise.</div>
+    </div>
+    <button class="btn-verify" id="btn-verify" onclick="verificar()">Verificar agora — grátis</button>
+    <div class="err-box" id="err-box">Não foi possível analisar. Verifique a sua conexão e tente novamente.</div>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <div class="result-header">
+      <div class="score-circle" id="score-circle">
+        <div class="score-num" id="score-num">--</div>
+      </div>
+      <div class="score-info">
+        <h3 id="score-title">Analisando...</h3>
+        <p id="score-sub"></p>
+      </div>
+    </div>
+    <div class="result-body">
+      <div class="issues-title">O que a IA encontrou</div>
+      <div class="issues" id="issues-list"></div>
+    </div>
+    <div class="cta-section">
+      <div class="cta-text">
+        <h3>Gerar currículo corrigido automaticamente</h3>
+        <p>A IA cria um novo currículo já no formato certo para o país escolhido.</p>
+      </div>
+      <a href="/" class="btn-fix">Criar currículo corrigido →</a>
+    </div>
+  </div>
+</div>
+
+<div class="how">
+  <div class="how-title">Como funciona</div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">1</div>
+      <h3>Cola o seu currículo</h3>
+      <p>Qualquer formato — Word, PDF copiado, texto simples. Não importa como está.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">2</div>
+      <h3>A IA analisa</h3>
+      <p>Verifica formato, idioma, estrutura e os erros mais comuns que fazem recrutadores rejeitar.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">3</div>
+      <h3>Vê o que está errado</h3>
+      <p>Lista clara com problemas críticos, avisos e o que já está bem — com explicação.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">4</div>
+      <h3>Corrige automaticamente</h3>
+      <p>Um clique e o gerador cria um currículo novo já no formato certo para o país.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <a href="/">Currículo</a>
+    <a href="/panfleto">Panfleto</a>
+    <a href="/#precos">Preços</a>
+    <a href="/#faq">Dúvidas</a>
+  </div>
+  <p>© 2025 CurrículoEU. Feito para brasileiros na Europa.</p>
+</footer>
+
+<script>
+const PAIS_NAMES = {pt:'Portugal',es:'Espanha',uk:'Reino Unido',de:'Alemanha',nl:'Holanda',fr:'França',it:'Itália',ie:'Irlanda',ch:'Suíça',be:'Bélgica',at:'Áustria',se:'Suécia'};
+
+async function verificar() {
+  const cv = document.getElementById('v-cv').value.trim();
+  const pais = document.getElementById('v-pais').value;
+  const paisName = PAIS_NAMES[pais];
+
+  if (cv.length < 50) {
+    alert('Por favor, cole o seu currículo antes de verificar.');
+    return;
+  }
+
+  const btn = document.getElementById('btn-verify');
+  btn.disabled = true;
+  btn.textContent = 'Analisando...';
+  document.getElementById('result-card').style.display = 'none';
+  document.getElementById('err-box').style.display = 'none';
+
+  const systemPrompt = `Você é um especialista em recrutamento europeu. Analise este currículo e identifique problemas para o mercado de ${paisName}.
+
+Responda APENAS em JSON válido, sem texto antes ou depois, neste formato exato:
+{
+  "score": <número de 0 a 100>,
+  "titulo": "<frase curta sobre a compatibilidade>",
+  "resumo": "<1 frase com quantos problemas críticos e avisos>",
+  "problemas": [
+    {"tipo": "bad", "texto": "<problema crítico que causa rejeição>"},
+    {"tipo": "warn", "texto": "<melhoria importante mas não crítica>"},
+    {"tipo": "good", "texto": "<o que está bem no currículo>"}
+  ]
+}
+
+Tipos: "bad" = problema crítico (máx 4), "warn" = aviso (máx 3), "good" = ponto positivo (máx 2).
+Seja específico e direto. Mencione o país ${paisName} nas observações relevantes.`;
+
+  const userPrompt = `País de destino: ${paisName}\n\nCurrículo:\n${cv.slice(0, 3000)}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: systemPrompt + '\n\n' + userPrompt }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const result = JSON.parse(clean);
+    mostrarResultado(result);
+  } catch(e) {
+    // Fallback para API interna
+    try {
+      const res2 = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: 'verificador', email: 'v@v.com', country: pais,
+          setor: 'verificador', cargo: 'verificador', exp: cv.slice(0,500),
+          langs: ['Português'], avail: [], form: '',
+          _override: { system: systemPrompt, user: userPrompt }
+        })
+      });
+      const data2 = await res2.json();
+      const text2 = data2.curriculo || '';
+      const clean2 = text2.replace(/```json|```/g, '').trim();
+      const result2 = JSON.parse(clean2);
+      mostrarResultado(result2);
+    } catch(e2) {
+      document.getElementById('err-box').style.display = 'block';
+    }
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Verificar novamente';
+}
+
+function mostrarResultado(r) {
+  const score = Math.min(100, Math.max(0, r.score || 50));
+  const circle = document.getElementById('score-circle');
+  circle.style.background = score >= 70 ? '#2d9e72' : score >= 40 ? '#E8A020' : '#c33';
+
+  document.getElementById('score-num').textContent = score;
+  document.getElementById('score-title').textContent = r.titulo || 'Análise concluída';
+  document.getElementById('score-sub').textContent = r.resumo || '';
+
+  const icons = { bad: '✕', warn: '!', good: '✓' };
+  const list = document.getElementById('issues-list');
+  list.innerHTML = (r.problemas || []).map(p =>
+    `<div class="issue ${p.tipo}"><span class="issue-icon">${icons[p.tipo] || '•'}</span><span>${p.texto}</span></div>`
+  ).join('');
+
+  document.getElementById('result-card').style.display = 'block';
+  document.getElementById('result-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
