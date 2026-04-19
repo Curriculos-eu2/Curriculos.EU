@@ -191,7 +191,7 @@
     </div>
     <div class="field">
       <label>Descreve o teu serviço</label>
-      <textarea id="p-desc" placeholder="Ex: Faço limpeza profissional de casas e apartamentos. Tenho 5 anos de experiência, sou pontual e de confiança. Atendo fins de semana e tenho os meus próprios produtos de limpeza." oninput="chkForm()"></textarea>
+      <textarea id="p-desc" placeholder="Ex: Ofereço serviço de limpeza residencial completa com materiais incluídos. Atendo domicílios, apartamentos e escritórios. Cobro €19 por hora ou €80 por limpeza completa. Sou pontual, discreta e de total confiança — com 5 anos de experiência em Portugal e Holanda." oninput="chkForm()"></textarea>
       <div class="hint">Quanto mais detalhe, melhor o panfleto gerado pela IA.</div>
     </div>
     <div class="field">
@@ -245,6 +245,63 @@
     </div>
   </div>
 </div>
+
+
+<div style="background:#fff;border-top:1px solid #dde8e3;padding:48px 24px">
+  <div style="max-width:700px;margin:0 auto">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#C4622D;margin-bottom:8px;text-align:center">Dúvidas</div>
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1B2820;text-align:center;margin-bottom:28px">Perguntas frequentes</div>
+    <div id="faq-pan">
+      <div class="faq-item">
+        <div class="faq-q">O panfleto fica em qual idioma? <span class="faq-arr">+</span></div>
+        <div class="faq-a">No idioma do país que escolheres — holandês para a Holanda, português para Portugal, inglês para o Reino Unido, e assim por diante. A IA escreve o texto como se fosse um nativo local, nada que pareça traduzido.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Preciso de visto ou documentos para usar? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Não. O gerador de panfletos não pede visto, passaporte nem qualquer dado burocrático. É só o teu nome, serviço e contacto — nada mais.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">A versão gratuita tem marca d'água? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Sim, a versão gratuita tem uma marca d'água discreta. Para baixar o panfleto limpo e pronto para enviar no WhatsApp ou imprimir, basta pagar €1,90 por panfleto — sem subscrição nem compromisso.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Como partilho o panfleto no WhatsApp? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Depois de gerar, clica em "Enviar no WhatsApp" — abre automaticamente com o texto formatado pronto para enviar. Na versão Premium podes também baixar o PDF e partilhar como imagem ou ficheiro.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso fazer panfletos para serviços diferentes? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Sim! Cada panfleto é gerado de forma independente. Podes fazer um para limpeza, outro para babysitter, outro para cabeleireiro — quantos precisares. Cada um sai com o texto adaptado ao serviço.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">O panfleto funciona para qualquer tipo de serviço? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Funciona para qualquer serviço autônomo — limpeza, cuidados, cabeleireiro, manicure, babysitter, jardinagem, pintura, eletricista, personal trainer, e muito mais. Se a pessoa faz, o panfleto consegue apresentar.</div>
+      </div>
+      <div class="faq-item" style="border-bottom:none">
+        <div class="faq-q">Assino o Premium do currículo e tenho panfletos incluídos? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Sim! O plano Premium de €7,90/mês inclui currículos e panfletos ilimitados, ambos sem marca d'água. É o melhor custo-benefício se precisares das duas ferramentas.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.faq-item { border-bottom: 1px solid #dde8e3; }
+.faq-q { padding: 16px 0; font-size: 14px; font-weight: 600; color: #0f1a14; display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer; }
+.faq-arr { font-size: 18px; color: #7a9186; flex-shrink: 0; transition: transform .2s; }
+.faq-item.open .faq-arr { transform: rotate(45deg); color: #C4622D; }
+.faq-a { font-size: 13px; color: #3d5247; line-height: 1.75; padding-bottom: 16px; display: none; }
+.faq-item.open .faq-a { display: block; }
+</style>
+<script>
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
 
 <footer>
   <div>
