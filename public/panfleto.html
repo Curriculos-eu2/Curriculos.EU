@@ -1,436 +1,668 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Panfleto Profissional — CurrículoEU</title>
-  <meta name="description" content="Crie um panfleto profissional para o seu serviço autônomo na Europa. Pronto para WhatsApp em 2 minutos."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --tc: #C4622D; --tcl: #fff8f5; --tcd: #1B2820;
-      --g: #1a6b4a; --gl: #e8f5ef; --gm: #2d9e72;
-      --ink: #0f1a14; --ink2: #3d5247; --ink3: #7a9186;
-      --line: #dde8e3; --surf: #f7faf8; --white: #fff;
-      --r: 14px; --rs: 9px;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--surf); color: var(--ink); }
-
-    nav { background: var(--tcd); padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 9px; text-decoration: none; }
-    .logo-mark { width: 28px; height: 28px; background: var(--tc); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
-    .nav-links { display: flex; align-items: center; gap: 16px; }
-    .nav-links a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; }
-    .nav-links a:hover { color: #fff; }
-    .nav-cta { background: var(--tc) !important; color: #fff !important; padding: 8px 18px; border-radius: 20px; font-weight: 600 !important; }
-
-    /* HERO */
-    .hero { background: var(--tcd); padding: 60px 24px 50px; text-align: center; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(196,98,45,0.15); color: #E8A07A; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; border: 1px solid rgba(196,98,45,0.3); }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 4vw, 42px); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 14px; }
-    .hero h1 em { color: var(--tc); font-style: normal; }
-    .hero p { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 480px; margin: 0 auto 20px; }
-    .hero-trust { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-    .hero-trust span { font-size: 12px; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 5px; }
-    .hero-trust span::before { content: '✓'; color: var(--tc); font-weight: 700; }
-
-    /* COMPARE */
-    .compare-strip { background: var(--white); border-bottom: 1px solid var(--line); padding: 28px 24px; }
-    .compare-inner { max-width: 700px; margin: 0 auto; }
-    .compare-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--ink); text-align: center; margin-bottom: 18px; }
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .compare-card { border-radius: 10px; padding: 16px; }
-    .compare-bad { background: #fff5f5; border: 1px solid #fdd; }
-    .compare-good { background: var(--gl); border: 1px solid #b8e8d0; }
-    .compare-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
-    .compare-bad .compare-label { color: #c33; }
-    .compare-good .compare-label { color: var(--g); }
-    .compare-msg { font-size: 12px; color: #555; line-height: 1.6; font-style: italic; background: var(--white); border-radius: 6px; padding: 10px; border: 1px solid #eee; margin-bottom: 10px; }
-    .compare-rate { font-size: 13px; font-weight: 700; }
-    .compare-bad .compare-rate { color: #c33; }
-    .compare-good .compare-rate { color: var(--g); }
-
-    /* FORM */
-    .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
-    @media (max-width: 680px) { .main { grid-template-columns: 1fr; } }
-    .form-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; }
-    .form-card h2 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
-    .form-card p { font-size: 13px; color: var(--ink2); margin-bottom: 18px; }
-    .field { margin-bottom: 12px; }
-    .field label { display: block; font-size: 12px; font-weight: 600; color: var(--ink2); margin-bottom: 4px; }
-    .field input, .field select, .field textarea { width: 100%; padding: 10px 13px; border: 1.5px solid var(--line); border-radius: var(--rs); font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--white); outline: none; transition: border .2s; }
-    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--tc); }
-    .field textarea { min-height: 90px; resize: vertical; line-height: 1.6; }
-    .hint { font-size: 11px; color: var(--ink3); margin-top: 4px; line-height: 1.5; }
-    .btn-gen { width: 100%; padding: 13px; border: none; border-radius: var(--rs); font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 700; color: #fff; background: var(--tc); cursor: pointer; transition: background .2s; margin-top: 4px; }
-    .btn-gen:hover { background: #b5561f; }
-    .btn-gen:disabled { background: var(--line); color: var(--ink3); cursor: default; }
-
-    /* RESULTADO */
-    .result-side { display: flex; flex-direction: column; gap: 14px; }
-    .result-preview { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
-    .result-preview-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); padding: 12px 16px; border-bottom: 1px solid var(--line); }
-
-    /* Panfleto arte */
-    .pan-art { font-family: 'DM Sans', sans-serif; }
-    .pan-header { background: var(--tc); padding: 22px 18px; text-align: center; }
-    .pan-avatar { width: 52px; height: 52px; background: rgba(255,255,255,0.2); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; }
-    .pan-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-    .pan-service { font-size: 10px; color: rgba(255,255,255,0.8); letter-spacing: .06em; text-transform: uppercase; }
-    .pan-body { padding: 16px 18px; }
-    .pan-desc { font-size: 12px; color: var(--ink2); line-height: 1.75; margin-bottom: 14px; text-align: center; }
-    .pan-divider { height: 1px; background: var(--line); margin-bottom: 14px; }
-    .pan-contact-title { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tc); margin-bottom: 8px; text-align: center; }
-    .pan-contacts { display: flex; flex-direction: column; gap: 5px; }
-    .pan-contact { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink2); background: var(--surf); padding: 7px 10px; border-radius: 6px; }
-    .pan-contact-icon { width: 18px; height: 18px; background: var(--tc); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 700; }
-    .pan-footer { background: var(--tcd); padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; }
-    .pan-footer-text { font-size: 8px; color: rgba(255,255,255,0.3); }
-    .pan-footer-logo { font-family: 'Playfair Display', serif; font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.3); }
-    .watermark-wrap { position: relative; }
-    .watermark-wrap::after { content: 'GRATUITO'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-25deg); font-size: 24px; font-weight: 700; color: rgba(196,98,45,0.12); letter-spacing: .2em; pointer-events: none; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
-
-    /* Upsell */
-    .upsell-card { background: var(--tcl); border: 1.5px solid var(--tc); border-radius: var(--r); padding: 16px; }
-    .upsell-title { font-size: 13px; font-weight: 700; color: var(--tc); margin-bottom: 4px; }
-    .upsell-desc { font-size: 12px; color: #8a6a5a; line-height: 1.55; margin-bottom: 12px; }
-    .upsell-price { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--tc); margin-bottom: 10px; }
-    .upsell-price span { font-size: 12px; font-weight: 400; color: #c4856a; }
-    .btn-upsell { background: var(--tc); color: #fff; width: 100%; padding: 11px; border-radius: var(--rs); font-size: 13px; font-weight: 700; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; text-align: center; display: block; text-decoration: none; transition: background .2s; }
-    .btn-upsell:hover { background: #b5561f; }
-
-    /* Share */
-    .share-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; }
-    .share-title { font-size: 12px; font-weight: 600; color: var(--ink2); margin-bottom: 10px; }
-    .share-btns { display: flex; gap: 8px; }
-    .btn-wa { flex: 1; background: #25D366; color: #fff; padding: 10px; border-radius: var(--rs); font-size: 12px; font-weight: 700; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 6px; }
-    .btn-premium-share { flex: 1; background: var(--tcd); color: #fff; padding: 10px; border-radius: var(--rs); font-size: 12px; font-weight: 700; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-
-    /* Loading */
-    .spinner { width: 32px; height: 32px; border: 3px solid var(--tcl); border-top-color: var(--tc); border-radius: 50%; animation: spin .75s linear infinite; margin: 40px auto; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Empty state */
-    .empty-state { padding: 40px 20px; text-align: center; color: var(--ink3); font-size: 13px; line-height: 1.7; }
-    .empty-icon { font-size: 32px; margin-bottom: 10px; }
-
-    footer { background: var(--tcd); padding: 24px; text-align: center; margin-top: 20px; }
-    footer a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; margin: 0 12px; }
-    footer p { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 10px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Panfleto — CurrículoEU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --tc: #C4622D; --tcd: #1B2820; --g: #1a6b4a;
+  --cream: #FAF7F2; --light: #F2EDE6; --muted: #6b7280; --border: #e5e0d8;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--cream); color: #1a1a1a; line-height: 1.6; }
+nav { background: var(--tcd); position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 64px; box-shadow: 0 2px 16px rgba(0,0,0,0.18); }
+.nav-logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.4rem; font-weight: 900; text-decoration: none; }
+.nav-logo span { color: var(--tc); }
+.nav-links { display: flex; gap: 8px; align-items: center; }
+.nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 6px 14px; border-radius: 6px; transition: background 0.18s; }
+.nav-links a:hover { background: rgba(255,255,255,0.10); color: #fff; }
+.nav-cta { background: var(--tc) !important; color: #fff !important; font-weight: 600 !important; }
+.nav-cta:hover { background: #b3561f !important; }
+.hero { background: var(--tcd); padding: 70px 5% 60px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, rgba(196,98,45,0.18) 0%, transparent 70%); }
+.hero-badge { display: inline-block; background: rgba(196,98,45,0.22); border: 1px solid rgba(196,98,45,0.5); color: #f5c09a; font-size: 0.78rem; font-weight: 600; padding: 5px 14px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; position: relative; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 14px; letter-spacing: -1px; position: relative; }
+.hero h1 span { color: var(--tc); }
+.hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 520px; margin: 0 auto 44px; position: relative; }
+.compare { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; max-width: 660px; margin: 0 auto; }
+.compare-card { background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 24px 28px; flex: 1; min-width: 200px; text-align: center; }
+.compare-card.highlight { background: rgba(196,98,45,0.12); border-color: rgba(196,98,45,0.5); }
+.compare-icon { font-size: 2rem; margin-bottom: 8px; }
+.compare-label { color: rgba(255,255,255,0.55); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.compare-rate { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: #fff; }
+.compare-rate.bad { color: #f87171; }
+.compare-rate.good { color: #6ee7b7; }
+.compare-desc { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+.compare-arrow { display: flex; align-items: center; color: rgba(255,255,255,0.25); font-size: 1.6rem; }
+#gerar { background: var(--tcd); padding: 0 5% 80px; }
+.form-wrap { max-width: 680px; margin: 0 auto; }
+.form-card { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.10); border-radius: 18px; padding: 36px; }
+.form-card h2 { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+.form-card > p { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 26px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+label { color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 500; }
+input, select, textarea { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.13); border-radius: 8px; padding: 10px 13px; color: #fff; font-size: 0.92rem; font-family: 'Outfit', sans-serif; transition: border-color 0.18s; width: 100%; }
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.28); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--tc); }
+select option { background: #1B2820; }
+.idioma-toggle { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; }
+.idioma-toggle label { color: rgba(255,255,255,0.65); font-size: 0.82rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+.toggle-switch { position: relative; width: 42px; height: 22px; flex-shrink: 0; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; cursor: pointer; inset: 0; background: rgba(255,255,255,0.15); border-radius: 22px; transition: 0.2s; }
+.toggle-slider:before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.2s; }
+input:checked + .toggle-slider { background: var(--tc); }
+input:checked + .toggle-slider:before { transform: translateX(20px); }
+.btn-gerar { background: var(--tc); color: #fff; border: none; border-radius: 8px; padding: 14px 36px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; margin-top: 6px; transition: background 0.18s; font-family: 'Outfit', sans-serif; grid-column: 1 / -1; }
+.btn-gerar:hover { background: #b3561f; }
+#resultado { display: none; padding: 60px 5%; }
+.resultado-wrap { max-width: 800px; margin: 0 auto; }
+.resultado-wrap h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900; color: var(--tcd); margin-bottom: 6px; }
+.resultado-wrap > p { color: var(--muted); margin-bottom: 28px; }
+.panfleto-arte { max-width: 420px; margin: 0 auto 20px; border-radius: 16px; overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,0.3); position: relative; aspect-ratio: 4/5; }
+.pf-bg { position: absolute; inset: 0; }
+.pf-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.pf-grad { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.0) 32%, rgba(0,0,0,0.0) 42%, rgba(0,0,0,0.82) 68%, rgba(0,0,0,0.98) 100%); }
+.pf-stripe { position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: #C4622D; z-index: 4; }
+.pf-wm { position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%) rotate(-32deg); font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900; color: rgba(255,255,255,0.06); white-space: nowrap; pointer-events: none; z-index: 6; letter-spacing: 6px; text-transform: uppercase; }
+.pf-top { position: absolute; top: 18px; left: 18px; right: 18px; z-index: 5; display: flex; justify-content: space-between; align-items: center; }
+.pf-logo { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 700; color: #fff; }
+.pf-logo span { color: #f5956a; }
+.pf-pais { font-size: 0.6rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(196,98,45,0.85); padding: 4px 10px; border-radius: 4px; }
+.pf-bottom { position: absolute; bottom: 0; left: 0; right: 0; z-index: 5; padding: 0 20px 24px 20px; }
+.pf-setor { font-size: 0.58rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: #f5956a; display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+.pf-setor-line { width: 20px; height: 1.5px; background: #C4622D; flex-shrink: 0; }
+.pf-nome { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: #fff; line-height: 0.92; letter-spacing: -1.5px; margin-bottom: 6px; }
+.pf-nome em { font-style: italic; color: rgba(255,255,255,0.65); font-size: 1.9rem; }
+.pf-cidade { font-size: 0.68rem; color: rgba(255,255,255,0.48); margin-bottom: 16px; }
+.pf-hr { width: 100%; height: 1px; background: linear-gradient(to right, #C4622D 0%, rgba(255,255,255,0.08) 80%); margin-bottom: 13px; }
+.pf-slogan { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; font-style: italic; color: rgba(255,255,255,0.9); line-height: 1.4; margin-bottom: 12px; }
+.pf-servicos { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+.pf-srv { font-size: 0.6rem; font-weight: 500; color: rgba(255,255,255,0.7); border-left: 2px solid #C4622D; padding-left: 7px; line-height: 1.3; }
+.pf-contacto-bloco { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 13px; }
+.pf-contacto-label { font-size: 0.54rem; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.pf-contacto-num { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: #fff; letter-spacing: 0.3px; }
+.watermark-banner { background: #fff8f5; border: 1.5px solid #fde8da; border-radius: 10px; padding: 13px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 16px; flex-wrap: wrap; max-width: 420px; margin-left: auto; margin-right: auto; }
+.watermark-banner p { font-size: 0.82rem; color: var(--tc); font-weight: 500; }
+.watermark-banner a { background: var(--tc); color: #fff; padding: 8px 18px; border-radius: 7px; font-weight: 700; font-size: 0.82rem; text-decoration: none; white-space: nowrap; }
+.watermark-banner a:hover { background: #b3561f; }
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; max-width: 420px; margin-left: auto; margin-right: auto; }
+.btn-wa { background: #25D366; color: #fff; padding: 12px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 0.18s; }
+.btn-wa:hover { background: #1ebe5c; }
+.btn-novo { background: transparent; color: var(--tcd); padding: 12px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: 2px solid var(--border); cursor: pointer; font-family: 'Outfit', sans-serif; }
+.btn-novo:hover { border-color: var(--tcd); }
+.faq { padding: 80px 5%; background: var(--light); }
+.faq-wrap { max-width: 720px; margin: 0 auto; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 900; color: var(--tcd); margin-bottom: 8px; }
+.section-sub { color: var(--muted); font-size: 0.92rem; margin-bottom: 32px; }
+.faq-item { border-bottom: 1.5px solid var(--border); padding: 15px 0; }
+.faq-q { font-weight: 600; font-size: 0.91rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+.faq-q .icon { color: var(--g); font-size: 1.1rem; transition: transform 0.2s; flex-shrink: 0; }
+.faq-item.open .icon { transform: rotate(45deg); }
+.faq-a { font-size: 0.84rem; color: var(--muted); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+.faq-item.open .faq-a { max-height: 300px; padding-top: 9px; }
+footer { background: var(--tcd); color: rgba(255,255,255,0.6); padding: 40px 5% 24px; text-align: center; }
+footer .nav-logo { display: inline-block; margin-bottom: 10px; }
+footer p { font-size: 0.82rem; margin-bottom: 6px; }
+footer a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.78rem; }
+footer a:hover { color: var(--tc); }
+/* FOTO PICKER */
+.foto-picker-wrap { grid-column: 1 / -1; }
+.foto-picker-label { color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+.foto-modo-btns { display: flex; gap: 6px; }
+.foto-modo-btn { background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65); font-size: 0.72rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.15s; }
+.foto-modo-btn.active { background: var(--tc); border-color: var(--tc); color: #fff; }
+.foto-galeria { display: none; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; max-height: 320px; overflow-y: auto; padding-right: 4px; }
+.foto-galeria.show { display: grid; }
+.foto-thumb { border-radius: 8px; overflow: hidden; cursor: pointer; aspect-ratio: 4/3; border: 2.5px solid transparent; transition: border-color 0.15s, transform 0.15s; position: relative; }
+.foto-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto-thumb.selected { border-color: var(--tc); transform: scale(1.03); }
+.foto-thumb.selected::after { content: '✓'; position: absolute; top: 5px; right: 6px; background: var(--tc); color: #fff; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.loading-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(27,40,32,0.88); backdrop-filter: blur(4px); flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+.loading-overlay.show { display: flex; }
+.spinner { width: 46px; height: 46px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.15); border-top-color: var(--tc); animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-overlay p { color: #fff; font-size: 0.95rem; opacity: 0.82; }
+@media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } .form-group.full { grid-column: 1; } .form-card { padding: 22px 18px; } .compare { flex-direction: column; align-items: center; } }
+</style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="logo">
-    <div class="logo-mark">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="2" rx="1" fill="white"/><rect x="2" y="6" width="8" height="2" rx="1" fill="white" opacity=".7"/><rect x="2" y="10" width="10" height="2" rx="1" fill="white" opacity=".5"/></svg>
-    </div>
-    CurrículoEU
-  </a>
+  <a href="/" class="nav-logo">Currículo<span>EU</span></a>
   <div class="nav-links">
-    <a href="/">Currículo</a>
+    <a href="/panfleto">Panfleto</a>
     <a href="/verificador">Verificador</a>
-    <a href="/#precos" class="nav-cta">Premium</a>
+    <a href="/#gerar" class="nav-cta">Criar Currículo</a>
   </div>
 </nav>
 
-<div class="hero">
-  <div class="hero-badge">Para autônomos e freelancers</div>
-  <h1>Pare de vender pelo WhatsApp.<br/>Comece a vender com <em>profissionalismo.</em></h1>
-  <p>Crie um panfleto profissional em 2 minutos e aumente as suas chances de conseguir clientes em até 3x.</p>
-  <div class="hero-trust">
-    <span>Sem burocracia de visto</span>
-    <span>Pronto para WhatsApp</span>
-    <span>12 países e idiomas</span>
+<section class="hero">
+  <div class="hero-badge">📣 Ferramenta gratuita</div>
+  <h1>O panfleto certo traz<br><span>4× mais clientes</span></h1>
+  <p>Um panfleto profissional converte muito mais do que uma mensagem no WhatsApp. Cria o teu em segundos.</p>
+  <div class="compare">
+    <div class="compare-card">
+      <div class="compare-icon">💬</div>
+      <div class="compare-label">Mensagem WhatsApp</div>
+      <div class="compare-rate bad">5–10%</div>
+      <div class="compare-desc">Taxa de conversão média</div>
+    </div>
+    <div class="compare-arrow">→</div>
+    <div class="compare-card highlight">
+      <div class="compare-icon">📄</div>
+      <div class="compare-label">Panfleto Profissional</div>
+      <div class="compare-rate good">25–40%</div>
+      <div class="compare-desc">Taxa de conversão média</div>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="compare-strip">
-  <div class="compare-inner">
-    <div class="compare-title">A diferença que um panfleto faz</div>
-    <div class="compare-grid">
-      <div class="compare-card compare-bad">
-        <div class="compare-label">Sem panfleto</div>
-        <div class="compare-msg">"Oi, faço limpeza, cobro €15/hora, tenho disponibilidade essa semana"</div>
-        <div class="compare-rate">5–10% de conversão</div>
+<section id="gerar">
+  <div class="form-wrap">
+    <div class="form-card">
+      <h2>Criar o meu panfleto</h2>
+      <p>Preenche os campos e recebe um panfleto profissional para partilhar no WhatsApp, Nextdoor ou imprimir.</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>O teu nome</label>
+          <input type="text" id="nome" placeholder="ex: Maria Silva">
+        </div>
+        <div class="form-group">
+          <label>Serviço que ofereces</label>
+          <select id="servico">
+            <option value="">— Seleciona —</option>
+            <option value="limpeza">🧹 Limpeza doméstica</option>
+            <option value="cabeleireiro">💇 Cabeleireiro(a)</option>
+            <option value="babysitter">👶 Babysitter / Au pair</option>
+            <option value="cozinha">🍳 Cozinheiro(a)</option>
+            <option value="construcao">🏗️ Construção / Remodelação</option>
+            <option value="motorista">🚗 Motorista / Entregas</option>
+            <option value="fitness">💪 Personal Trainer</option>
+            <option value="jardim">🌿 Jardinagem</option>
+            <option value="beleza">💅 Estética / Beleza</option>
+            <option value="pintura">🖌️ Pintura</option>
+            <option value="cuidados">❤️ Cuidados a idosos</option>
+            <option value="outro">✨ Outro serviço</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cidade onde trabalhas</label>
+          <input type="text" id="cidade" placeholder="ex: Amesterdão">
+        </div>
+        <div class="form-group">
+          <label>Contacto (telefone / WhatsApp)</label>
+          <input type="text" id="contacto" placeholder="ex: +31 678 764 563">
+        </div>
+        <div class="form-group">
+          <label>País</label>
+          <select id="pais">
+            <option value="">— Seleciona —</option>
+            <option value="pt">🇵🇹 Portugal</option>
+            <option value="es">🇪🇸 Espanha</option>
+            <option value="uk">🇬🇧 Reino Unido</option>
+            <option value="de">🇩🇪 Alemanha</option>
+            <option value="nl">🇳🇱 Países Baixos</option>
+            <option value="fr">🇫🇷 França</option>
+            <option value="it">🇮🇹 Itália</option>
+            <option value="ie">🇮🇪 Irlanda</option>
+            <option value="ch">🇨🇭 Suíça</option>
+            <option value="be">🇧🇪 Bélgica</option>
+            <option value="at">🇦🇹 Áustria</option>
+            <option value="se">🇸🇪 Suécia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Anos de experiência (opcional)</label>
+          <input type="text" id="anos" placeholder="ex: 5">
+        </div>
+        <div class="idioma-toggle">
+          <label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="toggleIngles">
+              <span class="toggle-slider"></span>
+            </div>
+            🇬🇧 Gerar sempre em inglês (mais universal)
+          </label>
+        </div>
+
+        <div class="foto-picker-wrap">
+          <div class="foto-picker-label">
+            <span>📸 Foto de fundo</span>
+            <div class="foto-modo-btns">
+              <button class="foto-modo-btn active" onclick="setFotoModo('auto', this)">🎲 Aleatório</button>
+              <button class="foto-modo-btn" onclick="setFotoModo('escolher', this)">🖼️ Escolher</button>
+            </div>
+          </div>
+          <div class="foto-galeria" id="fotoGaleria"></div>
+        </div>
+
+        <button class="btn-gerar" onclick="gerarPanfleto()">✨ Gerar Panfleto Grátis</button>
       </div>
-      <div class="compare-card compare-good">
-        <div class="compare-label">Com panfleto</div>
-        <div class="compare-msg">Arte profissional com nome, serviço, contato e visual que transmite confiança imediata</div>
-        <div class="compare-rate">25–40% de conversão</div>
+    </div>
+  </div>
+</section>
+
+<div id="resultado">
+  <div class="resultado-wrap">
+    <h2>O teu panfleto está pronto! 🎉</h2>
+    <p>Faz screenshot e partilha no WhatsApp, Nextdoor ou imprime.</p>
+    <div class="panfleto-arte">
+      <div class="pf-bg"><img id="pf-foto" src="" alt="fundo"></div>
+      <div class="pf-grad"></div>
+      <div class="pf-stripe"></div>
+      <div class="pf-wm">CurrículoEU</div>
+      <div class="pf-top">
+        <div class="pf-logo">Currículo<span>EU</span></div>
+        <div class="pf-pais" id="pf-pais-tag"></div>
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="main">
-  <!-- FORMULÁRIO -->
-  <div class="form-card">
-    <h2>Criar o meu panfleto</h2>
-    <p>Preenche em 2 minutos — sem burocracia.</p>
-
-    <div class="field">
-      <label>Seu nome completo</label>
-      <input id="p-nome" placeholder="Maria Silva" oninput="chkForm()"/>
-    </div>
-    <div class="field">
-      <label>Serviço que oferece</label>
-      <input id="p-servico" placeholder="Limpeza residencial, babysitter, cabeleireiro..." oninput="chkForm()"/>
-    </div>
-    <div class="field">
-      <label>Cidade onde trabalha</label>
-      <input id="p-cidade" placeholder="Amsterdam, Lisboa, Londres..."/>
-    </div>
-    <div class="field">
-      <label>WhatsApp / contacto</label>
-      <input id="p-contato" placeholder="+31 6 12345678"/>
-    </div>
-    <div class="field">
-      <label>Descreve o teu serviço</label>
-      <textarea id="p-desc" placeholder="Ex: Ofereço serviço de limpeza residencial completa com materiais incluídos. Atendo domicílios, apartamentos e escritórios. Cobro €19 por hora ou €80 por limpeza completa. Sou pontual, discreta e de total confiança — com 5 anos de experiência em Portugal e Holanda." oninput="chkForm()"></textarea>
-      <div class="hint">Quanto mais detalhe, melhor o panfleto gerado pela IA.</div>
-    </div>
-    <div class="field">
-      <label>País / idioma do panfleto</label>
-      <select id="p-pais">
-        <option value="pt">🇵🇹 Português (Portugal)</option>
-        <option value="nl">🇳🇱 Holandês (Holanda)</option>
-        <option value="es">🇪🇸 Espanhol (Espanha)</option>
-        <option value="uk">🇬🇧 Inglês (Reino Unido)</option>
-        <option value="de">🇩🇪 Alemão (Alemanha)</option>
-        <option value="fr">🇫🇷 Francês (França)</option>
-        <option value="it">🇮🇹 Italiano (Itália)</option>
-        <option value="ie">🇮🇪 Inglês (Irlanda)</option>
-        <option value="ch">🇨🇭 Alemão (Suíça)</option>
-        <option value="be">🇧🇪 Francês (Bélgica)</option>
-        <option value="at">🇦🇹 Alemão (Áustria)</option>
-        <option value="se">🇸🇪 Sueco (Suécia)</option>
-      </select>
-    </div>
-    <button class="btn-gen" id="btn-gen" disabled onclick="gerarPanfleto()">Gerar meu panfleto com IA</button>
-  </div>
-
-  <!-- RESULTADO -->
-  <div class="result-side">
-    <div class="result-preview">
-      <div class="result-preview-label">Pré-visualização do panfleto</div>
-      <div id="pan-content">
-        <div class="empty-state">
-          <div class="empty-icon">🎨</div>
-          Preenche o formulário ao lado e clica em "Gerar" para ver o teu panfleto profissional aqui.
+      <div class="pf-bottom">
+        <div class="pf-setor"><div class="pf-setor-line"></div><span id="pf-setor"></span></div>
+        <div class="pf-nome" id="pf-nome"></div>
+        <div class="pf-cidade" id="pf-cidade"></div>
+        <div class="pf-hr"></div>
+        <div class="pf-slogan" id="pf-slogan"></div>
+        <div class="pf-servicos" id="pf-servicos"></div>
+        <div class="pf-contacto-bloco">
+          <div class="pf-contacto-label" id="pf-contacto-label">Contacto</div>
+          <div class="pf-contacto-num" id="pf-contacto-num"></div>
         </div>
       </div>
     </div>
-
-    <div class="upsell-card" id="upsell-card" style="display:none">
-      <div class="upsell-title">Baixar versão limpa — sem marca d'água</div>
-      <div class="upsell-desc">O panfleto gratuito tem marca d'água. Por €1,90 tens a versão profissional pronta para WhatsApp e impressão.</div>
-      <div class="upsell-price">€1,90 <span>por panfleto</span></div>
-      <a href="https://pay.hotmart.com/Y105390443O" target="_blank" class="btn-upsell">Baixar versão limpa</a>
+    <div class="watermark-banner">
+      <p>🔒 Versão gratuita com marca d'água — Remove por <strong>€1,90</strong></p>
+      <a href="https://pay.hotmart.com/Y105390443O" target="_blank">Remover →</a>
     </div>
-
-    <div class="share-card" id="share-card" style="display:none">
-      <div class="share-title">Partilhar o panfleto</div>
-      <div class="share-btns">
-        <button class="btn-wa" onclick="partilharWA()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.12 1.523 5.855L0 24l6.335-1.506A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.727.976.994-3.634-.234-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-          Enviar no WhatsApp
-        </button>
-        <button class="btn-premium-share" onclick="alert('Assine o Premium para baixar o PDF limpo!')">Baixar PDF</button>
-      </div>
+    <div class="result-actions">
+      <a id="btnWA" href="#" class="btn-wa" target="_blank">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.14 1.541 5.876L0 24l6.304-1.518A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.031-1.385l-.36-.214-3.742.981.998-3.648-.235-.374A9.787 9.787 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Partilhar no WhatsApp
+      </a>
+      <button class="btn-novo" onclick="novoPanel()">← Criar novo panfleto</button>
     </div>
   </div>
 </div>
 
-
-<div style="background:#fff;border-top:1px solid #dde8e3;padding:48px 24px">
-  <div style="max-width:700px;margin:0 auto">
-    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#C4622D;margin-bottom:8px;text-align:center">Dúvidas</div>
-    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1B2820;text-align:center;margin-bottom:28px">Perguntas frequentes</div>
-    <div id="faq-pan">
-      <div class="faq-item">
-        <div class="faq-q">O panfleto fica em qual idioma? <span class="faq-arr">+</span></div>
-        <div class="faq-a">No idioma do país que escolheres — holandês para a Holanda, português para Portugal, inglês para o Reino Unido, e assim por diante. A IA escreve o texto como se fosse um nativo local, nada que pareça traduzido.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Preciso de visto ou documentos para usar? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Não. O gerador de panfletos não pede visto, passaporte nem qualquer dado burocrático. É só o teu nome, serviço e contacto — nada mais.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">A versão gratuita tem marca d'água? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Sim, a versão gratuita tem uma marca d'água discreta. Para baixar o panfleto limpo e pronto para enviar no WhatsApp ou imprimir, basta pagar €1,90 por panfleto — sem subscrição nem compromisso.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Como partilho o panfleto no WhatsApp? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Depois de gerar, clica em "Enviar no WhatsApp" — abre automaticamente com o texto formatado pronto para enviar. Na versão Premium podes também baixar o PDF e partilhar como imagem ou ficheiro.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Posso fazer panfletos para serviços diferentes? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Sim! Cada panfleto é gerado de forma independente. Podes fazer um para limpeza, outro para babysitter, outro para cabeleireiro — quantos precisares. Cada um sai com o texto adaptado ao serviço.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">O panfleto funciona para qualquer tipo de serviço? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Funciona para qualquer serviço autônomo — limpeza, cuidados, cabeleireiro, manicure, babysitter, jardinagem, pintura, eletricista, personal trainer, e muito mais. Se a pessoa faz, o panfleto consegue apresentar.</div>
-      </div>
-      <div class="faq-item" style="border-bottom:none">
-        <div class="faq-q">Assino o Premium do currículo e tenho panfletos incluídos? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Sim! O plano Premium de €7,90/mês inclui currículos e panfletos ilimitados, ambos sem marca d'água. É o melhor custo-benefício se precisares das duas ferramentas.</div>
-      </div>
-    </div>
+<section class="faq">
+  <div class="faq-wrap">
+    <h2 class="section-title">Perguntas frequentes</h2>
+    <p class="section-sub">Tudo o que precisas de saber sobre o Gerador de Panfletos.</p>
+    <div id="faqList"></div>
   </div>
-</div>
-
-<style>
-.faq-item { border-bottom: 1px solid #dde8e3; }
-.faq-q { padding: 16px 0; font-size: 14px; font-weight: 600; color: #0f1a14; display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer; }
-.faq-arr { font-size: 18px; color: #7a9186; flex-shrink: 0; transition: transform .2s; }
-.faq-item.open .faq-arr { transform: rotate(45deg); color: #C4622D; }
-.faq-a { font-size: 13px; color: #3d5247; line-height: 1.75; padding-bottom: 16px; display: none; }
-.faq-item.open .faq-a { display: block; }
-</style>
-<script>
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    const item = q.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  });
-});
-</script>
+</section>
 
 <footer>
-  <div>
-    <a href="/">Currículo</a>
-    <a href="/verificador">Verificador</a>
-    <a href="/#precos">Preços</a>
-    <a href="/#faq">Dúvidas</a>
-  </div>
-  <p>© 2025 CurrículoEU. Feito para brasileiros na Europa.</p>
+  <a href="/" class="nav-logo">Currículo<span>EU</span></a>
+  <p>Ajudamos imigrantes a conseguir clientes e emprego na Europa.</p>
+  <p style="margin-top:10px;">
+    <a href="/">Gerador de Currículo</a> &nbsp;·&nbsp;
+    <a href="/verificador">Verificador</a> &nbsp;·&nbsp;
+    <a href="mailto:suporte@curriculos.eu">Suporte</a>
+  </p>
 </footer>
 
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <p>A criar o teu panfleto...</p>
+</div>
+
 <script>
-const PAIS_LANG = {pt:'português europeu',nl:'Nederlands',es:'español',uk:'English',de:'Deutsch',fr:'français',it:'italiano',ie:'English',ch:'Deutsch',be:'français',at:'Deutsch',se:'svenska'};
-const PAIS_NAMES = {pt:'Portugal',nl:'Holanda',es:'Espanha',uk:'Reino Unido',de:'Alemanha',fr:'França',it:'Itália',ie:'Irlanda',ch:'Suíça',be:'Bélgica',at:'Áustria',se:'Suécia'};
+// Fotos autênticas por país (referência visual do país) + serviço (ação real)
+// 6 fotos por combinação — mix de cityscape do país + pessoa a trabalhar
+const FOTOS = {
+  pt: {
+    limpeza:     ["1555881400-74d7acaacd8b","1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1558763831-0d5f4dce5e14","1600880292203-757bb62ee408"],
+    jardim:      ["1555881400-74d7acaacd8b","1416879595882-3373a0480b5b","1558904541-efa843a96f01","1523348837708-15d4a09cfac2","1599598425-14f7c9c8c3ef","1464226184884-fa280b87912a"],
+    construcao:  ["1555881400-74d7acaacd8b","1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1621905252507-b35492cc74b4","1504307651254-35680f356dfd"],
+    cozinha:     ["1555881400-74d7acaacd8b","1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1607631568010-04d9e6c9c9cc","1600565597548-b00addbf3fb4"],
+    babysitter:  ["1555881400-74d7acaacd8b","1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1565073624497-5f73b0b8e9f7"],
+    cabeleireiro:["1555881400-74d7acaacd8b","1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1521490683474-6f6e43d60332","1519699047748-de8e457a634e"],
+    motorista:   ["1555881400-74d7acaacd8b","1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1600880292203-757bb62ee408","1568605117036-5f31fd70ad76"],
+    fitness:     ["1555881400-74d7acaacd8b","1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1594737625785-a6cbdabd333c"],
+    beleza:      ["1555881400-74d7acaacd8b","1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1616394584738-fc6e612e71b9"],
+    pintura:     ["1555881400-74d7acaacd8b","1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1572296374666-7b0a90e5b7cd","1581858726788-75bc0f6a952d"],
+    cuidados:    ["1555881400-74d7acaacd8b","1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1609220136736-443140f6f76c"],
+    outro:       ["1555881400-74d7acaacd8b","1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1600880292203-757bb62ee408"],
+  },
+  es: {
+    limpeza:     ["1539037116277-4db20889f2d4","1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1558763831-0d5f4dce5e14","1600880292203-757bb62ee408"],
+    jardim:      ["1539037116277-4db20889f2d4","1416879595882-3373a0480b5b","1558904541-efa843a96f01","1523348837708-15d4a09cfac2","1464226184884-fa280b87912a","1599598425-14f7c9c8c3ef"],
+    construcao:  ["1539037116277-4db20889f2d4","1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1621905252507-b35492cc74b4","1504307651254-35680f356dfd"],
+    cozinha:     ["1539037116277-4db20889f2d4","1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1607631568010-04d9e6c9c9cc","1600565597548-b00addbf3fb4"],
+    babysitter:  ["1539037116277-4db20889f2d4","1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1565073624497-5f73b0b8e9f7"],
+    cabeleireiro:["1539037116277-4db20889f2d4","1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1521490683474-6f6e43d60332","1519699047748-de8e457a634e"],
+    motorista:   ["1539037116277-4db20889f2d4","1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1568605117036-5f31fd70ad76","1600880292203-757bb62ee408"],
+    fitness:     ["1539037116277-4db20889f2d4","1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1594737625785-a6cbdabd333c"],
+    beleza:      ["1539037116277-4db20889f2d4","1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1616394584738-fc6e612e71b9"],
+    pintura:     ["1539037116277-4db20889f2d4","1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1572296374666-7b0a90e5b7cd","1581858726788-75bc0f6a952d"],
+    cuidados:    ["1539037116277-4db20889f2d4","1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1609220136736-443140f6f76c"],
+    outro:       ["1539037116277-4db20889f2d4","1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1600880292203-757bb62ee408"],
+  },
+  uk: {
+    limpeza:     ["1513635269975-59663e0ac1ad","1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1558763831-0d5f4dce5e14","1600880292203-757bb62ee408"],
+    jardim:      ["1513635269975-59663e0ac1ad","1416879595882-3373a0480b5b","1558904541-efa843a96f01","1585320806297-9794b3e4eeae","1464226184884-fa280b87912a","1599598425-14f7c9c8c3ef"],
+    construcao:  ["1513635269975-59663e0ac1ad","1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1621905252507-b35492cc74b4","1504307651254-35680f356dfd"],
+    cozinha:     ["1513635269975-59663e0ac1ad","1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1607631568010-04d9e6c9c9cc","1600565597548-b00addbf3fb4"],
+    babysitter:  ["1513635269975-59663e0ac1ad","1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1565073624497-5f73b0b8e9f7"],
+    cabeleireiro:["1513635269975-59663e0ac1ad","1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1521490683474-6f6e43d60332","1519699047748-de8e457a634e"],
+    motorista:   ["1513635269975-59663e0ac1ad","1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1568605117036-5f31fd70ad76","1600880292203-757bb62ee408"],
+    fitness:     ["1513635269975-59663e0ac1ad","1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1594737625785-a6cbdabd333c"],
+    beleza:      ["1513635269975-59663e0ac1ad","1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1616394584738-fc6e612e71b9"],
+    pintura:     ["1513635269975-59663e0ac1ad","1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1572296374666-7b0a90e5b7cd","1581858726788-75bc0f6a952d"],
+    cuidados:    ["1513635269975-59663e0ac1ad","1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1609220136736-443140f6f76c"],
+    outro:       ["1513635269975-59663e0ac1ad","1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1600880292203-757bb62ee408"],
+  },
+  de: {
+    limpeza:     ["1467269204594-9661b134dd2b","1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1558763831-0d5f4dce5e14","1600880292203-757bb62ee408"],
+    jardim:      ["1467269204594-9661b134dd2b","1416879595882-3373a0480b5b","1558904541-efa843a96f01","1585320806297-9794b3e4eeae","1464226184884-fa280b87912a","1523348837708-15d4a09cfac2"],
+    construcao:  ["1467269204594-9661b134dd2b","1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1621905252507-b35492cc74b4","1504307651254-35680f356dfd"],
+    cozinha:     ["1467269204594-9661b134dd2b","1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1607631568010-04d9e6c9c9cc","1600565597548-b00addbf3fb4"],
+    babysitter:  ["1467269204594-9661b134dd2b","1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1565073624497-5f73b0b8e9f7"],
+    cabeleireiro:["1467269204594-9661b134dd2b","1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1521490683474-6f6e43d60332","1519699047748-de8e457a634e"],
+    motorista:   ["1467269204594-9661b134dd2b","1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1568605117036-5f31fd70ad76","1600880292203-757bb62ee408"],
+    fitness:     ["1467269204594-9661b134dd2b","1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1594737625785-a6cbdabd333c"],
+    beleza:      ["1467269204594-9661b134dd2b","1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1616394584738-fc6e612e71b9"],
+    pintura:     ["1467269204594-9661b134dd2b","1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1572296374666-7b0a90e5b7cd","1581858726788-75bc0f6a952d"],
+    cuidados:    ["1467269204594-9661b134dd2b","1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1609220136736-443140f6f76c"],
+    outro:       ["1467269204594-9661b134dd2b","1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1600880292203-757bb62ee408"],
+  },
+  nl: {
+    limpeza:     ["1512470876302-972faa2aa9a4","1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1558763831-0d5f4dce5e14","1600880292203-757bb62ee408"],
+    jardim:      ["1508193638397-1c4234db14d8","1416879595882-3373a0480b5b","1558904541-efa843a96f01","1585320806297-9794b3e4eeae","1464226184884-fa280b87912a","1523348837708-15d4a09cfac2"],
+    construcao:  ["1512470876302-972faa2aa9a4","1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1621905252507-b35492cc74b4","1504307651254-35680f356dfd"],
+    cozinha:     ["1512470876302-972faa2aa9a4","1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1607631568010-04d9e6c9c9cc","1600565597548-b00addbf3fb4"],
+    babysitter:  ["1508193638397-1c4234db14d8","1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1565073624497-5f73b0b8e9f7"],
+    cabeleireiro:["1512470876302-972faa2aa9a4","1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1521490683474-6f6e43d60332","1519699047748-de8e457a634e"],
+    motorista:   ["1512470876302-972faa2aa9a4","1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1568605117036-5f31fd70ad76","1600880292203-757bb62ee408"],
+    fitness:     ["1508193638397-1c4234db14d8","1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1594737625785-a6cbdabd333c"],
+    beleza:      ["1512470876302-972faa2aa9a4","1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1616394584738-fc6e612e71b9"],
+    pintura:     ["1512470876302-972faa2aa9a4","1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1572296374666-7b0a90e5b7cd","1581858726788-75bc0f6a952d"],
+    cuidados:    ["1508193638397-1c4234db14d8","1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1609220136736-443140f6f76c"],
+    outro:       ["1512470876302-972faa2aa9a4","1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1600880292203-757bb62ee408"],
+  },
+  fr: {
+    limpeza:     ["1499856871958-5b9627545d1a","1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1558763831-0d5f4dce5e14","1600880292203-757bb62ee408"],
+    jardim:      ["1499856871958-5b9627545d1a","1416879595882-3373a0480b5b","1558904541-efa843a96f01","1523348837708-15d4a09cfac2","1464226184884-fa280b87912a","1599598425-14f7c9c8c3ef"],
+    construcao:  ["1499856871958-5b9627545d1a","1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1621905252507-b35492cc74b4","1504307651254-35680f356dfd"],
+    cozinha:     ["1499856871958-5b9627545d1a","1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1607631568010-04d9e6c9c9cc","1600565597548-b00addbf3fb4"],
+    babysitter:  ["1499856871958-5b9627545d1a","1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1565073624497-5f73b0b8e9f7"],
+    cabeleireiro:["1499856871958-5b9627545d1a","1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1521490683474-6f6e43d60332","1519699047748-de8e457a634e"],
+    motorista:   ["1499856871958-5b9627545d1a","1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1568605117036-5f31fd70ad76","1600880292203-757bb62ee408"],
+    fitness:     ["1499856871958-5b9627545d1a","1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1594737625785-a6cbdabd333c"],
+    beleza:      ["1499856871958-5b9627545d1a","1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1616394584738-fc6e612e71b9"],
+    pintura:     ["1499856871958-5b9627545d1a","1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1572296374666-7b0a90e5b7cd","1581858726788-75bc0f6a952d"],
+    cuidados:    ["1499856871958-5b9627545d1a","1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1609220136736-443140f6f76c"],
+    outro:       ["1499856871958-5b9627545d1a","1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1600880292203-757bb62ee408"],
+  },
+  it: {
+    limpeza:     ["1534430480872-3498386e7856","1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1558763831-0d5f4dce5e14","1600880292203-757bb62ee408"],
+    jardim:      ["1534430480872-3498386e7856","1416879595882-3373a0480b5b","1558904541-efa843a96f01","1585320806297-9794b3e4eeae","1464226184884-fa280b87912a","1523348837708-15d4a09cfac2"],
+    construcao:  ["1534430480872-3498386e7856","1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1621905252507-b35492cc74b4","1504307651254-35680f356dfd"],
+    cozinha:     ["1534430480872-3498386e7856","1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1607631568010-04d9e6c9c9cc","1600565597548-b00addbf3fb4"],
+    babysitter:  ["1534430480872-3498386e7856","1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1565073624497-5f73b0b8e9f7"],
+    cabeleireiro:["1534430480872-3498386e7856","1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1521490683474-6f6e43d60332","1519699047748-de8e457a634e"],
+    motorista:   ["1534430480872-3498386e7856","1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1568605117036-5f31fd70ad76","1600880292203-757bb62ee408"],
+    fitness:     ["1534430480872-3498386e7856","1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1594737625785-a6cbdabd333c"],
+    beleza:      ["1534430480872-3498386e7856","1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1616394584738-fc6e612e71b9"],
+    pintura:     ["1534430480872-3498386e7856","1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1572296374666-7b0a90e5b7cd","1581858726788-75bc0f6a952d"],
+    cuidados:    ["1534430480872-3498386e7856","1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1609220136736-443140f6f76c"],
+    outro:       ["1534430480872-3498386e7856","1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1600880292203-757bb62ee408"],
+  },
+  ie: {
+    limpeza:     ["1590089415225-401ed6f9db8e","1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1558763831-0d5f4dce5e14","1600880292203-757bb62ee408"],
+    jardim:      ["1590089415225-401ed6f9db8e","1416879595882-3373a0480b5b","1558904541-efa843a96f01","1585320806297-9794b3e4eeae","1464226184884-fa280b87912a","1523348837708-15d4a09cfac2"],
+    construcao:  ["1590089415225-401ed6f9db8e","1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1621905252507-b35492cc74b4","1504307651254-35680f356dfd"],
+    cozinha:     ["1590089415225-401ed6f9db8e","1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1607631568010-04d9e6c9c9cc","1600565597548-b00addbf3fb4"],
+    babysitter:  ["1590089415225-401ed6f9db8e","1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1565073624497-5f73b0b8e9f7"],
+    cabeleireiro:["1590089415225-401ed6f9db8e","1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1521490683474-6f6e43d60332","1519699047748-de8e457a634e"],
+    motorista:   ["1590089415225-401ed6f9db8e","1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1568605117036-5f31fd70ad76","1600880292203-757bb62ee408"],
+    fitness:     ["1590089415225-401ed6f9db8e","1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1594737625785-a6cbdabd333c"],
+    beleza:      ["1590089415225-401ed6f9db8e","1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1616394584738-fc6e612e71b9"],
+    pintura:     ["1590089415225-401ed6f9db8e","1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1572296374666-7b0a90e5b7cd","1581858726788-75bc0f6a952d"],
+    cuidados:    ["1590089415225-401ed6f9db8e","1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1609220136736-443140f6f76c"],
+    outro:       ["1590089415225-401ed6f9db8e","1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1600880292203-757bb62ee408"],
+  },
+};
+['ch','be','at','se'].forEach(p => { FOTOS[p] = JSON.parse(JSON.stringify(FOTOS.de)); });
 
-let panData = {};
+// Converte IDs para URL completo ao renderizar
+function fotoUrl(id) { return `https://images.unsplash.com/photo-${id}?w=900&q=85&fit=crop`; }
 
-function chkForm(){
-  const ok = document.getElementById('p-nome').value.trim() &&
-             document.getElementById('p-servico').value.trim() &&
-             document.getElementById('p-desc').value.trim().length >= 20;
-  document.getElementById('btn-gen').disabled = !ok;
-}
+// Banco completo de fotos por serviço — usado na galeria de escolha manual
+const BANCO_FOTOS = {
+  limpeza: [
+    "1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf",
+    "1558763831-0d5f4dce5e14","1600880292203-757bb62ee408","1581578731548-c64695cc6952",
+    "1558908929-6e9f8a2b7c5a","1556909114-f6e7ad7d3136","1584820927498-cfe5211fd8bf",
+    "1600585152220-90363fe7e115","1527515637462-cff94eecc1ac","1521737604893-d14cc237f11d",
+    "1555881400-74d7acaacd8b","1539037116277-4db20889f2d4","1467269204594-9661b134dd2b",
+  ],
+  jardim: [
+    "1416879595882-3373a0480b5b","1558904541-efa843a96f01","1523348837708-15d4a09cfac2",
+    "1464226184884-fa280b87912a","1599598425-14f7c9c8c3ef","1585320806297-9794b3e4eeae",
+    "1508193638397-1c4234db14d8","1499856871958-5b9627545d1a","1513635269975-59663e0ac1ad",
+    "1416879595882-3373a0480b5b","1472289065338-008780935e05","1459156212016-c812468e2103",
+    "1530968033775-b09065f55a96","1534430480872-3498386e7856","1555881400-74d7acaacd8b",
+  ],
+  construcao: [
+    "1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5",
+    "1621905252507-b35492cc74b4","1513635269975-59663e0ac1ad","1467269204594-9661b134dd2b",
+    "1504307651254-35680f356dfd","1581091226825-a6a2a5aee158","1558618047-3c8c76ca7d13",
+    "1504307651254-35680f356dfd","1541888946425-d81bb19240f5","1565008576549-57569a49371d",
+    "1504307651254-35680f356dfd","1555881400-74d7acaacd8b","1539037116277-4db20889f2d4",
+  ],
+  cozinha: [
+    "1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2",
+    "1607631568010-04d9e6c9c9cc","1600565597548-b00addbf3fb4","1499856871958-5b9627545d1a",
+    "1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b","1467269204594-9661b134dd2b",
+    "1482049527296-b2b7a5c01a57","1504674900-feef4c91c73a","1540914124-6a3d0a4d76fc",
+    "1547592180-85f173990554","1514190051497-48f6196a3b89","1556909114-f6e7ad7d3136",
+  ],
+  babysitter: [
+    "1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9",
+    "1544717302-de2939b7ef71","1565073624497-5f73b0b8e9f7","1508193638397-1c4234db14d8",
+    "1499856871958-5b9627545d1a","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b",
+    "1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1587654780291-39c9404d746b",
+    "1516627145497-ae6968895b74","1519098635131-1c9b31f85b0a","1475483768547-7c0a27754f98",
+  ],
+  cabeleireiro: [
+    "1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486",
+    "1521490683474-6f6e43d60332","1519699047748-de8e457a634e","1512470876302-972faa2aa9a4",
+    "1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b","1467269204594-9661b134dd2b",
+    "1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486",
+    "1521490683474-6f6e43d60332","1531746590-3fa3f02c6a9b","1596174169672-e5d6e5d7f1e0",
+  ],
+  motorista: [
+    "1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8",
+    "1568605117036-5f31fd70ad76","1600880292203-757bb62ee408","1512470876302-972faa2aa9a4",
+    "1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b","1467269204594-9661b134dd2b",
+    "1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8",
+    "1568605117036-5f31fd70ad76","1553260168-0db5f1b64a2f","1558618666-fcd25c85cd64",
+  ],
+  fitness: [
+    "1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5",
+    "1574680096145-d05b474e2155","1594737625785-a6cbdabd333c","1508193638397-1c4234db14d8",
+    "1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b","1467269204594-9661b134dd2b",
+    "1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5",
+    "1574680096145-d05b474e2155","1517836357463-d25dfeac3438","1549060279-7e168fcee0c2",
+  ],
+  beleza: [
+    "1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2",
+    "1596704017254-9b121068fb31","1616394584738-fc6e612e71b9","1512470876302-972faa2aa9a4",
+    "1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b","1467269204594-9661b134dd2b",
+    "1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2",
+    "1596704017254-9b121068fb31","1595476589-96c7ebf50b23","1522337913791-5c5f71f17e28",
+  ],
+  pintura: [
+    "1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115",
+    "1572296374666-7b0a90e5b7cd","1581858726788-75bc0f6a952d","1512470876302-972faa2aa9a4",
+    "1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b","1467269204594-9661b134dd2b",
+    "1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115",
+    "1572296374666-7b0a90e5b7cd","1600585152220-90363fe7e115","1598300042-16f5ee5872b8",
+  ],
+  cuidados: [
+    "1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22",
+    "1582750433449-648ed127bb54","1609220136736-443140f6f76c","1508193638397-1c4234db14d8",
+    "1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b","1467269204594-9661b134dd2b",
+    "1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22",
+    "1582750433449-648ed127bb54","1574226559-56f2d7eb0a3d","1552072092-7c08f8e00c14",
+  ],
+  outro: [
+    "1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40",
+    "1542744094-3a31f272c490","1600880292203-757bb62ee408","1512470876302-972faa2aa9a4",
+    "1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b","1467269204594-9661b134dd2b",
+    "1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40",
+    "1542744094-3a31f272c490","1600880292203-757bb62ee408","1497366216548-37526070297c",
+  ],
+};
 
-async function gerarPanfleto(){
-  const nome = document.getElementById('p-nome').value.trim();
-  const servico = document.getElementById('p-servico').value.trim();
-  const cidade = document.getElementById('p-cidade').value.trim();
-  const contato = document.getElementById('p-contato').value.trim();
-  const desc = document.getElementById('p-desc').value.trim();
-  const pais = document.getElementById('p-pais').value;
-  const lang = PAIS_LANG[pais];
-  const paisName = PAIS_NAMES[pais];
+const SLOGANS = {
+  limpeza: { pt:["Limpeza que faz a diferença — na sua casa, no seu dia.","A sua casa merece o melhor — e eu estou aqui para isso.","Cada detalhe cuidado, para que não precise preocupar.","O seu lar, sempre impecável — sem esforço da sua parte.","Confiança que se vê em cada canto da sua casa.","Porque um lar limpo é um lar feliz.","O cuidado que a sua casa merece, nas mãos certas.","Limpeza com dedicação — porque o seu tempo é precioso.","Profissionalismo em cada visita, resultado em cada detalhe.","A sua tranquilidade começa numa casa bem cuidada."], es:["Limpieza que marca la diferencia — en tu hogar, cada día.","Tu casa merece lo mejor — y yo estoy aquí para eso.","Cada detalle cuidado, para que no tengas que preocuparte.","Tu hogar, siempre impecable — sin esfuerzo de tu parte.","Confianza que se nota en cada rincón de tu casa.","Porque un hogar limpio es un hogar feliz.","El cuidado que tu casa merece, en manos expertas.","Limpieza con dedicación — porque tu tiempo es valioso.","Profesionalismo en cada visita, resultado en cada detalle.","Tu tranquilidad empieza en un hogar bien cuidado."], de:["Sauberkeit, die den Unterschied macht — jeden Tag.","Ihr Zuhause verdient das Beste — ich bin für Sie da.","Jedes Detail gepflegt, damit Sie sich keine Sorgen machen.","Ihr Heim, immer makellos — ganz ohne Aufwand Ihrerseits.","Vertrauen, das man in jedem Winkel Ihres Hauses sieht.","Ein sauberes Zuhause ist ein glückliches Zuhause.","Die Pflege, die Ihr Heim verdient — in guten Händen.","Reinigung mit Hingabe — weil Ihre Zeit kostbar ist.","Professionalität bei jedem Besuch, Ergebnis in jedem Detail.","Ihre Ruhe beginnt in einem gut gepflegten Zuhause."], nl:["Schoonmaak die het verschil maakt — elke dag opnieuw.","Uw huis verdient het beste — en ik ben er voor u.","Elk detail verzorgd, zodat u zich geen zorgen hoeft te maken.","Uw thuis, altijd onberispelijk — zonder moeite van uw kant.","Vertrouwen dat zichtbaar is in elke hoek van uw huis.","Want een schoon huis is een gelukkig huis.","De zorg die uw huis verdient, in goede handen.","Schoonmaken met toewijding — want uw tijd is kostbaar.","Vakmanschap bij elk bezoek, resultaat in elk detail.","Uw rust begint in een goed verzorgd thuis."], fr:["Un nettoyage qui fait la différence — chaque jour.","Votre maison mérite le meilleur — je suis là pour ça.","Chaque détail soigné, pour que vous n'ayez pas à vous inquiéter.","Votre foyer, toujours impeccable — sans effort de votre part.","La confiance qui se voit dans chaque coin de votre maison.","Parce qu'un foyer propre est un foyer heureux.","Le soin que votre maison mérite, entre de bonnes mains.","Nettoyage avec dévouement — parce que votre temps est précieux.","Professionnalisme à chaque visite, résultat à chaque détail.","Votre tranquillité commence dans un foyer bien entretenu."], it:["Pulizia che fa la differenza — ogni giorno.","La tua casa merita il meglio — e io sono qui per questo.","Ogni dettaglio curato, perché tu non debba preoccuparti.","Il tuo nido, sempre impeccabile — senza sforzo da parte tua.","Fiducia che si vede in ogni angolo della tua casa.","Perché una casa pulita è una casa felice.","La cura che la tua casa merita, in mani esperte.","Pulizia con dedizione — perché il tuo tempo è prezioso.","Professionalità ad ogni visita, risultato in ogni dettaglio.","La tua tranquillità inizia in una casa ben curata."], en:["Cleaning that makes a difference — every single day.","Your home deserves the best — and I'm here for that.","Every detail taken care of, so you don't have to worry.","Your home, always spotless — without any effort from you.","Trust you can see in every corner of your home.","Because a clean home is a happy home.","The care your home deserves, in the right hands.","Cleaning with dedication — because your time is precious.","Professionalism at every visit, results in every detail.","Your peace of mind starts with a well-kept home."] },
+  jardim: { pt:["Um jardim bonito começa com quem o cuida de verdade.","O seu espaço verde, sempre a sorrir para si.","Jardins cuidados, vizinhos invejosos.","Natureza e cuidado — o jardim que você merece.","Cada planta tem a sua história — eu cuido da sua.","Verde, fresco e sempre impecável.","O jardim dos seus sonhos está nas minhas mãos.","Crescer com cuidado — jardins que inspiram.","Um jardim bem cuidado vale mais que mil palavras.","Da semente ao jardim perfeito — estou aqui."], es:["Un jardín bonito empieza con quien lo cuida de verdad.","Tu espacio verde, siempre sonriéndote.","Jardines cuidados, vecinos envidiosos.","Naturaleza y cuidado — el jardín que mereces.","Cada planta tiene su historia — yo cuido la tuya.","Verde, fresco y siempre impecable.","El jardín de tus sueños está en mis manos.","Crecer con cuidado — jardines que inspiran.","Un jardín bien cuidado vale más que mil palabras.","De la semilla al jardín perfecto — aquí estoy."], de:["Ein schöner Garten beginnt mit jemandem, der ihn wirklich pflegt.","Ihr Grünraum, immer in voller Blüte.","Gepflegte Gärten, neidische Nachbarn.","Natur und Fürsorge — der Garten, den Sie verdienen.","Jede Pflanze hat ihre Geschichte — ich pflege Ihre.","Grün, frisch und immer makellos.","Der Garten Ihrer Träume liegt in meinen Händen.","Mit Sorgfalt wachsen — Gärten, die inspirieren.","Ein gepflegter Garten sagt mehr als tausend Worte.","Von der Saat zum perfekten Garten — ich bin da."], nl:["Een mooie tuin begint met iemand die er echt voor zorgt.","Uw groene ruimte, altijd stralend.","Verzorgde tuinen, jaloerse buren.","Natuur en zorg — de tuin die u verdient.","Elke plant heeft zijn verhaal — ik zorg voor het uwe.","Groen, fris en altijd onberispelijk.","De tuin van uw dromen ligt in mijn handen.","Groeien met zorg — tuinen die inspireren.","Een goed onderhouden tuin zegt meer dan duizend woorden.","Van zaad tot perfecte tuin — ik ben er."], fr:["Un beau jardin commence par quelqu'un qui en prend vraiment soin.","Votre espace vert, toujours épanoui.","Des jardins soignés, des voisins jaloux.","Nature et soin — le jardin que vous méritez.","Chaque plante a son histoire — je prends soin de la vôtre.","Vert, frais et toujours impeccable.","Le jardin de vos rêves est entre mes mains.","Grandir avec soin — des jardins qui inspirent.","Un jardin bien entretenu vaut mieux que mille mots.","De la graine au jardin parfait — je suis là."], it:["Un bel giardino inizia con chi se ne prende cura davvero.","Il tuo spazio verde, sempre fiorente.","Giardini curati, vicini invidiosi.","Natura e cura — il giardino che meriti.","Ogni pianta ha la sua storia — mi prendo cura della tua.","Verde, fresco e sempre impeccabile.","Il giardino dei tuoi sogni è nelle mie mani.","Crescere con cura — giardini che ispirano.","Un giardino ben curato vale più di mille parole.","Dal seme al giardino perfetto — sono qui."], en:["A beautiful garden starts with someone who truly cares.","Your green space, always blooming.","Well-kept gardens, jealous neighbours.","Nature and care — the garden you deserve.","Every plant has a story — I take care of yours.","Green, fresh and always perfect.","The garden of your dreams is in my hands.","Growing with care — gardens that inspire.","A well-kept garden speaks louder than words.","From seed to perfect garden — I'm here."] },
+  construcao: { pt:["Construção com precisão — do início ao fim.","A sua obra nas mãos certas, sem surpresas.","Qualidade que se vê, durabilidade que se sente.","Cada projeto tratado como se fosse o meu próprio lar.","Obras que ficam — porque faço para durar.","Do sonho à realidade, tijolo a tijolo.","Confiança e rigor em cada metro quadrado.","A sua remodelação, feita com orgulho e dedicação.","Profissionalismo que se nota — do primeiro ao último dia.","O seu espaço, transformado com cuidado e qualidade."], es:["Construcción con precisión — de principio a fin.","Tu obra en las manos correctas, sin sorpresas.","Calidad que se ve, durabilidad que se siente.","Cada proyecto tratado como si fuera mi propio hogar.","Obras que duran — porque construyo para el futuro.","Del sueño a la realidad, ladrillo a ladrillo.","Confianza y rigor en cada metro cuadrado.","Tu reforma, hecha con orgullo y dedicación.","Profesionalismo que se nota — del primero al último día.","Tu espacio, transformado con cuidado y calidad."], de:["Bau mit Präzision — von Anfang bis Ende.","Ihr Bauprojekt in den richtigen Händen, ohne Überraschungen.","Qualität, die man sieht, Haltbarkeit, die man fühlt.","Jedes Projekt behandelt wie mein eigenes Zuhause.","Arbeiten, die halten — weil ich für die Ewigkeit baue.","Vom Traum zur Wirklichkeit, Stein für Stein.","Vertrauen und Sorgfalt auf jedem Quadratmeter.","Ihre Renovierung, mit Stolz und Hingabe ausgeführt.","Professionalität, die auffällt — vom ersten bis zum letzten Tag.","Ihr Raum, mit Sorgfalt und Qualität transformiert."], nl:["Bouwen met precisie — van begin tot eind.","Uw project in de juiste handen, zonder verrassingen.","Kwaliteit die zichtbaar is, duurzaamheid die voelbaar is.","Elk project behandeld alsof het mijn eigen huis was.","Werken die blijven — want ik bouw voor de eeuwigheid.","Van droom naar werkelijkheid, steen voor steen.","Vertrouwen en vakmanschap op elke vierkante meter.","Uw renovatie, uitgevoerd met trots en toewijding.","Professionaliteit die opvalt — van de eerste tot de laatste dag.","Uw ruimte, getransformeerd met zorg en kwaliteit."], fr:["Construction avec précision — du début à la fin.","Votre chantier entre les bonnes mains, sans surprises.","Qualité visible, durabilité ressentie.","Chaque projet traité comme si c'était ma propre maison.","Des travaux qui durent — parce que je construis pour l'éternité.","Du rêve à la réalité, brique par brique.","Confiance et rigueur sur chaque mètre carré.","Votre rénovation, réalisée avec fierté et dévouement.","Professionnalisme remarquable — du premier au dernier jour.","Votre espace, transformé avec soin et qualité."], it:["Costruzione con precisione — dall'inizio alla fine.","Il tuo progetto nelle mani giuste, senza sorprese.","Qualità che si vede, durabilità che si sente.","Ogni progetto trattato come se fosse casa mia.","Lavori che durano — perché costruisco per l'eternità.","Dal sogno alla realtà, mattone dopo mattone.","Fiducia e rigore su ogni metro quadrato.","La tua ristrutturazione, realizzata con orgoglio e dedizione.","Professionalità che si nota — dal primo all'ultimo giorno.","Il tuo spazio, trasformato con cura e qualità."], en:["Building with precision — from start to finish.","Your project in the right hands, no surprises.","Quality you can see, durability you can feel.","Every project treated as if it were my own home.","Work that lasts — because I build to endure.","From dream to reality, brick by brick.","Trust and precision on every square metre.","Your renovation, done with pride and dedication.","Professionalism you'll notice — from day one to the last.","Your space, transformed with care and quality."] },
+  cozinha: { pt:["Sabores que contam histórias — feitos com amor.","A cozinha certa para a sua mesa, todos os dias.","Comida de qualidade, preparada com dedicação.","O gosto de casa, onde quer que esteja.","Cada prato, uma experiência que não esquece.","Cozinha profissional com toque pessoal.","Do mercado à mesa — frescura e sabor garantidos.","Porque comer bem é viver melhor.","Receitas com alma, sabores com identidade.","A cozinha que o seu paladar merece."], es:["Sabores que cuentan historias — hechos con amor.","La cocina adecuada para tu mesa, todos los días.","Comida de calidad, preparada con dedicación.","El sabor de casa, donde quiera que estés.","Cada plato, una experiencia que no olvidarás.","Cocina profesional con toque personal.","Del mercado a la mesa — frescura y sabor garantizados.","Porque comer bien es vivir mejor.","Recetas con alma, sabores con identidad.","La cocina que tu paladar merece."], de:["Aromen, die Geschichten erzählen — mit Liebe gemacht.","Die richtige Küche für Ihren Tisch, jeden Tag.","Qualitätsessen, mit Hingabe zubereitet.","Der Geschmack von Zuhause, wo immer Sie sind.","Jedes Gericht, ein Erlebnis, das man nicht vergisst.","Professionelle Küche mit persönlicher Note.","Vom Markt auf den Tisch — Frische und Geschmack garantiert.","Denn gut essen bedeutet besser leben.","Rezepte mit Seele, Aromen mit Identität.","Die Küche, die Ihr Gaumen verdient."], nl:["Smaken die verhalen vertellen — gemaakt met liefde.","De juiste keuken voor uw tafel, elke dag.","Kwalitatief eten, bereid met toewijding.","De smaak van thuis, waar u ook bent.","Elk gerecht, een ervaring die bijblijft.","Professionele keuken met een persoonlijk tintje.","Van de markt naar de tafel — versheid en smaak gegarandeerd.","Want goed eten is beter leven.","Recepten met ziel, smaken met identiteit.","De keuken die uw gehemelte verdient."], fr:["Des saveurs qui racontent des histoires — faites avec amour.","La bonne cuisine pour votre table, chaque jour.","Nourriture de qualité, préparée avec dévouement.","Le goût de chez soi, où que vous soyez.","Chaque plat, une expérience inoubliable.","Cuisine professionnelle avec une touche personnelle.","Du marché à la table — fraîcheur et saveur garanties.","Parce que bien manger, c'est mieux vivre.","Des recettes avec âme, des saveurs avec identité.","La cuisine que votre palais mérite."], it:["Sapori che raccontano storie — fatti con amore.","La cucina giusta per la tua tavola, ogni giorno.","Cibo di qualità, preparato con dedizione.","Il sapore di casa, ovunque tu sia.","Ogni piatto, un'esperienza che non dimentichi.","Cucina professionale con un tocco personale.","Dal mercato alla tavola — freschezza e sapore garantiti.","Perché mangiare bene significa vivere meglio.","Ricette con anima, sapori con identità.","La cucina che il tuo palato merita."], en:["Flavours that tell stories — made with love.","The right cooking for your table, every single day.","Quality food, prepared with dedication.","The taste of home, wherever you are.","Every dish, an experience you won't forget.","Professional cooking with a personal touch.","From market to table — freshness and flavour guaranteed.","Because eating well means living better.","Recipes with soul, flavours with identity.","The cooking your taste buds deserve."] },
+  cuidados: { pt:["Cuidar com carinho — porque cada pessoa importa.","Presença que reconforta, cuidado que transforma.","O bem-estar dos seus entes queridos, em boas mãos.","Cuidado com dignidade, afeto com profissionalismo.","Porque envelhecer bem é um direito de todos.","Cada sorriso é a razão do meu trabalho.","Dedicação que vai além do dever.","Cuidar é a minha vocação — e faço-o com o coração.","Tranquilidade para a família, conforto para quem fica.","Um cuidador de confiança — presente quando mais precisa."], es:["Cuidar con cariño — porque cada persona importa.","Presencia que reconforta, cuidado que transforma.","El bienestar de tus seres queridos, en buenas manos.","Cuidado con dignidad, afecto con profesionalismo.","Porque envejecer bien es un derecho de todos.","Cada sonrisa es la razón de mi trabajo.","Dedicación que va más allá del deber.","Cuidar es mi vocación — y lo hago con el corazón.","Tranquilidad para la familia, confort para quien se queda.","Un cuidador de confianza — presente cuando más se necesita."], de:["Fürsorge mit Herz — denn jeder Mensch zählt.","Präsenz, die tröstet, Fürsorge, die verwandelt.","Das Wohlbefinden Ihrer Liebsten in guten Händen.","Pflege mit Würde, Zuneigung mit Professionalität.","Denn gut zu altern ist ein Recht für alle.","Jedes Lächeln ist der Grund meiner Arbeit.","Hingabe, die über die Pflicht hinausgeht.","Pflegen ist meine Berufung — und ich tue es von Herzen.","Ruhe für die Familie, Komfort für den Pflegebedürftigen.","Ein vertrauensvoller Pflegender — da, wenn man ihn am meisten braucht."], nl:["Zorgen met liefde — want elke persoon telt.","Aanwezigheid die troost, zorg die transformeert.","Het welzijn van uw dierbaren in goede handen.","Zorg met waardigheid, genegenheid met professionaliteit.","Want goed oud worden is een recht voor iedereen.","Elke glimlach is de reden van mijn werk.","Toewijding die verder gaat dan de plicht.","Zorgen is mijn roeping — en ik doe het van harte.","Rust voor de familie, comfort voor wie blijft.","Een vertrouwde verzorger — aanwezig wanneer het het meest nodig is."], fr:["Prendre soin avec amour — parce que chaque personne compte.","Présence qui réconforte, soin qui transforme.","Le bien-être de vos proches, entre de bonnes mains.","Soin avec dignité, affection avec professionnalisme.","Parce que bien vieillir est un droit pour tous.","Chaque sourire est la raison de mon travail.","Dévouement qui va au-delà du devoir.","Prendre soin est ma vocation — et je le fais avec le cœur.","Tranquillité pour la famille, confort pour ceux qui restent.","Un soignant de confiance — présent quand on en a le plus besoin."], it:["Prendersi cura con affetto — perché ogni persona conta.","Presenza che conforta, cura che trasforma.","Il benessere dei tuoi cari, in buone mani.","Cura con dignità, affetto con professionalità.","Perché invecchiare bene è un diritto di tutti.","Ogni sorriso è la ragione del mio lavoro.","Dedizione che va oltre il dovere.","Prendersi cura è la mia vocazione — e lo faccio con il cuore.","Tranquillità per la famiglia, comfort per chi rimane.","Un assistente di fiducia — presente quando se ne ha più bisogno."], en:["Caring with love — because every person matters.","Presence that comforts, care that transforms.","Your loved ones' wellbeing, in good hands.","Care with dignity, affection with professionalism.","Because ageing well is everyone's right.","Every smile is the reason I do this work.","Dedication that goes beyond duty.","Caring is my calling — and I do it from the heart.","Peace of mind for the family, comfort for those who need it.","A trusted carer — present when you need it most."] },
+  babysitter: { pt:["As suas crianças, cuidadas com amor e responsabilidade.","Segurança e alegria — para os seus pequenos.","Uma babysitter de confiança, sempre presente.","Crianças felizes, pais tranquilos.","Cada criança é especial — e eu trato-a assim.","Brincar, aprender e crescer — estou aqui.","O cuidado que os seus filhos merecem.","Disponível quando mais precisa, dedicada sempre.","Diversão, segurança e muito carinho.","Porque os seus filhos merecem o melhor."], es:["Tus hijos, cuidados con amor y responsabilidad.","Seguridad y alegría — para tus pequeños.","Una niñera de confianza, siempre presente.","Niños felices, padres tranquilos.","Cada niño es especial — y los trato así.","Jugar, aprender y crecer — estoy aquí.","El cuidado que tus hijos merecen.","Disponible cuando más lo necesitas, dedicada siempre.","Diversión, seguridad y mucho cariño.","Porque tus hijos merecen lo mejor."], de:["Ihre Kinder, mit Liebe und Verantwortung betreut.","Sicherheit und Freude — für Ihre Kleinen.","Eine vertrauensvolle Babysitterin, immer da.","Glückliche Kinder, entspannte Eltern.","Jedes Kind ist besonders — und ich behandle es so.","Spielen, lernen und wachsen — ich bin dabei.","Die Fürsorge, die Ihre Kinder verdienen.","Verfügbar, wenn Sie es am meisten brauchen, immer engagiert.","Spaß, Sicherheit und ganz viel Zuneigung.","Denn Ihre Kinder verdienen das Beste."], nl:["Uw kinderen, verzorgd met liefde en verantwoordelijkheid.","Veiligheid en plezier — voor uw kleintjes.","Een vertrouwde babysitter, altijd aanwezig.","Gelukkige kinderen, ontspannen ouders.","Elk kind is bijzonder — en ik behandel het zo.","Spelen, leren en groeien — ik ben erbij.","De zorg die uw kinderen verdienen.","Beschikbaar wanneer u het het meest nodig heeft, altijd toegewijd.","Plezier, veiligheid en veel liefde.","Want uw kinderen verdienen het beste."], fr:["Vos enfants, pris en charge avec amour et responsabilité.","Sécurité et joie — pour vos petits.","Une baby-sitter de confiance, toujours présente.","Enfants heureux, parents tranquilles.","Chaque enfant est spécial — et je les traite ainsi.","Jouer, apprendre et grandir — je suis là.","Le soin que vos enfants méritent.","Disponible quand vous en avez le plus besoin, dévouée toujours.","Amusement, sécurité et beaucoup d'affection.","Parce que vos enfants méritent le meilleur."], it:["I tuoi bambini, accuditi con amore e responsabilità.","Sicurezza e gioia — per i tuoi piccoli.","Una babysitter di fiducia, sempre presente.","Bambini felici, genitori tranquilli.","Ogni bambino è speciale — e lo tratto così.","Giocare, imparare e crescere — sono qui.","La cura che i tuoi figli meritono.","Disponibile quando ne hai più bisogno, dedicata sempre.","Divertimento, sicurezza e tanto affetto.","Perché i tuoi figli meritano il meglio."], en:["Your children, cared for with love and responsibility.","Safety and joy — for your little ones.","A trusted babysitter, always there for you.","Happy children, relaxed parents.","Every child is special — and I treat them that way.","Play, learn and grow — I'm here for it all.","The care your children deserve.","Available when you need it most, dedicated always.","Fun, safety and lots of love.","Because your children deserve the best."] },
+};
+const SLOGANS_GENERICO = { pt:["Serviço profissional, resultado garantido.","Qualidade que se nota, confiança que se sente.","O melhor serviço, ao seu alcance.","Dedicação total em cada trabalho.","Experiência e profissionalismo ao seu serviço.","Porque merece o melhor.","Resultados que falam por si.","Sempre disponível, sempre profissional.","O seu serviço de confiança na cidade.","Feito com orgulho, entregue com qualidade."], es:["Servicio profesional, resultados garantizados.","Calidad que se nota, confianza que se siente.","El mejor servicio, a tu alcance.","Dedicación total en cada trabajo.","Experiencia y profesionalismo a tu servicio.","Porque mereces lo mejor.","Resultados que hablan por sí solos.","Siempre disponible, siempre profesional.","Tu servicio local de confianza.","Hecho con orgullo, entregado con calidad."], de:["Professioneller Service, garantierte Ergebnisse.","Qualität, die man merkt, Vertrauen, das man spürt.","Der beste Service, in greifbarer Nähe.","Volle Hingabe bei jedem Auftrag.","Erfahrung und Professionalität zu Ihren Diensten.","Weil Sie das Beste verdienen.","Ergebnisse, die für sich sprechen.","Immer verfügbar, immer professionell.","Ihr vertrauenswürdiger lokaler Service.","Mit Stolz gemacht, mit Qualität geliefert."], nl:["Professionele service, gegarandeerde resultaten.","Kwaliteit die opvalt, vertrouwen dat voelbaar is.","De beste service, binnen handbereik.","Volledige toewijding bij elke opdracht.","Ervaring en professionaliteit tot uw dienst.","Omdat u het beste verdient.","Resultaten die voor zichzelf spreken.","Altijd beschikbaar, altijd professioneel.","Uw vertrouwde lokale service.","Met trots gedaan, met kwaliteit geleverd."], fr:["Service professionnel, résultats garantis.","Qualité qui se remarque, confiance qui se ressent.","Le meilleur service, à votre portée.","Dévouement total dans chaque travail.","Expérience et professionnalisme à votre service.","Parce que vous méritez le meilleur.","Des résultats qui parlent d'eux-mêmes.","Toujours disponible, toujours professionnel.","Votre service local de confiance.","Fait avec fierté, livré avec qualité."], it:["Servizio professionale, risultati garantiti.","Qualità che si nota, fiducia che si sente.","Il miglior servizio, alla tua portata.","Dedizione totale in ogni lavoro.","Esperienza e professionalità al tuo servizio.","Perché meriti il meglio.","Risultati che parlano da soli.","Sempre disponibile, sempre professionale.","Il tuo servizio locale di fiducia.","Fatto con orgoglio, consegnato con qualità."], en:["Professional service, guaranteed results.","Quality you notice, trust you feel.","The best service, within your reach.","Total dedication in every job.","Experience and professionalism at your service.","Because you deserve the best.","Results that speak for themselves.","Always available, always professional.","Your trusted local service.","Done with pride, delivered with quality."] };
+['cabeleireiro','motorista','fitness','beleza','pintura','outro'].forEach(s => { SLOGANS[s] = SLOGANS_GENERICO; });
 
-  const btn = document.getElementById('btn-gen');
-  btn.disabled = true;
-  btn.textContent = 'Gerando...';
+const SERVICOS_TEXTO = {
+  limpeza:     { pt:['Experiência comprovada','Horários flexíveis','Resultados garantidos'], es:['Experiencia comprobada','Horarios flexibles','Resultados garantizados'], de:['Nachgewiesene Erfahrung','Flexible Zeiten','Garantierte Ergebnisse'], nl:['Bewezen ervaring','Flexibele tijden','Gegarandeerde resultaten'], fr:['Expérience prouvée','Horaires flexibles','Résultats garantis'], it:['Esperienza comprovata','Orari flessibili','Risultati garantiti'], en:['Proven experience','Flexible hours','Guaranteed results'] },
+  jardim:      { pt:['Poda e manutenção','Plantação sazonal','Resultados visíveis'], es:['Poda y mantenimiento','Plantación de temporada','Resultados visibles'], de:['Schnitt & Pflege','Saisonale Bepflanzung','Sichtbare Ergebnisse'], nl:['Snoeien & onderhoud','Seizoensbeplanting','Zichtbare resultaten'], fr:['Taille & entretien','Plantation saisonnière','Résultats visibles'], it:['Potatura e manutenzione','Piantumazione stagionale','Risultati visibili'], en:['Pruning & maintenance','Seasonal planting','Visible results'] },
+  construcao:  { pt:['Obras e remodelações','Orçamento gratuito','Trabalho garantido'], es:['Obras y reformas','Presupuesto gratuito','Trabajo garantizado'], de:['Umbauten & Renovierungen','Kostenloser Kostenvoranschlag','Garantierte Arbeit'], nl:['Verbouwingen & renovaties','Gratis offerte','Werk gegarandeerd'], fr:['Travaux & rénovations','Devis gratuit','Travail garanti'], it:['Lavori e ristrutturazioni','Preventivo gratuito','Lavoro garantito'], en:['Renovations & builds','Free quote','Work guaranteed'] },
+  cozinha:     { pt:['Cozinha diária','Eventos e festas','Experiência comprovada'], es:['Cocina diaria','Eventos y fiestas','Experiencia comprobada'], de:['Tägliches Kochen','Veranstaltungen & Feiern','Nachgewiesene Erfahrung'], nl:['Dagelijks koken','Evenementen & feesten','Bewezen ervaring'], fr:['Cuisine quotidienne','Événements & fêtes','Expérience prouvée'], it:['Cucina quotidiana','Eventi e feste','Esperienza comprovata'], en:['Daily cooking','Events & parties','Proven experience'] },
+  babysitter:  { pt:['Crianças dos 0 aos 12','Primeiros socorros','Sempre disponível'], es:['Niños de 0 a 12 años','Primeros auxilios','Siempre disponible'], de:['Kinder von 0 bis 12','Erste-Hilfe-Ausbildung','Immer verfügbar'], nl:['Kinderen 0 tot 12','EHBO gecertificeerd','Altijd beschikbaar'], fr:['Enfants de 0 à 12 ans','Premiers secours','Toujours disponible'], it:['Bambini da 0 a 12 anni','Primo soccorso','Sempre disponibile'], en:['Children 0 to 12','First aid certified','Always available'] },
+  cabeleireiro:{ pt:['Corte e coloração','Tratamentos capilares','Resultado profissional'], es:['Corte y coloración','Tratamientos capilares','Resultado profesional'], de:['Schnitt und Färbung','Haarbehandlungen','Professionelles Ergebnis'], nl:['Knippen en kleuren','Haarbehandelingen','Professioneel resultaat'], fr:['Coupe et coloration','Soins capillaires','Résultat professionnel'], it:['Taglio e colorazione','Trattamenti capillari','Risultato professionale'], en:['Cut & colour','Hair treatments','Professional results'] },
+  motorista:   { pt:['Entregas rápidas','Pontualidade garantida','Disponível 7 dias'], es:['Entregas rápidas','Puntualidad garantizada','Disponible 7 días'], de:['Schnelle Lieferungen','Pünktlichkeit garantiert','7 Tage verfügbar'], nl:['Snelle leveringen','Stiptheid gegarandeerd','7 dagen beschikbaar'], fr:['Livraisons rapides','Ponctualité garantie','Disponible 7 jours'], it:['Consegne rapide','Puntualità garantita','Disponibile 7 giorni'], en:['Fast deliveries','Punctuality guaranteed','Available 7 days'] },
+  fitness:     { pt:['Treinos personalizados','Resultados comprovados','Online e presencial'], es:['Entrenamientos personalizados','Resultados comprobados','Online y presencial'], de:['Personalisiertes Training','Nachgewiesene Ergebnisse','Online und vor Ort'], nl:['Persoonlijke training','Bewezen resultaten','Online en live'], fr:['Entraînements personnalisés','Résultats prouvés','En ligne et en personne'], it:['Allenamenti personalizzati','Risultati comprovati','Online e di persona'], en:['Personalised training','Proven results','Online & in-person'] },
+  beleza:      { pt:['Estética profissional','Produtos de qualidade','Resultado garantido'], es:['Estética profesional','Productos de calidad','Resultado garantizado'], de:['Professionelle Ästhetik','Qualitätsprodukte','Garantiertes Ergebnis'], nl:['Professionele esthetiek','Kwaliteitsproducten','Gegarandeerd resultaat'], fr:['Esthétique professionnelle','Produits de qualité','Résultat garanti'], it:['Estetica professionale','Prodotti di qualità','Risultato garantito'], en:['Professional aesthetics','Quality products','Guaranteed results'] },
+  pintura:     { pt:['Interior e exterior','Acabamento perfeito','Preço justo'], es:['Interior y exterior','Acabado perfecto','Precio justo'], de:['Innen und außen','Perfekte Ausführung','Fairer Preis'], nl:['Binnen en buiten','Perfecte afwerking','Eerlijke prijs'], fr:['Intérieur et extérieur','Finition parfaite','Prix juste'], it:['Interno ed esterno','Finitura perfetta','Prezzo giusto'], en:['Interior & exterior','Perfect finish','Fair price'] },
+  cuidados:    { pt:['Acompanhamento diário','Experiência e empatia','Família tranquila'], es:['Acompañamiento diario','Experiencia y empatía','Familia tranquila'], de:['Tägliche Begleitung','Erfahrung und Empathie','Beruhigte Familie'], nl:['Dagelijkse begeleiding','Ervaring en empathie','Geruste familie'], fr:['Accompagnement quotidien','Expérience et empathie','Famille tranquille'], it:['Accompagnamento quotidiano','Esperienza ed empatia','Famiglia tranquilla'], en:['Daily care','Experience & empathy','Family peace of mind'] },
+  outro:       { pt:['Experiência profissional','Qualidade garantida','Disponibilidade imediata'], es:['Experiencia profesional','Calidad garantizada','Disponibilidad inmediata'], de:['Berufserfahrung','Garantierte Qualität','Sofortige Verfügbarkeit'], nl:['Professionele ervaring','Gegarandeerde kwaliteit','Directe beschikbaarheid'], fr:['Expérience professionnelle','Qualité garantie','Disponibilité immédiate'], it:['Esperienza professionale','Qualità garantita','Disponibilità immediata'], en:['Professional experience','Guaranteed quality','Immediate availability'] },
+};
 
-  document.getElementById('pan-content').innerHTML = '<div class="spinner"></div>';
-  document.getElementById('upsell-card').style.display = 'none';
-  document.getElementById('share-card').style.display = 'none';
+const PAISES = { pt:{flag:'🇵🇹',nome:'Portugal',idioma:'pt',label:'Contacto'}, es:{flag:'🇪🇸',nome:'Espanha',idioma:'es',label:'Contacto'}, uk:{flag:'🇬🇧',nome:'Reino Unido',idioma:'en',label:'Contact'}, de:{flag:'🇩🇪',nome:'Alemanha',idioma:'de',label:'Kontakt'}, nl:{flag:'🇳🇱',nome:'Países Baixos',idioma:'nl',label:'Contact'}, fr:{flag:'🇫🇷',nome:'França',idioma:'fr',label:'Contact'}, it:{flag:'🇮🇹',nome:'Itália',idioma:'it',label:'Contatto'}, ie:{flag:'🇮🇪',nome:'Irlanda',idioma:'en',label:'Contact'}, ch:{flag:'🇨🇭',nome:'Suíça',idioma:'de',label:'Kontakt'}, be:{flag:'🇧🇪',nome:'Bélgica',idioma:'fr',label:'Contact'}, at:{flag:'🇦🇹',nome:'Áustria',idioma:'de',label:'Kontakt'}, se:{flag:'🇸🇪',nome:'Suécia',idioma:'en',label:'Kontakt'} };
+const SETOR_LABELS = { limpeza:'Limpeza Doméstica', cabeleireiro:'Cabeleireiro(a)', babysitter:'Babysitter / Au pair', cozinha:'Cozinheiro(a)', construcao:'Construção / Obras', motorista:'Motorista / Entregas', fitness:'Personal Trainer', jardim:'Jardinagem', beleza:'Estética / Beleza', pintura:'Pintura', cuidados:'Cuidados a Idosos', outro:'Serviços Profissionais' };
 
-  const systemPrompt = `Você é especialista em marketing para autônomos imigrantes na Europa. Crie o texto de um panfleto profissional em ${lang} para um serviço autônomo em ${paisName}.
+let ultimaFoto = -1, ultimoSlogan = -1;
+let fotoModo = 'auto'; // 'auto' ou 'escolher'
+let fotoEscolhida = null; // índice da foto escolhida manualmente
 
-Responda APENAS em JSON válido neste formato:
-{
-  "titulo_servico": "<nome do serviço em ${lang}, max 5 palavras>",
-  "descricao": "<texto persuasivo de 2-3 frases em ${lang} que convença clientes a contratar>",
-  "pontos": ["<benefício 1>", "<benefício 2>", "<benefício 3>"],
-  "disponibilidade": "<ex: Disponível durante a semana e fins de semana>"
-}
-
-O texto deve soar natural em ${lang}, profissional e convincente para clientes locais em ${paisName}.`;
-
-  const userPrompt = `Nome: ${nome}
-Serviço: ${servico}
-Cidade: ${cidade || paisName}
-Contacto: ${contato || 'N/A'}
-Descrição fornecida: ${desc}`;
-
-  try {
-    const res = await fetch('/api/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nome, email: 'panfleto@curriculos.eu', country: pais,
-        setor: 'panfleto', cargo: servico, exp: desc,
-        langs: ['Português'], avail: [], form: '',
-        _override: { system: systemPrompt, user: userPrompt }
-      })
-    });
-
-    const data = await res.json();
-    const text = data.curriculo || '';
-    const clean = text.replace(/```json|```/g, '').trim();
-    const result = JSON.parse(clean);
-
-    panData = { nome, servico: result.titulo_servico || servico, cidade: cidade || paisName, contato, desc: result.descricao, pontos: result.pontos || [], disponibilidade: result.disponibilidade };
-    renderPanfleto(panData);
-
-  } catch(e) {
-    panData = { nome, servico, cidade: cidade || paisName, contato, desc, pontos: [], disponibilidade: '' };
-    renderPanfleto(panData);
+function setFotoModo(modo, btn) {
+  fotoModo = modo;
+  document.querySelectorAll('.foto-modo-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const galeria = document.getElementById('fotoGaleria');
+  if (modo === 'escolher') {
+    galeria.classList.add('show');
+    atualizarGaleria();
+  } else {
+    galeria.classList.remove('show');
+    fotoEscolhida = null;
   }
-
-  btn.disabled = false;
-  btn.textContent = 'Gerar novo panfleto';
 }
 
-function getInitials(nome) {
-  return nome.split(' ').slice(0,2).map(n=>n[0]).join('').toUpperCase();
+function atualizarGaleria() {
+  const servico = document.getElementById('servico').value || 'outro';
+  // Na galeria mostra o banco completo do serviço (independente do país)
+  const fotos = BANCO_FOTOS[servico] || BANCO_FOTOS.outro;
+  const galeria = document.getElementById('fotoGaleria');
+  galeria.innerHTML = '';
+  // Remove duplicados
+  const unique = [...new Set(fotos)];
+  unique.forEach((id, i) => {
+    const div = document.createElement('div');
+    div.className = 'foto-thumb' + (fotoEscolhida === i ? ' selected' : '');
+    div.onclick = () => selecionarFoto(i);
+    div.innerHTML = `<img src="https://images.unsplash.com/photo-${id}?w=300&q=70&fit=crop" loading="lazy">`;
+    galeria.appendChild(div);
+  });
 }
 
-function renderPanfleto(d) {
-  const html = `
-    <div class="pan-art watermark-wrap">
-      <div class="pan-header">
-        <div class="pan-avatar">${getInitials(d.nome)}</div>
-        <div class="pan-name">${d.nome}</div>
-        <div class="pan-service">${d.servico}</div>
-      </div>
-      <div class="pan-body">
-        <div class="pan-desc">${d.desc}</div>
-        ${d.pontos.length ? `<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px">${d.pontos.map(p=>`<div style="display:flex;align-items:center;gap:7px;font-size:11px;color:#3d5247"><span style="width:5px;height:5px;background:#C4622D;border-radius:50%;flex-shrink:0;display:inline-block"></span>${p}</div>`).join('')}</div>` : ''}
-        <div class="pan-divider"></div>
-        <div class="pan-contact-title">Entre em contacto</div>
-        <div class="pan-contacts">
-          ${d.contato ? `<div class="pan-contact"><div class="pan-contact-icon">W</div>${d.contato}</div>` : ''}
-          ${d.cidade ? `<div class="pan-contact"><div class="pan-contact-icon" style="font-size:9px">📍</div>${d.cidade}</div>` : ''}
-          ${d.disponibilidade ? `<div class="pan-contact"><div class="pan-contact-icon" style="font-size:9px">✓</div>${d.disponibilidade}</div>` : ''}
-        </div>
-      </div>
-      <div class="pan-footer">
-        <div class="pan-footer-text">Versão gratuita</div>
-        <div class="pan-footer-logo">CurrículoEU</div>
-      </div>
-    </div>`;
-
-  document.getElementById('pan-content').innerHTML = html;
-  document.getElementById('upsell-card').style.display = 'block';
-  document.getElementById('share-card').style.display = 'block';
+function selecionarFoto(idx) {
+  fotoEscolhida = idx;
+  document.querySelectorAll('.foto-thumb').forEach((t, i) => {
+    t.classList.toggle('selected', i === idx);
+  });
 }
 
-function partilharWA(){
-  const d = panData;
-  if(!d.nome) return;
-  const texto = encodeURIComponent(`*${d.nome} — ${d.servico}*\n\n${d.desc}\n\n📍 ${d.cidade}${d.contato ? '\n📱 ' + d.contato : ''}\n\n_Panfleto criado com CurrículoEU — curriculos-eu.vercel.app_`);
-  window.open('https://wa.me/?text=' + texto, '_blank');
+// Atualiza galeria quando país ou serviço mudam
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('pais').addEventListener('change', () => { if (fotoModo === 'escolher') { fotoEscolhida = null; atualizarGaleria(); } });
+  document.getElementById('servico').addEventListener('change', () => { if (fotoModo === 'escolher') { fotoEscolhida = null; atualizarGaleria(); } });
+});
+
+function gerarPanfleto() {
+  const nome = document.getElementById('nome').value.trim();
+  const servico = document.getElementById('servico').value;
+  const cidade = document.getElementById('cidade').value.trim();
+  const contacto = document.getElementById('contacto').value.trim();
+  const pais = document.getElementById('pais').value;
+  const usarIngles = document.getElementById('toggleIngles').checked;
+  if (!nome || !servico || !cidade || !pais) { alert('Por favor preenche o nome, serviço, cidade e país.'); return; }
+  document.getElementById('loading').classList.add('show');
+  setTimeout(() => {
+    const paisInfo = PAISES[pais];
+    const idioma = usarIngles ? 'en' : (paisInfo.idioma || 'en');
+    const fotosDisponiveis = (FOTOS[pais] || FOTOS.de)[servico] || (FOTOS[pais] || FOTOS.de).outro;
+    const bancoServico = [...new Set(BANCO_FOTOS[servico] || BANCO_FOTOS.outro)];
+    let fotoIdx;
+    if (fotoModo === 'escolher' && fotoEscolhida !== null) {
+      // Usa a foto escolhida do banco completo
+      const fotoId = bancoServico[fotoEscolhida];
+      document.getElementById('pf-foto').src = fotoUrl(fotoId);
+    } else {
+      do { fotoIdx = Math.floor(Math.random() * fotosDisponiveis.length); } while (fotoIdx === ultimaFoto && fotosDisponiveis.length > 1);
+      ultimaFoto = fotoIdx;
+      document.getElementById('pf-foto').src = fotoUrl(fotosDisponiveis[fotoIdx]);
+    }
+    const slogansDisponiveis = (SLOGANS[servico] || SLOGANS_GENERICO)[idioma] || SLOGANS_GENERICO.en;
+    let sloganIdx; do { sloganIdx = Math.floor(Math.random() * slogansDisponiveis.length); } while (sloganIdx === ultimoSlogan && slogansDisponiveis.length > 1);
+    ultimoSlogan = sloganIdx;
+    const partes = nome.trim().split(' ');
+    const nomeHtml = partes.length > 1 ? `${partes[0]}<br><em>${partes.slice(1).join(' ')}</em>` : partes[0];
+    const servicos = (SERVICOS_TEXTO[servico] || SERVICOS_TEXTO.outro)[idioma] || SERVICOS_TEXTO.outro.en;
+    const contactoLabel = usarIngles ? 'Contact' : paisInfo.label;
+    document.getElementById('loading').classList.remove('show');
+    document.getElementById('pf-pais-tag').textContent = `${paisInfo.flag} ${paisInfo.nome}`;
+    document.getElementById('pf-setor').textContent = SETOR_LABELS[servico];
+    document.getElementById('pf-nome').innerHTML = nomeHtml;
+    document.getElementById('pf-cidade').textContent = `📍 ${cidade}, ${paisInfo.nome}`;
+    document.getElementById('pf-slogan').textContent = `"${slogansDisponiveis[sloganIdx]}"`;
+    document.getElementById('pf-servicos').innerHTML = servicos.map(s => `<div class="pf-srv">${s}</div>`).join('');
+    document.getElementById('pf-contacto-label').textContent = contactoLabel;
+    document.getElementById('pf-contacto-num').textContent = contacto || '—';
+    const msg = encodeURIComponent(`"${slogansDisponiveis[sloganIdx]}"\n\n📍 ${cidade}\n📞 ${contacto || ''}\n\n✨ curriculos-eu.vercel.app`);
+    document.getElementById('btnWA').href = `https://wa.me/?text=${msg}`;
+    document.getElementById('resultado').style.display = 'block';
+    document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 600);
 }
+
+function novoPanel() { document.getElementById('resultado').style.display = 'none'; document.getElementById('gerar').scrollIntoView({ behavior: 'smooth' }); }
+
+const faqs = [
+  ["O panfleto é mesmo grátis?","Sim! A versão gratuita inclui uma marca d'água. Para removê-la, paga apenas €1,90 por panfleto limpo."],
+  ["Em que idioma sai o panfleto?","O panfleto sai no idioma do país selecionado. Podes também ativar a opção 'Inglês universal' para gerar sempre em inglês."],
+  ["A frase do panfleto é sempre a mesma?","Não! Há 10 variações por serviço em cada idioma. Nunca repete a mesma duas vezes seguidas."],
+  ["As fotos de fundo mudam?","Sim. Há 4 fotos por serviço por país, escolhidas aleatoriamente a cada geração."],
+  ["Como partilho o panfleto?","Faz screenshot e partilha no WhatsApp, Nextdoor, Facebook ou imprime. É uma imagem — funciona em qualquer plataforma."],
+  ["O que é a opção 'Inglês universal'?","Ativa esta opção se quiseres que o panfleto saia em inglês independentemente do país. Útil para países como Suécia ou Bélgica onde o inglês é amplamente compreendido."],
+  ["Posso criar panfletos para vários países?","Sim! Cada país tem fotos e idioma diferentes. Gera versões para Portugal, Países Baixos, Reino Unido — cada uma adaptada ao mercado local."],
+  ["Quanto tempo demora a gerar?","Menos de 1 segundo. Tudo é gerado localmente, sem chamada a servidor externo."],
+  ["Posso remover a marca d'água?","Sim. Ao pagar €1,90 recebes uma versão limpa. Ou subscreve o Premium (€7,90/mês) para gerações ilimitadas sem marca."],
+  ["O serviço funciona para autónomos?","Foi criado a pensar em prestadores de serviços independentes que precisam de promover o trabalho de forma profissional e económica."],
+  ["Posso usar o mesmo panfleto em países diferentes?","Podes, mas recomendamos gerar uma versão por país — o idioma, as fotos e os textos são adaptados ao mercado local."],
+];
+const faqEl = document.getElementById('faqList');
+faqs.forEach(([q,a]) => { faqEl.innerHTML += `<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>${q}</span><span class="icon">+</span></div><div class="faq-a">${a}</div></div>`; });
 </script>
 </body>
 </html>
