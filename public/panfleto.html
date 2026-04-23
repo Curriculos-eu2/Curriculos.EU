@@ -1,805 +1,761 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Panfleto Profissional — CurrículoEU</title>
-  <meta name="description" content="Crie um panfleto profissional para o seu serviço autônomo na Europa. Pronto para WhatsApp em 2 minutos."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --tc: #C4622D; --tcl: #fff8f5; --tcd: #1B2820;
-      --g: #1a6b4a; --gl: #e8f5ef; --gm: #2d9e72;
-      --ink: #0f1a14; --ink2: #3d5247; --ink3: #7a9186;
-      --line: #dde8e3; --surf: #f7faf8; --white: #fff;
-      --r: 14px; --rs: 9px;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--surf); color: var(--ink); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Panfleto — CurrículoEU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --tc: #C4622D;
+  --tcd: #1B2820;
+  --g: #1a6b4a;
+  --g2: #145a3d;
+  --cream: #FAF7F2;
+  --light: #F2EDE6;
+  --text: #1a1a1a;
+  --muted: #6b7280;
+  --border: #e5e0d8;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(27,40,32,0.10);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; }
 
-    nav { background: var(--tcd); padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 9px; text-decoration: none; }
-    .logo-mark { width: 28px; height: 28px; background: var(--tc); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
-    .nav-links { display: flex; align-items: center; gap: 16px; }
-    .nav-links a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; }
-    .nav-links a:hover { color: #fff; }
-    .nav-cta { background: var(--tc) !important; color: #fff !important; padding: 8px 18px; border-radius: 20px; font-weight: 600 !important; }
+/* ── NAV ── */
+nav {
+  background: var(--tcd);
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 64px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  color: #fff; font-size: 1.4rem; font-weight: 900;
+  text-decoration: none; letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--tc); }
+.nav-links { display: flex; gap: 8px; align-items: center; }
+.nav-links a {
+  color: rgba(255,255,255,0.82); text-decoration: none;
+  font-size: 0.9rem; font-weight: 500;
+  padding: 6px 14px; border-radius: 6px;
+  transition: background 0.18s, color 0.18s;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.10); color: #fff; }
+.nav-cta { background: var(--tc) !important; color: #fff !important; font-weight: 600 !important; padding: 8px 18px !important; }
+.nav-cta:hover { background: #b3561f !important; }
 
-    /* HERO */
-    .hero { background: var(--tcd); padding: 60px 24px 50px; text-align: center; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(196,98,45,0.15); color: #E8A07A; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; border: 1px solid rgba(196,98,45,0.3); }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 4vw, 42px); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 14px; }
-    .hero h1 em { color: var(--tc); font-style: normal; }
-    .hero p { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 480px; margin: 0 auto 20px; }
-    .hero-trust { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-    .hero-trust span { font-size: 12px; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 5px; }
-    .hero-trust span::before { content: '✓'; color: var(--tc); font-weight: 700; }
+/* ── HERO ── */
+.hero {
+  background: var(--tcd);
+  padding: 80px 5% 70px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, rgba(196,98,45,0.18) 0%, transparent 70%);
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(196,98,45,0.22); border: 1px solid rgba(196,98,45,0.5);
+  color: #f5c09a; font-size: 0.78rem; font-weight: 600;
+  padding: 5px 14px; border-radius: 20px; letter-spacing: 0.06em;
+  text-transform: uppercase; margin-bottom: 20px;
+  position: relative;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 900; color: #fff;
+  line-height: 1.1; margin-bottom: 16px;
+  letter-spacing: -1px; position: relative;
+}
+.hero h1 span { color: var(--tc); }
+.hero p { color: rgba(255,255,255,0.72); font-size: 1.05rem; max-width: 560px; margin: 0 auto 48px; position: relative; }
 
-    /* COMPARE */
-    .compare-strip { background: var(--white); border-bottom: 1px solid var(--line); padding: 28px 24px; }
-    .compare-inner { max-width: 700px; margin: 0 auto; }
-    .compare-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--ink); text-align: center; margin-bottom: 18px; }
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .compare-card { border-radius: 10px; padding: 16px; }
-    .compare-bad { background: #fff5f5; border: 1px solid #fdd; }
-    .compare-good { background: var(--gl); border: 1px solid #b8e8d0; }
-    .compare-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
-    .compare-bad .compare-label { color: #c33; }
-    .compare-good .compare-label { color: var(--g); }
-    .compare-msg { font-size: 12px; color: #555; line-height: 1.6; font-style: italic; background: var(--white); border-radius: 6px; padding: 10px; border: 1px solid #eee; margin-bottom: 10px; }
-    .compare-rate { font-size: 13px; font-weight: 700; }
-    .compare-bad .compare-rate { color: #c33; }
-    .compare-good .compare-rate { color: var(--g); }
+/* ── COMPARAÇÃO ── */
+.compare {
+  display: flex; gap: 24px; justify-content: center;
+  flex-wrap: wrap; position: relative;
+  max-width: 700px; margin: 0 auto;
+}
+.compare-card {
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 14px; padding: 28px 32px;
+  flex: 1; min-width: 220px; text-align: center;
+  transition: border-color 0.2s;
+}
+.compare-card.highlight {
+  background: rgba(196,98,45,0.12);
+  border-color: rgba(196,98,45,0.5);
+}
+.compare-icon { font-size: 2.4rem; margin-bottom: 10px; }
+.compare-label { color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.compare-rate { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900; color: #fff; }
+.compare-rate.bad { color: #f87171; }
+.compare-rate.good { color: #6ee7b7; }
+.compare-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-top: 6px; }
+.compare-arrow { display: flex; align-items: center; color: rgba(255,255,255,0.3); font-size: 1.8rem; }
 
-    /* FORM */
-    .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
-    @media (max-width: 680px) { .main { grid-template-columns: 1fr; } }
-    .form-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; }
-    .form-card h2 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
-    .form-card p { font-size: 13px; color: var(--ink2); margin-bottom: 18px; }
-    .field { margin-bottom: 12px; }
-    .field label { display: block; font-size: 12px; font-weight: 600; color: var(--ink2); margin-bottom: 4px; }
-    .field input, .field select, .field textarea { width: 100%; padding: 10px 13px; border: 1.5px solid var(--line); border-radius: var(--rs); font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--white); outline: none; transition: border .2s; }
-    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--tc); }
-    .field textarea { min-height: 90px; resize: vertical; line-height: 1.6; }
-    .hint { font-size: 11px; color: var(--ink3); margin-top: 4px; line-height: 1.5; }
-    .btn-gen { width: 100%; padding: 13px; border: none; border-radius: var(--rs); font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 700; color: #fff; background: var(--tc); cursor: pointer; transition: background .2s; margin-top: 4px; }
-    .btn-gen:hover { background: #b5561f; }
-    .btn-gen:disabled { background: var(--line); color: var(--ink3); cursor: default; }
+/* ── FORMULÁRIO ── */
+#gerar { background: var(--tcd); padding: 0 5% 80px; }
+.form-wrap { max-width: 700px; margin: 0 auto; }
+.form-card {
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 18px; padding: 40px;
+}
+.form-card h2 {
+  font-family: 'Playfair Display', serif;
+  color: #fff; font-size: 1.6rem; font-weight: 700;
+  margin-bottom: 6px;
+}
+.form-card p { color: rgba(255,255,255,0.55); font-size: 0.88rem; margin-bottom: 28px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+label { color: rgba(255,255,255,0.7); font-size: 0.82rem; font-weight: 500; }
+input, select, textarea {
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 8px; padding: 11px 14px;
+  color: #fff; font-size: 0.95rem; font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.18s, background 0.18s; width: 100%;
+}
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--tc); background: rgba(255,255,255,0.10); }
+select option { background: #1B2820; }
+textarea { resize: vertical; min-height: 90px; }
+.btn-gerar {
+  background: var(--tc); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 15px 36px; font-size: 1.05rem; font-weight: 700;
+  cursor: pointer; width: 100%; margin-top: 8px;
+  transition: background 0.18s, transform 0.15s;
+  font-family: 'DM Sans', sans-serif; grid-column: 1 / -1;
+}
+.btn-gerar:hover { background: #b3561f; transform: translateY(-1px); }
 
-    /* RESULTADO */
-    .result-side { display: flex; flex-direction: column; gap: 14px; }
-    .result-preview { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
-    .result-preview-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); padding: 12px 16px; border-bottom: 1px solid var(--line); }
+/* ── RESULTADO PANFLETO ── */
+#resultado { display: none; padding: 60px 5%; }
+.resultado-wrap { max-width: 900px; margin: 0 auto; }
+.resultado-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 900; color: var(--tcd);
+  margin-bottom: 8px;
+}
+.resultado-wrap > p { color: var(--muted); margin-bottom: 32px; }
 
-    /* Panfleto arte */
-    .pan-art { font-family: 'DM Sans', sans-serif; }
-    .pan-header { background: var(--tc); padding: 22px 18px; text-align: center; }
-    .pan-avatar { width: 52px; height: 52px; background: rgba(255,255,255,0.2); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; }
-    .pan-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-    .pan-service { font-size: 10px; color: rgba(255,255,255,0.8); letter-spacing: .06em; text-transform: uppercase; }
-    .pan-body { padding: 16px 18px; }
-    .pan-desc { font-size: 12px; color: var(--ink2); line-height: 1.75; margin-bottom: 14px; text-align: center; }
-    .pan-divider { height: 1px; background: var(--line); margin-bottom: 14px; }
-    .pan-contact-title { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tc); margin-bottom: 8px; text-align: center; }
-    .pan-contacts { display: flex; flex-direction: column; gap: 5px; }
-    .pan-contact { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink2); background: var(--surf); padding: 7px 10px; border-radius: 6px; }
-    .pan-contact-icon { width: 18px; height: 18px; background: var(--tc); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 700; }
-    .pan-footer { background: var(--tcd); padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; }
-    .pan-footer-text { font-size: 8px; color: rgba(255,255,255,0.3); }
-    .pan-footer-logo { font-family: 'Playfair Display', serif; font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.3); }
-    .watermark-wrap { position: relative; }
-    .watermark-wrap::after { content: 'GRATUITO'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-25deg); font-size: 24px; font-weight: 700; color: rgba(196,98,45,0.12); letter-spacing: .2em; pointer-events: none; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+.panfleto-arte {
+  border-radius: 18px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+  position: relative; margin-bottom: 28px;
+  aspect-ratio: 16/9;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+}
+.panfleto-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}
+.panfleto-overlay {
+  position: absolute; inset: 0;
+  opacity: 0.72;
+}
+.panfleto-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 100%);
+}
+.panfleto-content {
+  position: relative; z-index: 2;
+  padding: 32px 36px;
+  display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 20px;
+}
+.panfleto-servico {
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: rgba(255,255,255,0.7); margin-bottom: 6px;
+}
+.panfleto-nome {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 900; color: #fff; line-height: 1.1;
+  margin-bottom: 8px;
+}
+.panfleto-cidade {
+  font-size: 0.88rem; color: rgba(255,255,255,0.75);
+  display: flex; align-items: center; gap: 6px;
+}
+.panfleto-contacto-box {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 12px; padding: 16px 20px; text-align: center;
+  min-width: 160px;
+}
+.panfleto-contacto-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+.panfleto-contacto-num { font-size: 1.1rem; font-weight: 700; color: #fff; }
+.panfleto-logo {
+  position: absolute; top: 20px; right: 24px; z-index: 3;
+  background: rgba(27,40,32,0.75); backdrop-filter: blur(6px);
+  border-radius: 8px; padding: 6px 12px;
+  font-family: 'Playfair Display', serif;
+  color: #fff; font-size: 0.85rem; font-weight: 900;
+}
+.panfleto-logo span { color: var(--tc); }
 
-    /* Upsell */
-    .upsell-card { background: var(--tcl); border: 1.5px solid var(--tc); border-radius: var(--r); padding: 16px; }
-    .upsell-title { font-size: 13px; font-weight: 700; color: var(--tc); margin-bottom: 4px; }
-    .upsell-desc { font-size: 12px; color: #8a6a5a; line-height: 1.55; margin-bottom: 12px; }
-    .upsell-price { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--tc); margin-bottom: 10px; }
-    .upsell-price span { font-size: 12px; font-weight: 400; color: #c4856a; }
-    .btn-upsell { background: var(--tc); color: #fff; width: 100%; padding: 11px; border-radius: var(--rs); font-size: 13px; font-weight: 700; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; text-align: center; display: block; text-decoration: none; transition: background .2s; }
-    .btn-upsell:hover { background: #b5561f; }
+/* FAIXA DE TEXTO IA */
+.panfleto-texto-faixa {
+  background: #fff; border-radius: 0 0 18px 18px;
+  padding: 28px 36px; border-top: 3px solid var(--tc);
+  position: relative;
+}
+.panfleto-texto-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700; color: var(--tcd);
+  margin-bottom: 10px;
+}
+.panfleto-texto-body { font-size: 0.9rem; line-height: 1.7; color: #444; }
+.panfleto-texto-body p { margin-bottom: 8px; }
+.panfleto-texto-body ul { padding-left: 18px; }
+.panfleto-texto-body li { margin-bottom: 4px; }
 
-    /* Share */
-    .share-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; }
-    .share-title { font-size: 12px; font-weight: 600; color: var(--ink2); margin-bottom: 10px; }
-    .share-btns { display: flex; gap: 8px; }
-    .btn-wa { flex: 1; background: #25D366; color: #fff; padding: 10px; border-radius: var(--rs); font-size: 12px; font-weight: 700; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 6px; }
-    .btn-premium-share { flex: 1; background: var(--tcd); color: #fff; padding: 10px; border-radius: var(--rs); font-size: 12px; font-weight: 700; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+/* MARCA D'ÁGUA */
+.watermark-overlay {
+  position: absolute; inset: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.watermark-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  font-weight: 900; color: rgba(255,255,255,0.22);
+  transform: rotate(-30deg); letter-spacing: 4px;
+  text-transform: uppercase; white-space: nowrap;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.watermark-banner {
+  background: #fff8f5; border: 1.5px solid #fde8da;
+  border-radius: 10px; padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-top: 16px; flex-wrap: wrap;
+}
+.watermark-banner p { font-size: 0.85rem; color: var(--tc); font-weight: 500; }
+.watermark-banner a {
+  background: var(--tc); color: #fff;
+  padding: 9px 20px; border-radius: 7px;
+  font-weight: 700; font-size: 0.85rem;
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.15s;
+}
+.watermark-banner a:hover { background: #b3561f; }
 
-    /* Loading */
-    .spinner { width: 32px; height: 32px; border: 3px solid var(--tcl); border-top-color: var(--tc); border-radius: 50%; animation: spin .75s linear infinite; margin: 40px auto; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+/* BOTÕES PÓS-RESULTADO */
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+.btn-wa {
+  background: #25D366; color: #fff;
+  padding: 13px 24px; border-radius: 8px;
+  font-size: 0.92rem; font-weight: 600; border: none;
+  cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background 0.18s;
+}
+.btn-wa:hover { background: #1ebe5c; }
+.btn-novo {
+  background: transparent; color: var(--tcd);
+  padding: 13px 24px; border-radius: 8px;
+  font-size: 0.92rem; font-weight: 600;
+  border: 2px solid var(--border); cursor: pointer;
+  text-decoration: none; transition: border-color 0.18s;
+}
+.btn-novo:hover { border-color: var(--tcd); }
 
-    /* Empty state */
-    .empty-state { padding: 40px 20px; text-align: center; color: var(--ink3); font-size: 13px; line-height: 1.7; }
-    .empty-icon { font-size: 32px; margin-bottom: 10px; }
+/* ── FAQ ── */
+.faq { padding: 80px 5%; background: var(--light); }
+.faq-wrap { max-width: 720px; margin: 0 auto; }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 900; color: var(--tcd);
+  margin-bottom: 10px; letter-spacing: -0.5px;
+}
+.section-sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 36px; }
+.faq-item { border-bottom: 1.5px solid var(--border); padding: 16px 0; }
+.faq-q { font-weight: 600; font-size: 0.93rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-q .icon { color: var(--g); font-size: 1.2rem; transition: transform 0.2s; flex-shrink: 0; }
+.faq-item.open .icon { transform: rotate(45deg); }
+.faq-a { font-size: 0.86rem; color: var(--muted); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+.faq-item.open .faq-a { max-height: 300px; padding-top: 10px; }
 
-    footer { background: var(--tcd); padding: 24px; text-align: center; margin-top: 20px; }
-    footer a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; margin: 0 12px; }
-    footer p { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 10px; }
-  </style>
+/* ── FOOTER ── */
+footer {
+  background: var(--tcd); color: rgba(255,255,255,0.6);
+  padding: 40px 5% 24px; text-align: center;
+}
+footer .nav-logo { display: inline-block; margin-bottom: 10px; }
+footer p { font-size: 0.82rem; margin-bottom: 6px; }
+footer a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.78rem; }
+footer a:hover { color: var(--tc); }
+
+/* ── LOADING ── */
+.loading-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(27,40,32,0.88); backdrop-filter: blur(4px);
+  flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+}
+.loading-overlay.show { display: flex; }
+.spinner { width: 48px; height: 48px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.15); border-top-color: var(--tc); animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-overlay p { color: #fff; font-size: 1rem; opacity: 0.85; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+  .compare { flex-direction: column; align-items: center; }
+  .compare-arrow { transform: rotate(90deg); }
+  .panfleto-content { grid-template-columns: 1fr; }
+  .panfleto-contacto-box { display: none; }
+  .form-card { padding: 24px 20px; }
+}
+</style>
 </head>
 <body>
 
+<!-- ── NAV ── -->
 <nav>
-  <a href="/" class="logo">
-    <div class="logo-mark">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="2" rx="1" fill="white"/><rect x="2" y="6" width="8" height="2" rx="1" fill="white" opacity=".7"/><rect x="2" y="10" width="10" height="2" rx="1" fill="white" opacity=".5"/></svg>
-    </div>
-    CurrículoEU
-  </a>
+  <a href="/" class="nav-logo">Currículo<span>EU</span></a>
   <div class="nav-links">
-    <a href="/">Currículo</a>
+    <a href="/panfleto">Panfleto</a>
     <a href="/verificador">Verificador</a>
-    <a href="/#precos" class="nav-cta">Premium</a>
+    <a href="/#gerar" class="nav-cta">Criar Currículo</a>
   </div>
 </nav>
 
-<div class="hero">
-  <div class="hero-badge">Para autônomos e freelancers</div>
-  <h1>Pare de vender pelo WhatsApp.<br/>Comece a vender com <em>profissionalismo.</em></h1>
-  <p>Crie um panfleto profissional em 2 minutos e aumente as suas chances de conseguir clientes em até 3x.</p>
-  <div class="hero-trust">
-    <span>Sem burocracia de visto</span>
-    <span>Pronto para WhatsApp</span>
-    <span>12 países e idiomas</span>
-  </div>
-</div>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-badge">📣 Ferramenta gratuita</div>
+  <h1>O panfleto certo traz<br><span>4× mais clientes</span></h1>
+  <p>Um panfleto profissional converte muito mais do que uma mensagem no WhatsApp. Cria o teu em segundos com IA.</p>
 
-<div class="compare-strip">
-  <div class="compare-inner">
-    <div class="compare-title">A diferença que um panfleto faz</div>
-    <div class="compare-grid">
-      <div class="compare-card compare-bad">
-        <div class="compare-label">Sem panfleto</div>
-        <div class="compare-msg">"Oi, faço limpeza, cobro €15/hora, tenho disponibilidade essa semana"</div>
-        <div class="compare-rate">5–10% de conversão</div>
+  <div class="compare">
+    <div class="compare-card">
+      <div class="compare-icon">💬</div>
+      <div class="compare-label">Mensagem WhatsApp</div>
+      <div class="compare-rate bad">5–10%</div>
+      <div class="compare-desc">Taxa de conversão média</div>
+    </div>
+    <div class="compare-arrow">→</div>
+    <div class="compare-card highlight">
+      <div class="compare-icon">📄</div>
+      <div class="compare-label">Panfleto Profissional</div>
+      <div class="compare-rate good">25–40%</div>
+      <div class="compare-desc">Taxa de conversão média</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORMULÁRIO ── -->
+<section id="gerar">
+  <div class="form-wrap">
+    <div class="form-card">
+      <h2>Criar o meu panfleto</h2>
+      <p>Preenche os campos abaixo e recebe um panfleto profissional para partilhar no WhatsApp ou imprimir.</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>O teu nome</label>
+          <input type="text" id="nome" placeholder="ex: Maria Silva">
+        </div>
+        <div class="form-group">
+          <label>Serviço que ofereces</label>
+          <select id="servico">
+            <option value="">— Seleciona —</option>
+            <option value="limpeza">🧹 Limpeza doméstica</option>
+            <option value="cabeleireiro">💇 Cabeleireiro(a)</option>
+            <option value="babysitter">👶 Babysitter / Au pair</option>
+            <option value="cozinha">🍳 Cozinheiro(a)</option>
+            <option value="construcao">🏗️ Construção / Remodelação</option>
+            <option value="motorista">🚗 Motorista / Entregas</option>
+            <option value="fitness">💪 Personal Trainer</option>
+            <option value="jardim">🌿 Jardinagem</option>
+            <option value="beleza">💅 Estética / Beleza</option>
+            <option value="pintura">🖌️ Pintura</option>
+            <option value="cuidados">❤️ Cuidados a idosos</option>
+            <option value="outro">✨ Outro serviço</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cidade onde trabalhas</label>
+          <input type="text" id="cidade" placeholder="ex: Amesterdão">
+        </div>
+        <div class="form-group">
+          <label>Contacto (telefone ou WhatsApp)</label>
+          <input type="text" id="contacto" placeholder="ex: +351 910 000 000">
+        </div>
+        <div class="form-group">
+          <label>País / Idioma do panfleto</label>
+          <select id="pais">
+            <option value="">— Seleciona um país —</option>
+            <option value="pt">🇵🇹 Portugal — Português</option>
+            <option value="es">🇪🇸 Espanha — Espanhol</option>
+            <option value="uk">🇬🇧 Reino Unido — Inglês</option>
+            <option value="de">🇩🇪 Alemanha — Alemão</option>
+            <option value="nl">🇳🇱 Países Baixos — Neerlandês</option>
+            <option value="fr">🇫🇷 França — Francês</option>
+            <option value="it">🇮🇹 Itália — Italiano</option>
+            <option value="ie">🇮🇪 Irlanda — Inglês</option>
+            <option value="ch">🇨🇭 Suíça — Alemão</option>
+            <option value="be">🇧🇪 Bélgica — Francês</option>
+            <option value="at">🇦🇹 Áustria — Alemão</option>
+            <option value="se">🇸🇪 Suécia — Sueco</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Descreve o teu serviço (opcional)</label>
+          <textarea id="descricao" placeholder="ex: Limpeza profissional com produtos ecológicos. 5 anos de experiência. Referências disponíveis. Disponível fins de semana."></textarea>
+        </div>
+        <button class="btn-gerar" onclick="gerarPanfleto()">✨ Gerar Panfleto Grátis</button>
       </div>
-      <div class="compare-card compare-good">
-        <div class="compare-label">Com panfleto</div>
-        <div class="compare-msg">Arte profissional com nome, serviço, contato e visual que transmite confiança imediata</div>
-        <div class="compare-rate">25–40% de conversão</div>
-      </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="main">
-  <!-- FORMULÁRIO -->
-  <div class="form-card">
-    <h2>Criar o meu panfleto</h2>
-    <p>Preenche em 2 minutos — sem burocracia.</p>
+<!-- ── RESULTADO ── -->
+<div id="resultado">
+  <div class="resultado-wrap">
+    <h2>O teu panfleto está pronto! 🎉</h2>
+    <p>Partilha no WhatsApp, envia por e-mail ou imprime para distribuir.</p>
 
-    <div class="field">
-      <label>Seu nome completo</label>
-      <input id="p-nome" placeholder="Maria Silva" oninput="chkForm()"/>
-    </div>
-    <div class="field">
-      <label>Serviço que oferece</label>
-      <input id="p-servico" placeholder="Limpeza residencial, babysitter, cabeleireiro..." oninput="chkForm()"/>
-    </div>
-    <div class="field">
-      <label>Cidade onde trabalha</label>
-      <input id="p-cidade" placeholder="Amsterdam, Lisboa, Londres..."/>
-    </div>
-    <div class="field">
-      <label>WhatsApp / contacto</label>
-      <input id="p-contato" placeholder="+31 6 12345678"/>
-    </div>
-    <div class="field">
-      <label>Descreve o teu serviço</label>
-      <textarea id="p-desc" placeholder="Ex: Ofereço serviço de limpeza residencial completa com materiais incluídos. Atendo domicílios, apartamentos e escritórios. Cobro €19 por hora ou €80 por limpeza completa. Sou pontual, discreta e de total confiança — com 5 anos de experiência em Portugal e Holanda." oninput="chkForm()"></textarea>
-      <div class="hint">Quanto mais detalhe, melhor o panfleto gerado pela IA.</div>
-    </div>
-    <div class="field">
-      <label>País / idioma do panfleto</label>
-      <select id="p-pais">
-        <option value="pt">🇵🇹 Português (Portugal)</option>
-        <option value="nl">🇳🇱 Holandês (Holanda)</option>
-        <option value="es">🇪🇸 Espanhol (Espanha)</option>
-        <option value="uk">🇬🇧 Inglês (Reino Unido)</option>
-        <option value="de">🇩🇪 Alemão (Alemanha)</option>
-        <option value="fr">🇫🇷 Francês (França)</option>
-        <option value="it">🇮🇹 Italiano (Itália)</option>
-        <option value="ie">🇮🇪 Inglês (Irlanda)</option>
-        <option value="ch">🇨🇭 Alemão (Suíça)</option>
-        <option value="be">🇧🇪 Francês (Bélgica)</option>
-        <option value="at">🇦🇹 Alemão (Áustria)</option>
-        <option value="se">🇸🇪 Sueco (Suécia)</option>
-      </select>
-    </div>
-    <button class="btn-gen" id="btn-gen" disabled onclick="gerarPanfleto()">Gerar meu panfleto com IA</button>
-  </div>
-
-  <!-- RESULTADO -->
-  <div class="result-side">
-    <div class="result-preview">
-      <div class="result-preview-label">Pré-visualização do panfleto</div>
-      <div id="pan-content">
-        <div class="empty-state">
-          <div class="empty-icon">🎨</div>
-          Preenche o formulário ao lado e clica em "Gerar" para ver o teu panfleto profissional aqui.
+    <div class="panfleto-arte" id="panfleteArte">
+      <div class="panfleto-bg" id="panfletoBg"></div>
+      <div class="panfleto-overlay" id="panfletoOverlay"></div>
+      <div class="panfleto-gradient"></div>
+      <div class="panfleto-logo">Currículo<span>EU</span></div>
+      <div class="panfleto-content">
+        <div>
+          <div class="panfleto-servico" id="pf-servico"></div>
+          <div class="panfleto-nome" id="pf-nome"></div>
+          <div class="panfleto-cidade" id="pf-cidade"></div>
+        </div>
+        <div class="panfleto-contacto-box">
+          <div class="panfleto-contacto-label">Contacto</div>
+          <div class="panfleto-contacto-num" id="pf-contacto"></div>
         </div>
       </div>
-    </div>
-
-    <div class="upsell-card" id="upsell-card" style="display:none">
-      <div class="upsell-title">Baixar versão limpa — sem marca d'água</div>
-      <div class="upsell-desc">O panfleto gratuito tem marca d'água. Por €1,90 tens a versão profissional pronta para WhatsApp e impressão.</div>
-      <div class="upsell-price">€1,90 <span>por panfleto</span></div>
-      <a href="https://pay.hotmart.com/Y105390443O" target="_blank" class="btn-upsell">Baixar versão limpa</a>
-    </div>
-
-    <div class="share-card" id="share-card" style="display:none">
-      <div class="share-title">Partilhar o panfleto</div>
-      <div class="share-btns">
-        <button class="btn-wa" onclick="partilharWA()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.12 1.523 5.855L0 24l6.335-1.506A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.727.976.994-3.634-.234-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-          Enviar no WhatsApp
-        </button>
-        <button class="btn-premium-share" onclick="alert('Assine o Premium para baixar o PDF limpo!')">Baixar PDF</button>
+      <div class="watermark-overlay">
+        <div class="watermark-text">CurrículoEU</div>
       </div>
     </div>
-  </div>
-</div>
 
+    <div class="panfleto-texto-faixa" id="panfletoTexto">
+      <div class="panfleto-texto-titulo" id="pf-titulo"></div>
+      <div class="panfleto-texto-body" id="pf-body"></div>
 
-<div style="background:#fff;border-top:1px solid #dde8e3;padding:48px 24px">
-  <div style="max-width:700px;margin:0 auto">
-    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#C4622D;margin-bottom:8px;text-align:center">Dúvidas</div>
-    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1B2820;text-align:center;margin-bottom:28px">Perguntas frequentes</div>
-    <div id="faq-pan">
-      <div class="faq-item">
-        <div class="faq-q">O panfleto fica em qual idioma? <span class="faq-arr">+</span></div>
-        <div class="faq-a">No idioma do país que escolheres — holandês para a Holanda, português para Portugal, inglês para o Reino Unido, e assim por diante. A IA escreve o texto como se fosse um nativo local, nada que pareça traduzido.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Preciso de visto ou documentos para usar? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Não. O gerador de panfletos não pede visto, passaporte nem qualquer dado burocrático. É só o teu nome, serviço e contacto — nada mais.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">A versão gratuita tem marca d'água? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Sim, a versão gratuita tem uma marca d'água discreta. Para baixar o panfleto limpo e pronto para enviar no WhatsApp ou imprimir, basta pagar €1,90 por panfleto — sem subscrição nem compromisso.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Como partilho o panfleto no WhatsApp? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Depois de gerar, clica em "Enviar no WhatsApp" — abre automaticamente com o texto formatado pronto para enviar. Na versão Premium podes também baixar o PDF e partilhar como imagem ou ficheiro.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Posso fazer panfletos para serviços diferentes? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Sim! Cada panfleto é gerado de forma independente. Podes fazer um para limpeza, outro para babysitter, outro para cabeleireiro — quantos precisares. Cada um sai com o texto adaptado ao serviço.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">O panfleto funciona para qualquer tipo de serviço? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Funciona para qualquer serviço autônomo — limpeza, cuidados, cabeleireiro, manicure, babysitter, jardinagem, pintura, eletricista, personal trainer, e muito mais. Se a pessoa faz, o panfleto consegue apresentar.</div>
-      </div>
-      <div class="faq-item" style="border-bottom:none">
-        <div class="faq-q">Assino o Premium do currículo e tenho panfletos incluídos? <span class="faq-arr">+</span></div>
-        <div class="faq-a">Sim! O plano Premium de €7,90/mês inclui currículos e panfletos ilimitados, ambos sem marca d'água. É o melhor custo-benefício se precisares das duas ferramentas.</div>
-      </div>
+    </div>
+
+    <div class="watermark-banner">
+      <p>🔒 Versão gratuita com marca d'água — Remove por apenas <strong>€1,90</strong></p>
+      <a href="https://pay.hotmart.com/Y105390443O" target="_blank">Remover marca d'água →</a>
+    </div>
+
+    <div class="result-actions">
+      <a id="btnWA" href="#" class="btn-wa" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.14 1.541 5.876L0 24l6.304-1.518A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.031-1.385l-.36-.214-3.742.981.998-3.648-.235-.374A9.787 9.787 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Partilhar no WhatsApp
+      </a>
+      <button class="btn-novo" onclick="novoPanel()">← Criar novo panfleto</button>
     </div>
   </div>
 </div>
 
-<style>
-.faq-item { border-bottom: 1px solid #dde8e3; }
-.faq-q { padding: 16px 0; font-size: 14px; font-weight: 600; color: #0f1a14; display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer; }
-.faq-arr { font-size: 18px; color: #7a9186; flex-shrink: 0; transition: transform .2s; }
-.faq-item.open .faq-arr { transform: rotate(45deg); color: #C4622D; }
-.faq-a { font-size: 13px; color: #3d5247; line-height: 1.75; padding-bottom: 16px; display: none; }
-.faq-item.open .faq-a { display: block; }
-</style>
-<script>
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    const item = q.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  });
-});
-</script>
+<!-- ── FAQ ── -->
+<section class="faq">
+  <div class="faq-wrap">
+    <h2 class="section-title">Perguntas frequentes</h2>
+    <p class="section-sub">Tudo o que precisas de saber sobre o Gerador de Panfletos.</p>
+    <div id="faqList"></div>
+  </div>
+</section>
 
+<!-- ── FOOTER ── -->
 <footer>
-  <div>
-    <a href="/">Currículo</a>
-    <a href="/verificador">Verificador</a>
-    <a href="/#precos">Preços</a>
-    <a href="/#faq">Dúvidas</a>
-  </div>
-  <p>© 2025 CurrículoEU. Feito para brasileiros na Europa.</p>
+  <a href="/" class="nav-logo">Currículo<span>EU</span></a>
+  <p>Ajudamos imigrantes a conseguir clientes e emprego na Europa.</p>
+  <p style="margin-top:12px;">
+    <a href="/">Gerador de Currículo</a> &nbsp;·&nbsp;
+    <a href="/verificador">Verificador</a> &nbsp;·&nbsp;
+    <a href="mailto:suporte@curriculos.eu">Suporte</a>
+  </p>
 </footer>
 
+<!-- ── LOADING ── -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <p>A criar o teu panfleto com IA...</p>
+</div>
+
 <script>
-const PAIS_LANG = {pt:'português europeu',nl:'Nederlands',es:'español',uk:'English',de:'Deutsch',fr:'français',it:'italiano',ie:'English',ch:'Deutsch',be:'français',at:'Deutsch',se:'svenska'};
-const PAIS_NAMES = {pt:'Portugal',nl:'Holanda',es:'Espanha',uk:'Reino Unido',de:'Alemanha',fr:'França',it:'Itália',ie:'Irlanda',ch:'Suíça',be:'Bélgica',at:'Áustria',se:'Suécia'};
+// ── DADOS POR SETOR — 4 fotos reais por setor (URLs completos Unsplash) ──
+const SETOR_DATA = {
+  limpeza: {
+    label: 'Limpeza Doméstica', overlay: '#1B3A2A',
+    fotos: [
+      'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=1200&q=80&fit=crop',
+    ]
+  },
+  cabeleireiro: {
+    label: 'Cabeleireiro(a)', overlay: '#4A1528',
+    fotos: [
+      'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=1200&q=80&fit=crop',
+    ]
+  },
+  babysitter: {
+    label: 'Babysitter / Au pair', overlay: '#1A2A4A',
+    fotos: [
+      'https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=1200&q=80&fit=crop',
+    ]
+  },
+  cozinha: {
+    label: 'Cozinheiro(a)', overlay: '#4A1A1A',
+    fotos: [
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?w=1200&q=80&fit=crop',
+    ]
+  },
+  construcao: {
+    label: 'Construção / Obras', overlay: '#3A2A0A',
+    fotos: [
+      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1565008576549-57569a49371d?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80&fit=crop',
+    ]
+  },
+  motorista: {
+    label: 'Motorista / Entregas', overlay: '#0A1A3A',
+    fotos: [
+      'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=80&fit=crop',
+    ]
+  },
+  fitness: {
+    label: 'Personal Trainer', overlay: '#0A2A1A',
+    fotos: [
+      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1200&q=80&fit=crop',
+    ]
+  },
+  jardim: {
+    label: 'Jardinagem', overlay: '#0A2A12',
+    fotos: [
+      'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=1200&q=80&fit=crop',
+    ]
+  },
+  beleza: {
+    label: 'Estética / Beleza', overlay: '#2A1A4A',
+    fotos: [
+      'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1596704017254-9b121068fb31?w=1200&q=80&fit=crop',
+    ]
+  },
+  pintura: {
+    label: 'Pintura', overlay: '#1A1A3A',
+    fotos: [
+      'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1572296374666-7b0a90e5b7cd?w=1200&q=80&fit=crop',
+    ]
+  },
+  cuidados: {
+    label: 'Cuidados a Idosos', overlay: '#0A2A2A',
+    fotos: [
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=1200&q=80&fit=crop',
+    ]
+  },
+  outro: {
+    label: 'Serviços Profissionais', overlay: '#1B3A2A',
+    fotos: [
+      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop',
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80&fit=crop',
+    ]
+  },
+};
 
-let panData = {};
-
-function chkForm(){
-  const ok = document.getElementById('p-nome').value.trim() &&
-             document.getElementById('p-servico').value.trim() &&
-             document.getElementById('p-desc').value.trim().length >= 20;
-  document.getElementById('btn-gen').disabled = !ok;
+// Escolhe foto pelas iniciais do nome (consistência por pessoa, variedade entre clientes)
+function escolherFoto(fotos, nome) {
+  const inicial = (nome || 'A').toUpperCase().charCodeAt(0);
+  return fotos[inicial % fotos.length];
 }
 
-async function gerarPanfleto(){
-  const nome = document.getElementById('p-nome').value.trim();
-  const servico = document.getElementById('p-servico').value.trim();
-  const cidade = document.getElementById('p-cidade').value.trim();
-  const contato = document.getElementById('p-contato').value.trim();
-  const desc = document.getElementById('p-desc').value.trim();
-  const pais = document.getElementById('p-pais').value;
-  const lang = PAIS_LANG[pais];
-  const paisName = PAIS_NAMES[pais];
+const PAIS_IDIOMA = {
+  pt: 'Português', es: 'Espanhol', uk: 'Inglês', de: 'Alemão',
+  nl: 'Neerlandês', fr: 'Francês', it: 'Italiano', ie: 'Inglês',
+  ch: 'Alemão', be: 'Francês', at: 'Alemão', se: 'Sueco'
+};
 
-  const btn = document.getElementById('btn-gen');
-  btn.disabled = true;
-  btn.textContent = 'Gerando...';
+const PAIS_FLAG = {
+  pt:'🇵🇹', es:'🇪🇸', uk:'🇬🇧', de:'🇩🇪', nl:'🇳🇱', fr:'🇫🇷',
+  it:'🇮🇹', ie:'🇮🇪', ch:'🇨🇭', be:'🇧🇪', at:'🇦🇹', se:'🇸🇪'
+};
 
-  document.getElementById('pan-content').innerHTML = '<div class="spinner"></div>';
-  document.getElementById('upsell-card').style.display = 'none';
-  document.getElementById('share-card').style.display = 'none';
+// ── GERAR PANFLETO ──
+async function gerarPanfleto() {
+  const nome = document.getElementById('nome').value.trim();
+  const servico = document.getElementById('servico').value;
+  const cidade = document.getElementById('cidade').value.trim();
+  const contacto = document.getElementById('contacto').value.trim();
+  const pais = document.getElementById('pais').value;
+  const descricao = document.getElementById('descricao').value.trim();
 
-  const systemPrompt = `Você é especialista em marketing para autônomos imigrantes na Europa. Crie o texto de um panfleto profissional em ${lang} para um serviço autônomo em ${paisName}.
+  if (!nome || !servico || !cidade || !pais) {
+    alert('Por favor preenche o nome, serviço, cidade e país.');
+    return;
+  }
 
-Responda APENAS em JSON válido neste formato:
+  const idioma = PAIS_IDIOMA[pais];
+  const setor = SETOR_DATA[servico];
+  document.getElementById('loading').classList.add('show');
+
+  const prompt = `Cria o texto de um panfleto publicitário profissional e persuasivo.
+
+Dados:
+- Nome: ${nome}
+- Serviço: ${setor.label}
+- Cidade: ${cidade}
+- País: ${pais} (idioma: ${idioma})
+- Contacto: ${contacto || 'não fornecido'}
+- Descrição adicional: ${descricao || 'nenhuma'}
+
+O panfleto deve estar 100% em ${idioma} e ser muito persuasivo para clientes locais.
+
+Responde APENAS com JSON sem markdown:
 {
-  "titulo_servico": "<nome do serviço em ${lang}, max 5 palavras>",
-  "descricao": "<texto persuasivo de 2-3 frases em ${lang} que convença clientes a contratar>",
-  "pontos": ["<benefício 1>", "<benefício 2>", "<benefício 3>"],
-  "disponibilidade": "<ex: Disponível durante a semana e fins de semana>"
-}
-
-O texto deve soar natural em ${lang}, profissional e convincente para clientes locais em ${paisName}.`;
-
-  const userPrompt = `Nome: ${nome}
-Serviço: ${servico}
-Cidade: ${cidade || paisName}
-Contacto: ${contato || 'N/A'}
-Descrição fornecida: ${desc}`;
+  "titulo": "slogan curto e impactante (máx 8 palavras) em ${idioma}",
+  "subtitulo": "frase de apoio (máx 12 palavras) em ${idioma}",
+  "pontos": ["ponto forte 1", "ponto forte 2", "ponto forte 3", "ponto forte 4"],
+  "cta": "chamada à ação curta em ${idioma} (ex: Ligue já!, Call now!, Bel nu!)",
+  "descricao_curta": "1-2 frases persuasivas sobre o serviço em ${idioma}"
+}`;
 
   try {
-    const res = await fetch('/api/generate', {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        nome, email: 'panfleto@curriculos.eu', country: pais,
-        setor: 'panfleto', cargo: servico, exp: desc,
-        langs: ['Português'], avail: [], form: '',
-        _override: { system: systemPrompt, user: userPrompt }
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
       })
     });
-
     const data = await res.json();
-    const text = data.curriculo || '';
-    const clean = text.replace(/```json|```/g, '').trim();
-    const result = JSON.parse(clean);
-
-    panData = { nome, servico: result.titulo_servico || servico, cidade: cidade || paisName, contato, desc: result.descricao, pontos: result.pontos || [], disponibilidade: result.disponibilidade };
-    renderPanfleto(panData);
-
+    const text = data.content[0].text.replace(/```json|```/g, '').trim();
+    const pf = JSON.parse(text);
+    renderPanfleto(pf, nome, servico, cidade, contacto, pais, setor);
   } catch(e) {
-    panData = { nome, servico, cidade: cidade || paisName, contato, desc, pontos: [], disponibilidade: '' };
-    renderPanfleto(panData);
+    // Fallback
+    renderPanfleto({
+      titulo: `${setor.label} Profissional`,
+      subtitulo: `Serviço de confiança em ${cidade}`,
+      pontos: ['Experiência comprovada', 'Preços acessíveis', 'Disponível rapidamente', 'Referências disponíveis'],
+      cta: 'Contacte já!',
+      descricao_curta: `Serviço profissional de ${setor.label.toLowerCase()} em ${cidade}. Qualidade garantida e preços justos.`
+    }, nome, servico, cidade, contacto, pais, setor);
   }
-
-  btn.disabled = false;
-  btn.textContent = 'Gerar novo panfleto';
 }
 
-function getInitials(nome) {
-  return nome.split(' ').slice(0,2).map(n=>n[0]).join('').toUpperCase();
+function renderPanfleto(pf, nome, servico, cidade, contacto, pais, setor) {
+  document.getElementById('loading').classList.remove('show');
+
+  // Arte visual — foto escolhida pelas iniciais do nome (URL completo)
+  const fotoUrl = escolherFoto(setor.fotos, nome);
+  document.getElementById('panfletoBg').style.backgroundImage = `url('${fotoUrl}')`;
+  document.getElementById('panfletoOverlay').style.background = setor.overlay;
+
+  document.getElementById('pf-servico').textContent = `${PAIS_FLAG[pais]} ${setor.label}`;
+  document.getElementById('pf-nome').textContent = nome;
+  document.getElementById('pf-cidade').innerHTML = `📍 ${cidade}`;
+  document.getElementById('pf-contacto').textContent = contacto || '—';
+
+  // Texto IA
+  document.getElementById('pf-titulo').textContent = pf.titulo;
+  document.getElementById('pf-body').innerHTML = `
+    <p>${pf.descricao_curta}</p>
+    <ul style="margin: 10px 0 12px;">
+      ${pf.pontos.map(p => `<li>✓ ${p}</li>`).join('')}
+    </ul>
+    <p style="font-weight:700;color:var(--tc);font-size:1rem;">📞 ${pf.cta} ${contacto ? '— ' + contacto : ''}</p>
+  `;
+
+  // WhatsApp
+  const msg = encodeURIComponent(`${pf.titulo}\n\n${pf.descricao_curta}\n\n📍 ${cidade}\n📞 ${contacto || ''}\n\n✨ Panfleto criado em curriculos-eu.vercel.app`);
+  document.getElementById('btnWA').href = `https://wa.me/?text=${msg}`;
+
+  document.getElementById('resultado').style.display = 'block';
+  document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function getSectorIllustration(servico, nome, servicoDisplay) {
-  const s = servico.toLowerCase();
-  const ini = getInitials(nome);
-
-  // Detect sector from service text
-  const isLimpeza = /limpez|faxin|arruma|clean/i.test(s);
-  const isCabel = /cabel|cabelo|corte|colora|hair|salon/i.test(s);
-  const isBaby = /baby|crian|bebe|bebê|infantil|au pair|cuidad/i.test(s);
-  const isCozinha = /cozinha|cozinheir|chef|culinár|restaur|comida|food/i.test(s);
-  const isConstru = /constru|pedreiro|obra|pintor|pintura|eletric|encanad/i.test(s);
-  const isMotor = /motor|transport|entrega|taxi|uber|caminhão|caminhao/i.test(s);
-  const isFitness = /fitness|personal|treino|academia|gym|muscula/i.test(s);
-  const isJardim = /jardim|jardineiro|plantas|poda|grama/i.test(s);
-  const isMassagem = /massag|estétic|estetic|spa|beleza|manicure|unhas/i.test(s);
-
-  if (isLimpeza) return svgLimpeza(ini, servicoDisplay);
-  if (isCabel) return svgCabeleireiro(ini, servicoDisplay);
-  if (isBaby) return svgBabysitter(ini, servicoDisplay);
-  if (isCozinha) return svgCozinha(ini, servicoDisplay);
-  if (isConstru) return svgConstrucao(ini, servicoDisplay);
-  if (isMotor) return svgMotorista(ini, servicoDisplay);
-  if (isFitness) return svgFitness(ini, servicoDisplay);
-  if (isJardim) return svgJardim(ini, servicoDisplay);
-  if (isMassagem) return svgBeleza(ini, servicoDisplay);
-  return svgGenerico(ini, servicoDisplay);
+function novoPanel() {
+  document.getElementById('resultado').style.display = 'none';
+  document.getElementById('gerar').scrollIntoView({ behavior: 'smooth' });
 }
 
-function svgFaixa(nome, servico) {
-  return `<rect x="0" y="155" width="300" height="25" fill="rgba(0,0,0,0.45)"/>
-<text x="150" y="168" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" font-weight="700" fill="white">${nome}</text>
-<text x="150" y="178" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.8)" letter-spacing="1">${servico.toUpperCase()}</text>`;
-}
-
-function svgLimpeza(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#C4622D"/>
-<g opacity="0.1" fill="white"><path d="M0 20L20 0L40 20L20 40Z"/><path d="M40 20L60 0L80 20L60 40Z"/><path d="M80 20L100 0L120 20L100 40Z"/><path d="M120 20L140 0L160 20L140 40Z"/><path d="M160 20L180 0L200 20L180 40Z"/><path d="M200 20L220 0L240 20L220 40Z"/><path d="M240 20L260 0L280 20L260 40Z"/><path d="M20 60L40 40L60 60L40 80Z"/><path d="M60 60L80 40L100 60L80 80Z"/><path d="M100 60L120 40L140 60L120 80Z"/><path d="M140 60L160 40L180 60L160 80Z"/><path d="M180 60L200 40L220 60L200 80Z"/><path d="M220 60L240 40L260 60L240 80Z"/></g>
-<ellipse cx="175" cy="168" rx="55" ry="7" fill="rgba(0,0,0,0.15)"/>
-<rect x="205" y="128" width="24" height="22" rx="3" fill="#f5c842"/><rect x="203" y="126" width="28" height="6" rx="2" fill="#e8b830"/><path d="M207 126Q217 115Q227 126" fill="none" stroke="#e8b830" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="217" cy="128" rx="10" ry="3" fill="rgba(255,255,255,0.5)"/>
-<line x1="240" y1="55" x2="218" y2="155" stroke="#8B5E3C" stroke-width="4" stroke-linecap="round"/><rect x="205" y="150" width="28" height="12" rx="3" fill="#5a3e28"/><g><line x1="206" y1="162" x2="203" y2="172" stroke="#8B5E3C" stroke-width="2" stroke-linecap="round"/><line x1="210" y1="162" x2="208" y2="172" stroke="#8B5E3C" stroke-width="2" stroke-linecap="round"/><line x1="214" y1="162" x2="214" y2="172" stroke="#8B5E3C" stroke-width="2" stroke-linecap="round"/><line x1="218" y1="162" x2="219" y2="172" stroke="#8B5E3C" stroke-width="2" stroke-linecap="round"/><line x1="222" y1="162" x2="224" y2="172" stroke="#8B5E3C" stroke-width="2" stroke-linecap="round"/><line x1="226" y1="162" x2="229" y2="172" stroke="#8B5E3C" stroke-width="2" stroke-linecap="round"/></g>
-<rect x="88" y="133" width="12" height="32" rx="5" fill="#f5c5a3"/><rect x="108" y="133" width="12" height="32" rx="5" fill="#f5c5a3"/><ellipse cx="94" cy="165" rx="10" ry="5" fill="#3d2b1f"/><ellipse cx="114" cy="165" rx="10" ry="5" fill="#3d2b1f"/>
-<path d="M82 108Q102 148Q122 108L120 93Q102 106Q84 93Z" fill="#fff"/><path d="M90 106Q102 132Q114 106L112 96Q102 110Q92 96Z" fill="#e8e8e8"/>
-<rect x="84" y="73" width="38" height="37" rx="8" fill="#4a90d9"/><circle cx="103" cy="83" r="2" fill="rgba(255,255,255,0.6)"/><circle cx="103" cy="92" r="2" fill="rgba(255,255,255,0.6)"/><circle cx="103" cy="101" r="2" fill="rgba(255,255,255,0.6)"/>
-<path d="M84 80Q68 94Q72 116" fill="none" stroke="#4a90d9" stroke-width="13" stroke-linecap="round"/><path d="M84 80Q68 94Q72 116" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<path d="M122 80Q138 90Q134 110" fill="none" stroke="#4a90d9" stroke-width="13" stroke-linecap="round"/><path d="M122 80Q138 90Q134 110" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<circle cx="74" cy="117" r="6" fill="#f5c5a3"/>
-<rect x="96" y="63" width="14" height="14" rx="5" fill="#f5c5a3"/>
-<ellipse cx="103" cy="50" rx="23" ry="25" fill="#f5c5a3"/>
-<ellipse cx="93" cy="46" rx="4" ry="5" fill="white"/><ellipse cx="113" cy="46" rx="4" ry="5" fill="white"/><circle cx="94" cy="47" r="2.5" fill="#3d2b1f"/><circle cx="114" cy="47" r="2.5" fill="#3d2b1f"/><circle cx="95" cy="46" r="1" fill="white"/><circle cx="115" cy="46" r="1" fill="white"/>
-<path d="M89 41Q93 39Q97 41" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/><path d="M109 41Q113 39Q117 41" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M94 57Q103 63Q112 57" fill="none" stroke="#c07040" stroke-width="2" stroke-linecap="round"/>
-<ellipse cx="89" cy="55" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/><ellipse cx="117" cy="55" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/>
-<path d="M80 43Q80 22Q103 20Q126 22Q126 43Q122 28Q103 26Q84 28Z" fill="#8B4513"/>
-<ellipse cx="103" cy="24" rx="13" ry="8" fill="#8B4513"/><circle cx="103" cy="18" r="7" fill="#a0522d"/>
-<rect x="82" y="34" width="42" height="6" rx="3" fill="white" opacity="0.9"/>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function svgCabeleireiro(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#1B2820"/>
-<path d="M0 100Q75 75Q150 100Q225 125Q300 100L300 180L0 180Z" fill="rgba(196,98,45,0.2)"/>
-<path d="M0 115Q75 90Q150 115Q225 140Q300 115L300 180L0 180Z" fill="rgba(196,98,45,0.15)"/>
-<circle cx="260" cy="35" r="30" fill="rgba(196,98,45,0.12)"/><circle cx="260" cy="35" r="18" fill="rgba(196,98,45,0.1)"/>
-<g fill="rgba(255,255,255,0.5)" font-size="12" font-family="DM Sans"><text x="18" y="55">✦</text><text x="270" y="70">✦</text><text x="14" y="130">✦</text><text x="275" y="120">✦</text></g>
-<ellipse cx="150" cy="168" rx="60" ry="7" fill="rgba(0,0,0,0.25)"/>
-<rect x="100" y="128" width="58" height="22" rx="5" fill="#2d4a35"/><rect x="110" y="150" width="10" height="20" rx="4" fill="#2d4a35"/><rect x="137" y="150" width="10" height="20" rx="4" fill="#2d4a35"/><rect x="94" y="115" width="70" height="18" rx="5" fill="#3d5a45"/><rect x="86" y="118" width="14" height="10" rx="3" fill="#2d4a35"/><rect x="157" y="118" width="14" height="10" rx="3" fill="#2d4a35"/>
-<rect x="102" y="127" width="12" height="26" rx="5" fill="#d4a574"/><rect x="142" y="127" width="12" height="26" rx="5" fill="#d4a574"/><ellipse cx="108" cy="153" rx="10" ry="5" fill="#8B4513"/><ellipse cx="148" cy="153" rx="10" ry="5" fill="#8B4513"/>
-<rect x="104" y="96" width="50" height="34" rx="7" fill="#9b5de5"/>
-<ellipse cx="129" cy="84" rx="20" ry="22" fill="#f5c5a3"/>
-<path d="M109 75Q109 62Q129 60Q149 62Q149 75" fill="#8B4513"/>
-<path d="M110 72Q113 58Q117 53" fill="none" stroke="#C4622D" stroke-width="3.5" stroke-linecap="round" opacity="0.9"/>
-<path d="M115 70Q119 56Q123 50" fill="none" stroke="#f5c842" stroke-width="3.5" stroke-linecap="round" opacity="0.9"/>
-<path d="M148 72Q145 58Q141 53" fill="none" stroke="#C4622D" stroke-width="3.5" stroke-linecap="round" opacity="0.9"/>
-<path d="M143 70Q140 56Q136 50" fill="none" stroke="#f5c842" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
-<path d="M112 78Q116 76Q120 78" fill="none" stroke="#8B5E3C" stroke-width="1.5" stroke-linecap="round"/><path d="M138 78Q142 76Q146 78" fill="none" stroke="#8B5E3C" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M119 88Q129 94Q139 88" fill="none" stroke="#c07040" stroke-width="1.5" stroke-linecap="round"/>
-<ellipse cx="114" cy="168" rx="35" ry="7" fill="rgba(0,0,0,0.0)"/>
-<rect x="57" y="97" width="44" height="45" rx="8" fill="#2d4a35"/>
-<rect x="61" y="99" width="36" height="42" rx="6" fill="#1B2820"/>
-<rect x="68" y="99" width="22" height="4" rx="2" fill="#C4622D"/>
-<rect x="58" y="135" width="13" height="28" rx="5" fill="#f5c5a3"/><rect x="73" y="138" width="13" height="25" rx="5" fill="#f5c5a3"/>
-<ellipse cx="64" cy="163" rx="10" ry="5" fill="#1a1a1a"/><ellipse cx="80" cy="163" rx="10" ry="5" fill="#1a1a1a"/>
-<path d="M57 105Q38 97Q40 75" fill="none" stroke="#2d4a35" stroke-width="13" stroke-linecap="round"/><path d="M57 105Q38 97Q40 75" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<g transform="translate(30,65) rotate(-20)"><circle cx="0" cy="0" r="6" fill="none" stroke="silver" stroke-width="2.5"/><circle cx="11" cy="0" r="6" fill="none" stroke="silver" stroke-width="2.5"/><line x1="6" y1="-4" x2="22" y2="-13" stroke="silver" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="4" x2="22" y2="13" stroke="silver" stroke-width="2" stroke-linecap="round"/></g>
-<path d="M101 105Q118 112Q114 138" fill="none" stroke="#2d4a35" stroke-width="13" stroke-linecap="round"/><path d="M101 105Q118 112Q114 138" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="110" y="136" width="14" height="4" rx="1" fill="silver"/><line x1="111" y1="140" x2="111" y2="146" stroke="silver" stroke-width="1.5"/><line x1="114" y1="140" x2="114" y2="146" stroke="silver" stroke-width="1.5"/><line x1="117" y1="140" x2="117" y2="146" stroke="silver" stroke-width="1.5"/><line x1="120" y1="140" x2="120" y2="146" stroke="silver" stroke-width="1.5"/>
-<rect x="69" y="88" width="12" height="14" rx="5" fill="#f5c5a3"/>
-<ellipse cx="75" cy="75" rx="20" ry="22" fill="#f5c5a3"/>
-<ellipse cx="67" cy="70" rx="4" ry="5" fill="white"/><ellipse cx="83" cy="70" rx="4" ry="5" fill="white"/><circle cx="68" cy="71" r="2.5" fill="#3d2b1f"/><circle cx="84" cy="71" r="2.5" fill="#3d2b1f"/>
-<path d="M63 65Q67 63Q71 65" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/><path d="M79 65Q83 63Q87 65" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M67 82Q75 88Q83 82" fill="none" stroke="#c07040" stroke-width="2" stroke-linecap="round"/>
-<ellipse cx="62" cy="79" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/><ellipse cx="88" cy="79" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/>
-<path d="M55 66Q55 52Q75 50Q95 52Q95 66Q91 54Q75 52Q59 54Z" fill="#1a0a0a"/>
-<ellipse cx="75" cy="52" rx="12" ry="7" fill="#1a0a0a"/>
-<line x1="68" y1="48" x2="71" y2="43" stroke="#C4622D" stroke-width="2.5" stroke-linecap="round"/><line x1="75" y1="45" x2="77" y2="40" stroke="#C4622D" stroke-width="2.5" stroke-linecap="round"/><line x1="82" y1="48" x2="79" y2="43" stroke="#C4622D" stroke-width="2.5" stroke-linecap="round"/>
-<g fill="rgba(255,215,0,0.8)" font-size="11" font-family="DM Sans"><text x="156" y="58">✦</text><text x="168" y="70">✦</text><text x="160" y="46">✦</text></g>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function svgBabysitter(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#2d5a8e"/>
-<g fill="rgba(255,255,255,0.08)"><ellipse cx="40" cy="28" rx="25" ry="14"/><ellipse cx="58" cy="22" rx="22" ry="13"/><ellipse cx="76" cy="28" rx="25" ry="14"/><ellipse cx="210" cy="38" rx="22" ry="12"/><ellipse cx="232" cy="32" rx="20" ry="12"/><ellipse cx="254" cy="38" rx="22" ry="12"/></g>
-<g fill="rgba(255,255,255,0.55)" font-size="13" font-family="DM Sans"><text x="18" y="58">★</text><text x="265" y="55">★</text><text x="14" y="125">★</text><text x="272" y="105">★</text></g>
-<g fill="rgba(196,98,45,0.7)"><path d="M238 68C238 66 236 64 234 66C232 64 230 66 230 68C230 70 234 74 234 74C234 74 238 70 238 68Z"/><path d="M262 96C262 94 260 92 258 94C256 92 254 94 254 96C254 98 258 102 258 102C258 102 262 98 262 96Z"/><path d="M30 84C30 82 28 80 26 82C24 80 22 82 22 84C22 86 26 90 26 90C26 90 30 86 30 84Z"/></g>
-<ellipse cx="148" cy="168" rx="62" ry="7" fill="rgba(0,0,0,0.2)"/>
-<ellipse cx="148" cy="162" rx="70" ry="10" fill="rgba(255,255,255,0.06)"/>
-<rect x="58" y="148" width="18" height="18" rx="3" fill="#f5c842"/><text x="67" y="161" text-anchor="middle" font-family="DM Sans" font-size="11" fill="#a0801a">A</text>
-<circle cx="218" cy="159" r="11" fill="#e74c3c"/><path d="M210 153Q218 148Q226 153" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
-<circle cx="175" cy="148" r="17" fill="#fde8d0"/>
-<rect x="158" y="140" width="34" height="22" rx="8" fill="#a8d8ea"/>
-<ellipse cx="156" cy="148" rx="9" ry="5" fill="#fde8d0" transform="rotate(-15,156,148)"/><ellipse cx="193" cy="145" rx="9" ry="5" fill="#fde8d0" transform="rotate(20,193,145)"/>
-<circle cx="175" cy="133" r="15" fill="#fde8d0"/>
-<path d="M162 127Q175 119Q188 127" fill="#f5c5a3"/>
-<path d="M167 131Q170 129Q173 131" fill="none" stroke="#8B5E3C" stroke-width="1.5" stroke-linecap="round"/><path d="M177 131Q180 129Q183 131" fill="none" stroke="#8B5E3C" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M169 137Q175 141Q181 137" fill="none" stroke="#c07040" stroke-width="1.5" stroke-linecap="round"/>
-<ellipse cx="165" cy="135" rx="5" ry="3" fill="rgba(220,100,80,0.35)"/><ellipse cx="185" cy="135" rx="5" ry="3" fill="rgba(220,100,80,0.35)"/>
-<rect x="98" y="133" width="13" height="30" rx="5" fill="#f5c5a3" transform="rotate(-8,98,133)"/><rect x="114" y="136" width="13" height="27" rx="5" fill="#f5c5a3" transform="rotate(8,114,136)"/>
-<ellipse cx="100" cy="163" rx="10" ry="5" fill="#8B4513" transform="rotate(-8,100,163)"/><ellipse cx="122" cy="163" rx="10" ry="5" fill="#8B4513"/>
-<rect x="90" y="95" width="42" height="42" rx="8" fill="#e8b4d8"/>
-<rect x="94" y="103" width="34" height="4" rx="1" fill="rgba(255,255,255,0.3)"/><rect x="94" y="113" width="34" height="4" rx="1" fill="rgba(255,255,255,0.3)"/><rect x="94" y="123" width="34" height="4" rx="1" fill="rgba(255,255,255,0.3)"/>
-<path d="M90 105Q72 116Q78 142" fill="none" stroke="#e8b4d8" stroke-width="14" stroke-linecap="round"/><path d="M90 105Q72 116Q78 142" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/><circle cx="80" cy="142" r="7" fill="#f5c5a3"/>
-<path d="M132 105Q152 113Q148 138" fill="none" stroke="#e8b4d8" stroke-width="14" stroke-linecap="round"/><path d="M132 105Q152 113Q148 138" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="104" y="84" width="14" height="14" rx="5" fill="#f5c5a3"/>
-<ellipse cx="111" cy="71" rx="21" ry="23" fill="#f5c5a3"/>
-<ellipse cx="102" cy="67" rx="5" ry="6" fill="white"/><ellipse cx="120" cy="67" rx="5" ry="6" fill="white"/><circle cx="103" cy="68" r="3.5" fill="#4a2060"/><circle cx="121" cy="68" r="3.5" fill="#4a2060"/><circle cx="104" cy="67" r="1.5" fill="white"/><circle cx="122" cy="67" r="1.5" fill="white"/>
-<path d="M97 61Q102 58Q107 61" fill="none" stroke="#8B5E3C" stroke-width="1.5" stroke-linecap="round"/><path d="M115 61Q120 58Q125 61" fill="none" stroke="#8B5E3C" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M103 80Q111 87Q119 80" fill="none" stroke="#c07040" stroke-width="2" stroke-linecap="round"/>
-<ellipse cx="96" cy="75" rx="6" ry="4" fill="rgba(220,100,80,0.35)"/><ellipse cx="126" cy="75" rx="6" ry="4" fill="rgba(220,100,80,0.35)"/>
-<path d="M90 61Q90 46Q111 44Q132 46Q132 61Q128 49Q111 47Q94 49Z" fill="#C4622D"/>
-<path d="M132 54Q146 48Q143 65Q148 72Q140 76" fill="none" stroke="#C4622D" stroke-width="9" stroke-linecap="round"/>
-<circle cx="132" cy="51" r="6" fill="#ffd700"/><circle cx="132" cy="51" r="3.5" fill="#ffaa00"/>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function svgCozinha(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#8B1A1A"/>
-<g opacity="0.08" fill="white"><circle cx="20" cy="20" r="12"/><circle cx="60" cy="20" r="12"/><circle cx="100" cy="20" r="12"/><circle cx="140" cy="20" r="12"/><circle cx="180" cy="20" r="12"/><circle cx="220" cy="20" r="12"/><circle cx="260" cy="20" r="12"/><circle cx="300" cy="20" r="12"/><circle cx="40" cy="50" r="12"/><circle cx="80" cy="50" r="12"/><circle cx="120" cy="50" r="12"/><circle cx="160" cy="50" r="12"/><circle cx="200" cy="50" r="12"/><circle cx="240" cy="50" r="12"/><circle cx="280" cy="50" r="12"/></g>
-<ellipse cx="160" cy="168" rx="65" ry="7" fill="rgba(0,0,0,0.2)"/>
-<rect x="195" y="110" width="70" height="55" rx="4" fill="#5a2020"/>
-<rect x="197" y="112" width="66" height="51" rx="3" fill="#3d1515"/>
-<circle cx="210" cy="125" r="10" fill="#2a0f0f" stroke="#f5c842" stroke-width="2"/><circle cx="210" cy="125" r="5" fill="#f5c842" opacity="0.3"/>
-<circle cx="235" cy="125" r="10" fill="#2a0f0f" stroke="#f5c842" stroke-width="2"/><circle cx="235" cy="125" r="5" fill="#f5c842" opacity="0.3"/>
-<circle cx="252" cy="138" r="7" fill="#2a0f0f" stroke="#f5c842" stroke-width="1.5"/>
-<rect x="195" y="145" width="70" height="8" rx="2" fill="#4a1a1a"/>
-<rect x="200" y="150" width="15" height="12" rx="2" fill="#3d1515"/><rect x="225" y="150" width="15" height="12" rx="2" fill="#3d1515"/>
-<rect x="196" y="105" width="72" height="8" rx="3" fill="#4a1a1a"/>
-<rect x="196" y="160" width="72" height="5" rx="2" fill="#4a1a1a"/>
-<rect x="185" y="160" width="90" height="10" rx="3" fill="#5a2020"/>
-<rect x="95" y="135" width="12" height="32" rx="5" fill="#f5c5a3"/><rect x="115" y="135" width="12" height="32" rx="5" fill="#f5c5a3"/>
-<ellipse cx="101" cy="167" rx="10" ry="5" fill="#1a1a1a"/><ellipse cx="121" cy="167" rx="10" ry="5" fill="#1a1a1a"/>
-<rect x="85" y="95" width="50" height="42" rx="8" fill="#fff"/>
-<rect x="87" y="97" width="46" height="38" rx="6" fill="#f0f0f0"/>
-<rect x="92" y="97" width="36" height="10" rx="3" fill="#f5c842"/>
-<rect x="94" y="99" width="32" height="6" rx="2" fill="#e8b830"/>
-<path d="M85 105Q68 98Q70 118" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/><path d="M85 105Q68 98Q70 118" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="190" y="100" width="12" height="30" rx="5" fill="#f5c5a3"/>
-<path d="M135 100Q155 92Q158 115" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/><path d="M135 100Q155 92Q158 115" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="155" y="112" width="25" height="8" rx="3" fill="#c0392b"/>
-<rect x="156" y="118" width="23" height="4" rx="2" fill="#e74c3c"/>
-<circle cx="170" cy="108" r="7" fill="#e67e22"/>
-<circle cx="170" cy="108" r="4" fill="#f39c12"/>
-<rect x="98" y="84" width="24" height="14" rx="5" fill="#f5c5a3"/>
-<ellipse cx="110" cy="70" rx="27" ry="26" fill="#f5c5a3"/>
-<rect x="84" y="52" width="52" height="22" rx="5" fill="white"/><rect x="86" y="54" width="48" height="18" rx="4" fill="#f0f0f0"/>
-<rect x="92" y="56" width="36" height="14" rx="3" fill="white"/>
-<text x="110" y="67" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#8B1A1A" font-weight="700">CHEF</text>
-<ellipse cx="96" cy="68" rx="3.5" ry="4" fill="white"/><ellipse cx="124" cy="68" rx="3.5" ry="4" fill="white"/><circle cx="97" cy="69" r="2.2" fill="#3d2b1f"/><circle cx="125" cy="69" r="2.2" fill="#3d2b1f"/>
-<path d="M92 63Q96 61Q100 63" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/><path d="M120 63Q124 61Q128 63" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M100 78Q110 84Q120 78" fill="none" stroke="#c07040" stroke-width="2" stroke-linecap="round"/>
-<ellipse cx="91" cy="75" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/><ellipse cx="129" cy="75" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/>
-<path d="M84 55Q84 44Q110 42Q136 44Q136 55" fill="#8B4513"/>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function svgConstrucao(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#F5A623"/>
-<g opacity="0.1"><rect x="0" y="0" width="300" height="8" fill="#333"/><rect x="0" y="16" width="300" height="8" fill="#333"/><rect x="0" y="32" width="300" height="8" fill="#333"/><rect x="0" y="48" width="300" height="8" fill="#333"/><rect x="0" y="64" width="300" height="8" fill="#333"/><rect x="0" y="80" width="300" height="8" fill="#333"/></g>
-<ellipse cx="150" cy="168" rx="65" ry="7" fill="rgba(0,0,0,0.2)"/>
-<rect x="190" y="80" width="80" height="90" rx="3" fill="#d4820a"/>
-<rect x="193" y="83" width="35" height="45" rx="2" fill="#e8952a"/><rect x="233" y="83" width="34" height="45" rx="2" fill="#e8952a"/>
-<rect x="193" y="133" width="74" height="35" rx="2" fill="#e8952a"/>
-<rect x="203" y="90" width="15" height="20" rx="2" fill="#c4710a"/><rect x="223" y="90" width="15" height="20" rx="2" fill="#c4710a"/>
-<rect x="215" y="140" width="20" height="28" rx="3" fill="#c4710a"/>
-<rect x="188" y="76" width="88" height="8" rx="2" fill="#c4710a"/>
-<rect x="185" y="130" width="94" height="8" rx="2" fill="#c4710a"/>
-<line x1="230" y1="40" x2="230" y2="84" stroke="#888" stroke-width="5" stroke-linecap="round"/>
-<rect x="215" y="35" width="30" height="12" rx="2" fill="#aaa"/>
-<path d="M215 35L200 20L260 20L245 35Z" fill="#aaa"/>
-<line x1="200" y1="20" x2="200" y2="5" stroke="#888" stroke-width="3"/>
-<line x1="260" y1="20" x2="260" y2="5" stroke="#888" stroke-width="3"/>
-<rect x="95" y="133" width="13" height="34" rx="5" fill="#f5c5a3"/><rect x="117" y="133" width="13" height="34" rx="5" fill="#f5c5a3"/>
-<ellipse cx="101" cy="167" rx="11" ry="6" fill="#333"/><ellipse cx="123" cy="167" rx="11" ry="6" fill="#333"/>
-<rect x="85" y="93" width="55" height="43" rx="8" fill="#FF8C00"/>
-<rect x="88" y="96" width="49" height="37" rx="6" fill="#e07800"/>
-<path d="M85 100Q65 93Q68 118" fill="none" stroke="#FF8C00" stroke-width="14" stroke-linecap="round"/><path d="M85 100Q65 93Q68 118" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="45" y="115" width="30" height="8" rx="3" fill="#888"/>
-<rect x="42" y="110" width="5" height="18" rx="2" fill="#666"/>
-<rect x="50" y="110" width="5" height="18" rx="2" fill="#666"/>
-<rect x="58" y="110" width="5" height="18" rx="2" fill="#666"/>
-<rect x="66" y="110" width="5" height="18" rx="2" fill="#666"/>
-<path d="M140 100Q162 93Q165 115" fill="none" stroke="#FF8C00" stroke-width="14" stroke-linecap="round"/><path d="M140 100Q162 93Q165 115" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="161" y="112" width="18" height="30" rx="3" fill="#888"/>
-<rect x="176" y="110" width="6" height="34" rx="2" fill="#666"/>
-<rect x="100" y="82" width="25" height="15" rx="5" fill="#f5c5a3"/>
-<ellipse cx="112" cy="68" rx="26" ry="27" fill="#f5c5a3"/>
-<rect x="88" y="48" width="48" height="24" rx="4" fill="#FFD700"/>
-<rect x="90" y="50" width="44" height="20" rx="3" fill="#F5C842"/>
-<rect x="94" y="53" width="36" height="14" rx="2" fill="#FFD700"/>
-<path d="M88 48Q88 38Q112 36Q136 38Q136 48" fill="#FFB300"/>
-<ellipse cx="98" cy="67" rx="4" ry="5" fill="white"/><ellipse cx="126" cy="67" rx="4" ry="5" fill="white"/><circle cx="99" cy="68" r="2.5" fill="#3d2b1f"/><circle cx="127" cy="68" r="2.5" fill="#3d2b1f"/>
-<path d="M94 62Q98 60Q102 62" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/><path d="M122 62Q126 60Q130 62" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M102 79Q112 85Q122 79" fill="none" stroke="#c07040" stroke-width="2" stroke-linecap="round"/>
-<ellipse cx="93" cy="75" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/><ellipse cx="131" cy="75" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/>
-<path d="M88 55Q88 43Q112 41Q136 43Q136 55" fill="#8B4513"/>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function svgMotorista(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#1a3a5c"/>
-<g opacity="0.15"><line x1="0" y1="0" x2="300" y2="180" stroke="white" stroke-width="1"/><line x1="50" y1="0" x2="300" y2="130" stroke="white" stroke-width="0.5"/><line x1="100" y1="0" x2="300" y2="80" stroke="white" stroke-width="0.5"/><line x1="150" y1="0" x2="300" y2="30" stroke="white" stroke-width="0.5"/><line x1="0" y1="50" x2="250" y2="180" stroke="white" stroke-width="0.5"/></g>
-<ellipse cx="150" cy="168" rx="70" ry="7" fill="rgba(0,0,0,0.25)"/>
-<rect x="40" y="105" width="220" height="55" rx="12" fill="#2d5a8a"/>
-<rect x="55" y="95" width="180" height="40" rx="10" fill="#3d6a9a"/>
-<rect x="65" y="100" width="70" height="30" rx="5" fill="#a8d4f0"/><rect x="145" y="100" width="70" height="30" rx="5" fill="#a8d4f0"/>
-<line x1="130" y1="100" x2="130" y2="130" stroke="#2d5a8a" stroke-width="3"/>
-<rect x="38" y="115" width="15" height="25" rx="7" fill="#2d5a8a"/>
-<rect x="247" y="115" width="15" height="25" rx="7" fill="#2d5a8a"/>
-<circle cx="80" cy="162" r="18" fill="#1a1a2a"/><circle cx="80" cy="162" r="12" fill="#2d2d3d"/><circle cx="80" cy="162" r="6" fill="#888"/><circle cx="80" cy="162" r="3" fill="#aaa"/>
-<circle cx="220" cy="162" r="18" fill="#1a1a2a"/><circle cx="220" cy="162" r="12" fill="#2d2d3d"/><circle cx="220" cy="162" r="6" fill="#888"/><circle cx="220" cy="162" r="3" fill="#aaa"/>
-<rect x="36" y="130" width="14" height="10" rx="3" fill="#f5c842"/>
-<rect x="250" y="130" width="14" height="10" rx="3" fill="#f5c842"/>
-<rect x="40" y="155" width="15" height="5" rx="2" fill="#e74c3c"/>
-<rect x="245" y="155" width="15" height="5" rx="2" fill="#e74c3c"/>
-<rect x="95" y="125" width="110" height="35" rx="5" fill="#2a4a7a"/>
-<rect x="117" y="128" width="66" height="8" rx="2" fill="#1a3a5c"/>
-<circle cx="150" cy="147" r="8" fill="#1a3a5c"/><circle cx="150" cy="147" r="5" fill="#2d5a8a"/>
-<circle cx="135" cy="147" r="4" fill="#1a3a5c"/><circle cx="165" cy="147" r="4" fill="#1a3a5c"/>
-<rect x="100" y="73" width="13" height="35" rx="5" fill="#f5c5a3"/>
-<ellipse cx="106" cy="70" rx="20" ry="18" fill="#f5c5a3"/>
-<rect x="70" y="80" width="65" height="50" rx="8" fill="#1f4a7a"/>
-<rect x="73" y="83" width="59" height="44" rx="6" fill="#2d5a8a"/>
-<rect x="76" y="86" width="18" height="14" rx="3" fill="#a8d4f0" opacity="0.7"/>
-<rect x="80" y="103" width="50" height="20" rx="4" fill="#1a3a5c"/>
-<rect x="115" y="86" width="14" height="8" rx="2" fill="#f5c842"/><rect x="116" y="87" width="12" height="6" rx="1" fill="#e8b830"/>
-<path d="M70 90Q52 88Q54 110" fill="none" stroke="#1f4a7a" stroke-width="14" stroke-linecap="round"/><path d="M70 90Q52 88Q54 110" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<path d="M135 90Q153 88Q151 108" fill="none" stroke="#1f4a7a" stroke-width="14" stroke-linecap="round"/><path d="M135 90Q153 88Q151 108" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<ellipse cx="96" cy="63" rx="3.5" ry="4" fill="white"/><ellipse cx="116" cy="63" rx="3.5" ry="4" fill="white"/><circle cx="97" cy="64" r="2.2" fill="#1a3a5c"/><circle cx="117" cy="64" r="2.2" fill="#1a3a5c"/>
-<path d="M97 77Q106 83Q115 77" fill="none" stroke="#c07040" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M84 52Q84 46Q106 44Q128 46Q128 52" fill="#1a1a1a"/>
-<rect x="82" y="50" width="48" height="8" rx="2" fill="#1a1a1a"/>
-<rect x="86" y="52" width="40" height="6" rx="2" fill="#333"/>
-<text x="106" y="58" text-anchor="middle" font-family="DM Sans" font-size="7" fill="#f5c842" font-weight="700">MOTORISTA</text>
-<path d="M84 50Q84 42Q106 40Q128 42Q128 50" fill="#555"/>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function svgFitness(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#1a6b4a"/>
-<g opacity="0.08"><circle cx="30" cy="30" r="20"/><circle cx="80" cy="60" r="15"/><circle cx="130" cy="20" r="25"/><circle cx="220" cy="40" r="18"/><circle cx="270" cy="70" r="22"/><circle cx="250" cy="140" r="30"/></g>
-<ellipse cx="150" cy="168" rx="65" ry="7" fill="rgba(0,0,0,0.2)"/>
-<g transform="translate(200,80)"><rect x="-5" y="-8" width="10" height="75" rx="4" fill="#555"/><rect x="-28" y="-8" width="22" height="20" rx="5" fill="#777"/><rect x="-28" y="17" width="22" height="20" rx="5" fill="#777"/><rect x="-28" y="42" width="22" height="14" rx="4" fill="#666"/><rect x="5" y="-8" width="22" height="20" rx="5" fill="#777"/><rect x="5" y="17" width="22" height="20" rx="5" fill="#777"/><rect x="5" y="42" width="22" height="14" rx="4" fill="#666"/></g>
-<rect x="95" y="135" width="13" height="32" rx="5" fill="#f5c5a3"/><rect x="117" y="130" width="13" height="37" rx="5" fill="#f5c5a3"/>
-<ellipse cx="101" cy="167" rx="10" ry="5" fill="#333"/><ellipse cx="123" cy="167" rx="10" ry="5" fill="#333"/>
-<rect x="85" y="90" width="55" height="48" rx="8" fill="#C4622D"/>
-<rect x="88" y="93" width="49" height="42" rx="6" fill="#e07040"/>
-<rect x="92" y="95" width="42" height="8" rx="2" fill="rgba(255,255,255,0.2)"/>
-<text x="113" y="102" text-anchor="middle" font-family="DM Sans" font-size="7" fill="white" font-weight="700">PERSONAL</text>
-<path d="M85 97Q65 90Q62 118" fill="none" stroke="#C4622D" stroke-width="14" stroke-linecap="round"/><path d="M85 97Q65 90Q62 118" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="37" y="110" width="32" height="12" rx="5" fill="#555"/><rect x="33" y="107" width="8" height="18" rx="4" fill="#666"/><rect x="67" y="107" width="8" height="18" rx="4" fill="#666"/>
-<path d="M140 97Q162 90Q166 115" fill="none" stroke="#C4622D" stroke-width="14" stroke-linecap="round"/><path d="M140 97Q162 90Q166 115" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="163" y="107" width="32" height="12" rx="5" fill="#555"/><rect x="161" y="104" width="8" height="18" rx="4" fill="#666"/><rect x="187" y="104" width="8" height="18" rx="4" fill="#666"/>
-<rect x="100" y="79" width="25" height="14" rx="5" fill="#f5c5a3"/>
-<ellipse cx="112" cy="64" rx="26" ry="27" fill="#f5c5a3"/>
-<ellipse cx="102" cy="60" rx="4" ry="5" fill="white"/><ellipse cx="122" cy="60" rx="4" ry="5" fill="white"/><circle cx="103" cy="61" r="2.5" fill="#1a6b4a"/><circle cx="123" cy="61" r="2.5" fill="#1a6b4a"/>
-<path d="M98 55Q102 53Q106 55" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/><path d="M118 55Q122 53Q126 55" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M104 75Q112 81Q120 75" fill="none" stroke="#c07040" stroke-width="2" stroke-linecap="round"/>
-<ellipse cx="95" cy="71" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/><ellipse cx="129" cy="71" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/>
-<path d="M88 53Q88 41Q112 39Q136 41Q136 53Q132 44Q112 42Q92 44Z" fill="#8B4513"/>
-<circle cx="112" cy="40" r="8" fill="#a0522d"/>
-<circle cx="112" cy="40" r="4" fill="#8B4513"/>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function svgJardim(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#2d6a2d"/>
-<g fill="rgba(255,255,255,0.06)"><circle cx="20" cy="60" r="30"/><circle cx="280" cy="50" r="35"/><circle cx="150" cy="20" r="25"/></g>
-<g fill="#1a4a1a"><path d="M230 168Q230 130Q250 110Q270 130Q270 168Z"/><path d="M245 168Q245 140Q260 125Q275 140Q275 168Z"/><path d="M20 168Q20 140Q35 125Q50 140Q50 168Z"/><path d="M30 168Q30 150Q42 138Q54 150Q54 168Z"/></g>
-<g fill="#3d8a3d"><path d="M225 168Q225 135Q242 115Q258 135Q258 168Z"/><path d="M15 168Q15 145Q28 130Q42 145Q42 168Z"/></g>
-<ellipse cx="150" cy="168" rx="65" ry="7" fill="rgba(0,0,0,0.15)"/>
-<g transform="translate(195,100)"><rect x="0" y="-5" width="6" height="65" rx="3" fill="#8B5E3C"/><path d="M3 -5Q-20 -30Q3 -20Q26 -30Q3 -5Z" fill="#3d8a3d"/><path d="M3 10Q-18 -12Q3 0Q24 -12Q3 10Z" fill="#2d7a2d"/><path d="M3 22Q-15 5Q3 14Q21 5Q3 22Z" fill="#4a9a4a"/></g>
-<rect x="95" y="133" width="13" height="34" rx="5" fill="#f5c5a3"/><rect x="117" y="133" width="13" height="34" rx="5" fill="#f5c5a3"/>
-<ellipse cx="101" cy="167" rx="10" ry="5" fill="#5a3020"/><ellipse cx="123" cy="167" rx="10" ry="5" fill="#5a3020"/>
-<rect x="85" y="92" width="55" height="45" rx="8" fill="#4a7a30"/>
-<rect x="88" y="95" width="49" height="39" rx="6" fill="#5a8a3d"/>
-<path d="M85 99Q65 93Q62 118" fill="none" stroke="#4a7a30" stroke-width="14" stroke-linecap="round"/><path d="M85 99Q65 93Q62 118" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="38" y="117" width="34" height="8" rx="3" fill="#8B5E3C"/>
-<line x1="42" y1="117" x2="42" y2="108" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round"/>
-<line x1="48" y1="117" x2="48" y2="106" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round"/>
-<line x1="54" y1="117" x2="54" y2="104" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round"/>
-<line x1="60" y1="117" x2="60" y2="106" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round"/>
-<line x1="66" y1="117" x2="66" y2="108" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round"/>
-<path d="M140 99Q162 93Q166 118" fill="none" stroke="#4a7a30" stroke-width="14" stroke-linecap="round"/><path d="M140 99Q162 93Q166 118" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="161" y="115" width="20" height="35" rx="4" fill="#8B5E3C"/>
-<path d="M165 115Q171 100Q177 115Z" fill="#3d8a3d"/>
-<rect x="100" y="81" width="25" height="14" rx="5" fill="#f5c5a3"/>
-<ellipse cx="112" cy="67" rx="26" ry="27" fill="#f5c5a3"/>
-<rect x="88" y="52" width="48" height="18" rx="4" fill="#5a8a3d"/><rect x="90" y="54" width="44" height="14" rx="3" fill="#4a7a30"/>
-<path d="M88 52Q88 44Q112 42Q136 44Q136 52" fill="#3d6a2d"/>
-<ellipse cx="98" cy="65" rx="4" ry="5" fill="white"/><ellipse cx="126" cy="65" rx="4" ry="5" fill="white"/><circle cx="99" cy="66" r="2.5" fill="#2d5a20"/><circle cx="127" cy="66" r="2.5" fill="#2d5a20"/>
-<path d="M102 78Q112 84Q122 78" fill="none" stroke="#c07040" stroke-width="2" stroke-linecap="round"/>
-<path d="M88 55Q88 44Q112 42Q136 44Q136 55" fill="#5a3020"/>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function svgBeleza(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#8B3D8B"/>
-<g opacity="0.1"><circle cx="150" cy="90" r="80"/><circle cx="150" cy="90" r="55"/></g>
-<g fill="rgba(255,220,255,0.3)"><circle cx="20" cy="20" r="4"/><circle cx="40" cy="15" r="3"/><circle cx="60" cy="25" r="5"/><circle cx="250" cy="18" r="4"/><circle cx="270" cy="12" r="3"/><circle cx="285" cy="28" r="5"/><circle cx="30" cy="155" r="4"/><circle cx="275" cy="160" r="5"/></g>
-<g fill="rgba(255,180,255,0.6)"><path d="M15 60C15 58 13 56 11 58C9 56 7 58 7 60C7 62 11 66 11 66C11 66 15 62 15 60Z"/><path d="M288 80C288 78 286 76 284 78C282 76 280 78 280 80C280 82 284 86 284 86C284 86 288 82 288 80Z"/><path d="M20 130C20 128 18 126 16 128C14 126 12 128 12 130C12 132 16 136 16 136C16 136 20 132 20 130Z"/></g>
-<ellipse cx="150" cy="168" rx="60" ry="7" fill="rgba(0,0,0,0.2)"/>
-<g transform="translate(210,90)"><ellipse cx="0" cy="0" rx="18" ry="55" fill="rgba(255,255,255,0.1)"/><ellipse cx="0" cy="-10" rx="12" ry="12" fill="rgba(255,200,255,0.3)"/><ellipse cx="0" cy="10" rx="14" ry="14" fill="rgba(255,180,255,0.25)"/><ellipse cx="0" cy="30" rx="12" ry="12" fill="rgba(255,160,255,0.2)"/><rect x="-2" y="50" width="4" height="20" rx="2" fill="rgba(255,255,255,0.2)"/><rect x="-8" y="68" width="16" height="4" rx="2" fill="rgba(255,255,255,0.2)"/></g>
-<g transform="translate(55,90)"><circle cx="0" cy="-30" r="8" fill="rgba(255,200,100,0.7)"/><line x1="0" y1="-22" x2="0" y2="20" stroke="rgba(255,180,80,0.6)" stroke-width="3" stroke-linecap="round"/><path d="M-12 25Q0 18Q12 25L10 40L-10 40Z" fill="rgba(255,180,80,0.5)"/></g>
-<rect x="95" y="133" width="13" height="34" rx="5" fill="#f5c5a3"/><rect x="117" y="133" width="13" height="34" rx="5" fill="#f5c5a3"/>
-<ellipse cx="101" cy="167" rx="10" ry="5" fill="#4a1a4a"/><ellipse cx="123" cy="167" rx="10" ry="5" fill="#4a1a4a"/>
-<rect x="85" y="93" width="55" height="44" rx="8" fill="#6a1a6a"/>
-<rect x="88" y="96" width="49" height="38" rx="6" fill="#7d2a7d"/>
-<path d="M85 100Q65 93Q62 118" fill="none" stroke="#6a1a6a" stroke-width="14" stroke-linecap="round"/><path d="M85 100Q65 93Q62 118" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<g transform="translate(48,108)"><ellipse cx="0" cy="0" rx="14" ry="8" fill="#ffd700"/><circle cx="0" cy="-5" r="6" fill="#ffd700"/><rect x="-10" y="8" width="20" height="5" rx="2" fill="#e8c200"/><line x1="-8" y1="13" x2="-10" y2="20" stroke="#e8c200" stroke-width="2" stroke-linecap="round"/><line x1="-4" y1="13" x2="-5" y2="20" stroke="#e8c200" stroke-width="2" stroke-linecap="round"/><line x1="0" y1="13" x2="0" y2="20" stroke="#e8c200" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="13" x2="5" y2="20" stroke="#e8c200" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="13" x2="10" y2="20" stroke="#e8c200" stroke-width="2" stroke-linecap="round"/></g>
-<path d="M140 100Q162 93Q166 118" fill="none" stroke="#6a1a6a" stroke-width="14" stroke-linecap="round"/><path d="M140 100Q162 93Q166 118" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<g transform="translate(168,112)"><rect x="-4" y="0" width="8" height="25" rx="3" fill="#e8c8e8"/><ellipse cx="0" cy="0" rx="8" ry="4" fill="#d4a8d4"/><ellipse cx="0" cy="-5" rx="5" ry="3" fill="#e8c8e8"/></g>
-<rect x="100" y="82" width="25" height="14" rx="5" fill="#f5c5a3"/>
-<ellipse cx="112" cy="67" rx="26" ry="27" fill="#f5c5a3"/>
-<ellipse cx="102" cy="63" rx="4" ry="5" fill="white"/><ellipse cx="122" cy="63" rx="4" ry="5" fill="white"/><circle cx="103" cy="64" r="2.5" fill="#4a1a4a"/><circle cx="123" cy="64" r="2.5" fill="#4a1a4a"/>
-<path d="M98 58Q102 56Q106 58" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/><path d="M118 58Q122 56Q126 58" fill="none" stroke="#3d2b1f" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M103 77Q112 83Q121 77" fill="none" stroke="#c07040" stroke-width="2" stroke-linecap="round"/>
-<ellipse cx="96" cy="73" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/><ellipse cx="128" cy="73" rx="5" ry="3" fill="rgba(220,100,80,0.3)"/>
-<path d="M88 56Q88 44Q112 42Q136 44Q136 56Q132 47Q112 45Q92 47Z" fill="#4a1a4a"/>
-<ellipse cx="112" cy="44" rx="14" ry="8" fill="#4a1a4a"/>
-<circle cx="99" cy="41" r="5" fill="#ffd700"/><circle cx="112" cy="38" r="5" fill="#ff88cc"/><circle cx="125" cy="41" r="5" fill="#ffd700"/>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function svgGenerico(ini, srv) {
-  return `<svg viewBox="0 0 300 180" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">
-<rect width="300" height="180" fill="#1B2820"/>
-<g opacity="0.08" fill="white"><path d="M0 20L20 0L40 20L20 40Z"/><path d="M40 20L60 0L80 20L60 40Z"/><path d="M80 20L100 0L120 20L100 40Z"/><path d="M120 20L140 0L160 20L140 40Z"/><path d="M160 20L180 0L200 20L180 40Z"/><path d="M200 20L220 0L240 20L220 40Z"/><path d="M240 20L260 0L280 20L260 40Z"/><path d="M20 60L40 40L60 60L40 80Z"/><path d="M60 60L80 40L100 60L80 80Z"/><path d="M100 60L120 40L140 60L120 80Z"/><path d="M140 60L160 40L180 60L160 80Z"/><path d="M180 60L200 40L220 60L200 80Z"/><path d="M220 60L240 40L260 60L240 80Z"/></g>
-<circle cx="220" cy="60" r="35" fill="rgba(196,98,45,0.2)"/><circle cx="220" cy="60" r="20" fill="rgba(196,98,45,0.15)"/>
-<ellipse cx="150" cy="168" rx="65" ry="7" fill="rgba(0,0,0,0.2)"/>
-<rect x="95" y="133" width="13" height="34" rx="5" fill="#f5c5a3"/><rect x="117" y="133" width="13" height="34" rx="5" fill="#f5c5a3"/>
-<ellipse cx="101" cy="167" rx="10" ry="5" fill="#3d2b1f"/><ellipse cx="123" cy="167" rx="10" ry="5" fill="#3d2b1f"/>
-<rect x="85" y="93" width="55" height="44" rx="8" fill="#C4622D"/>
-<rect x="88" y="96" width="49" height="38" rx="6" fill="#d4723d"/>
-<path d="M85 100Q65 93Q62 118" fill="none" stroke="#C4622D" stroke-width="14" stroke-linecap="round"/><path d="M85 100Q65 93Q62 118" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<path d="M140 100Q162 93Q166 118" fill="none" stroke="#C4622D" stroke-width="14" stroke-linecap="round"/><path d="M140 100Q162 93Q166 118" fill="none" stroke="#f5c5a3" stroke-width="10" stroke-linecap="round"/>
-<rect x="100" y="82" width="25" height="14" rx="5" fill="#f5c5a3"/>
-<ellipse cx="112" cy="67" rx="26" ry="27" fill="#f5c5a3"/>
-<ellipse cx="102" cy="63" rx="4" ry="5" fill="white"/><ellipse cx="122" cy="63" rx="4" ry="5" fill="white"/><circle cx="103" cy="64" r="2.5" fill="#3d2b1f"/><circle cx="123" cy="64" r="2.5" fill="#3d2b1f"/>
-<path d="M103 77Q112 83Q121 77" fill="none" stroke="#c07040" stroke-width="2" stroke-linecap="round"/>
-<path d="M88 56Q88 44Q112 42Q136 44Q136 56Q132 47Q112 45Q92 47Z" fill="#8B4513"/>
-<ellipse cx="112" cy="44" rx="13" ry="8" fill="#8B4513"/>
-<text x="228" y="56" text-anchor="middle" font-family="DM Sans" font-size="28" fill="rgba(196,98,45,0.8)">★</text>
-${svgFaixa(ini, srv)}</svg>`;
-}
-
-function renderPanfleto(d) {
-  const illustration = getSectorIllustration(d.servico + ' ' + d.desc, d.nome, d.servico);
-  const html = `
-    <div class="pan-art watermark-wrap">
-      ${illustration}
-      <div class="pan-body">
-        <div class="pan-desc">${d.desc}</div>
-        ${d.pontos.length ? `<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px">${d.pontos.map(p=>`<div style="display:flex;align-items:center;gap:7px;font-size:11px;color:#3d5247"><span style="width:5px;height:5px;background:#C4622D;border-radius:50%;flex-shrink:0;display:inline-block"></span>${p}</div>`).join('')}</div>` : ''}
-        <div class="pan-divider"></div>
-        <div class="pan-contact-title">Entre em contacto</div>
-        <div class="pan-contacts">
-          ${d.contato ? `<div class="pan-contact"><div class="pan-contact-icon">W</div>${d.contato}</div>` : ''}
-          ${d.cidade ? `<div class="pan-contact"><div class="pan-contact-icon" style="font-size:9px">📍</div>${d.cidade}</div>` : ''}
-          ${d.disponibilidade ? `<div class="pan-contact"><div class="pan-contact-icon" style="font-size:9px">✓</div>${d.disponibilidade}</div>` : ''}
-        </div>
+// ── FAQ ──
+const faqs = [
+  ["O panfleto é mesmo grátis?", "Sim! Podes gerar o panfleto gratuitamente. A versão gratuita inclui uma marca d'água. Para removê-la, paga apenas €1,90 por panfleto limpo."],
+  ["Em que idioma sai o panfleto?", "O panfleto é gerado no idioma do país selecionado — português para Portugal, inglês para UK/Irlanda, neerlandês para os Países Baixos, etc."],
+  ["Posso usar a foto do panfleto no WhatsApp?", "Sim! Usa o botão 'Partilhar no WhatsApp' para enviar o texto, ou faz screenshot da arte para enviar como imagem."],
+  ["Qual é a diferença entre 5-10% e 25-40% de conversão?", "Uma mensagem de texto simples no WhatsApp tem baixa taxa de resposta. Um panfleto profissional com design, foto e texto persuasivo gera muito mais confiança e respostas."],
+  ["Posso imprimir o panfleto?", "Sim. Recomendamos fazer screenshot ou usar o botão de imprimir do browser. A versão Premium (€7,90/mês) inclui download em alta qualidade."],
+  ["Quanto tempo demora a gerar?", "Entre 15 e 30 segundos. A IA escreve o texto persuasivo adaptado ao país e ao serviço."],
+  ["Posso criar panfletos para vários serviços?", "Sim! Podes gerar quantos panfletos quiseres — cada um com foto, cor e texto diferente conforme o serviço."],
+  ["A foto que aparece é minha?", "Não — é uma foto profissional do Unsplash que representa visualmente o teu setor. Para adicionar a tua foto pessoal, essa funcionalidade estará disponível em breve."],
+  ["O que significa 'remover marca d'água'?", "A versão gratuita tem 'CurrículoEU' impresso na arte. Ao pagar €1,90 recebes uma versão limpa sem qualquer marca."],
+  ["Posso usar o panfleto para qualquer país da Europa?", "Sim. Temos 12 países disponíveis e o texto é gerado no idioma local para soar natural aos clientes locais."],
+  ["O serviço funciona para autónomos e pequenas empresas?", "Perfeitamente. Foi criado a pensar em prestadores de serviços independentes que precisam de promover o seu trabalho de forma profissional e económica."],
+];
+const faqEl = document.getElementById('faqList');
+faqs.forEach(([q, a]) => {
+  faqEl.innerHTML += `
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>${q}</span><span class="icon">+</span>
       </div>
-      <div class="pan-footer">
-        <div class="pan-footer-text">Versão gratuita</div>
-        <div class="pan-footer-logo">CurrículoEU</div>
-      </div>
+      <div class="faq-a">${a}</div>
     </div>`;
-
-  document.getElementById('pan-content').innerHTML = html;
-  document.getElementById('upsell-card').style.display = 'block';
-  document.getElementById('share-card').style.display = 'block';
-}
-
-function partilharWA(){
-  const d = panData;
-  if(!d.nome) return;
-  const texto = encodeURIComponent(`*${d.nome} — ${d.servico}*\n\n${d.desc}\n\n📍 ${d.cidade}${d.contato ? '\n📱 ' + d.contato : ''}\n\n_Panfleto criado com CurrículoEU — curriculos-eu.vercel.app_`);
-  window.open('https://wa.me/?text=' + texto, '_blank');
-}
+});
 </script>
 </body>
 </html>
