@@ -456,6 +456,13 @@ footer {
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-overlay p { color: #fff; font-size: 1rem; opacity: 0.85; }
 
+.toggle-switch { position: relative; width: 42px; height: 22px; flex-shrink: 0; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; cursor: pointer; inset: 0; background: rgba(255,255,255,0.15); border-radius: 22px; transition: 0.2s; }
+.toggle-slider:before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.2s; }
+input:checked + .toggle-slider { background: var(--tc); }
+input:checked + .toggle-slider:before { transform: translateX(20px); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; }
@@ -639,6 +646,16 @@ footer {
       <div class="form-group full">
         <label>Idiomas</label>
         <input type="text" id="idiomas" placeholder="ex: Português nativo, Inglês B2, Espanhol básico">
+      </div>
+
+      <div class="form-group full" style="display:flex;align-items:center;gap:12px;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+          <div class="toggle-switch">
+            <input type="checkbox" id="toggleIngles">
+            <span class="toggle-slider"></span>
+          </div>
+          🇬🇧 Gerar sempre em inglês (mais universal)
+        </label>
       </div>
 
       <button class="btn-gerar" onclick="gerarCV()">✨ Gerar Currículo Grátis</button>
@@ -886,6 +903,8 @@ async function gerarCV() {
   }
 
   const paisInfo = PAIS_INFO[pais];
+  const usarIngles = document.getElementById('toggleIngles').checked;
+  const idioma = usarIngles ? 'Inglês' : paisInfo.idioma;
   const loading = document.getElementById('loading');
   loading.classList.add('show');
 
@@ -901,22 +920,16 @@ Dados:
 - Formação: ${formacao || 'sem informação adicional'}
 - Idiomas: ${idiomas || 'não fornecido'}
 
-Adapta o currículo às normas de ${paisInfo.nome}. 
-Responde APENAS com JSON no seguinte formato, sem markdown nem explicações:
+IMPORTANTE: Gera o currículo 100% em ${idioma}. Adapta às normas de ${paisInfo.nome}.
+Responde APENAS com JSON sem markdown:
 {
-  "cargo": "título do cargo/setor em ${paisInfo.idioma}",
-  "resumo": "2-3 frases de perfil profissional em ${paisInfo.idioma}",
-  "experiencia": [
-    {"titulo": "...", "empresa": "...", "periodo": "...", "descricao": "..."}
-  ],
-  "formacao": [
-    {"titulo": "...", "instituicao": "...", "ano": "..."}
-  ],
-  "competencias": ["competência 1", "competência 2", "competência 3", "competência 4", "competência 5"],
-  "idiomas": [
-    {"idioma": "...", "nivel": "..."}
-  ],
-  "dica_pais": "dica específica importante para trabalhar em ${paisInfo.nome} neste setor"
+  "cargo": "título em ${idioma}",
+  "resumo": "2-3 frases de perfil em ${idioma}",
+  "experiencia": [{"titulo": "...", "empresa": "...", "periodo": "...", "descricao": "..."}],
+  "formacao": [{"titulo": "...", "instituicao": "...", "ano": "..."}],
+  "competencias": ["comp 1", "comp 2", "comp 3", "comp 4", "comp 5"],
+  "idiomas": [{"idioma": "...", "nivel": "..."}],
+  "dica_pais": "dica importante em ${idioma} para trabalhar em ${paisInfo.nome} neste setor"
 }`;
 
   try {
