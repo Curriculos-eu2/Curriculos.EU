@@ -904,18 +904,18 @@ faqs.forEach(([q, a]) => {
 
 // ── PAÍSES ──
 const PAIS_INFO = {
-  pt: { nome: 'Portugal', idioma: 'Português', flag: '🇵🇹' },
+  pt: { nome: 'Portugal', idioma: 'Portugues', flag: '🇵🇹' },
   es: { nome: 'Espanha', idioma: 'Espanhol', flag: '🇪🇸' },
-  uk: { nome: 'Reino Unido', idioma: 'Inglês', flag: '🇬🇧' },
-  de: { nome: 'Alemanha', idioma: 'Alemão', flag: '🇩🇪' },
-  nl: { nome: 'Países Baixos', idioma: 'Neerlandês', flag: '🇳🇱' },
-  fr: { nome: 'França', idioma: 'Francês', flag: '🇫🇷' },
+  uk: { nome: 'Reino Unido', idioma: 'Ingles', flag: '🇬🇧' },
+  de: { nome: 'Alemanha', idioma: 'Alemao', flag: '🇩🇪' },
+  nl: { nome: 'Países Baixos', idioma: 'Neerlandes', flag: '🇳🇱' },
+  fr: { nome: 'França', idioma: 'Frances', flag: '🇫🇷' },
   it: { nome: 'Itália', idioma: 'Italiano', flag: '🇮🇹' },
-  ie: { nome: 'Irlanda', idioma: 'Inglês', flag: '🇮🇪' },
-  ch: { nome: 'Suíça', idioma: 'Alemão/Francês', flag: '🇨🇭' },
-  be: { nome: 'Bélgica', idioma: 'Francês/Neerlandês', flag: '🇧🇪' },
-  at: { nome: 'Áustria', idioma: 'Alemão', flag: '🇦🇹' },
-  se: { nome: 'Suécia', idioma: 'Sueco/Inglês', flag: '🇸🇪' },
+  ie: { nome: 'Irlanda', idioma: 'Ingles', flag: '🇮🇪' },
+  ch: { nome: 'Suíça', idioma: 'Alemao', flag: '🇨🇭' },
+  be: { nome: 'Bélgica', idioma: 'Frances', flag: '🇧🇪' },
+  at: { nome: 'Áustria', idioma: 'Alemao', flag: '🇦🇹' },
+  se: { nome: 'Suécia', idioma: 'Ingles', flag: '🇸🇪' },
 };
 
 const SETOR_NOMES = {
@@ -929,16 +929,13 @@ const SETOR_NOMES = {
 
 // Títulos por idioma
 const TITULOS = {
-  'Neerlandês': { perfil:'Professioneel Profiel', experiencia:'Werkervaring', formacao:'Opleiding', competencias:'Vaardigheden', idiomas:'Talen', mercado:'Markt' },
-  'Alemão': { perfil:'Berufsprofil', experiencia:'Berufserfahrung', formacao:'Ausbildung', competencias:'Kompetenzen', idiomas:'Sprachen', mercado:'Markt' },
-  'Francês': { perfil:'Profil Professionnel', experiencia:'Expérience Professionnelle', formacao:'Formation', competencias:'Compétences', idiomas:'Langues', mercado:'Marché' },
-  'Inglês': { perfil:'Professional Profile', experiencia:'Work Experience', formacao:'Education', competencias:'Skills', idiomas:'Languages', mercado:'Market' },
+  'Neerlandes': { perfil:'Professioneel Profiel', experiencia:'Werkervaring', formacao:'Opleiding', competencias:'Vaardigheden', idiomas:'Talen', mercado:'Markt' },
+  'Alemao': { perfil:'Berufsprofil', experiencia:'Berufserfahrung', formacao:'Ausbildung', competencias:'Kompetenzen', idiomas:'Sprachen', mercado:'Markt' },
+  'Frances': { perfil:'Profil Professionnel', experiencia:'Expérience Professionnelle', formacao:'Formation', competencias:'Compétences', idiomas:'Langues', mercado:'Marché' },
+  'Ingles': { perfil:'Professional Profile', experiencia:'Work Experience', formacao:'Education', competencias:'Skills', idiomas:'Languages', mercado:'Market' },
   'Espanhol': { perfil:'Perfil Profesional', experiencia:'Experiencia Profesional', formacao:'Formación', competencias:'Competencias', idiomas:'Idiomas', mercado:'Mercado' },
   'Italiano': { perfil:'Profilo Professionale', experiencia:'Esperienza Professionale', formacao:'Formazione', competencias:'Competenze', idiomas:'Lingue', mercado:'Mercato' },
-  'Sueco/Inglês': { perfil:'Professional Profile', experiencia:'Work Experience', formacao:'Education', competencias:'Skills', idiomas:'Languages', mercado:'Market' },
-  'Alemão/Francês': { perfil:'Berufsprofil', experiencia:'Berufserfahrung', formacao:'Ausbildung', competencias:'Kompetenzen', idiomas:'Sprachen', mercado:'Markt' },
-  'Francês/Neerlandês': { perfil:'Profil Professionnel', experiencia:'Expérience Professionnelle', formacao:'Formation', competencias:'Compétences', idiomas:'Langues', mercado:'Marché' },
-  'Português': { perfil:'Perfil Profissional', experiencia:'Experiência Profissional', formacao:'Formação', competencias:'Competências', idiomas:'Idiomas', mercado:'Mercado' },
+  'Portugues': { perfil:'Perfil Profissional', experiencia:'Experiência Profissional', formacao:'Formação', competencias:'Competências', idiomas:'Idiomas', mercado:'Mercado' },
 };
 
 // Mapeamento país → layout
@@ -1088,14 +1085,6 @@ function renderCV(cv, nome, pais, setor, telefone, email, paisInfo, idioma) {
   const msg = encodeURIComponent(`Olá! Gerei o meu currículo para ${paisInfo.nome} com o CurrículoEU 🎉\n👉 curriculos-eu.vercel.app`);
   document.getElementById('btnWA').href = `https://wa.me/?text=${msg}`;
 }
-  'Neerlandês': { perfil:'Professioneel Profiel', experiencia:'Werkervaring', formacao:'Opleiding', competencias:'Vaardigheden', idiomas:'Talen', mercado:'Markt' },
-  'Alemão': { perfil:'Berufsprofil', experiencia:'Berufserfahrung', formacao:'Ausbildung', competencias:'Kompetenzen', idiomas:'Sprachen', mercado:'Markt' },
-  'Francês': { perfil:'Profil Professionnel', experiencia:'Expérience Professionnelle', formacao:'Formation', competencias:'Compétences', idiomas:'Langues', mercado:'Marché' },
-  'Inglês': { perfil:'Professional Profile', experiencia:'Work Experience', formacao:'Education', competencias:'Skills', idiomas:'Languages', mercado:'Market' },
-  'Espanhol': { perfil:'Perfil Profesional', experiencia:'Experiencia Profesional', formacao:'Formación', competencias:'Competencias', idiomas:'Idiomas', mercado:'Mercado' },
-  'Italiano': { perfil:'Profilo Professionale', experiencia:'Esperienza Professionale', formacao:'Formazione', competencias:'Competenze', idiomas:'Lingue', mercado:'Mercato' },
-  'Português': { perfil:'Perfil Profissional', experiencia:'Experiência Profissional', formacao:'Formação', competencias:'Competências', idiomas:'Idiomas', mercado:'Mercado' },
-};
 async function gerarCV() {
   const nome = document.getElementById('nome').value.trim();
   const pais = document.getElementById('pais').value;
