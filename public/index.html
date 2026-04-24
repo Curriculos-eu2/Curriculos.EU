@@ -886,7 +886,16 @@ const SETOR_NOMES = {
   educacao_infantil: 'Educação Infantil', marketing: 'Marketing Digital', eletricista: 'Eletricista',
 };
 
-// ── GERAR CV ──
+// Títulos por idioma
+const TITULOS = {
+  'Neerlandês': { perfil:'Professioneel Profiel', experiencia:'Werkervaring', formacao:'Opleiding', competencias:'Vaardigheden', idiomas:'Talen', mercado:'Markt' },
+  'Alemão': { perfil:'Berufsprofil', experiencia:'Berufserfahrung', formacao:'Ausbildung', competencias:'Kompetenzen', idiomas:'Sprachen', mercado:'Markt' },
+  'Francês': { perfil:'Profil Professionnel', experiencia:'Expérience Professionnelle', formacao:'Formation', competencias:'Compétences', idiomas:'Langues', mercado:'Marché' },
+  'Inglês': { perfil:'Professional Profile', experiencia:'Work Experience', formacao:'Education', competencias:'Skills', idiomas:'Languages', mercado:'Market' },
+  'Espanhol': { perfil:'Perfil Profesional', experiencia:'Experiencia Profesional', formacao:'Formación', competencias:'Competencias', idiomas:'Idiomas', mercado:'Mercado' },
+  'Italiano': { perfil:'Profilo Professionale', experiencia:'Esperienza Professionale', formacao:'Formazione', competencias:'Competenze', idiomas:'Lingue', mercado:'Mercato' },
+  'Português': { perfil:'Perfil Profissional', experiencia:'Experiência Profissional', formacao:'Formação', competencias:'Competências', idiomas:'Idiomas', mercado:'Mercado' },
+};
 async function gerarCV() {
   const nome = document.getElementById('nome').value.trim();
   const pais = document.getElementById('pais').value;
@@ -942,10 +951,15 @@ Responde APENAS com JSON sem markdown:
         messages: [{ role: 'user', content: prompt }]
       })
     });
+    if (res.status === 429) {
+      loading.classList.remove('show');
+      alert('Atingiste o limite de 2 currículos gratuitos. Faz upgrade para Premium para gerações ilimitadas! 🚀');
+      return;
+    }
     const data = await res.json();
     const text = data.content[0].text.replace(/```json|```/g, '').trim();
     const cv = JSON.parse(text);
-    renderCV(cv, nome, pais, setor, telefone, email, paisInfo);
+    renderCV(cv, nome, pais, setor, telefone, email, paisInfo, idioma);
   } catch(e) {
     loading.classList.remove('show');
     // Fallback com dados de exemplo
@@ -961,24 +975,23 @@ Responde APENAS com JSON sem markdown:
   }
 }
 
-function renderCV(cv, nome, pais, setor, telefone, email, paisInfo) {
+function renderCV(cv, nome, pais, setor, telefone, email, paisInfo, idioma) {
   document.getElementById('loading').classList.remove('show');
+  const t = TITULOS[idioma] || TITULOS['Português'];
 
   document.getElementById('cv-nome').textContent = nome;
   document.getElementById('cv-cargo').textContent = cv.cargo;
 
-  // Contactos no header
   const contacts = document.getElementById('cv-contacts');
   contacts.innerHTML = '';
   if (email) contacts.innerHTML += `<span class="cv-tag">✉ ${email}</span>`;
   if (telefone) contacts.innerHTML += `<span class="cv-tag">☎ ${telefone}</span>`;
   contacts.innerHTML += `<span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span>`;
 
-  // SIDEBAR — competências + idiomas + info
   const sidebar = document.getElementById('cv-sidebar');
   sidebar.innerHTML = `
     <div class="cv-section">
-      <div class="cv-section-title">Competências</div>
+      <div class="cv-section-title">${t.competencias}</div>
       ${cv.competencias.map((c, i) => `
         <div class="cv-skill-bar">
           <div class="cv-skill-name">${c}</div>
@@ -986,27 +999,25 @@ function renderCV(cv, nome, pais, setor, telefone, email, paisInfo) {
         </div>`).join('')}
     </div>
     <div class="cv-section">
-      <div class="cv-section-title">Idiomas</div>
+      <div class="cv-section-title">${t.idiomas}</div>
       <div>${cv.idiomas.map(l => `<span class="cv-lang-tag">${l.idioma} · ${l.nivel}</span>`).join('')}</div>
     </div>
     <div class="cv-section">
-      <div class="cv-section-title">Mercado</div>
+      <div class="cv-section-title">${t.mercado}</div>
       <div style="font-size:0.75rem;color:var(--muted);line-height:1.6;">
-        Currículo adaptado para <strong>${paisInfo.nome}</strong><br>
-        Setor: <strong>${SETOR_NOMES[setor]}</strong>
+        ${paisInfo.nome} · ${SETOR_NOMES[setor]}
       </div>
     </div>
   `;
 
-  // MAIN — perfil + experiência + formação + dica
   const main = document.getElementById('cv-main');
   main.innerHTML = `
     <div class="cv-section">
-      <div class="cv-section-title">Perfil Profissional</div>
+      <div class="cv-section-title">${t.perfil}</div>
       <p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p>
     </div>
     <div class="cv-section">
-      <div class="cv-section-title">Experiência Profissional</div>
+      <div class="cv-section-title">${t.experiencia}</div>
       ${cv.experiencia.map(e => `
         <div class="cv-item">
           <div class="cv-item-title">${e.titulo}</div>
@@ -1015,7 +1026,7 @@ function renderCV(cv, nome, pais, setor, telefone, email, paisInfo) {
         </div>`).join('')}
     </div>
     <div class="cv-section">
-      <div class="cv-section-title">Formação</div>
+      <div class="cv-section-title">${t.formacao}</div>
       ${cv.formacao.map(f => `
         <div class="cv-item">
           <div class="cv-item-title">${f.titulo}</div>
@@ -1024,14 +1035,12 @@ function renderCV(cv, nome, pais, setor, telefone, email, paisInfo) {
     </div>
     ${cv.dica_pais ? `
     <div style="background:#fff8f5;border-left:3px solid var(--tc);padding:11px 14px;font-size:0.8rem;color:var(--tcd);line-height:1.6;">
-      <strong>💡 Dica para ${paisInfo.nome}:</strong> ${cv.dica_pais}
+      <strong>💡</strong> ${cv.dica_pais}
     </div>` : ''}
   `;
 
-  const resultado = document.getElementById('resultado');
-  resultado.style.display = 'block';
-  resultado.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
+  document.getElementById('resultado').style.display = 'block';
+  document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
   const msg = encodeURIComponent(`Olá! Gerei o meu currículo para ${paisInfo.nome} com o CurrículoEU 🎉\n👉 curriculos-eu.vercel.app`);
   document.getElementById('btnWA').href = `https://wa.me/?text=${msg}`;
 }
