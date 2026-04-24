@@ -236,65 +236,106 @@ textarea { resize: vertical; min-height: 100px; }
 }
 .btn-gerar:hover { background: #b3561f; transform: translateY(-1px); }
 
-/* ── RESULTADO CV — LAYOUT 1 CLÁSSICO EUROPEU ── */
+/* ── RESULTADO CV — 5 LAYOUTS POR PAÍS ── */
 #resultado { display: none; }
-.cv-wrap {
-  max-width: 860px; margin: 60px auto; background: #fff;
-  border-radius: var(--radius); box-shadow: var(--shadow);
-  overflow: hidden;
-}
-/* HEADER escuro */
-.cv-header {
-  background: var(--tcd); color: #fff;
-  padding: 32px 36px;
-}
-.cv-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.9rem; font-weight: 900; letter-spacing: -0.5px;
-}
-.cv-role {
-  font-size: 0.78rem; text-transform: uppercase;
-  letter-spacing: 0.12em; opacity: 0.6; margin-top: 4px;
-}
-.cv-contact-tags { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; }
-.cv-tag { font-size: 0.78rem; opacity: 0.65; }
-/* BODY: sidebar esquerda + main direita */
-.cv-body { display: grid; grid-template-columns: 220px 1fr; min-height: 400px; }
-.cv-sidebar {
-  background: #f5f3ee; padding: 28px 22px;
-  border-right: 1px solid #e5e0d8;
-}
-.cv-main { padding: 28px 32px; }
-.cv-section { margin-bottom: 24px; }
-.cv-section-title {
-  font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.12em; color: var(--tcd);
-  border-bottom: 1.5px solid var(--tcd);
-  padding-bottom: 4px; margin-bottom: 12px;
-}
-.cv-item { margin-bottom: 14px; }
-.cv-item-title { font-weight: 600; font-size: 0.88rem; color: var(--tcd); }
-.cv-item-sub { font-size: 0.76rem; color: var(--muted); margin-bottom: 3px; }
-.cv-item-desc { font-size: 0.82rem; line-height: 1.6; color: #444; }
-/* Barras de competência */
-.cv-skill-bar { margin-bottom: 9px; }
-.cv-skill-name { font-size: 0.78rem; font-weight: 500; margin-bottom: 4px; color: var(--tcd); }
-.cv-skill-track { height: 4px; background: #ddd9d0; border-radius: 2px; overflow: hidden; }
-.cv-skill-fill { height: 100%; background: var(--tc); border-radius: 2px; }
-/* Idiomas como tags */
-.cv-lang-tag {
-  display: inline-block; font-size: 0.72rem;
-  background: #fff; border: 1px solid #ddd9d0;
-  border-radius: 4px; padding: 3px 9px; margin: 2px 3px 2px 0;
-  color: var(--tcd);
-}
-/* Watermark */
-.cv-watermark {
-  text-align: center; padding: 12px;
-  background: #fff8f5; border-top: 1.5px solid #fde8da;
-  font-size: 0.78rem; color: var(--tc); font-weight: 600;
-}
+.cv-wrap { max-width: 860px; margin: 60px auto; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.cv-section { margin-bottom: 20px; }
+.cv-item { margin-bottom: 12px; }
+.cv-watermark { text-align: center; padding: 12px; background: #fff8f5; border-top: 1.5px solid #fde8da; font-size: 0.78rem; color: var(--tc); font-weight: 600; }
 .cv-watermark a { color: var(--tc); }
+
+/* ── LAYOUT A: NL/DE/AT/CH — Minimalista Clean ── */
+.cv-nl .cv-header { padding: 26px 36px 18px; border-bottom: 2px solid var(--tcd); }
+.cv-nl .cv-name { font-size: 1.8rem; font-weight: 500; color: var(--tcd); letter-spacing: -0.5px; }
+.cv-nl .cv-role { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+.cv-nl .cv-contacts { display: flex; gap: 20px; margin-top: 10px; }
+.cv-nl .cv-tag { font-size: 0.75rem; color: var(--muted); }
+.cv-nl .cv-body { display: grid; grid-template-columns: 1fr 1fr; padding: 28px 36px; gap: 36px; }
+.cv-nl .cv-section-title { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
+.cv-nl .cv-item-title { font-size: 0.88rem; font-weight: 500; color: var(--tcd); }
+.cv-nl .cv-item-sub { font-size: 0.75rem; color: var(--muted); }
+.cv-nl .cv-item-desc { font-size: 0.82rem; color: #555; margin-top: 3px; line-height: 1.6; }
+.cv-nl .cv-skill-bar { margin-bottom: 8px; }
+.cv-nl .cv-skill-name { font-size: 0.78rem; color: var(--tcd); margin-bottom: 3px; }
+.cv-nl .cv-skill-track { height: 2px; background: #e5e0d8; border-radius: 1px; overflow: hidden; }
+.cv-nl .cv-skill-fill { height: 100%; background: var(--tcd); }
+.cv-nl .cv-lang-tag { font-size: 0.75rem; color: var(--muted); display: block; margin-bottom: 4px; }
+.cv-nl .cv-dica { background: #f5f5f5; border-left: 3px solid var(--tcd); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
+
+/* ── LAYOUT B: UK/IE — Serif Elegante ── */
+.cv-uk .cv-header { padding: 28px 36px 18px; }
+.cv-uk .cv-name { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--tcd); }
+.cv-uk .cv-role { font-size: 0.72rem; color: var(--tc); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 3px; }
+.cv-uk .cv-contacts { display: flex; gap: 18px; margin-top: 12px; padding-top: 12px; border-top: 0.5px solid #e5e0d8; }
+.cv-uk .cv-tag { font-size: 0.75rem; color: var(--muted); }
+.cv-uk .cv-body { padding: 20px 36px 28px; }
+.cv-uk .cv-section-title { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; padding-bottom: 5px; border-bottom: 0.5px solid #e5e0d8; }
+.cv-uk .cv-item-title { font-size: 0.9rem; font-weight: 600; color: var(--tcd); }
+.cv-uk .cv-item-sub { font-size: 0.76rem; color: var(--muted); }
+.cv-uk .cv-item-desc { font-size: 0.83rem; color: #444; margin-top: 3px; line-height: 1.6; }
+.cv-uk .cv-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.cv-uk .cv-tag-pill { font-size: 0.72rem; padding: 3px 10px; border: 0.5px solid #e5e0d8; border-radius: 2px; color: var(--muted); }
+.cv-uk .cv-lang-tag { font-size: 0.75rem; color: var(--tcd); margin-right: 14px; display: inline-block; }
+.cv-uk .cv-dica { background: #fff8f5; border-left: 3px solid var(--tc); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
+
+/* ── LAYOUT C: FR/BE — Editorial ── */
+.cv-fr .cv-stripe { height: 4px; background: linear-gradient(90deg, var(--tc) 0%, var(--tcd) 100%); }
+.cv-fr .cv-header { padding: 18px 28px 14px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; }
+.cv-fr .cv-name { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; color: var(--tcd); }
+.cv-fr .cv-role { font-size: 0.72rem; color: var(--tc); margin-top: 2px; }
+.cv-fr .cv-contacts { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.cv-fr .cv-tag { font-size: 0.72rem; color: var(--muted); }
+.cv-fr .cv-body { display: grid; grid-template-columns: 190px 1fr; min-height: 380px; }
+.cv-fr .cv-sidebar { background: var(--light); padding: 22px 16px; border-right: 0.5px solid #e5e0d8; }
+.cv-fr .cv-main { padding: 22px 26px; }
+.cv-fr .cv-section-title { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--tc); margin-bottom: 8px; }
+.cv-fr .cv-item-title { font-size: 0.88rem; font-weight: 600; color: var(--tcd); }
+.cv-fr .cv-item-sub { font-size: 0.74rem; color: var(--muted); }
+.cv-fr .cv-item-desc { font-size: 0.82rem; color: #444; margin-top: 3px; line-height: 1.6; }
+.cv-fr .cv-skill-bar { margin-bottom: 8px; }
+.cv-fr .cv-skill-name { font-size: 0.76rem; color: var(--tcd); margin-bottom: 3px; }
+.cv-fr .cv-skill-track { height: 3px; background: #e5e0d8; border-radius: 2px; overflow: hidden; }
+.cv-fr .cv-skill-fill { height: 100%; background: var(--tc); }
+.cv-fr .cv-lang-tag { font-size: 0.72rem; display: block; color: var(--tcd); margin-bottom: 4px; }
+.cv-fr .cv-dica { background: #fff8f5; border-left: 3px solid var(--tc); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
+
+/* ── LAYOUT D: PT/ES — Clássico ── */
+.cv-pt .cv-header { background: var(--tcd); color: #fff; padding: 28px 36px; }
+.cv-pt .cv-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; letter-spacing: -0.5px; }
+.cv-pt .cv-role { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-top: 3px; }
+.cv-pt .cv-contacts { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; }
+.cv-pt .cv-tag { font-size: 0.74rem; opacity: 0.6; }
+.cv-pt .cv-body { display: grid; grid-template-columns: 210px 1fr; min-height: 380px; }
+.cv-pt .cv-sidebar { background: #f5f3ee; padding: 26px 20px; border-right: 1px solid #e5e0d8; }
+.cv-pt .cv-main { padding: 26px 30px; }
+.cv-pt .cv-section-title { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--tcd); border-bottom: 1.5px solid var(--tcd); padding-bottom: 3px; margin-bottom: 10px; }
+.cv-pt .cv-item-title { font-size: 0.88rem; font-weight: 600; color: var(--tcd); }
+.cv-pt .cv-item-sub { font-size: 0.74rem; color: var(--muted); }
+.cv-pt .cv-item-desc { font-size: 0.82rem; color: #444; margin-top: 3px; line-height: 1.6; }
+.cv-pt .cv-skill-bar { margin-bottom: 9px; }
+.cv-pt .cv-skill-name { font-size: 0.76rem; color: var(--tcd); margin-bottom: 3px; }
+.cv-pt .cv-skill-track { height: 4px; background: #ddd9d0; border-radius: 2px; overflow: hidden; }
+.cv-pt .cv-skill-fill { height: 100%; background: var(--tc); }
+.cv-pt .cv-lang-tag { display: inline-block; font-size: 0.7rem; background: #fff; border: 1px solid #ddd9d0; border-radius: 3px; padding: 2px 8px; margin: 2px 3px 2px 0; color: var(--tcd); }
+.cv-pt .cv-dica { background: #fff8f5; border-left: 3px solid var(--tc); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
+
+/* ── LAYOUT E: IT/SE — Moderno com Avatar ── */
+.cv-it .cv-header { padding: 22px 30px; display: flex; align-items: center; gap: 18px; border-bottom: 0.5px solid #e5e0d8; }
+.cv-it .cv-avatar { width: 54px; height: 54px; border-radius: 50%; background: var(--tc); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; font-weight: 600; flex-shrink: 0; }
+.cv-it .cv-name { font-size: 1.6rem; font-weight: 500; color: var(--tcd); }
+.cv-it .cv-role { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+.cv-it .cv-contacts { display: flex; gap: 14px; margin-top: 6px; }
+.cv-it .cv-tag { font-size: 0.72rem; color: var(--muted); }
+.cv-it .cv-body { padding: 22px 30px; }
+.cv-it .cv-section-title { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--tc); display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.cv-it .cv-section-title::after { content: ''; flex: 1; height: 0.5px; background: #e5e0d8; }
+.cv-it .cv-item-title { font-size: 0.9rem; font-weight: 600; color: var(--tcd); }
+.cv-it .cv-item-sub { font-size: 0.76rem; color: var(--muted); }
+.cv-it .cv-item-desc { font-size: 0.83rem; color: #444; margin-top: 3px; line-height: 1.6; }
+.cv-it .cv-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.cv-it .cv-tag-pill { font-size: 0.72rem; padding: 3px 10px; border-radius: 12px; background: var(--light); border: 0.5px solid #e5e0d8; color: var(--muted); }
+.cv-it .cv-lang-tag { font-size: 0.75rem; color: var(--tcd); margin-right: 14px; display: inline-block; }
+.cv-it .cv-dica { background: #fff8f5; border-left: 3px solid var(--tc); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
 
 /* BOTÕES PÓS-CV */
 .cv-actions {
@@ -886,8 +927,153 @@ const SETOR_NOMES = {
   educacao_infantil: 'Educação Infantil', marketing: 'Marketing Digital', eletricista: 'Eletricista',
 };
 
-// Títulos por idioma
-const TITULOS = {
+// Mapeamento país → layout
+const LAYOUT_PAIS = {
+  nl:'nl', de:'nl', at:'nl', ch:'nl',
+  uk:'uk', ie:'uk',
+  fr:'fr', be:'fr',
+  pt:'pt', es:'pt',
+  it:'it', se:'it'
+};
+
+function renderCV(cv, nome, pais, setor, telefone, email, paisInfo, idioma) {
+  document.getElementById('loading').classList.remove('show');
+  const t = TITULOS[idioma] || TITULOS['Português'];
+  const layout = LAYOUT_PAIS[pais] || 'pt';
+  const wrap = document.getElementById('cvWrap');
+  wrap.className = `cv-wrap cv-${layout}`;
+
+  const iniciais = nome.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
+
+  // Header
+  let headerHTML = '';
+  if (layout === 'fr') {
+    headerHTML = `
+      <div class="cv-stripe"></div>
+      <div class="cv-header">
+        <div>
+          <div class="cv-name">${nome}</div>
+          <div class="cv-role">${cv.cargo}</div>
+        </div>
+        <div class="cv-contacts">
+          ${email ? `<span class="cv-tag">✉ ${email}</span>` : ''}
+          ${telefone ? `<span class="cv-tag">☎ ${telefone}</span>` : ''}
+          <span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span>
+        </div>
+      </div>`;
+  } else if (layout === 'it') {
+    headerHTML = `
+      <div class="cv-header">
+        <div class="cv-avatar">${iniciais}</div>
+        <div>
+          <div class="cv-name">${nome}</div>
+          <div class="cv-role">${cv.cargo}</div>
+          <div class="cv-contacts">
+            ${email ? `<span class="cv-tag">✉ ${email}</span>` : ''}
+            ${telefone ? `<span class="cv-tag">☎ ${telefone}</span>` : ''}
+            <span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span>
+          </div>
+        </div>
+      </div>`;
+  } else {
+    headerHTML = `
+      <div class="cv-header">
+        <div class="cv-name">${nome}</div>
+        <div class="cv-role">${cv.cargo}</div>
+        <div class="cv-contacts">
+          ${email ? `<span class="cv-tag">✉ ${email}</span>` : ''}
+          ${telefone ? `<span class="cv-tag">☎ ${telefone}</span>` : ''}
+          <span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span>
+        </div>
+      </div>`;
+  }
+
+  const dicaHTML = cv.dica_pais ? `<div class="cv-dica"><strong>💡</strong> ${cv.dica_pais}</div>` : '';
+  const skillsHTML = cv.competencias.map((c,i) => `
+    <div class="cv-skill-bar">
+      <div class="cv-skill-name">${c}</div>
+      <div class="cv-skill-track"><div class="cv-skill-fill" style="width:${95-i*8}%"></div></div>
+    </div>`).join('');
+  const langHTML = cv.idiomas.map(l => `<span class="cv-lang-tag">${l.idioma} · ${l.nivel}</span>`).join('');
+  const expHTML = cv.experiencia.map(e => `
+    <div class="cv-item">
+      <div class="cv-item-title">${e.titulo}</div>
+      <div class="cv-item-sub">${e.empresa} · ${e.periodo}</div>
+      <div class="cv-item-desc">${e.descricao}</div>
+    </div>`).join('');
+  const formHTML = cv.formacao.map(f => `
+    <div class="cv-item">
+      <div class="cv-item-title">${f.titulo}</div>
+      <div class="cv-item-sub">${f.instituicao} · ${f.ano}</div>
+    </div>`).join('');
+  const tagPillsHTML = cv.competencias.map(c => `<span class="cv-tag-pill">${c}</span>`).join('');
+
+  let bodyHTML = '';
+  if (layout === 'nl') {
+    bodyHTML = `<div class="cv-body">
+      <div>
+        <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
+        <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
+        ${dicaHTML}
+      </div>
+      <div>
+        <div class="cv-section"><div class="cv-section-title">${t.competencias}</div>${skillsHTML}</div>
+        <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
+      </div>
+    </div>`;
+  } else if (layout === 'uk') {
+    bodyHTML = `<div class="cv-body">
+      <div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p></div>
+      <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
+      <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
+      <div class="cv-section"><div class="cv-section-title">${t.competencias}</div><div class="cv-tags">${tagPillsHTML}</div></div>
+      <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
+      ${dicaHTML}
+    </div>`;
+  } else if (layout === 'fr') {
+    bodyHTML = `<div class="cv-body">
+      <div class="cv-sidebar">
+        <div class="cv-section"><div class="cv-section-title">${t.competencias}</div>${skillsHTML}</div>
+        <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
+      </div>
+      <div class="cv-main">
+        <div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.82rem;line-height:1.65;color:#444;">${cv.resumo}</p></div>
+        <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
+        <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
+        ${dicaHTML}
+      </div>
+    </div>`;
+  } else if (layout === 'pt') {
+    bodyHTML = `<div class="cv-body">
+      <div class="cv-sidebar">
+        <div class="cv-section"><div class="cv-section-title">${t.competencias}</div>${skillsHTML}</div>
+        <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
+      </div>
+      <div class="cv-main">
+        <div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p></div>
+        <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
+        <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
+        ${dicaHTML}
+      </div>
+    </div>`;
+  } else if (layout === 'it') {
+    bodyHTML = `<div class="cv-body">
+      <div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p></div>
+      <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
+      <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
+      <div class="cv-section"><div class="cv-section-title">${t.competencias}</div><div class="cv-tags">${tagPillsHTML}</div></div>
+      <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
+      ${dicaHTML}
+    </div>`;
+  }
+
+  wrap.innerHTML = headerHTML + bodyHTML + `<div class="cv-watermark">🔒 Versão gratuita — <a href="https://pay.hotmart.com/Y105390443O" target="_blank">Remover marca d'água por €7,90/mês</a></div>`;
+
+  document.getElementById('resultado').style.display = 'block';
+  document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const msg = encodeURIComponent(`Olá! Gerei o meu currículo para ${paisInfo.nome} com o CurrículoEU 🎉\n👉 curriculos-eu.vercel.app`);
+  document.getElementById('btnWA').href = `https://wa.me/?text=${msg}`;
+}
   'Neerlandês': { perfil:'Professioneel Profiel', experiencia:'Werkervaring', formacao:'Opleiding', competencias:'Vaardigheden', idiomas:'Talen', mercado:'Markt' },
   'Alemão': { perfil:'Berufsprofil', experiencia:'Berufserfahrung', formacao:'Ausbildung', competencias:'Kompetenzen', idiomas:'Sprachen', mercado:'Markt' },
   'Francês': { perfil:'Profil Professionnel', experiencia:'Expérience Professionnelle', formacao:'Formation', competencias:'Compétences', idiomas:'Langues', mercado:'Marché' },
@@ -975,75 +1161,8 @@ Responde APENAS com JSON sem markdown:
   }
 }
 
-function renderCV(cv, nome, pais, setor, telefone, email, paisInfo, idioma) {
-  document.getElementById('loading').classList.remove('show');
-  const t = TITULOS[idioma] || TITULOS['Português'];
 
-  document.getElementById('cv-nome').textContent = nome;
-  document.getElementById('cv-cargo').textContent = cv.cargo;
-
-  const contacts = document.getElementById('cv-contacts');
-  contacts.innerHTML = '';
-  if (email) contacts.innerHTML += `<span class="cv-tag">✉ ${email}</span>`;
-  if (telefone) contacts.innerHTML += `<span class="cv-tag">☎ ${telefone}</span>`;
-  contacts.innerHTML += `<span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span>`;
-
-  const sidebar = document.getElementById('cv-sidebar');
-  sidebar.innerHTML = `
-    <div class="cv-section">
-      <div class="cv-section-title">${t.competencias}</div>
-      ${cv.competencias.map((c, i) => `
-        <div class="cv-skill-bar">
-          <div class="cv-skill-name">${c}</div>
-          <div class="cv-skill-track"><div class="cv-skill-fill" style="width:${95 - i * 8}%"></div></div>
-        </div>`).join('')}
-    </div>
-    <div class="cv-section">
-      <div class="cv-section-title">${t.idiomas}</div>
-      <div>${cv.idiomas.map(l => `<span class="cv-lang-tag">${l.idioma} · ${l.nivel}</span>`).join('')}</div>
-    </div>
-    <div class="cv-section">
-      <div class="cv-section-title">${t.mercado}</div>
-      <div style="font-size:0.75rem;color:var(--muted);line-height:1.6;">
-        ${paisInfo.nome} · ${SETOR_NOMES[setor]}
-      </div>
-    </div>
-  `;
-
-  const main = document.getElementById('cv-main');
-  main.innerHTML = `
-    <div class="cv-section">
-      <div class="cv-section-title">${t.perfil}</div>
-      <p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p>
-    </div>
-    <div class="cv-section">
-      <div class="cv-section-title">${t.experiencia}</div>
-      ${cv.experiencia.map(e => `
-        <div class="cv-item">
-          <div class="cv-item-title">${e.titulo}</div>
-          <div class="cv-item-sub">${e.empresa} · ${e.periodo}</div>
-          <div class="cv-item-desc">${e.descricao}</div>
-        </div>`).join('')}
-    </div>
-    <div class="cv-section">
-      <div class="cv-section-title">${t.formacao}</div>
-      ${cv.formacao.map(f => `
-        <div class="cv-item">
-          <div class="cv-item-title">${f.titulo}</div>
-          <div class="cv-item-sub">${f.instituicao} · ${f.ano}</div>
-        </div>`).join('')}
-    </div>
-    ${cv.dica_pais ? `
-    <div style="background:#fff8f5;border-left:3px solid var(--tc);padding:11px 14px;font-size:0.8rem;color:var(--tcd);line-height:1.6;">
-      <strong>💡</strong> ${cv.dica_pais}
-    </div>` : ''}
-  `;
-
-  document.getElementById('resultado').style.display = 'block';
-  document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  const msg = encodeURIComponent(`Olá! Gerei o meu currículo para ${paisInfo.nome} com o CurrículoEU 🎉\n👉 curriculos-eu.vercel.app`);
-  document.getElementById('btnWA').href = `https://wa.me/?text=${msg}`;
-}
 </script>
 </body>
 </html>
+
