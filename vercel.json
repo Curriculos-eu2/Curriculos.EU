@@ -56,6 +56,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/generate-panfleto",
+      "destination": "/api/generate-panfleto.js"
+    },
+    {
       "source": "/api/generate",
       "destination": "/api/generate.js"
     }
