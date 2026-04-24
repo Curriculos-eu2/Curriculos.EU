@@ -1,22 +1,39 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" },
-    { "src": "public/**", "use": "@vercel/static" }
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
   ],
   "routes": [
     {
       "src": "/api/generate",
       "dest": "/api/generate.js",
-      "methods": ["POST", "OPTIONS"]
+      "methods": [
+        "POST",
+        "OPTIONS"
+      ]
     },
     {
       "src": "/api/webhook-hotmart",
       "dest": "/api/webhook-hotmart.js",
-      "methods": ["POST"]
+      "methods": [
+        "POST"
+      ]
     },
-    { "src": "/panfleto", "dest": "/public/panfleto.html" },
-{ "src": "/verificador", "dest": "/public/verificador.html" },
+    {
+      "src": "/panfleto",
+      "dest": "/public/panfleto.html"
+    },
+    {
+      "src": "/verificador",
+      "dest": "/public/verificador.html"
+    },
     {
       "src": "/(.*)",
       "dest": "/public/$1"
@@ -26,9 +43,21 @@
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/generate",
+      "destination": "/api/generate.js"
     }
   ]
 }
