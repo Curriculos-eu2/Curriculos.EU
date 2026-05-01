@@ -651,6 +651,12 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   font-family: 'DM Sans', sans-serif;
 }
 
+/* ── BEFORE/AFTER GRID ── */
+.before-after-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 32px; align-items: start;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; }
@@ -664,6 +670,12 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   .chips-grid { grid-column: 1; }
   .how-steps { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
+  .before-after-grid { grid-template-columns: 1fr; }
+  .nav-links a { font-size: 0.8rem; padding: 6px 8px; }
+  .nav-cta { padding: 6px 12px !important; font-size: 0.8rem !important; }
+  .cv-watermark-banner { flex-direction: column; align-items: flex-start; }
+  .cv-watermark-banner-btns { width: 100%; flex-direction: column; }
+  .btn-avulso, .btn-assinar { width: 100%; text-align: center; }
 }
 </style>
 </head>
@@ -771,7 +783,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     <h2 class="section-title">O currículo certo faz toda a diferença</h2>
     <p class="section-sub">Veja como um cozinheiro brasileiro candidatando-se em Portugal apresenta o mesmo perfil de formas completamente diferentes — e qual deles chama atenção do recrutador.</p>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;">
+    <div class="before-after-grid">
 
       <!-- ANTES: Brasil -->
       <div>
