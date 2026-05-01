@@ -177,6 +177,10 @@ footer a:hover { color: var(--tc); }
   .form-group.full, .idioma-toggle, .layout-picker-wrap, .foto-picker-wrap, .btn-gerar { grid-column: 1; }
   .foto-galeria { grid-template-columns: repeat(3, 1fr); }
   .layout-galeria { grid-template-columns: repeat(3, 1fr); }
+  .nav-links a { font-size: 0.8rem; padding: 6px 8px; }
+  .nav-cta { padding: 6px 10px !important; font-size: 0.78rem !important; }
+  .watermark-banner { flex-direction: column; }
+  .watermark-banner a { width: 100%; text-align: center; }
 }
 </style>
 </head>
@@ -492,7 +496,7 @@ async function gerarPanfleto(){
   const pais=document.getElementById('pais').value;
   const ingles=document.getElementById('toggleIngles').checked;
   if(!nome||!servico||!cidade||!pais){alert('Por favor preencha o nome, serviço, cidade e país.');return;}
-  try{const r=await fetch('/api/generate-panfleto',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(r.status===429){alert('Você atingiu o limite de 1 panfleto gratuito por dia.\n\nRemova a marca d\'água por apenas €1,90 ou faça upgrade para Premium! 🚀');window.open('https://curriculoeu.lemonsqueezy.com/checkout/buy/a454ba08-9507-4a92-af38-ad31aa7cb114','_blank');return;}}catch(e){}
+  try{const r=await fetch('/api/generate-panfleto',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(r.status===429){alert('Você atingiu o limite de 2 panfletos gratuitos.\n\nRemova a marca d\'água por apenas €1,90 ou faça upgrade para Premium! 🚀');window.open('https://curriculoeu.lemonsqueezy.com/checkout/buy/a454ba08-9507-4a92-af38-ad31aa7cb114','_blank');return;}}catch(e){}
   document.getElementById('loading').classList.add('show');
   setTimeout(()=>{
     const pi=PAISES[pais];
