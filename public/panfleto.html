@@ -319,7 +319,7 @@ footer a:hover { color: var(--tc); }
         <p>🔒 Versão gratuita com marca d'água</p>
         <span>Remova por apenas €1,90 — pagamento único</span>
       </div>
-      <a href="https://pay.hotmart.com/Y105390443O" target="_blank">Remover marca d'água →</a>
+      <a href="https://curriculoeu.lemonsqueezy.com/checkout/buy/a454ba08-9507-4a92-af38-ad31aa7cb114" target="_blank">Remover marca d'água →</a>
     </div>
     <div class="result-actions">
       <a id="btnWA" href="#" class="btn-wa" target="_blank">
@@ -393,7 +393,7 @@ footer a:hover { color: var(--tc); }
     <h3>Plano Gratuito</h3>
     <p>A versão gratuita inclui marca d'água. Para remover, é cobrado €1,90 por panfleto ou €7,90/mês no plano Premium com gerações ilimitadas.</p>
     <h3>Cancelamento</h3>
-    <p>A subscrição Premium pode ser cancelada a qualquer momento pelo Hotmart, sem custo adicional. O cancelamento tem efeito no final do período já pago.</p>
+    <p>A subscrição Premium pode ser cancelada a qualquer momento pelo Lemon Squeezy, sem custo adicional. O cancelamento tem efeito no final do período já pago.</p>
     <h3>Contacto</h3>
     <p>Dúvidas sobre os termos: <strong>suporte@curriculos.eu</strong></p>
     <button class="modal-close" onclick="fecharModal('modalTermos')">Fechar</button>
@@ -491,7 +491,7 @@ async function gerarPanfleto(){
   const pais=document.getElementById('pais').value;
   const ingles=document.getElementById('toggleIngles').checked;
   if(!nome||!servico||!cidade||!pais){alert('Por favor preencha o nome, serviço, cidade e país.');return;}
-  try{const r=await fetch('/api/generate-panfleto',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(r.status===429){alert('Você atingiu o limite de 1 panfleto gratuito por dia.\n\nRemova a marca d\'água por apenas €1,90 ou faça upgrade para Premium! 🚀');window.open('https://pay.hotmart.com/Y105390443O','_blank');return;}}catch(e){}
+  try{const r=await fetch('/api/generate-panfleto',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(r.status===429){alert('Você atingiu o limite de 1 panfleto gratuito por dia.\n\nRemova a marca d\'água por apenas €1,90 ou faça upgrade para Premium! 🚀');window.open('https://curriculoeu.lemonsqueezy.com/checkout/buy/a454ba08-9507-4a92-af38-ad31aa7cb114','_blank');return;}}catch(e){}
   document.getElementById('loading').classList.add('show');
   setTimeout(()=>{
     const pi=PAISES[pais];
