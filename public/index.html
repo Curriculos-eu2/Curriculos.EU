@@ -382,6 +382,40 @@ textarea { resize: vertical; min-height: 100px; }
 .cv-it .cv-lang-tag { font-size: 0.75rem; color: var(--tcd); margin-right: 14px; display: inline-block; }
 .cv-it .cv-dica { background: #fff8f5; border-left: 3px solid var(--tc); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
 
+/* ── WATERMARK BANNER ── */
+.cv-watermark-banner {
+  max-width: 860px; margin: 0 auto;
+  background: linear-gradient(135deg, #fff8f5 0%, #fff3ee 100%);
+  border: 2px solid #fde8da;
+  border-top: none;
+  padding: 20px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+  box-shadow: 0 8px 24px rgba(196,98,45,0.10);
+}
+.cv-watermark-banner-text p { font-size: 0.95rem; color: var(--tcd); font-weight: 700; margin-bottom: 3px; }
+.cv-watermark-banner-text span { font-size: 0.78rem; color: var(--muted); }
+.cv-watermark-banner-btns { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn-avulso {
+  background: #fff; color: var(--tc);
+  border: 2px solid var(--tc);
+  padding: 10px 20px; border-radius: 8px;
+  font-weight: 700; font-size: 0.88rem;
+  text-decoration: none; white-space: nowrap;
+  transition: all 0.18s; display: inline-block;
+}
+.btn-avulso:hover { background: var(--tc); color: #fff; }
+.btn-assinar {
+  background: var(--g); color: #fff;
+  border: 2px solid var(--g);
+  padding: 10px 20px; border-radius: 8px;
+  font-weight: 700; font-size: 0.88rem;
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.18s; display: inline-block;
+}
+.btn-assinar:hover { background: var(--g2); border-color: var(--g2); }
+.btn-assinar-note { font-size: 0.7rem; color: var(--muted); display: block; text-align: center; margin-top: 3px; }
+
 /* BOTÕES PÓS-CV */
 .cv-actions {
   display: flex; gap: 12px; justify-content: center;
@@ -625,7 +659,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   .form-group.full { grid-column: 1; }
   .cv-body { grid-template-columns: 1fr; }
   .cv-sidebar { border-left: none; border-top: 1.5px solid #e5efe9; }
-  .plans { grid-template-columns: 1fr; }
+  .plans { grid-template-columns: 1fr !important; }
   .footer-inner { grid-template-columns: 1fr; }
   .chips-grid { grid-column: 1; }
   .how-steps { grid-template-columns: 1fr; }
@@ -867,7 +901,23 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
       <div class="cv-main" id="cv-main"></div>
     </div>
     <div class="cv-watermark">
-      🔒 Versão gratuita com marca d'água — <a href="https://pay.hotmart.com/Y105390443O" target="_blank">Remover por €7,90/mês</a>
+      🔒 Versão gratuita — remova a marca d'água abaixo
+    </div>
+  </div>
+  <div class="cv-watermark-banner">
+    <div class="cv-watermark-banner-text">
+      <p>Quer o currículo limpo, sem marca d'água?</p>
+      <span>Escolha a opção que faz mais sentido para você</span>
+    </div>
+    <div class="cv-watermark-banner-btns">
+      <div>
+        <a href="https://pay.hotmart.com/Y105390443O" target="_blank" class="btn-avulso">💳 Só este currículo — €4,90</a>
+        <span class="btn-assinar-note">Pagamento único, sem mensalidade</span>
+      </div>
+      <div>
+        <a href="https://pay.hotmart.com/Y105390443O" target="_blank" class="btn-assinar">⭐ Premium — €7,90/mês</a>
+        <span class="btn-assinar-note">Ilimitados + 5 dias grátis</span>
+      </div>
     </div>
   </div>
   <div class="cv-actions">
@@ -875,7 +925,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.14 1.541 5.876L0 24l6.304-1.518A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.031-1.385l-.36-.214-3.742.981.998-3.648-.235-.374A9.787 9.787 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
       Compartilhar no WhatsApp
     </a>
-    <a href="https://pay.hotmart.com/Y105390443O" target="_blank" class="btn-premium">⭐ Remover marca d'água — €7,90/mês</a>
   </div>
 </div>
 
@@ -950,8 +999,8 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 <section class="pricing">
   <div class="pricing-wrap">
     <h2 class="section-title">Planos simples e transparentes</h2>
-    <p class="section-sub" style="margin-bottom: 36px;">Comece de graça, faça upgrade quando precisar.</p>
-    <div class="plans">
+    <p class="section-sub" style="margin-bottom: 36px;">Comece de graça. Pague só se gostar do resultado.</p>
+    <div class="plans" style="grid-template-columns: 1fr 1fr 1fr;">
       <div class="plan">
         <div class="plan-name">Gratuito</div>
         <div class="plan-price">€0</div>
@@ -967,8 +1016,24 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         </ul>
         <a href="#gerar" class="btn-plan btn-plan-free">Criar grátis</a>
       </div>
+      <div class="plan" style="border-color: var(--tc);">
+        <div class="plan-badge" style="background: var(--tc);">💳 Pagamento único</div>
+        <div class="plan-name">Avulso</div>
+        <div class="plan-price" style="color: var(--tc);">€4,90</div>
+        <div class="plan-desc">Por currículo, sem mensalidade</div>
+        <ul class="plan-features">
+          <li>1 currículo sem marca d'água</li>
+          <li>12 países disponíveis</li>
+          <li>18 setores profissionais</li>
+          <li>IA adapta ao país</li>
+          <li>Sem marca d'água</li>
+          <li>Download PDF limpo</li>
+          <li class="no">Currículos ilimitados</li>
+        </ul>
+        <a href="https://pay.hotmart.com/Y105390443O" target="_blank" class="btn-plan" style="background: var(--tc); color: #fff;">Comprar este currículo →</a>
+      </div>
       <div class="plan premium">
-        <div class="plan-badge">⭐ Mais popular</div>
+        <div class="plan-badge">⭐ Mais inteligente</div>
         <div class="plan-name">Premium</div>
         <div class="plan-price">€7,90<span>/mês</span></div>
         <div class="plan-desc">5 dias grátis — cancele quando quiser</div>
@@ -983,6 +1048,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         </ul>
         <a href="https://pay.hotmart.com/Y105390443O" target="_blank" class="btn-plan btn-plan-premium">Começar 5 dias grátis →</a>
         <div class="plan-guarantee">🛡️ Cancele em 1 clique, sem compromisso</div>
+        <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:10px;">Equivale a menos de 2 avulsos por mês — com ilimitados</p>
       </div>
     </div>
     <p style="text-align:center;font-size:0.8rem;color:var(--muted);margin-top:20px;">
@@ -1321,7 +1387,7 @@ function renderCV(cv, nome, pais, setor, telefone, email, paisInfo, idioma) {
     </div>`;
   }
 
-  wrap.innerHTML = headerHTML + bodyHTML + `<div class="cv-watermark">🔒 Versão gratuita com marca d'água — <a href="https://pay.hotmart.com/Y105390443O" target="_blank">Remover por €7,90/mês</a></div>`;
+  wrap.innerHTML = headerHTML + bodyHTML + `<div class="cv-watermark">🔒 Versão gratuita — remova a marca d'água abaixo</div>`;
 
   document.getElementById('resultado').style.display = 'block';
   document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
