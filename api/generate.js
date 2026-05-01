@@ -20,7 +20,8 @@ export default async function handler(req, res) {
       return res.status(429).json({ error: 'limit_reached' });
     }
 
-    await fetch(`${url}/set/${key}/${count + 1}/ex/86400`, { headers: { Authorization: `Bearer ${token}` } });
+    // Sem expiração — limite permanente por IP
+    await fetch(`${url}/set/${key}/${count + 1}`, { headers: { Authorization: `Bearer ${token}` } });
 
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const response = await fetch('https://api.anthropic.com/v1/messages', {
