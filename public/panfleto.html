@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gerador de Panfleto — CurrículoEU</title>
+<meta name="description" content="Crie um panfleto profissional para divulgar seus serviços no WhatsApp. Limpeza, cabeleireiro, babysitter e mais. Grátis, em segundos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -21,22 +22,24 @@ nav { background: var(--tcd); position: sticky; top: 0; z-index: 100; display: f
 .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 6px 14px; border-radius: 6px; transition: background 0.18s; }
 .nav-links a:hover { background: rgba(255,255,255,0.10); color: #fff; }
 .nav-cta { background: var(--tc) !important; color: #fff !important; font-weight: 600 !important; }
+
+/* HERO */
 .hero { background: var(--tcd); padding: 70px 5% 60px; text-align: center; position: relative; overflow: hidden; }
 .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, rgba(196,98,45,0.18) 0%, transparent 70%); }
 .hero-badge { display: inline-block; background: rgba(196,98,45,0.22); border: 1px solid rgba(196,98,45,0.5); color: #f5c09a; font-size: 0.78rem; font-weight: 600; padding: 5px 14px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; position: relative; }
 .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 14px; letter-spacing: -1px; position: relative; }
 .hero h1 span { color: var(--tc); }
-.hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 520px; margin: 0 auto 44px; position: relative; }
-.compare { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; max-width: 660px; margin: 0 auto; }
+.hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 540px; margin: 0 auto 44px; position: relative; }
+.compare { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; max-width: 700px; margin: 0 auto; }
 .compare-card { background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 24px 28px; flex: 1; min-width: 200px; text-align: center; }
 .compare-card.highlight { background: rgba(196,98,45,0.12); border-color: rgba(196,98,45,0.5); }
-.compare-icon { font-size: 2rem; margin-bottom: 8px; }
-.compare-label { color: rgba(255,255,255,0.55); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-.compare-rate { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; }
-.compare-rate.bad { color: #f87171; }
-.compare-rate.good { color: #6ee7b7; }
-.compare-desc { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+.compare-icon { font-size: 2rem; margin-bottom: 10px; }
+.compare-label { color: rgba(255,255,255,0.55); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.compare-desc { font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+.compare-desc strong { color: #fff; }
 .compare-arrow { display: flex; align-items: center; color: rgba(255,255,255,0.25); font-size: 1.6rem; }
+
+/* FORM */
 #gerar { background: var(--tcd); padding: 0 5% 80px; }
 .form-wrap { max-width: 680px; margin: 0 auto; }
 .form-card { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.10); border-radius: 18px; padding: 36px; }
@@ -58,6 +61,7 @@ select option { background: #1B2820; }
 .toggle-slider:before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.2s; }
 input:checked + .toggle-slider { background: var(--tc); }
 input:checked + .toggle-slider:before { transform: translateX(20px); }
+
 /* LAYOUT PICKER */
 .layout-picker-wrap { grid-column: 1 / -1; }
 .layout-picker-label { color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
@@ -69,7 +73,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .layout-thumb { border-radius: 6px; overflow: hidden; cursor: pointer; aspect-ratio: 3/4; border: 2px solid transparent; transition: border-color 0.15s, transform 0.12s; position: relative; background: #1B2820; }
 .layout-thumb:hover { transform: scale(1.04); }
 .layout-thumb.selected { border-color: var(--tc); }
-.layout-thumb.selected::after { content: '✓'; position: absolute; top: 3px; right: 4px; background: var(--tc); color: #fff; font-size: 0.6rem; font-weight: 700; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .layout-thumb-inner { width: 100%; height: 100%; position: relative; }
 .layout-name { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.55rem; font-weight: 600; padding: 3px 5px; text-align: center; }
 
@@ -85,70 +88,14 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .foto-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .foto-thumb:hover { transform: scale(1.04); }
 .foto-thumb.selected { border-color: var(--tc); }
-.foto-thumb.selected::after { content: '✓'; position: absolute; top: 3px; right: 4px; background: var(--tc); color: #fff; font-size: 0.6rem; font-weight: 700; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.btn-gerar { background: var(--tc); color: #fff; border: none; border-radius: 8px; padding: 14px 36px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; margin-top: 6px; transition: background 0.18s; font-family: 'Outfit', sans-serif; grid-column: 1 / -1; }
-.btn-gerar:hover { background: #b3561f; }
-#pf-overlay { position: absolute; inset: 0; z-index: 5; }
-/* ── 10 LAYOUTS DE PANFLETO ── */
-/* L1 — Foto Fundo Escuro (padrão atual) */
-.pfl-1 .pf-bg img { filter: brightness(0.7); }
-.pfl-1 .pf-grad { background: linear-gradient(to bottom, rgba(0,0,0,0.48) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.80) 65%, rgba(0,0,0,0.97) 100%); }
-/* L2 — Sidebar Escura (sidebar esquerda coberta) */
-.pfl-2 .pf-bg img { filter: brightness(0.55); }
-.pfl-2 .pf-grad { background: linear-gradient(to right, rgba(27,40,32,0.97) 0%, rgba(27,40,32,0.7) 40%, transparent 100%); }
-.pfl-2 .pf-stripe { width: 0; }
-.pfl-2 .pf-bottom { left: 0; right: auto; width: 55%; padding: 0 16px 20px 18px; }
-/* L3 — Minimalista (fundo claro + texto escuro) */
-.pfl-3 .pf-bg img { filter: brightness(0.15) saturate(0); }
-.pfl-3 .pf-grad { background: rgba(250,247,242,0.92); }
-.pfl-3 .pf-stripe { background: var(--tc); }
-.pfl-3 .pf-logo { color: var(--tcd) !important; }
-.pfl-3 .pf-logo span { color: var(--tc) !important; }
-.pfl-3 .pf-pais { background: var(--tcd) !important; }
-.pfl-3 .pf-setor { color: var(--tc) !important; }
-.pfl-3 .pf-nome { color: var(--tcd) !important; }
-.pfl-3 .pf-nome em { color: var(--tc) !important; }
-.pfl-3 .pf-cidade { color: rgba(27,40,32,0.55) !important; }
-.pfl-3 .pf-slogan { color: #333 !important; }
-.pfl-3 .pf-srv { color: #555 !important; border-left-color: var(--tc) !important; }
-.pfl-3 .pf-contacto-label { color: rgba(27,40,32,0.45) !important; }
-.pfl-3 .pf-contacto-num { color: var(--tcd) !important; }
-.pfl-3 .pf-hr { background: linear-gradient(to right, var(--tc), rgba(27,40,32,0.1)) !important; }
-.pfl-3 .pf-contacto-bloco { border-top-color: rgba(27,40,32,0.12) !important; }
-/* L4 — Gradient Topo */
-.pfl-4 .pf-bg img { filter: brightness(0.5); }
-.pfl-4 .pf-grad { background: linear-gradient(to bottom, rgba(196,98,45,0.9) 0%, rgba(27,40,32,0.6) 35%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.9) 100%); }
-/* L5 — Bold Terracota */
-.pfl-5 .pf-bg img { filter: brightness(0.4) sepia(0.3); }
-.pfl-5 .pf-grad { background: linear-gradient(to bottom, rgba(196,98,45,0.95) 0%, rgba(196,98,45,0.3) 30%, transparent 50%, rgba(0,0,0,0.95) 80%); }
-.pfl-5 .pf-stripe { background: #fff; width: 4px; }
-/* L6 — Frame Geométrico */
-.pfl-6 .pf-bg img { filter: brightness(0.45) saturate(0.8); }
-.pfl-6 .pf-grad { background: rgba(0,0,0,0.55); }
-.pfl-6::before { content: ''; position: absolute; inset: 8px; border: 2px solid rgba(255,255,255,0.3); z-index: 4; pointer-events: none; border-radius: 6px; }
-.pfl-6::after { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(196,98,45,0.5); z-index: 4; pointer-events: none; border-radius: 4px; }
-/* L7 — Dois Tons */
-.pfl-7 .pf-bg img { filter: brightness(0.35) saturate(0); }
-.pfl-7 .pf-grad { background: linear-gradient(to bottom, rgba(27,40,32,0.98) 0%, rgba(27,40,32,0.98) 45%, rgba(196,98,45,0.95) 45%, rgba(196,98,45,0.98) 100%); }
-.pfl-7 .pf-nome { color: #fff !important; }
-.pfl-7 .pf-slogan { color: rgba(255,255,255,0.9) !important; }
-/* L8 — Avatar Centrado */
-.pfl-8 .pf-bg img { filter: brightness(0.2) saturate(0); }
-.pfl-8 .pf-grad { background: rgba(27,40,32,0.92); }
-.pfl-8 .pf-bottom { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.pfl-8 .pf-setor { justify-content: center; }
-.pfl-8 .pf-servicos { justify-content: center; }
-/* L9 — Diagonal Split */
-.pfl-9 .pf-bg img { filter: brightness(0.5); }
-.pfl-9 .pf-grad { background: linear-gradient(120deg, rgba(27,40,32,0.97) 0%, rgba(27,40,32,0.97) 50%, rgba(0,0,0,0.2) 50%); }
-.pfl-9 .pf-bottom { width: 58%; }
-/* L10 — Dark Premium */
-.pfl-10 .pf-bg img { filter: brightness(0.25) saturate(0.3); }
-.pfl-10 .pf-grad { background: rgba(0,0,0,0.78); }
-.pfl-10 .pf-stripe { background: var(--tc); }
-.pfl-10 .pf-nome { font-size: 1.9rem !important; letter-spacing: -1px !important; }
 
-/* ── RESULTADO */
+.form-privacy-note { grid-column: 1 / -1; color: rgba(255,255,255,0.4); font-size: 0.75rem; text-align: center; margin-top: -4px; }
+.form-privacy-note a { color: rgba(255,255,255,0.55); cursor: pointer; text-decoration: underline; }
+
+.btn-gerar { background: var(--tc); color: #fff; border: none; border-radius: 8px; padding: 15px 36px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; margin-top: 6px; transition: background 0.18s; font-family: 'Outfit', sans-serif; grid-column: 1 / -1; }
+.btn-gerar:hover { background: #b3561f; }
+
+/* RESULTADO */
 #resultado { display: none; padding: 60px 5%; }
 .resultado-wrap { max-width: 800px; margin: 0 auto; }
 .resultado-wrap h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900; color: var(--tcd); margin-bottom: 6px; }
@@ -156,33 +103,37 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .panfleto-arte { max-width: 400px; margin: 0 auto 20px; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.28); position: relative; aspect-ratio: 4/5; }
 .pf-bg { position: absolute; inset: 0; }
 .pf-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-.pf-grad { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.48) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.80) 65%, rgba(0,0,0,0.97) 100%); }
-.pf-stripe { position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: #C4622D; z-index: 4; }
-.pf-wm { position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%) rotate(-32deg); font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: rgba(255,255,255,0.06); white-space: nowrap; pointer-events: none; z-index: 6; letter-spacing: 5px; text-transform: uppercase; }
-.pf-top { position: absolute; top: 14px; left: 14px; right: 14px; z-index: 5; display: flex; justify-content: space-between; align-items: center; }
-.pf-logo { font-family: 'Playfair Display', serif; font-size: 0.8rem; font-weight: 700; color: #fff; }
-.pf-logo span { color: #f5956a; }
-.pf-pais { font-size: 0.58rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(196,98,45,0.85); padding: 3px 9px; border-radius: 4px; }
-.pf-bottom { position: absolute; bottom: 0; left: 0; right: 0; z-index: 5; padding: 0 18px 20px 18px; }
-.pf-setor { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: #f5956a; display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
-.pf-setor-line { width: 16px; height: 1.5px; background: #C4622D; flex-shrink: 0; }
-.pf-nome { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 900; color: #fff; line-height: 0.92; letter-spacing: -1px; margin-bottom: 5px; }
-.pf-nome em { font-style: italic; color: rgba(255,255,255,0.65); font-size: 1.65rem; }
-.pf-cidade { font-size: 0.65rem; color: rgba(255,255,255,0.48); margin-bottom: 13px; }
-.pf-hr { width: 100%; height: 1px; background: linear-gradient(to right, #C4622D 0%, rgba(255,255,255,0.08) 80%); margin-bottom: 11px; }
-.pf-slogan { font-family: 'Playfair Display', serif; font-size: 0.88rem; font-weight: 700; font-style: italic; color: rgba(255,255,255,0.9); line-height: 1.4; margin-bottom: 10px; }
-.pf-servicos { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-.pf-srv { font-size: 0.57rem; font-weight: 500; color: rgba(255,255,255,0.7); border-left: 2px solid #C4622D; padding-left: 6px; line-height: 1.3; }
-.pf-contacto-bloco { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 11px; }
-.pf-contacto-label { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
-.pf-contacto-num { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: #fff; }
-.watermark-banner { background: #fff8f5; border: 1.5px solid #fde8da; border-radius: 10px; padding: 13px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 16px; flex-wrap: wrap; max-width: 400px; margin-left: auto; margin-right: auto; }
-.watermark-banner p { font-size: 0.82rem; color: var(--tc); font-weight: 500; }
-.watermark-banner a { background: var(--tc); color: #fff; padding: 8px 18px; border-radius: 7px; font-weight: 700; font-size: 0.82rem; text-decoration: none; }
-.result-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; max-width: 400px; margin-left: auto; margin-right: auto; }
-.btn-wa { background: #25D366; color: #fff; padding: 12px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+#pf-overlay { position: absolute; inset: 0; z-index: 5; }
+
+/* WATERMARK BANNER — destaque máximo */
+.watermark-banner {
+  background: linear-gradient(135deg, #fff8f5 0%, #fff3ee 100%);
+  border: 2px solid #fde8da;
+  border-radius: 12px; padding: 20px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-top: 20px; flex-wrap: wrap;
+  max-width: 400px; margin-left: auto; margin-right: auto;
+  box-shadow: 0 4px 16px rgba(196,98,45,0.12);
+}
+.watermark-banner-text p { font-size: 0.95rem; color: var(--tcd); font-weight: 700; margin-bottom: 3px; }
+.watermark-banner-text span { font-size: 0.78rem; color: var(--muted); }
+.watermark-banner a {
+  background: var(--tc); color: #fff;
+  padding: 12px 22px; border-radius: 8px;
+  font-weight: 700; font-size: 0.9rem;
+  text-decoration: none; white-space: nowrap;
+  flex-shrink: 0; transition: background 0.18s;
+  display: inline-block;
+}
+.watermark-banner a:hover { background: #b3561f; }
+
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; max-width: 400px; margin-left: auto; margin-right: auto; }
+.btn-wa { background: #25D366; color: #fff; padding: 12px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; flex: 1; justify-content: center; transition: background 0.18s; }
 .btn-wa:hover { background: #1ebe5c; }
-.btn-novo { background: transparent; color: var(--tcd); padding: 12px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: 2px solid var(--border); cursor: pointer; font-family: 'Outfit', sans-serif; }
+.btn-novo { background: transparent; color: var(--tcd); padding: 12px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: 2px solid var(--border); cursor: pointer; font-family: 'Outfit', sans-serif; transition: border-color 0.18s; }
+.btn-novo:hover { border-color: var(--tcd); }
+
+/* FAQ */
 .faq { padding: 80px 5%; background: var(--light); }
 .faq-wrap { max-width: 720px; margin: 0 auto; }
 .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 900; color: var(--tcd); margin-bottom: 8px; }
@@ -193,17 +144,39 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .faq-item.open .icon { transform: rotate(45deg); }
 .faq-a { font-size: 0.84rem; color: var(--muted); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
 .faq-item.open .faq-a { max-height: 300px; padding-top: 9px; }
+
+/* FOOTER */
 footer { background: var(--tcd); color: rgba(255,255,255,0.6); padding: 40px 5% 24px; text-align: center; }
 footer .nav-logo { display: inline-block; margin-bottom: 10px; }
 footer p { font-size: 0.82rem; margin-bottom: 6px; }
 footer a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.78rem; }
 footer a:hover { color: var(--tc); }
+.footer-bottom { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; color: rgba(255,255,255,0.4); }
+.footer-bottom a { color: rgba(255,255,255,0.45); }
+
+/* LOADING */
 .loading-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(27,40,32,0.88); backdrop-filter: blur(4px); flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
 .loading-overlay.show { display: flex; }
 .spinner { width: 46px; height: 46px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.15); border-top-color: var(--tc); animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-overlay p { color: #fff; font-size: 0.95rem; opacity: 0.82; }
-@media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } .form-group.full, .idioma-toggle, .foto-picker-wrap, .btn-gerar { grid-column: 1; } .foto-galeria { grid-template-columns: repeat(3, 1fr); } }
+
+/* MODAIS */
+.modal-overlay { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.show { display: flex; }
+.modal-box { background: #fff; border-radius: 16px; max-width: 640px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 40px; }
+.modal-box h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 16px; color: var(--tcd); }
+.modal-box h3 { font-size: 1rem; font-weight: 700; color: var(--tcd); margin: 20px 0 8px; }
+.modal-box p, .modal-box li { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
+.modal-box ul { padding-left: 18px; margin-bottom: 8px; }
+.modal-close { display: block; margin-top: 28px; width: 100%; padding: 12px; border-radius: 8px; background: var(--tcd); color: #fff; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 600; font-family: 'Outfit', sans-serif; }
+
+@media (max-width: 700px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full, .idioma-toggle, .layout-picker-wrap, .foto-picker-wrap, .btn-gerar { grid-column: 1; }
+  .foto-galeria { grid-template-columns: repeat(3, 1fr); }
+  .layout-galeria { grid-template-columns: repeat(3, 1fr); }
+}
 </style>
 </head>
 <body>
@@ -217,41 +190,41 @@ footer a:hover { color: var(--tc); }
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-badge">📣 Ferramenta gratuita</div>
-  <h1>O panfleto certo traz<br><span>4× mais clientes</span></h1>
-  <p>Um panfleto profissional converte muito mais do que uma mensagem no WhatsApp. Cria o teu em segundos.</p>
+  <h1>Um panfleto profissional<br><span>atrai muito mais clientes</span></h1>
+  <p>Brasileiros que divulgam seus serviços com um panfleto profissional se destacam muito mais do que com uma mensagem simples no WhatsApp. Crie o seu em segundos.</p>
   <div class="compare">
     <div class="compare-card">
       <div class="compare-icon">💬</div>
-      <div class="compare-label">Mensagem WhatsApp</div>
-      <div class="compare-rate bad">5–10%</div>
-      <div class="compare-desc">Taxa de conversão média</div>
+      <div class="compare-label">Mensagem simples</div>
+      <div class="compare-desc">"Faço faxina, €15/hora" — sem foto, sem diferencial, fácil de ignorar.</div>
     </div>
     <div class="compare-arrow">→</div>
     <div class="compare-card highlight">
       <div class="compare-icon">📄</div>
       <div class="compare-label">Panfleto Profissional</div>
-      <div class="compare-rate good">25–40%</div>
-      <div class="compare-desc">Taxa de conversão média</div>
+      <div class="compare-desc"><strong>Visual atrativo, texto persuasivo</strong> no idioma do país e seu contato em destaque.</div>
     </div>
   </div>
 </section>
 
+<!-- FORMULÁRIO -->
 <section id="gerar">
   <div class="form-wrap">
     <div class="form-card">
-      <h2>Criar o meu panfleto</h2>
-      <p>Preenche os campos e recebe um panfleto profissional para partilhar no WhatsApp ou imprimir.</p>
+      <h2>Criar meu panfleto</h2>
+      <p>Preencha os campos e receba um panfleto profissional para compartilhar no WhatsApp ou imprimir.</p>
       <div class="form-grid">
         <div class="form-group">
-          <label>O teu nome</label>
+          <label>Seu nome</label>
           <input type="text" id="nome" placeholder="ex: Maria Silva">
         </div>
         <div class="form-group">
-          <label>Serviço que ofereces</label>
+          <label>Serviço que oferece</label>
           <select id="servico" onchange="onServicoChange()">
-            <option value="">— Seleciona —</option>
+            <option value="">— Selecione —</option>
             <option value="limpeza">🧹 Limpeza doméstica</option>
             <option value="cabeleireiro">💇 Cabeleireiro(a)</option>
             <option value="babysitter">👶 Babysitter / Au pair</option>
@@ -267,17 +240,17 @@ footer a:hover { color: var(--tc); }
           </select>
         </div>
         <div class="form-group">
-          <label>Cidade onde trabalhas</label>
-          <input type="text" id="cidade" placeholder="ex: Amesterdão">
+          <label>Cidade onde trabalha</label>
+          <input type="text" id="cidade" placeholder="ex: Amsterdã">
         </div>
         <div class="form-group">
-          <label>Contacto (telefone / WhatsApp)</label>
+          <label>Contato (telefone / WhatsApp)</label>
           <input type="text" id="contacto" placeholder="ex: +31 678 764 563">
         </div>
         <div class="form-group">
           <label>País</label>
           <select id="pais" onchange="onPaisChange()">
-            <option value="">— Seleciona —</option>
+            <option value="">— Selecione —</option>
             <option value="pt">🇵🇹 Portugal</option>
             <option value="es">🇪🇸 Espanha</option>
             <option value="uk">🇬🇧 Reino Unido</option>
@@ -326,297 +299,152 @@ footer a:hover { color: var(--tc); }
           <div class="foto-galeria" id="fotoGaleria"></div>
         </div>
         <button class="btn-gerar" onclick="gerarPanfleto()">✨ Gerar Panfleto Grátis</button>
+        <p class="form-privacy-note">🔒 Seus dados não são armazenados. <a onclick="abrirPrivacidade(event)">Política de Privacidade</a></p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- RESULTADO -->
 <div id="resultado">
   <div class="resultado-wrap">
-    <h2>O teu panfleto está pronto! 🎉</h2>
-    <p>Faz screenshot e partilha no WhatsApp, Nextdoor ou imprime.</p>
+    <h2>Seu panfleto está pronto! 🎉</h2>
+    <p>Faça screenshot e compartilhe no WhatsApp, Nextdoor ou imprima para distribuir.</p>
     <div class="panfleto-arte" id="pfArte">
       <div class="pf-bg"><img id="pf-foto" src="" alt="fundo"></div>
       <div id="pf-overlay"></div>
     </div>
     <div class="watermark-banner">
-      <p>🔒 Versão gratuita com marca d'água — Remove por <strong>€1,90</strong></p>
-      <a href="https://pay.hotmart.com/Y105390443O" target="_blank">Remover →</a>
+      <div class="watermark-banner-text">
+        <p>🔒 Versão gratuita com marca d'água</p>
+        <span>Remova por apenas €1,90 — pagamento único</span>
+      </div>
+      <a href="https://pay.hotmart.com/Y105390443O" target="_blank">Remover marca d'água →</a>
     </div>
     <div class="result-actions">
       <a id="btnWA" href="#" class="btn-wa" target="_blank">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.14 1.541 5.876L0 24l6.304-1.518A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.031-1.385l-.36-.214-3.742.981.998-3.648-.235-.374A9.787 9.787 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-        Partilhar no WhatsApp
+        Compartilhar no WhatsApp
       </a>
       <button class="btn-novo" onclick="novoPanel()">← Criar novo panfleto</button>
     </div>
   </div>
 </div>
 
+<!-- FAQ -->
 <section class="faq">
   <div class="faq-wrap">
     <h2 class="section-title">Perguntas frequentes</h2>
-    <p class="section-sub">Tudo o que precisas de saber sobre o Gerador de Panfletos.</p>
+    <p class="section-sub">Tudo o que você precisa saber sobre o Gerador de Panfletos.</p>
     <div id="faqList"></div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <a href="/" class="nav-logo">Currículo<span>EU</span></a>
-  <p>Ajudamos imigrantes a conseguir clientes e emprego na Europa.</p>
-  <p style="margin-top:10px;"><a href="/">Gerador de Currículo</a> &nbsp;·&nbsp; <a href="/verificador">Verificador</a> &nbsp;·&nbsp; <a href="mailto:suporte@curriculos.eu">Suporte</a></p>
+  <p>Ajudamos brasileiros imigrantes a conseguir clientes e emprego na Europa.</p>
+  <p style="margin-top:10px;">
+    <a href="/">Gerador de Currículo</a> &nbsp;·&nbsp;
+    <a href="/verificador">Verificador</a>
+  </p>
+  <div class="footer-bottom">
+    <span>© 2026 CurrículoEU · Feito para imigrantes 🌍</span>
+    <span>
+      <a href="#" onclick="abrirPrivacidade(event)">Política de Privacidade</a>
+      &nbsp;·&nbsp;
+      <a href="#" onclick="abrirTermos(event)">Termos de Uso</a>
+    </span>
+  </div>
 </footer>
 
+<!-- LOADING -->
 <div class="loading-overlay" id="loading">
   <div class="spinner"></div>
-  <p>A criar o teu panfleto...</p>
+  <p>Criando seu panfleto...</p>
+</div>
+
+<!-- MODAL PRIVACIDADE -->
+<div class="modal-overlay" id="modalPrivacidade">
+  <div class="modal-box">
+    <h2>Política de Privacidade</h2>
+    <p>Última atualização: Janeiro de 2026. Esta política descreve como o CurrículoEU recolhe, usa e protege seus dados pessoais, em conformidade com o RGPD/GDPR.</p>
+    <h3>Quais dados recolhemos</h3>
+    <p>Para gerar seu panfleto, recolhemos temporariamente: nome, cidade, contato e tipo de serviço. Esses dados são usados exclusivamente para gerar o panfleto solicitado.</p>
+    <h3>Como usamos seus dados</h3>
+    <ul>
+      <li>Os dados são processados localmente para gerar o panfleto.</li>
+      <li>Não armazenamos seus dados pessoais após a geração.</li>
+      <li>Não vendemos nem partilhamos seus dados com terceiros para fins comerciais.</li>
+    </ul>
+    <h3>Seus direitos (GDPR)</h3>
+    <p>Você tem direito a acesso, retificação e eliminação dos seus dados. Para exercer esses direitos, entre em contacto: <strong>suporte@curriculos.eu</strong></p>
+    <button class="modal-close" onclick="fecharModal('modalPrivacidade')">Fechar</button>
+  </div>
+</div>
+
+<!-- MODAL TERMOS -->
+<div class="modal-overlay" id="modalTermos">
+  <div class="modal-box">
+    <h2>Termos de Uso</h2>
+    <p>Última atualização: Janeiro de 2026. Ao usar o CurrículoEU, você concorda com os termos abaixo.</p>
+    <h3>Uso do serviço</h3>
+    <p>O CurrículoEU fornece uma ferramenta de geração de panfletos profissionais. O conteúdo gerado é de responsabilidade do utilizador.</p>
+    <h3>Plano Gratuito</h3>
+    <p>A versão gratuita inclui marca d'água. Para remover, é cobrado €1,90 por panfleto ou €7,90/mês no plano Premium com gerações ilimitadas.</p>
+    <h3>Cancelamento</h3>
+    <p>A subscrição Premium pode ser cancelada a qualquer momento pelo Hotmart, sem custo adicional. O cancelamento tem efeito no final do período já pago.</p>
+    <h3>Contacto</h3>
+    <p>Dúvidas sobre os termos: <strong>suporte@curriculos.eu</strong></p>
+    <button class="modal-close" onclick="fecharModal('modalTermos')">Fechar</button>
+  </div>
 </div>
 
 <script>
-// ── FOTOS ALEATÓRIAS POR PAÍS+SERVIÇO (para modo aleatório) ──
-const FOTOS_PAIS = {
-  pt: ["1555881400-74d7acaacd8b","1582555590-a0e3e2d1fd4b","1526659603081-33e5c2db9bd7"],
-  es: ["1539037116277-4db20889f2d4","1543783207-ec64e4d88a28","1558618666-fcd25c85cd64"],
-  uk: ["1513635269975-59663e0ac1ad","1486299267898-09bc3ce2a71d","1529655683826-aba9a3609862"],
-  de: ["1467269204594-9661b134dd2b","1560969184-10fe8719e047","1574440772897-9e78f668e540"],
-  nl: ["1512470876302-972faa2aa9a4","1508193638397-1c4234db14d8","1534351450980-8851dc55fa5d"],
-  fr: ["1499856871958-5b9627545d1a","1522093007474-d21958e8a8eb","1534351450980-8851dc55fa5d"],
-  it: ["1534430480872-3498386e7856","1520175480921-4edfd2f41de3","1572978122416-2b8b8e5e1b7e"],
-  ie: ["1590089415225-401ed6f9db8e","1504297900570-a2b2acd8e2c6","1569949381669-b76b8c2e8886"],
-  ch: ["1506905925346-21bda4d32df4","1531169628879-5de7a97d7d7b","1467268962820-c06ab9f2e2f0"],
-  be: ["1491557177925-46eae6e42df4","1553058649-be4b2428f63f","1545276744-7e5f9d5e7b2a"],
-  at: ["1506905925346-21bda4d32df4","1516490413543-eafb68bc2e5b","1542673-a0ee4e8c-8a15"],
-  se: ["1509356843882-aebef3b5a12e","1441974231531-c6227db76b6e","1573843981267-be1d1d57a9d8"],
-};
+// MODAIS
+function abrirPrivacidade(e){if(e)e.preventDefault();document.getElementById('modalPrivacidade').classList.add('show');}
+function abrirTermos(e){if(e)e.preventDefault();document.getElementById('modalTermos').classList.add('show');}
+function fecharModal(id){document.getElementById(id).classList.remove('show');}
+document.querySelectorAll('.modal-overlay').forEach(m=>{m.addEventListener('click',(e)=>{if(e.target===m)m.classList.remove('show');});});
 
-// ── BANCO DE FOTOS POR SERVIÇO (para galeria de escolha) ──
-// Fotos 100% relevantes — pessoas a trabalhar + cidades europeias
-const BANCO = {
-  limpeza: [
-    "1581578731548-c64695cc6952", // mulher a limpar janelas — luz natural
-    "1527515637462-cff94eecc1ac", // limpeza doméstica clássica
-    "1584820927498-cfe5211fd8bf", // limpeza superfície moderna
-    "1600585154340-be6161a56a0c", // interior limpo e luminoso
-    "1558618666-fcd25c85cd64",    // apartamento moderno arrumado
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1512470876302-972faa2aa9a4", // Amesterdão
-    "1513635269975-59663e0ac1ad", // Londres
-    "1499856871958-5b9627545d1a", // Paris
-  ],
-  jardim: [
-    "1416879595882-3373a0480b5b", // jardim europeu
-    "1523348837708-15d4a09cfac2", // jardim com flores
-    "1508193638397-1c4234db14d8", // parque Amesterdão
-    "1590089415225-401ed6f9db8e", // Irlanda verde
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1513635269975-59663e0ac1ad", // Londres
-    "1499856871958-5b9627545d1a", // Paris
-    "1467269204594-9661b134dd2b", // Berlim
-  ],
-  construcao: [
-    "1504307651254-35680f356dfd", // construção
-    "1565008576549-57569a49371d", // remodelação interior
-    "1541888946425-d81bb19240f5", // obra europeia
-    "1581091226825-a6a2a5aee158", // trabalhador obra
-    "1621905252507-b35492cc74b4", // construção moderna
-    "1467269204594-9661b134dd2b", // Berlim
-    "1513635269975-59663e0ac1ad", // Londres
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1512470876302-972faa2aa9a4", // Amesterdão
-    "1499856871958-5b9627545d1a", // Paris
-  ],
-  cozinha: [
-    "1556909114-f6e7ad7d3136",    // chef profissional
-    "1466637574441-749b8f19452f", // cozinha europeia
-    "1551218808-94e220e084d2",    // chef prato
-    "1590089415225-401ed6f9db8e", // Irlanda
-    "1467269204594-9661b134dd2b", // Berlim
-    "1499856871958-5b9627545d1a", // Paris
-    "1534430480872-3498386e7856", // Roma
-    "1555881400-74d7acaacd8b",    // Lisboa
-  ],
-  babysitter: [
-    "1587654780291-39c9404d746b", // babysitter bebé
-    "1476703993599-0035a21b17a9", // passeio parque
-    "1503454537195-1dcabb73ffb9", // criança jardim
-    "1544717302-de2939b7ef71",    // cuidadora criança
-    "1516627145497-ae6968895b74", // criança exterior
-    "1508193638397-1c4234db14d8", // parque Amesterdão
-    "1513635269975-59663e0ac1ad", // Londres
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1499856871958-5b9627545d1a", // Paris
-    "1590089415225-401ed6f9db8e", // Irlanda
-  ],
-  cabeleireiro: [
-    "1560066984-138dadb4c035",    // cabeleireiro trabalha
-    "1522337360788-8b13dee7a37e", // salão moderno
-    "1605497788044-5a32c7078486", // corte cabelo
-    "1534438327276-14e5300c3a48", // salon profissional
-    "1519699047748-de8e457a634e", // detalhe cabelo
-    "1512470876302-972faa2aa9a4", // Amesterdão
-    "1513635269975-59663e0ac1ad", // Londres
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1499856871958-5b9627545d1a", // Paris
-    "1467269204594-9661b134dd2b", // Berlim
-  ],
-  motorista: [
-    "1449965408869-eaa3f722e40d", // motorista
-    "1519003722824-194d4455a60c", // carro cidade
-    "1494976388531-d1058494cdd8", // estrada
-    "1534430480872-3498386e7856", // Roma
-    "1508193638397-1c4234db14d8", // parque Amesterdão
-    "1512470876302-972faa2aa9a4", // Amesterdão
-    "1513635269975-59663e0ac1ad", // Londres
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1467269204594-9661b134dd2b", // Berlim
-    "1499856871958-5b9627545d1a", // Paris
-  ],
-  fitness: [
-    "1534438327276-14e5300c3a48", // personal trainer
-    "1571019613454-1cb2f99b2d8b", // treino parque
-    "1526506118085-60ce8714f8c5", // corrida cidade
-    "1574680096145-d05b474e2155", // treino funcional
-    "1517836357463-d25dfeac3438", // exercício exterior
-    "1549060279-7e168fcee0c2",    // yoga parque
-    "1508193638397-1c4234db14d8", // parque Amesterdão
-    "1513635269975-59663e0ac1ad", // Londres
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1590089415225-401ed6f9db8e", // Irlanda
-  ],
-  beleza: [
-    "1519823551278-64ac92734fb1", // estética
-    "1570172619644-dfd03ed5d881", // facial spa
-    "1487412947147-5cebf100ffc2", // maquilhagem
-    "1596704017254-9b121068fb31", // manicure
-    "1616394584738-fc6e612e71b9", // salão beleza
-    "1526506118085-60ce8714f8c5", // beleza spa
-    "1512470876302-972faa2aa9a4", // Amesterdão
-    "1499856871958-5b9627545d1a", // Paris
-    "1534430480872-3498386e7856", // Roma
-    "1555881400-74d7acaacd8b",    // Lisboa
-  ],
-  pintura: [
-    "1562259929-b4e1fd3aef09",    // pintura parede
-    "1589939705384-5185137a7f0f", // pintor
-    "1600585152220-90363fe7e115", // sala pintada
-    "1467269204594-9661b134dd2b", // Berlim
-    "1513635269975-59663e0ac1ad", // Londres
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1512470876302-972faa2aa9a4", // Amesterdão
-    "1499856871958-5b9627545d1a", // Paris
-  ],
-  cuidados: [
-    "1576091160399-112ba8d25d1d", // cuidados idosos
-    "1559839734-2b71ea197ec2",    // enfermeira idoso
-    "1493894473891-10fc1e5dbd22", // passeio idoso
-    "1582750433449-648ed127bb54", // cuidador interior
-    "1493894473891-10fc1e5dbd22", // cuidado profissional
-    "1508193638397-1c4234db14d8", // parque Amesterdão
-    "1513635269975-59663e0ac1ad", // Londres
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1590089415225-401ed6f9db8e", // Irlanda
-    "1467269204594-9661b134dd2b", // Berlim
-  ],
-  outro: [
-    "1521737604893-d14cc237f11d", // profissional
-    "1497366216548-37526070297c", // escritório moderno
-    "1454165804606-c3d57bc86b40", // trabalho
-    "1542744094-3a31f272c490",    // reunião
-    "1512470876302-972faa2aa9a4", // Amesterdão
-    "1513635269975-59663e0ac1ad", // Londres
-    "1555881400-74d7acaacd8b",    // Lisboa
-    "1499856871958-5b9627545d1a", // Paris
-    "1467269204594-9661b134dd2b", // Berlim
-    "1590089415225-401ed6f9db8e", // Irlanda
-  ],
-};
+// DADOS
+const FOTOS_PAIS={pt:["1555881400-74d7acaacd8b","1582555590-a0e3e2d1fd4b","1526659603081-33e5c2db9bd7"],es:["1539037116277-4db20889f2d4","1543783207-ec64e4d88a28","1558618666-fcd25c85cd64"],uk:["1513635269975-59663e0ac1ad","1486299267898-09bc3ce2a71d","1529655683826-aba9a3609862"],de:["1467269204594-9661b134dd2b","1560969184-10fe8719e047","1574440772897-9e78f668e540"],nl:["1512470876302-972faa2aa9a4","1508193638397-1c4234db14d8","1534351450980-8851dc55fa5d"],fr:["1499856871958-5b9627545d1a","1522093007474-d21958e8a8eb","1534351450980-8851dc55fa5d"],it:["1534430480872-3498386e7856","1520175480921-4edfd2f41de3"],ie:["1590089415225-401ed6f9db8e","1504297900570-a2b2acd8e2c6"],ch:["1506905925346-21bda4d32df4","1531169628879-5de7a97d7d7b"],be:["1491557177925-46eae6e42df4","1553058649-be4b2428f63f"],at:["1506905925346-21bda4d32df4","1516490413543-eafb68bc2e5b"],se:["1509356843882-aebef3b5a12e","1441974231531-c6227db76b6e"]};
+const BANCO={limpeza:["1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1600585154340-be6161a56a0c","1555881400-74d7acaacd8b","1512470876302-972faa2aa9a4","1513635269975-59663e0ac1ad","1499856871958-5b9627545d1a"],jardim:["1416879595882-3373a0480b5b","1523348837708-15d4a09cfac2","1508193638397-1c4234db14d8","1590089415225-401ed6f9db8e","1555881400-74d7acaacd8b","1513635269975-59663e0ac1ad"],construcao:["1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1581091226825-a6a2a5aee158","1467269204594-9661b134dd2b","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],cozinha:["1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1590089415225-401ed6f9db8e","1499856871958-5b9627545d1a","1534430480872-3498386e7856","1555881400-74d7acaacd8b"],babysitter:["1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1508193638397-1c4234db14d8","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],cabeleireiro:["1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1534438327276-14e5300c3a48","1512470876302-972faa2aa9a4","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],motorista:["1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1534430480872-3498386e7856","1512470876302-972faa2aa9a4","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],fitness:["1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1508193638397-1c4234db14d8","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],beleza:["1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1512470876302-972faa2aa9a4","1499856871958-5b9627545d1a","1555881400-74d7acaacd8b"],pintura:["1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1467269204594-9661b134dd2b","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],cuidados:["1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1508193638397-1c4234db14d8","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],outro:["1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1512470876302-972faa2aa9a4","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"]};
+function fotoUrl(id,w){return`https://images.unsplash.com/photo-${id}?w=${w||900}&q=85&fit=crop`;}
 
-function fotoUrl(id, w) { return `https://images.unsplash.com/photo-${id}?w=${w||900}&q=85&fit=crop`; }
+const SLOGANS_BASE={limpeza:{pt:["Limpeza que faz a diferença — na sua casa, no seu dia.","A sua casa merece o melhor — e eu estou aqui para isso.","Cada detalhe cuidado, para que não precise preocupar.","O seu lar, sempre impecável — sem esforço da sua parte.","Porque um lar limpo é um lar feliz.","O cuidado que a sua casa merece, nas mãos certas.","Limpeza com dedicação — porque o seu tempo é precioso.","Profissionalismo em cada visita, resultado em cada detalhe."],en:["Cleaning that makes a difference — every single day.","Your home deserves the best — and I'm here for that.","Every detail taken care of, so you don't have to worry.","Your home, always spotless — without any effort from you.","Because a clean home is a happy home.","The care your home deserves, in the right hands.","Cleaning with dedication — because your time is precious.","Professionalism at every visit, results in every detail."],de:["Sauberkeit, die den Unterschied macht — jeden Tag.","Ihr Zuhause verdient das Beste — ich bin für Sie da.","Jedes Detail gepflegt, damit Sie sich keine Sorgen machen.","Ihr Heim, immer makellos — ganz ohne Aufwand Ihrerseits.","Ein sauberes Zuhause ist ein glückliches Zuhause.","Die Pflege, die Ihr Heim verdient — in guten Händen.","Reinigung mit Hingabe — weil Ihre Zeit kostbar ist.","Professionalität bei jedem Besuch, Ergebnis in jedem Detail."],nl:["Schoonmaak die het verschil maakt — elke dag opnieuw.","Uw huis verdient het beste — en ik ben er voor u.","Elk detail verzorgd, zodat u zich geen zorgen hoeft te maken.","Uw thuis, altijd onberispelijk — zonder moeite van uw kant.","Want een schoon huis is een gelukkig huis.","De zorg die uw huis verdient, in goede handen.","Schoonmaken met toewijding — want uw tijd is kostbaar.","Vakmanschap bij elk bezoek, resultaat in elk detail."],fr:["Un nettoyage qui fait la différence — chaque jour.","Votre maison mérite le meilleur — je suis là pour ça.","Chaque détail soigné, pour que vous n'ayez pas à vous inquiéter.","Votre foyer, toujours impeccable — sans effort de votre part.","Parce qu'un foyer propre est un foyer heureux.","Le soin que votre maison mérite, entre de bonnes mains.","Nettoyage avec dévouement — parce que votre temps est précieux.","Professionnalisme à chaque visite, résultat à chaque détail."],it:["Pulizia che fa la differenza — ogni giorno.","La tua casa merita il meglio — e io sono qui per questo.","Ogni dettaglio curato, perché tu non debba preoccuparti.","Il tuo nido, sempre impeccabile — senza sforzo da parte tua.","Perché una casa pulita è una casa felice.","La cura che la tua casa merita, in mani esperte.","Pulizia con dedizione — perché il tuo tempo è prezioso.","Professionalità ad ogni visita, risultato in ogni dettaglio."],es:["Limpieza que marca la diferencia — en tu hogar, cada día.","Tu casa merece lo mejor — y yo estoy aquí para eso.","Cada detalle cuidado, para que no tengas que preocuparte.","Tu hogar, siempre impecable — sin esfuerzo de tu parte.","Porque un hogar limpio es un hogar feliz.","El cuidado que tu casa merece, en manos expertas.","Limpieza con dedicación — porque tu tiempo es valioso.","Profesionalismo en cada visita, resultado en cada detalle."]}};
+const SLOGANS_G={pt:["Serviço profissional, resultado garantido.","Qualidade que se nota, confiança que se sente.","O melhor serviço, ao seu alcance.","Dedicação total em cada trabalho.","Porque você merece o melhor.","Resultados que falam por si.","Sempre disponível, sempre profissional.","O seu serviço de confiança na cidade."],en:["Professional service, guaranteed results.","Quality you notice, trust you feel.","The best service, within your reach.","Total dedication in every job.","Because you deserve the best.","Results that speak for themselves.","Always available, always professional.","Your trusted local service."],de:["Professioneller Service, garantierte Ergebnisse.","Qualität, die man merkt, Vertrauen, das man spürt.","Der beste Service, in greifbarer Nähe.","Volle Hingabe bei jedem Auftrag.","Weil Sie das Beste verdienen.","Ergebnisse, die für sich sprechen.","Immer verfügbar, immer professionell.","Ihr vertrauenswürdiger lokaler Service."],nl:["Professionele service, gegarandeerde resultaten.","Kwaliteit die opvalt, vertrouwen dat voelbaar is.","De beste service, binnen handbereik.","Volledige toewijding bij elke opdracht.","Omdat u het beste verdient.","Resultaten die voor zichzelf spreken.","Altijd beschikbaar, altijd professioneel.","Uw vertrouwde lokale service."],fr:["Service professionnel, résultats garantis.","Qualité qui se remarque, confiance qui se ressent.","Le meilleur service, à votre portée.","Dévouement total dans chaque travail.","Parce que vous méritez le meilleur.","Des résultats qui parlent d'eux-mêmes.","Toujours disponible, toujours professionnel.","Votre service local de confiance."],it:["Servizio professionale, risultati garantiti.","Qualità che si nota, fiducia che si sente.","Il miglior servizio, alla tua portata.","Dedizione totale in ogni lavoro.","Perché meriti il meglio.","Risultati che parlano da soli.","Sempre disponibile, sempre professionale.","Il tuo servizio locale di fiducia."],es:["Servicio profesional, resultados garantizados.","Calidad que se nota, confianza que se siente.","El mejor servicio, a tu alcance.","Dedicación total en cada trabajo.","Porque mereces lo mejor.","Resultados que hablan por sí solos.","Siempre disponible, siempre profesional.","Tu servicio local de confianza."]};
+function getSlogans(servico,idioma){const s=SLOGANS_BASE[servico];if(s&&s[idioma])return s[idioma];return SLOGANS_G[idioma]||SLOGANS_G.en;}
 
-// ── SLOGANS por serviço × idioma ──
-const SLOGANS = {
-  limpeza: { pt:["Limpeza que faz a diferença — na sua casa, no seu dia.","A sua casa merece o melhor — e eu estou aqui para isso.","Cada detalhe cuidado, para que não precise preocupar.","O seu lar, sempre impecável — sem esforço da sua parte.","Confiança que se vê em cada canto da sua casa.","Porque um lar limpo é um lar feliz.","O cuidado que a sua casa merece, nas mãos certas.","Limpeza com dedicação — porque o seu tempo é precioso.","Profissionalismo em cada visita, resultado em cada detalhe.","A sua tranquilidade começa numa casa bem cuidada."], es:["Limpieza que marca la diferencia — en tu hogar, cada día.","Tu casa merece lo mejor — y yo estoy aquí para eso.","Cada detalle cuidado, para que no tengas que preocuparte.","Tu hogar, siempre impecable — sin esfuerzo de tu parte.","Confianza que se nota en cada rincón de tu casa.","Porque un hogar limpio es un hogar feliz.","El cuidado que tu casa merece, en manos expertas.","Limpieza con dedicación — porque tu tiempo es valioso.","Profesionalismo en cada visita, resultado en cada detalle.","Tu tranquilidad empieza en un hogar bien cuidado."], de:["Sauberkeit, die den Unterschied macht — jeden Tag.","Ihr Zuhause verdient das Beste — ich bin für Sie da.","Jedes Detail gepflegt, damit Sie sich keine Sorgen machen.","Ihr Heim, immer makellos — ganz ohne Aufwand Ihrerseits.","Vertrauen, das man in jedem Winkel Ihres Hauses sieht.","Ein sauberes Zuhause ist ein glückliches Zuhause.","Die Pflege, die Ihr Heim verdient — in guten Händen.","Reinigung mit Hingabe — weil Ihre Zeit kostbar ist.","Professionalität bei jedem Besuch, Ergebnis in jedem Detail.","Ihre Ruhe beginnt in einem gut gepflegten Zuhause."], nl:["Schoonmaak die het verschil maakt — elke dag opnieuw.","Uw huis verdient het beste — en ik ben er voor u.","Elk detail verzorgd, zodat u zich geen zorgen hoeft te maken.","Uw thuis, altijd onberispelijk — zonder moeite van uw kant.","Vertrouwen dat zichtbaar is in elke hoek van uw huis.","Want een schoon huis is een gelukkig huis.","De zorg die uw huis verdient, in goede handen.","Schoonmaken met toewijding — want uw tijd is kostbaar.","Vakmanschap bij elk bezoek, resultaat in elk detail.","Uw rust begint in een goed verzorgd thuis."], fr:["Un nettoyage qui fait la différence — chaque jour.","Votre maison mérite le meilleur — je suis là pour ça.","Chaque détail soigné, pour que vous n'ayez pas à vous inquiéter.","Votre foyer, toujours impeccable — sans effort de votre part.","La confiance qui se voit dans chaque coin de votre maison.","Parce qu'un foyer propre est un foyer heureux.","Le soin que votre maison mérite, entre de bonnes mains.","Nettoyage avec dévouement — parce que votre temps est précieux.","Professionnalisme à chaque visite, résultat à chaque détail.","Votre tranquillité commence dans un foyer bien entretenu."], it:["Pulizia che fa la differenza — ogni giorno.","La tua casa merita il meglio — e io sono qui per questo.","Ogni dettaglio curato, perché tu non debba preoccuparti.","Il tuo nido, sempre impeccabile — senza sforzo da parte tua.","Fiducia che si vede in ogni angolo della tua casa.","Perché una casa pulita è una casa felice.","La cura che la tua casa merita, in mani esperte.","Pulizia con dedizione — perché il tuo tempo è prezioso.","Professionalità ad ogni visita, risultato in ogni dettaglio.","La tua tranquillità inizia in una casa ben curata."], en:["Cleaning that makes a difference — every single day.","Your home deserves the best — and I'm here for that.","Every detail taken care of, so you don't have to worry.","Your home, always spotless — without any effort from you.","Trust you can see in every corner of your home.","Because a clean home is a happy home.","The care your home deserves, in the right hands.","Cleaning with dedication — because your time is precious.","Professionalism at every visit, results in every detail.","Your peace of mind starts with a well-kept home."] },
-  jardim: { pt:["Um jardim bonito começa com quem o cuida de verdade.","O seu espaço verde, sempre a sorrir para si.","Jardins cuidados, vizinhos invejosos.","Natureza e cuidado — o jardim que você merece.","Cada planta tem a sua história — eu cuido da sua.","Verde, fresco e sempre impecável.","O jardim dos seus sonhos está nas minhas mãos.","Crescer com cuidado — jardins que inspiram.","Um jardim bem cuidado vale mais que mil palavras.","Da semente ao jardim perfeito — estou aqui."], en:["A beautiful garden starts with someone who truly cares.","Your green space, always blooming.","Well-kept gardens, jealous neighbours.","Nature and care — the garden you deserve.","Every plant has a story — I take care of yours.","Green, fresh and always perfect.","The garden of your dreams is in my hands.","Growing with care — gardens that inspire.","A well-kept garden speaks louder than words.","From seed to perfect garden — I'm here."], de:["Ein schöner Garten beginnt mit jemandem, der ihn wirklich pflegt.","Ihr Grünraum, immer in voller Blüte.","Gepflegte Gärten, neidische Nachbarn.","Natur und Fürsorge — der Garten, den Sie verdienen.","Jede Pflanze hat ihre Geschichte — ich pflege Ihre.","Grün, frisch und immer makellos.","Der Garten Ihrer Träume liegt in meinen Händen.","Mit Sorgfalt wachsen — Gärten, die inspirieren.","Ein gepflegter Garten sagt mehr als tausend Worte.","Von der Saat zum perfekten Garten — ich bin da."], nl:["Een mooie tuin begint met iemand die er echt voor zorgt.","Uw groene ruimte, altijd stralend.","Verzorgde tuinen, jaloerse buren.","Natuur en zorg — de tuin die u verdient.","Elke plant heeft zijn verhaal — ik zorg voor het uwe.","Groen, fris en altijd onberispelijk.","De tuin van uw dromen ligt in mijn handen.","Groeien met zorg — tuinen die inspireren.","Een goed onderhouden tuin zegt meer dan duizend woorden.","Van zaad tot perfecte tuin — ik ben er."], fr:["Un beau jardin commence par quelqu'un qui en prend vraiment soin.","Votre espace vert, toujours épanoui.","Des jardins soignés, des voisins jaloux.","Nature et soin — le jardin que vous méritez.","Chaque plante a son histoire — je prends soin de la vôtre.","Vert, frais et toujours impeccable.","Le jardin de vos rêves est entre mes mains.","Grandir avec soin — des jardins qui inspirent.","Un jardin bien entretenu vaut mieux que mille mots.","De la graine au jardin parfait — je suis là."], it:["Un bel giardino inizia con chi se ne prende cura davvero.","Il tuo spazio verde, sempre fiorente.","Giardini curati, vicini invidiosi.","Natura e cura — il giardino che meriti.","Ogni pianta ha la sua storia — mi prendo cura della tua.","Verde, fresco e sempre impeccabile.","Il giardino dei tuoi sogni è nelle mie mani.","Crescere con cura — giardini che ispirano.","Un giardino ben curato vale più di mille parole.","Dal seme al giardino perfetto — sono qui."], es:["Un jardín bonito empieza con quien lo cuida de verdad.","Tu espacio verde, siempre sonriéndote.","Jardines cuidados, vecinos envidiosos.","Naturaleza y cuidado — el jardín que mereces.","Cada planta tiene su historia — yo cuido la tuya.","Verde, fresco y siempre impecable.","El jardín de tus sueños está en mis manos.","Crecer con cuidado — jardines que inspiran.","Un jardín bien cuidado vale más que mil palabras.","De la semilla al jardín perfecto — aquí estoy."] },
-  construcao: { pt:["Construção com precisão — do início ao fim.","A sua obra nas mãos certas, sem surpresas.","Qualidade que se vê, durabilidade que se sente.","Cada projeto tratado como se fosse o meu próprio lar.","Obras que ficam — porque faço para durar.","Do sonho à realidade, tijolo a tijolo.","Confiança e rigor em cada metro quadrado.","A sua remodelação, feita com orgulho e dedicação.","Profissionalismo que se nota — do primeiro ao último dia.","O seu espaço, transformado com cuidado e qualidade."], en:["Building with precision — from start to finish.","Your project in the right hands, no surprises.","Quality you can see, durability you can feel.","Every project treated as if it were my own home.","Work that lasts — because I build to endure.","From dream to reality, brick by brick.","Trust and precision on every square metre.","Your renovation, done with pride and dedication.","Professionalism you'll notice — from day one to the last.","Your space, transformed with care and quality."], de:["Bau mit Präzision — von Anfang bis Ende.","Ihr Bauprojekt in den richtigen Händen, ohne Überraschungen.","Qualität, die man sieht, Haltbarkeit, die man fühlt.","Jedes Projekt behandelt wie mein eigenes Zuhause.","Arbeiten, die halten — weil ich für die Ewigkeit baue.","Vom Traum zur Wirklichkeit, Stein für Stein.","Vertrauen und Sorgfalt auf jedem Quadratmeter.","Ihre Renovierung, mit Stolz und Hingabe ausgeführt.","Professionalität, die auffällt — vom ersten bis zum letzten Tag.","Ihr Raum, mit Sorgfalt und Qualität transformiert."], nl:["Bouwen met precisie — van begin tot eind.","Uw project in de juiste handen, zonder verrassingen.","Kwaliteit die zichtbaar is, duurzaamheid die voelbaar is.","Elk project behandeld alsof het mijn eigen huis was.","Werken die blijven — want ik bouw voor de eeuwigheid.","Van droom naar werkelijkheid, steen voor steen.","Vertrouwen en vakmanschap op elke vierkante meter.","Uw renovatie, uitgevoerd met trots en toewijding.","Professionaliteit die opvalt — van de eerste tot de laatste dag.","Uw ruimte, getransformeerd met zorg en kwaliteit."], fr:["Construction avec précision — du début à la fin.","Votre chantier entre les bonnes mains, sans surprises.","Qualité visible, durabilité ressentie.","Chaque projet traité comme si c'était ma propre maison.","Des travaux qui durent — parce que je construis pour l'éternité.","Du rêve à la réalité, brique par brique.","Confiance et rigueur sur chaque mètre carré.","Votre rénovation, réalisée avec fierté et dévouement.","Professionnalisme remarquable — du premier au dernier jour.","Votre espace, transformé avec soin et qualité."], it:["Costruzione con precisione — dall'inizio alla fine.","Il tuo progetto nelle mani giuste, senza sorprese.","Qualità che si vede, durabilità che si sente.","Ogni progetto trattato come se fosse casa mia.","Lavori che durano — perché costruisco per l'eternità.","Dal sogno alla realtà, mattone dopo mattone.","Fiducia e rigore su ogni metro quadrato.","La tua ristrutturazione, realizzata con orgoglio e dedizione.","Professionalità che si nota — dal primo all'ultimo giorno.","Il tuo spazio, trasformato con cura e qualità."], es:["Construcción con precisión — de principio a fin.","Tu obra en las manos correctas, sin sorpresas.","Calidad que se ve, durabilidad que se siente.","Cada proyecto tratado como si fuera mi propio hogar.","Obras que duran — porque construyo para el futuro.","Del sueño a la realidad, ladrillo a ladrillo.","Confianza y rigor en cada metro cuadrado.","Tu reforma, hecha con orgullo y dedicación.","Profesionalismo que se nota — del primero al último día.","Tu espacio, transformado con cuidado y calidad."] },
-  cozinha: { pt:["Sabores que contam histórias — feitos com amor.","A cozinha certa para a sua mesa, todos os dias.","Comida de qualidade, preparada com dedicação.","O gosto de casa, onde quer que esteja.","Cada prato, uma experiência que não esquece.","Cozinha profissional com toque pessoal.","Do mercado à mesa — frescura e sabor garantidos.","Porque comer bem é viver melhor.","Receitas com alma, sabores com identidade.","A cozinha que o seu paladar merece."], en:["Flavours that tell stories — made with love.","The right cooking for your table, every single day.","Quality food, prepared with dedication.","The taste of home, wherever you are.","Every dish, an experience you won't forget.","Professional cooking with a personal touch.","From market to table — freshness and flavour guaranteed.","Because eating well means living better.","Recipes with soul, flavours with identity.","The cooking your taste buds deserve."], de:["Aromen, die Geschichten erzählen — mit Liebe gemacht.","Die richtige Küche für Ihren Tisch, jeden Tag.","Qualitätsessen, mit Hingabe zubereitet.","Der Geschmack von Zuhause, wo immer Sie sind.","Jedes Gericht, ein Erlebnis, das man nicht vergisst.","Professionelle Küche mit persönlicher Note.","Vom Markt auf den Tisch — Frische und Geschmack garantiert.","Denn gut essen bedeutet besser leben.","Rezepte mit Seele, Aromen mit Identität.","Die Küche, die Ihr Gaumen verdient."], nl:["Smaken die verhalen vertellen — gemaakt met liefde.","De juiste keuken voor uw tafel, elke dag.","Kwalitatief eten, bereid met toewijding.","De smaak van thuis, waar u ook bent.","Elk gerecht, een ervaring die bijblijft.","Professionele keuken met een persoonlijk tintje.","Van de markt naar de tafel — versheid en smaak gegarandeerd.","Want goed eten is beter leven.","Recepten met ziel, smaken met identiteit.","De keuken die uw gehemelte verdient."], fr:["Des saveurs qui racontent des histoires — faites avec amour.","La bonne cuisine pour votre table, chaque jour.","Nourriture de qualité, préparée avec dévouement.","Le goût de chez soi, où que vous soyez.","Chaque plat, une expérience inoubliable.","Cuisine professionnelle avec une touche personnelle.","Du marché à la table — fraîcheur et saveur garanties.","Parce que bien manger, c'est mieux vivre.","Des recettes avec âme, des saveurs avec identité.","La cuisine que votre palais mérite."], it:["Sapori che raccontano storie — fatti con amore.","La cucina giusta per la tua tavola, ogni giorno.","Cibo di qualità, preparato con dedizione.","Il sapore di casa, ovunque tu sia.","Ogni piatto, un'esperienza che non dimentichi.","Cucina professionale con un tocco personale.","Dal mercato alla tavola — freschezza e sapore garantiti.","Perché mangiare bene significa vivere meglio.","Ricette con anima, sapori con identità.","La cucina che il tuo palato merita."], es:["Sabores que cuentan historias — hechos con amor.","La cocina adecuada para tu mesa, todos los días.","Comida de calidad, preparada con dedicación.","El sabor de casa, donde quiera que estés.","Cada plato, una experiencia que no olvidarás.","Cocina profesional con toque personal.","Del mercado a la mesa — frescura y sabor garantizados.","Porque comer bien es vivir mejor.","Recetas con alma, sabores con identidad.","La cocina que tu paladar merece."] },
-  cuidados: { pt:["Cuidar com carinho — porque cada pessoa importa.","Presença que reconforta, cuidado que transforma.","O bem-estar dos seus entes queridos, em boas mãos.","Cuidado com dignidade, afeto com profissionalismo.","Porque envelhecer bem é um direito de todos.","Cada sorriso é a razão do meu trabalho.","Dedicação que vai além do dever.","Cuidar é a minha vocação — e faço-o com o coração.","Tranquilidade para a família, conforto para quem fica.","Um cuidador de confiança — presente quando mais precisa."], en:["Caring with love — because every person matters.","Presence that comforts, care that transforms.","Your loved ones' wellbeing, in good hands.","Care with dignity, affection with professionalism.","Because ageing well is everyone's right.","Every smile is the reason I do this work.","Dedication that goes beyond duty.","Caring is my calling — and I do it from the heart.","Peace of mind for the family, comfort for those who need it.","A trusted carer — present when you need it most."], de:["Fürsorge mit Herz — denn jeder Mensch zählt.","Präsenz, die tröstet, Fürsorge, die verwandelt.","Das Wohlbefinden Ihrer Liebsten in guten Händen.","Pflege mit Würde, Zuneigung mit Professionalität.","Denn gut zu altern ist ein Recht für alle.","Jedes Lächeln ist der Grund meiner Arbeit.","Hingabe, die über die Pflicht hinausgeht.","Pflegen ist meine Berufung — und ich tue es von Herzen.","Ruhe für die Familie, Komfort für den Pflegebedürftigen.","Ein vertrauensvoller Pflegender — da, wenn man ihn am meisten braucht."], nl:["Zorgen met liefde — want elke persoon telt.","Aanwezigheid die troost, zorg die transformeert.","Het welzijn van uw dierbaren in goede handen.","Zorg met waardigheid, genegenheid met professionaliteit.","Want goed oud worden is een recht voor iedereen.","Elke glimlach is de reden van mijn werk.","Toewijding die verder gaat dan de plicht.","Zorgen is mijn roeping — en ik doe het van harte.","Rust voor de familie, comfort voor wie blijft.","Een vertrouwde verzorger — aanwezig wanneer het het meest nodig is."], fr:["Prendre soin avec amour — parce que chaque personne compte.","Présence qui réconforte, soin qui transforme.","Le bien-être de vos proches, entre de bonnes mains.","Soin avec dignité, affection avec professionnalisme.","Parce que bien vieillir est un droit pour tous.","Chaque sourire est la raison de mon travail.","Dévouement qui va au-delà du devoir.","Prendre soin est ma vocation — et je le fais avec le cœur.","Tranquillité pour la famille, confort pour ceux qui restent.","Un soignant de confiance — présent quand on en a le plus besoin."], it:["Prendersi cura con affetto — perché ogni persona conta.","Presenza che conforta, cura che trasforma.","Il benessere dei tuoi cari, in buone mani.","Cura con dignità, affetto con professionalità.","Perché invecchiare bene è un diritto di tutti.","Ogni sorriso è la ragione del mio lavoro.","Dedizione che va oltre il dovere.","Prendersi cura è la mia vocazione — e lo faccio con il cuore.","Tranquillità per la famiglia, comfort per chi rimane.","Un assistente di fiducia — presente quando se ne ha più bisogno."], es:["Cuidar con cariño — porque cada persona importa.","Presencia que reconforta, cuidado que transforma.","El bienestar de tus seres queridos, en buenas manos.","Cuidado con dignidad, afecto con profesionalismo.","Porque envejecer bien es un derecho de todos.","Cada sonrisa es la razón de mi trabajo.","Dedicación que va más allá del deber.","Cuidar es mi vocación — y lo hago con el corazón.","Tranquilidad para la familia, confort para quien se queda.","Un cuidador de confianza — presente cuando más se necesita."] },
-  babysitter: { pt:["As suas crianças, cuidadas com amor e responsabilidade.","Segurança e alegria — para os seus pequenos.","Uma babysitter de confiança, sempre presente.","Crianças felizes, pais tranquilos.","Cada criança é especial — e eu trato-a assim.","Brincar, aprender e crescer — estou aqui.","O cuidado que os seus filhos merecem.","Disponível quando mais precisa, dedicada sempre.","Diversão, segurança e muito carinho.","Porque os seus filhos merecem o melhor."], en:["Your children, cared for with love and responsibility.","Safety and joy — for your little ones.","A trusted babysitter, always there for you.","Happy children, relaxed parents.","Every child is special — and I treat them that way.","Play, learn and grow — I'm here for it all.","The care your children deserve.","Available when you need it most, dedicated always.","Fun, safety and lots of love.","Because your children deserve the best."], de:["Ihre Kinder, mit Liebe und Verantwortung betreut.","Sicherheit und Freude — für Ihre Kleinen.","Eine vertrauensvolle Babysitterin, immer da.","Glückliche Kinder, entspannte Eltern.","Jedes Kind ist besonders — und ich behandle es so.","Spielen, lernen und wachsen — ich bin dabei.","Die Fürsorge, die Ihre Kinder verdienen.","Verfügbar, wenn Sie es am meisten brauchen, immer engagiert.","Spaß, Sicherheit und ganz viel Zuneigung.","Denn Ihre Kinder verdienen das Beste."], nl:["Uw kinderen, verzorgd met liefde en verantwoordelijkheid.","Veiligheid en plezier — voor uw kleintjes.","Een vertrouwde babysitter, altijd aanwezig.","Gelukkige kinderen, ontspannen ouders.","Elk kind is bijzonder — en ik behandel het zo.","Spelen, leren en groeien — ik ben erbij.","De zorg die uw kinderen verdienen.","Beschikbaar wanneer u het het meest nodig heeft, altijd toegewijd.","Plezier, veiligheid en veel liefde.","Want uw kinderen verdienen het beste."], fr:["Vos enfants, pris en charge avec amour et responsabilité.","Sécurité et joie — pour vos petits.","Une baby-sitter de confiance, toujours présente.","Enfants heureux, parents tranquilles.","Chaque enfant est spécial — et je les traite ainsi.","Jouer, apprendre et grandir — je suis là.","Le soin que vos enfants méritent.","Disponible quand vous en avez le plus besoin, dévouée toujours.","Amusement, sécurité et beaucoup d'affection.","Parce que vos enfants méritent le meilleur."], it:["I tuoi bambini, accuditi con amore e responsabilità.","Sicurezza e gioia — per i tuoi piccoli.","Una babysitter di fiducia, sempre presente.","Bambini felici, genitori tranquilli.","Ogni bambino è speciale — e lo tratto così.","Giocare, imparare e crescere — sono qui.","La cura che i tuoi figli meritono.","Disponibile quando ne hai più bisogno, dedicata sempre.","Divertimento, sicurezza e tanto affetto.","Perché i tuoi figli meritano il meglio."], es:["Tus hijos, cuidados con amor y responsabilidad.","Seguridad y alegría — para tus pequeños.","Una niñera de confianza, siempre presente.","Niños felices, padres tranquilos.","Cada niño es especial — y los trato así.","Jugar, aprender y crecer — estoy aquí.","El cuidado que tus hijos merecen.","Disponible cuando más lo necesitas, dedicada siempre.","Diversión, seguridad y mucho cariño.","Porque tus hijos merecen lo mejor."] },
-};
-const SLOGANS_G = { pt:["Serviço profissional, resultado garantido.","Qualidade que se nota, confiança que se sente.","O melhor serviço, ao seu alcance.","Dedicação total em cada trabalho.","Experiência e profissionalismo ao seu serviço.","Porque merece o melhor.","Resultados que falam por si.","Sempre disponível, sempre profissional.","O seu serviço de confiança na cidade.","Feito com orgulho, entregue com qualidade."], en:["Professional service, guaranteed results.","Quality you notice, trust you feel.","The best service, within your reach.","Total dedication in every job.","Experience and professionalism at your service.","Because you deserve the best.","Results that speak for themselves.","Always available, always professional.","Your trusted local service.","Done with pride, delivered with quality."], de:["Professioneller Service, garantierte Ergebnisse.","Qualität, die man merkt, Vertrauen, das man spürt.","Der beste Service, in greifbarer Nähe.","Volle Hingabe bei jedem Auftrag.","Erfahrung und Professionalität zu Ihren Diensten.","Weil Sie das Beste verdienen.","Ergebnisse, die für sich sprechen.","Immer verfügbar, immer professionell.","Ihr vertrauenswürdiger lokaler Service.","Mit Stolz gemacht, mit Qualität geliefert."], nl:["Professionele service, gegarandeerde resultaten.","Kwaliteit die opvalt, vertrouwen dat voelbaar is.","De beste service, binnen handbereik.","Volledige toewijding bij elke opdracht.","Ervaring en professionaliteit tot uw dienst.","Omdat u het beste verdient.","Resultaten die voor zichzelf spreken.","Altijd beschikbaar, altijd professioneel.","Uw vertrouwde lokale service.","Met trots gedaan, met kwaliteit geleverd."], fr:["Service professionnel, résultats garantis.","Qualité qui se remarque, confiance qui se ressent.","Le meilleur service, à votre portée.","Dévouement total dans chaque travail.","Expérience et professionnalisme à votre service.","Parce que vous méritez le meilleur.","Des résultats qui parlent d'eux-mêmes.","Toujours disponible, toujours professionnel.","Votre service local de confiance.","Fait avec fierté, livré avec qualité."], it:["Servizio professionale, risultati garantiti.","Qualità che si nota, fiducia che si sente.","Il miglior servizio, alla tua portata.","Dedizione totale in ogni lavoro.","Esperienza e professionalità al tuo servizio.","Perché meriti il meglio.","Risultati che parlano da soli.","Sempre disponibile, sempre professionale.","Il tuo servizio locale di fiducia.","Fatto con orgoglio, consegnato con qualità."], es:["Servicio profesional, resultados garantizados.","Calidad que se nota, confianza que se siente.","El mejor servicio, a tu alcance.","Dedicación total en cada trabajo.","Experiencia y profesionalismo a tu servicio.","Porque mereces lo mejor.","Resultados que hablan por sí solos.","Siempre disponible, siempre profesional.","Tu servicio local de confianza.","Hecho con orgullo, entregado con calidad."] };
-['cabeleireiro','motorista','fitness','beleza','pintura','outro'].forEach(s => { SLOGANS[s] = SLOGANS_G; });
+const SERVICOS_TEXTO={limpeza:{pt:['Experiência comprovada','Horários flexíveis','Resultados garantidos'],en:['Proven experience','Flexible hours','Guaranteed results'],de:['Nachgewiesene Erfahrung','Flexible Zeiten','Garantierte Ergebnisse'],nl:['Bewezen ervaring','Flexibele tijden','Gegarandeerde resultaten'],fr:['Expérience prouvée','Horaires flexibles','Résultats garantis'],it:['Esperienza comprovata','Orari flessibili','Risultati garantiti'],es:['Experiencia comprobada','Horarios flexibles','Resultados garantizados']},jardim:{pt:['Poda e manutenção','Plantação sazonal','Resultados visíveis'],en:['Pruning & maintenance','Seasonal planting','Visible results'],de:['Schnitt & Pflege','Saisonale Bepflanzung','Sichtbare Ergebnisse'],nl:['Snoeien & onderhoud','Seizoensbeplanting','Zichtbare resultaten'],fr:['Taille & entretien','Plantation saisonnière','Résultats visibles'],it:['Potatura e manutenzione','Piantumazione stagionale','Risultati visibili'],es:['Poda y mantenimiento','Plantación de temporada','Resultados visibles']},construcao:{pt:['Obras e remodelações','Orçamento gratuito','Trabalho garantido'],en:['Renovations & builds','Free quote','Work guaranteed'],de:['Umbauten & Renovierungen','Kostenloser Kostenvoranschlag','Garantierte Arbeit'],nl:['Verbouwingen & renovaties','Gratis offerte','Werk gegarandeerd'],fr:['Travaux & rénovations','Devis gratuit','Travail garanti'],it:['Lavori e ristrutturazioni','Preventivo gratuito','Lavoro garantito'],es:['Obras y reformas','Presupuesto gratuito','Trabajo garantizado']},cozinha:{pt:['Cozinha diária','Eventos e festas','Experiência comprovada'],en:['Daily cooking','Events & parties','Proven experience'],de:['Tägliches Kochen','Veranstaltungen & Feiern','Nachgewiesene Erfahrung'],nl:['Dagelijks koken','Evenementen & feesten','Bewezen ervaring'],fr:['Cuisine quotidienne','Événements & fêtes','Expérience prouvée'],it:['Cucina quotidiana','Eventi e feste','Esperienza comprovata'],es:['Cocina diaria','Eventos y fiestas','Experiencia comprobada']},babysitter:{pt:['Crianças dos 0 aos 12','Primeiros socorros','Sempre disponível'],en:['Children 0 to 12','First aid certified','Always available'],de:['Kinder von 0 bis 12','Erste-Hilfe-Ausbildung','Immer verfügbar'],nl:['Kinderen 0 tot 12','EHBO gecertificeerd','Altijd beschikbaar'],fr:['Enfants de 0 à 12 ans','Premiers secours','Toujours disponible'],it:['Bambini da 0 a 12 anni','Primo soccorso','Sempre disponibile'],es:['Niños de 0 a 12 años','Primeros auxilios','Siempre disponible']},cabeleireiro:{pt:['Corte e coloração','Tratamentos capilares','Resultado profissional'],en:['Cut & colour','Hair treatments','Professional results'],de:['Schnitt und Färbung','Haarbehandlungen','Professionelles Ergebnis'],nl:['Knippen en kleuren','Haarbehandelingen','Professioneel resultaat'],fr:['Coupe et coloration','Soins capillaires','Résultat professionnel'],it:['Taglio e colorazione','Trattamenti capillari','Risultato professionale'],es:['Corte y coloración','Tratamientos capilares','Resultado profesional']},motorista:{pt:['Entregas rápidas','Pontualidade garantida','Disponível 7 dias'],en:['Fast deliveries','Punctuality guaranteed','Available 7 days'],de:['Schnelle Lieferungen','Pünktlichkeit garantiert','7 Tage verfügbar'],nl:['Snelle leveringen','Stiptheid gegarandeerd','7 dagen beschikbaar'],fr:['Livraisons rapides','Ponctualité garantie','Disponible 7 jours'],it:['Consegne rapide','Puntualità garantita','Disponibile 7 giorni'],es:['Entregas rápidas','Puntualidad garantizada','Disponible 7 días']},fitness:{pt:['Treinos personalizados','Resultados comprovados','Online e presencial'],en:['Personalised training','Proven results','Online & in-person'],de:['Personalisiertes Training','Nachgewiesene Ergebnisse','Online und vor Ort'],nl:['Persoonlijke training','Bewezen resultaten','Online en live'],fr:['Entraînements personnalisés','Résultats prouvés','En ligne et en personne'],it:['Allenamenti personalizzati','Risultati comprovati','Online e di persona'],es:['Entrenamientos personalizados','Resultados comprobados','Online y presencial']},beleza:{pt:['Estética profissional','Produtos de qualidade','Resultado garantido'],en:['Professional aesthetics','Quality products','Guaranteed results'],de:['Professionelle Ästhetik','Qualitätsprodukte','Garantiertes Ergebnis'],nl:['Professionele esthetiek','Kwaliteitsproducten','Gegarandeerd resultaat'],fr:['Esthétique professionnelle','Produits de qualité','Résultat garanti'],it:['Estetica professionale','Prodotti di qualità','Risultato garantito'],es:['Estética profesional','Productos de calidad','Resultado garantizado']},pintura:{pt:['Interior e exterior','Acabamento perfeito','Preço justo'],en:['Interior & exterior','Perfect finish','Fair price'],de:['Innen und außen','Perfekte Ausführung','Fairer Preis'],nl:['Binnen en buiten','Perfecte afwerking','Eerlijke prijs'],fr:['Intérieur et extérieur','Finition parfaite','Prix juste'],it:['Interno ed esterno','Finitura perfetta','Prezzo giusto'],es:['Interior y exterior','Acabado perfecto','Precio justo']},cuidados:{pt:['Acompanhamento diário','Experiência e empatia','Família tranquila'],en:['Daily care','Experience & empathy','Family peace of mind'],de:['Tägliche Begleitung','Erfahrung und Empathie','Beruhigte Familie'],nl:['Dagelijkse begeleiding','Ervaring en empathie','Geruste familie'],fr:['Accompagnement quotidien','Expérience et empathie','Famille tranquille'],it:['Accompagnamento quotidiano','Esperienza ed empatia','Famiglia tranquilla'],es:['Acompañamiento diario','Experiencia y empatía','Familia tranquila']},outro:{pt:['Experiência profissional','Qualidade garantida','Disponibilidade imediata'],en:['Professional experience','Guaranteed quality','Immediate availability'],de:['Berufserfahrung','Garantierte Qualität','Sofortige Verfügbarkeit'],nl:['Professionele ervaring','Gegarandeerde kwaliteit','Directe beschikbaarheid'],fr:['Expérience professionnelle','Qualité garantie','Disponibilité immédiate'],it:['Esperienza professionale','Qualità garantita','Disponibilità immediata'],es:['Experiencia profesional','Calidad garantizada','Disponibilidad inmediata']}};
+function getSrv(servico,idioma){const s=SERVICOS_TEXTO[servico];if(s&&s[idioma])return s[idioma];return SERVICOS_TEXTO.outro[idioma]||SERVICOS_TEXTO.outro.en;}
 
-const SERVICOS_TEXTO = {
-  limpeza:{pt:['Experiência comprovada','Horários flexíveis','Resultados garantidos'],en:['Proven experience','Flexible hours','Guaranteed results'],de:['Nachgewiesene Erfahrung','Flexible Zeiten','Garantierte Ergebnisse'],nl:['Bewezen ervaring','Flexibele tijden','Gegarandeerde resultaten'],fr:['Expérience prouvée','Horaires flexibles','Résultats garantis'],it:['Esperienza comprovata','Orari flessibili','Risultati garantiti'],es:['Experiencia comprobada','Horarios flexibles','Resultados garantizados']},
-  jardim:{pt:['Poda e manutenção','Plantação sazonal','Resultados visíveis'],en:['Pruning & maintenance','Seasonal planting','Visible results'],de:['Schnitt & Pflege','Saisonale Bepflanzung','Sichtbare Ergebnisse'],nl:['Snoeien & onderhoud','Seizoensbeplanting','Zichtbare resultaten'],fr:['Taille & entretien','Plantation saisonnière','Résultats visibles'],it:['Potatura e manutenzione','Piantumazione stagionale','Risultati visibili'],es:['Poda y mantenimiento','Plantación de temporada','Resultados visibles']},
-  construcao:{pt:['Obras e remodelações','Orçamento gratuito','Trabalho garantido'],en:['Renovations & builds','Free quote','Work guaranteed'],de:['Umbauten & Renovierungen','Kostenloser Kostenvoranschlag','Garantierte Arbeit'],nl:['Verbouwingen & renovaties','Gratis offerte','Werk gegarandeerd'],fr:['Travaux & rénovations','Devis gratuit','Travail garanti'],it:['Lavori e ristrutturazioni','Preventivo gratuito','Lavoro garantito'],es:['Obras y reformas','Presupuesto gratuito','Trabajo garantizado']},
-  cozinha:{pt:['Cozinha diária','Eventos e festas','Experiência comprovada'],en:['Daily cooking','Events & parties','Proven experience'],de:['Tägliches Kochen','Veranstaltungen & Feiern','Nachgewiesene Erfahrung'],nl:['Dagelijks koken','Evenementen & feesten','Bewezen ervaring'],fr:['Cuisine quotidienne','Événements & fêtes','Expérience prouvée'],it:['Cucina quotidiana','Eventi e feste','Esperienza comprovata'],es:['Cocina diaria','Eventos y fiestas','Experiencia comprobada']},
-  babysitter:{pt:['Crianças dos 0 aos 12','Primeiros socorros','Sempre disponível'],en:['Children 0 to 12','First aid certified','Always available'],de:['Kinder von 0 bis 12','Erste-Hilfe-Ausbildung','Immer verfügbar'],nl:['Kinderen 0 tot 12','EHBO gecertificeerd','Altijd beschikbaar'],fr:['Enfants de 0 à 12 ans','Premiers secours','Toujours disponible'],it:['Bambini da 0 a 12 anni','Primo soccorso','Sempre disponibile'],es:['Niños de 0 a 12 años','Primeros auxilios','Siempre disponible']},
-  cabeleireiro:{pt:['Corte e coloração','Tratamentos capilares','Resultado profissional'],en:['Cut & colour','Hair treatments','Professional results'],de:['Schnitt und Färbung','Haarbehandlungen','Professionelles Ergebnis'],nl:['Knippen en kleuren','Haarbehandelingen','Professioneel resultaat'],fr:['Coupe et coloration','Soins capillaires','Résultat professionnel'],it:['Taglio e colorazione','Trattamenti capillari','Risultato professionale'],es:['Corte y coloración','Tratamientos capilares','Resultado profesional']},
-  motorista:{pt:['Entregas rápidas','Pontualidade garantida','Disponível 7 dias'],en:['Fast deliveries','Punctuality guaranteed','Available 7 days'],de:['Schnelle Lieferungen','Pünktlichkeit garantiert','7 Tage verfügbar'],nl:['Snelle leveringen','Stiptheid gegarandeerd','7 dagen beschikbaar'],fr:['Livraisons rapides','Ponctualité garantie','Disponible 7 jours'],it:['Consegne rapide','Puntualità garantita','Disponibile 7 giorni'],es:['Entregas rápidas','Puntualidad garantizada','Disponible 7 días']},
-  fitness:{pt:['Treinos personalizados','Resultados comprovados','Online e presencial'],en:['Personalised training','Proven results','Online & in-person'],de:['Personalisiertes Training','Nachgewiesene Ergebnisse','Online und vor Ort'],nl:['Persoonlijke training','Bewezen resultaten','Online en live'],fr:['Entraînements personnalisés','Résultats prouvés','En ligne et en personne'],it:['Allenamenti personalizzati','Risultati comprovati','Online e di persona'],es:['Entrenamientos personalizados','Resultados comprobados','Online y presencial']},
-  beleza:{pt:['Estética profissional','Produtos de qualidade','Resultado garantido'],en:['Professional aesthetics','Quality products','Guaranteed results'],de:['Professionelle Ästhetik','Qualitätsprodukte','Garantiertes Ergebnis'],nl:['Professionele esthetiek','Kwaliteitsproducten','Gegarandeerd resultaat'],fr:['Esthétique professionnelle','Produits de qualité','Résultat garanti'],it:['Estetica professionale','Prodotti di qualità','Risultato garantito'],es:['Estética profesional','Productos de calidad','Resultado garantizado']},
-  pintura:{pt:['Interior e exterior','Acabamento perfeito','Preço justo'],en:['Interior & exterior','Perfect finish','Fair price'],de:['Innen und außen','Perfekte Ausführung','Fairer Preis'],nl:['Binnen en buiten','Perfecte afwerking','Eerlijke prijs'],fr:['Intérieur et extérieur','Finition parfaite','Prix juste'],it:['Interno ed esterno','Finitura perfetta','Prezzo giusto'],es:['Interior y exterior','Acabado perfecto','Precio justo']},
-  cuidados:{pt:['Acompanhamento diário','Experiência e empatia','Família tranquila'],en:['Daily care','Experience & empathy','Family peace of mind'],de:['Tägliche Begleitung','Erfahrung und Empathie','Beruhigte Familie'],nl:['Dagelijkse begeleiding','Ervaring en empathie','Geruste familie'],fr:['Accompagnement quotidien','Expérience et empathie','Famille tranquille'],it:['Accompagnamento quotidiano','Esperienza ed empatia','Famiglia tranquilla'],es:['Acompañamiento diario','Experiencia y empatía','Familia tranquila']},
-  outro:{pt:['Experiência profissional','Qualidade garantida','Disponibilidade imediata'],en:['Professional experience','Guaranteed quality','Immediate availability'],de:['Berufserfahrung','Garantierte Qualität','Sofortige Verfügbarkeit'],nl:['Professionele ervaring','Gegarandeerde kwaliteit','Directe beschikbaarheid'],fr:['Expérience professionnelle','Qualité garantie','Disponibilité immédiate'],it:['Esperienza professionale','Qualità garantita','Disponibilità immediata'],es:['Experiencia profesional','Calidad garantizada','Disponibilidad inmediata']},
-};
+const PAISES={pt:{flag:'🇵🇹',nome:'Portugal',idioma:'pt'},es:{flag:'🇪🇸',nome:'Espanha',idioma:'es'},uk:{flag:'🇬🇧',nome:'Reino Unido',idioma:'en'},de:{flag:'🇩🇪',nome:'Alemanha',idioma:'de'},nl:{flag:'🇳🇱',nome:'Países Baixos',idioma:'nl'},fr:{flag:'🇫🇷',nome:'França',idioma:'fr'},it:{flag:'🇮🇹',nome:'Itália',idioma:'it'},ie:{flag:'🇮🇪',nome:'Irlanda',idioma:'en'},ch:{flag:'🇨🇭',nome:'Suíça',idioma:'de'},be:{flag:'🇧🇪',nome:'Bélgica',idioma:'fr'},at:{flag:'🇦🇹',nome:'Áustria',idioma:'de'},se:{flag:'🇸🇪',nome:'Suécia',idioma:'en'}};
+const SETOR_LABELS={limpeza:'Limpeza Doméstica',cabeleireiro:'Cabeleireiro(a)',babysitter:'Babysitter / Au pair',cozinha:'Cozinheiro(a)',construcao:'Construção / Obras',motorista:'Motorista / Entregas',fitness:'Personal Trainer',jardim:'Jardinagem',beleza:'Estética / Beleza',pintura:'Pintura',cuidados:'Cuidados a Idosos',outro:'Serviços Profissionais'};
 
-const PAISES = {pt:{flag:'🇵🇹',nome:'Portugal',idioma:'pt',label:'Contacto'},es:{flag:'🇪🇸',nome:'Espanha',idioma:'es',label:'Contacto'},uk:{flag:'🇬🇧',nome:'Reino Unido',idioma:'en',label:'Contact'},de:{flag:'🇩🇪',nome:'Alemanha',idioma:'de',label:'Kontakt'},nl:{flag:'🇳🇱',nome:'Países Baixos',idioma:'nl',label:'Contact'},fr:{flag:'🇫🇷',nome:'França',idioma:'fr',label:'Contact'},it:{flag:'🇮🇹',nome:'Itália',idioma:'it',label:'Contatto'},ie:{flag:'🇮🇪',nome:'Irlanda',idioma:'en',label:'Contact'},ch:{flag:'🇨🇭',nome:'Suíça',idioma:'de',label:'Kontakt'},be:{flag:'🇧🇪',nome:'Bélgica',idioma:'fr',label:'Contact'},at:{flag:'🇦🇹',nome:'Áustria',idioma:'de',label:'Kontakt'},se:{flag:'🇸🇪',nome:'Suécia',idioma:'en',label:'Kontakt'}};
-const SETOR_LABELS = {limpeza:'Limpeza Doméstica',cabeleireiro:'Cabeleireiro(a)',babysitter:'Babysitter / Au pair',cozinha:'Cozinheiro(a)',construcao:'Construção / Obras',motorista:'Motorista / Entregas',fitness:'Personal Trainer',jardim:'Jardinagem',beleza:'Estética / Beleza',pintura:'Pintura',cuidados:'Cuidados a Idosos',outro:'Serviços Profissionais'};
+let ultimaFoto=-1,ultimoSlogan=-1,fotoModo='auto',fotoEscolhida=null,layoutModo='auto',layoutEscolhido=null;
 
-let ultimaFoto=-1, ultimoSlogan=-1, fotoModo='auto', fotoEscolhida=null;
-let layoutModo='auto', layoutEscolhido=null;
-const LAYOUTS=[{id:1,nome:'Foto Fundo Escuro'},{id:2,nome:'Sidebar Escura'},{id:3,nome:'Minimalista'},{id:4,nome:'Gradient Topo'},{id:5,nome:'Bold Terracota'},{id:6,nome:'Frame Geométrico'},{id:7,nome:'Dois Tons'},{id:8,nome:'Avatar Centrado'},{id:9,nome:'Diagonal Split'},{id:10,nome:'Dark Premium'}];
-const LAYOUT_CORES=['#1B2820','#1B2820','#faf7f2','#c4622d','#c4622d','#1B2820','#1B2820','#1B2820','#1B2820','#0a0a0a'];
-function setLayoutModo(modo,btn){layoutModo=modo;layoutEscolhido=null;document.querySelectorAll('.layout-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('layoutGaleria');if(modo==='escolher'){g.classList.add('show');renderLayoutGaleria();}else{g.classList.remove('show');}}
+function setLayoutModo(modo,btn){layoutModo=modo;layoutEscolhido=null;document.querySelectorAll('.layout-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('layoutGaleria');if(modo==='escolher'){g.classList.add('show');renderLayoutGaleria();}else g.classList.remove('show');}
+
 function renderLayoutGaleria(){
-  const g=document.getElementById('layoutGaleria');
-  g.innerHTML='';
-  const previews=[
-    // 1 — Foto Fundo Escuro
-    `<div style="width:100%;height:100%;background:#1B2820;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,transparent 40%,rgba(0,0,0,0.9) 100%)"></div><div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#C4622D"></div><div style="position:absolute;bottom:8px;left:8px;right:8px"><div style="font-size:4px;color:#f5956a;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Serviço</div><div style="font-family:'Playfair Display',serif;font-size:9px;font-weight:900;color:#fff;line-height:1">Nome<br><em style="font-size:7px;opacity:0.65">Sobrenome</em></div><div style="width:100%;height:0.5px;background:linear-gradient(to right,#C4622D,transparent);margin:4px 0"></div><div style="font-size:4px;font-style:italic;color:rgba(255,255,255,0.8);margin-bottom:3px">"Slogan profissional"</div><div style="font-size:6px;font-weight:700;color:#fff">+31 678 000</div></div></div>`,
-    // 2 — Sidebar Escura
-    `<div style="width:100%;height:100%;background:#1B2820;position:relative;overflow:hidden"><div style="position:absolute;right:0;top:0;width:42%;height:100%;background:rgba(255,255,255,0.05)"></div><div style="position:absolute;inset:0;padding:8px 10px;display:flex;flex-direction:column;justify-content:space-between;width:60%"><div style="font-size:4px;color:rgba(255,255,255,0.4)">CurrículoEU</div><div><div style="width:12px;height:1px;background:#C4622D;margin-bottom:4px"></div><div style="font-size:4px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:2px">Serviço</div><div style="font-family:'Playfair Display',serif;font-size:9px;font-weight:900;color:#fff;line-height:1">Nome<br><span style="font-size:6px;opacity:0.6">Sobrenome</span></div></div><div><div style="font-size:4px;font-style:italic;color:rgba(255,255,255,0.7);margin-bottom:3px">"Slogan"</div><div style="font-size:6px;font-weight:700;color:#fff">+31 678 000</div></div></div></div>`,
-    // 3 — Minimalista
-    `<div style="width:100%;height:100%;background:#FAF7F2;position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#C4622D"></div><div style="position:absolute;inset:0;padding:8px 8px 8px 12px;display:flex;flex-direction:column;justify-content:space-between"><div style="display:flex;justify-content:space-between"><div style="font-size:4px;color:#1B2820;font-weight:700">CurrículoEU</div><div style="font-size:3px;background:#1B2820;color:#fff;padding:1px 4px;border-radius:2px">NL</div></div><div><div style="width:15px;height:1.5px;background:#C4622D;margin-bottom:4px"></div><div style="font-size:4px;color:#C4622D;text-transform:uppercase;margin-bottom:2px">Serviço</div><div style="font-family:'Playfair Display',serif;font-size:10px;font-weight:900;color:#1B2820;line-height:0.9">Nome<br><span style="color:#C4622D">Sobrenome</span></div><div style="font-size:3px;color:#888;margin-top:3px">📍 Cidade</div><div style="height:0.5px;background:linear-gradient(to right,#C4622D,transparent);margin:4px 0"></div><div style="font-size:4px;font-style:italic;color:#333;margin-bottom:4px">"Slogan"</div><div style="font-size:6px;font-weight:700;color:#1B2820">+31 678 000</div></div></div></div>`,
-    // 4 — Gradient Topo
-    `<div style="width:100%;height:100%;background:#1B2820;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(196,98,45,0.92) 0%,rgba(27,40,32,0.5) 35%,transparent 55%,rgba(0,0,0,0.92) 100%)"></div><div style="position:absolute;inset:0;padding:8px;display:flex;flex-direction:column;justify-content:space-between"><div><div style="display:flex;justify-content:space-between"><div style="font-size:4px;color:rgba(255,255,255,0.7);font-weight:700">CurrículoEU</div><div style="font-size:3px;color:rgba(255,255,255,0.6)">🇳🇱 NL</div></div><div style="font-size:4px;color:rgba(255,255,255,0.8);text-transform:uppercase;margin-top:3px">Serviço</div><div style="font-family:'Playfair Display',serif;font-size:9px;font-weight:900;color:#fff;line-height:0.95;margin-top:2px">Nome<br><em style="font-size:6px;opacity:0.8">Sobrenome</em></div></div><div><div style="font-size:4px;font-style:italic;color:rgba(255,255,255,0.85);margin-bottom:3px">"Slogan"</div><div style="font-size:6px;font-weight:700;color:#fff">+31 678 000</div></div></div></div>`,
-    // 5 — Bold Terracota
-    `<div style="width:100%;height:100%;background:#1B2820;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(196,98,45,0.95) 0%,rgba(196,98,45,0.2) 30%,transparent 50%,rgba(0,0,0,0.95) 75%)"></div><div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#fff"></div><div style="position:absolute;inset:0;padding:8px 8px 8px 12px;display:flex;flex-direction:column;justify-content:space-between"><div><div style="font-size:4px;color:#fff;font-weight:700;margin-bottom:4px">CurrículoEU</div><div style="font-size:4px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Serviço</div><div style="font-family:'Playfair Display',serif;font-size:10px;font-weight:900;color:#fff;line-height:0.9;text-transform:uppercase">Nome<br>Sobrenome</div></div><div><div style="width:20px;height:2px;background:#fff;margin-bottom:4px"></div><div style="font-size:4px;font-style:italic;color:rgba(255,255,255,0.85);margin-bottom:4px">"Slogan"</div><div style="background:rgba(255,255,255,0.12);border-radius:3px;padding:3px 5px;display:flex;justify-content:space-between"><div style="font-size:3px;color:rgba(255,255,255,0.5)">📍 Cidade</div><div style="font-size:5px;font-weight:700;color:#fff">+31</div></div></div></div></div>`,
-    // 6 — Frame Geométrico
-    `<div style="width:100%;height:100%;background:#1B2820;position:relative;overflow:hidden"><div style="position:absolute;inset:5px;border:1.5px solid rgba(255,255,255,0.25);border-radius:3px;pointer-events:none"></div><div style="position:absolute;inset:9px;border:0.5px solid rgba(196,98,45,0.5);border-radius:2px;pointer-events:none"></div><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14px 10px;text-align:center"><div style="font-size:4px;color:#fff;font-weight:700">CurrículoEU</div><div><div style="width:20px;height:1.5px;background:#C4622D;margin:0 auto 4px"></div><div style="font-family:'Playfair Display',serif;font-size:9px;font-weight:900;color:#fff;line-height:0.95">Nome<br><em style="font-size:6px;opacity:0.7">Sobrenome</em></div><div style="font-size:3px;color:rgba(255,255,255,0.4);margin:3px 0">📍 Cidade</div><div style="font-size:4px;font-style:italic;color:rgba(255,255,255,0.8);margin-bottom:3px">"Slogan"</div></div><div style="font-size:6px;font-weight:700;color:#fff">+31 678 000</div></div></div>`,
-    // 7 — Dois Tons
-    `<div style="width:100%;height:100%;position:relative;overflow:hidden"><div style="position:absolute;inset:0;top:0;height:50%;background:#1B2820"></div><div style="position:absolute;inset:0;top:50%;background:#C4622D"></div><div style="position:absolute;inset:0;padding:8px;display:flex;flex-direction:column"><div style="flex:1;display:flex;flex-direction:column;justify-content:space-between"><div style="display:flex;justify-content:space-between"><div style="font-size:4px;color:#fff;font-weight:700">CurrículoEU</div><div style="font-size:3px;color:rgba(255,255,255,0.4)">🇳🇱 NL</div></div><div><div style="font-size:4px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:1px">Serviço</div><div style="font-family:'Playfair Display',serif;font-size:9px;font-weight:900;color:#fff;line-height:0.95">Nome<br><em style="font-size:6px;opacity:0.65">Sobrenome</em></div></div></div><div style="padding-top:8px"><div style="font-size:4px;font-style:italic;font-weight:700;color:#fff;margin-bottom:3px">"Slogan"</div><div style="font-size:6px;font-weight:700;color:#fff">+31 678 000</div></div></div></div>`,
-    // 8 — Avatar Centrado
-    `<div style="width:100%;height:100%;background:#1B2820;position:relative;overflow:hidden"><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:8px;text-align:center"><div style="font-size:4px;color:#fff;font-weight:700">CurrículoEU</div><div><div style="width:28px;height:28px;border-radius:50%;background:#C4622D;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#fff;margin:0 auto 5px;border:1.5px solid rgba(255,255,255,0.15)">MC</div><div style="font-family:'Playfair Display',serif;font-size:9px;font-weight:900;color:#fff;line-height:0.95">Nome<br><em style="font-size:6px;opacity:0.65">Sobrenome</em></div><div style="width:20px;height:1.5px;background:#C4622D;margin:4px auto"></div><div style="font-size:4px;font-style:italic;color:rgba(255,255,255,0.75);margin-bottom:3px">"Slogan"</div></div><div style="font-size:6px;font-weight:700;color:#fff">+31 678 000</div></div></div>`,
-    // 9 — Diagonal Split
-    `<div style="width:100%;height:100%;background:#1B2820;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:linear-gradient(115deg,rgba(27,40,32,0.98) 0%,rgba(27,40,32,0.98) 52%,rgba(255,255,255,0.05) 52%)"></div><div style="position:absolute;inset:0;padding:8px;width:62%;display:flex;flex-direction:column;justify-content:space-between"><div><div style="font-size:4px;color:#fff;font-weight:700;margin-bottom:5px">CurrículoEU</div><div style="font-size:3px;color:#C4622D;text-transform:uppercase;margin-bottom:2px">Serviço</div><div style="font-family:'Playfair Display',serif;font-size:9px;font-weight:900;color:#fff;line-height:0.95">Nome<br><em style="font-size:6px;opacity:0.65">Sobrenome</em></div></div><div><div style="width:12px;height:1.5px;background:#C4622D;margin-bottom:4px"></div><div style="font-size:4px;font-style:italic;color:rgba(255,255,255,0.8);margin-bottom:3px">"Slogan"</div><div style="font-size:6px;font-weight:700;color:#fff">+31 678 000</div></div></div></div>`,
-    // 10 — Dark Premium
-    `<div style="width:100%;height:100%;background:#0a0a0a;position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#C4622D"></div><div style="position:absolute;inset:0;padding:8px 8px 8px 12px;display:flex;flex-direction:column;justify-content:space-between"><div style="display:flex;justify-content:space-between"><div style="font-size:4px;color:#fff;font-weight:700">CurrículoEU</div><div style="font-size:3px;background:#C4622D;color:#fff;padding:1px 4px;border-radius:2px">NL</div></div><div><div style="font-size:3px;color:#C4622D;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Serviço</div><div style="font-family:'Playfair Display',serif;font-size:11px;font-weight:900;color:#fff;line-height:0.85;letter-spacing:-1px">Nome<br>Sobrenome</div><div style="font-size:3px;color:rgba(255,255,255,0.3);margin:4px 0">📍 Cidade</div><div style="width:100%;height:0.5px;background:linear-gradient(to right,#C4622D,rgba(255,255,255,0.05));margin-bottom:4px"></div><div style="font-size:4px;font-style:italic;color:rgba(255,255,255,0.7);margin-bottom:4px">"Slogan"</div><div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:4px;display:flex;justify-content:space-between"><div style="font-size:3px;color:rgba(255,255,255,0.25)">Contacto</div><div style="font-size:5px;font-weight:700;color:#fff">+31</div></div></div></div></div>`,
-  ];
+  const g=document.getElementById('layoutGaleria');g.innerHTML='';
   const nomes=['Foto Fundo Escuro','Sidebar Escura','Minimalista','Gradient Topo','Bold Terracota','Frame Geométrico','Dois Tons','Avatar Centrado','Diagonal Split','Dark Premium'];
-  previews.forEach((p,i)=>{
+  const cores=['#1B2820','#1B2820','#FAF7F2','#1B2820','#1B2820','#1B2820','#1B2820','#1B2820','#1B2820','#0a0a0a'];
+  nomes.forEach((nome,i)=>{
     const d=document.createElement('div');
     d.className='layout-thumb'+(layoutEscolhido===(i+1)?' selected':'');
     d.onclick=()=>{layoutEscolhido=i+1;document.querySelectorAll('.layout-thumb').forEach((t,j)=>t.classList.toggle('selected',j===i));};
-    d.innerHTML=`<div class="layout-thumb-inner">${p}<div class="layout-name">${nomes[i]}</div></div>`;
+    d.innerHTML=`<div class="layout-thumb-inner" style="background:${cores[i]}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:6px"><div style="text-align:center"><div style="font-size:5px;color:rgba(255,255,255,0.5);margin-bottom:4px">${i+1}</div><div style="font-family:'Playfair Display',serif;font-size:7px;font-weight:900;color:${i===2?'#1B2820':'#fff'};line-height:1.2">Layout<br>${i+1}</div></div></div><div class="layout-name">${nome}</div></div>`;
     g.appendChild(d);
   });
 }
 
-function setFotoModo(modo,btn) {
-  fotoModo=modo; fotoEscolhida=null;
-  document.querySelectorAll('.foto-modo-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  const g=document.getElementById('fotoGaleria');
-  if(modo==='escolher'){g.classList.add('show');renderGaleria();}
-  else{g.classList.remove('show');}
-}
+function setFotoModo(modo,btn){fotoModo=modo;fotoEscolhida=null;document.querySelectorAll('.foto-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('fotoGaleria');if(modo==='escolher'){g.classList.add('show');renderGaleria();}else g.classList.remove('show');}
 
-function renderGaleria() {
+function renderGaleria(){
   const s=document.getElementById('servico').value||'outro';
   const fotos=BANCO[s]||BANCO.outro;
-  const g=document.getElementById('fotoGaleria');
-  g.innerHTML='';
+  const g=document.getElementById('fotoGaleria');g.innerHTML='';
   fotos.forEach((id,i)=>{
     const d=document.createElement('div');
     d.className='foto-thumb'+(fotoEscolhida===i?' selected':'');
@@ -629,6 +457,21 @@ function renderGaleria() {
 function onServicoChange(){if(fotoModo==='escolher'){fotoEscolhida=null;renderGaleria();}}
 function onPaisChange(){if(fotoModo==='escolher'){fotoEscolhida=null;renderGaleria();}}
 
+function buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidade,slogan,srv,contacto,iniciais){
+  const srvHtml=srv.map(s=>`<div style="font-size:0.57rem;font-weight:500;color:rgba(255,255,255,0.7);border-left:2px solid #C4622D;padding-left:6px;line-height:1.3">${s}</div>`).join('');
+  const srvPills=srv.map(s=>`<span style="font-size:0.55rem;padding:2px 8px;border:0.5px solid rgba(255,255,255,0.3);border-radius:10px;color:rgba(255,255,255,0.75)">${s}</span>`).join('');
+  if(layout===1)return`<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.5) 0%,transparent 35%,rgba(0,0,0,0.85) 65%,rgba(0,0,0,0.98) 100%)"></div><div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#C4622D;z-index:4"></div><div style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%) rotate(-32deg);font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:rgba(255,255,255,0.05);white-space:nowrap;pointer-events:none;letter-spacing:5px;text-transform:uppercase;z-index:5">CurrículoEU</div><div style="position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;justify-content:space-between;padding:14px 18px 20px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Playfair Display',serif;font-size:0.85rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;font-weight:600;color:#fff;background:rgba(196,98,45,0.85);padding:3px 9px;border-radius:4px">${pi.flag} ${pi.nome}</div></div><div><div style="font-size:0.55rem;font-weight:600;text-transform:uppercase;letter-spacing:0.18em;color:#f5956a;display:flex;align-items:center;gap:6px;margin-bottom:6px"><div style="width:16px;height:1.5px;background:#C4622D"></div>${setor}</div><div style="font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:#fff;line-height:0.92;letter-spacing:-1px;margin-bottom:5px">${nomeHtml}</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.48);margin-bottom:13px">📍 ${cidade}, ${pi.nome}</div><div style="width:100%;height:1px;background:linear-gradient(to right,#C4622D,rgba(255,255,255,0.08));margin-bottom:11px"></div><div style="font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">${srvHtml}</div><div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:11px"><div style="font-size:0.5rem;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);margin-bottom:3px">Contacto</div><div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div></div>`;
+  if(layout===2)return`<div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(27,40,32,0.98) 0%,rgba(27,40,32,0.95) 45%,rgba(0,0,0,0.1) 100%)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 20px;width:58%"><div><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div style="width:24px;height:2px;background:#C4622D;margin:8px 0"></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;line-height:1;margin-bottom:6px">${primeiroNome}${resto?`<br><span style="color:rgba(255,255,255,0.6);font-size:1.2rem">${resto}</span>`:''}</div></div><div><div style="font-family:'Playfair Display',serif;font-size:0.82rem;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.4;margin-bottom:12px">"${slogan}"</div><div style="margin-bottom:12px">${srv.map(s=>`<div style="font-size:0.6rem;color:rgba(255,255,255,0.65);border-left:2px solid #C4622D;padding-left:6px;margin-bottom:4px">${s}</div>`).join('')}</div><div style="font-size:0.58rem;color:rgba(255,255,255,0.4);margin-bottom:2px">📍 ${cidade} · ${pi.flag}</div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div>`;
+  if(layout===3)return`<div style="position:absolute;inset:0;background:rgba(250,247,242,0.94)"></div><div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#C4622D"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 20px 22px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#1B2820">Currículo<span style="color:#C4622D">EU</span></div><div style="font-size:0.58rem;background:#1B2820;color:#fff;padding:3px 9px;border-radius:4px">${pi.flag} ${pi.nome}</div></div><div><div style="width:30px;height:2px;background:#C4622D;margin-bottom:10px;margin-top:8px"></div><div style="font-size:0.6rem;color:#C4622D;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:#1B2820;line-height:0.95;margin-bottom:4px">${primeiroNome}${resto?`<br><span style="color:#C4622D">${resto}</span>`:''}</div><div style="font-size:0.62rem;color:#888;margin-bottom:12px">📍 ${cidade}, ${pi.nome}</div><div style="height:1px;background:linear-gradient(to right,#C4622D,rgba(27,40,32,0.1));margin-bottom:10px"></div><div style="font-size:0.8rem;font-style:italic;color:#333;line-height:1.5;margin-bottom:10px">"${slogan}"</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px">${srv.map(s=>`<span style="font-size:0.58rem;padding:3px 8px;border:0.5px solid #ddd;border-radius:10px;color:#555">${s}</span>`).join('')}</div><div style="border-top:1px solid rgba(27,40,32,0.1);padding-top:10px"><div style="font-size:0.5rem;color:#aaa;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:2px">Contacto</div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1B2820">${contacto||'—'}</div></div></div></div>`;
+  if(layout===4)return`<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(196,98,45,0.92) 0%,rgba(27,40,32,0.6) 35%,transparent 55%,rgba(0,0,0,0.92) 100%)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 20px"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:rgba(255,255,255,0.7)">EU</span></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.8)">${pi.flag} ${pi.nome}</div></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:#fff;line-height:0.95">${primeiroNome}${resto?`<br><em style="font-style:italic;font-size:1.4rem;opacity:0.85">${resto}</em>`:''}</div></div><div><div style="font-family:'Playfair Display',serif;font-size:0.85rem;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="margin-bottom:12px">${srv.map(s=>`<div style="font-size:0.6rem;color:rgba(255,255,255,0.7);padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.1)">${s}</div>`).join('')}</div><div style="display:flex;justify-content:space-between;align-items:flex-end"><div style="font-size:0.6rem;color:rgba(255,255,255,0.5)">📍 ${cidade}</div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div></div>`;
+  if(layout===5)return`<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(196,98,45,0.95) 0%,rgba(196,98,45,0.2) 30%,transparent 50%,rgba(0,0,0,0.96) 75%)"></div><div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#fff"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 20px 22px"><div><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:6px">Currículo<span style="color:rgba(255,255,255,0.6)">EU</span></div><div style="font-size:0.6rem;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#fff;line-height:0.92;text-transform:uppercase;letter-spacing:-1px">${primeiroNome}${resto?`<br>${resto}`:''}</div></div><div><div style="width:40px;height:3px;background:#fff;margin-bottom:10px"></div><div style="font-size:0.82rem;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="margin-bottom:12px">${srv.map(s=>`<div style="font-size:0.6rem;color:rgba(255,255,255,0.75);display:flex;align-items:center;gap:6px;margin-bottom:4px"><span style="width:5px;height:5px;background:#fff;border-radius:50%;flex-shrink:0"></span>${s}</div>`).join('')}</div><div style="background:rgba(255,255,255,0.12);border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:0.6rem;color:rgba(255,255,255,0.6)">📍 ${cidade} · ${pi.flag}</div><div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div></div>`;
+  if(layout===6)return`<div style="position:absolute;inset:0;background:rgba(0,0,0,0.55)"></div><div style="position:absolute;inset:8px;border:2px solid rgba(255,255,255,0.25);border-radius:6px;z-index:4;pointer-events:none"></div><div style="position:absolute;inset:14px;border:1px solid rgba(196,98,45,0.5);border-radius:4px;z-index:4;pointer-events:none"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:24px"><div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:6px">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.12em">${setor}</div></div><div style="text-align:center"><div style="width:30px;height:2px;background:#C4622D;margin:0 auto 10px"></div><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:#fff;line-height:0.95;margin-bottom:4px">${primeiroNome}${resto?`<br><em style="font-size:1.3rem;opacity:0.75">${resto}</em>`:''}</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.5);margin-bottom:12px">📍 ${cidade} · ${pi.flag}</div><div style="font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:5px;margin-bottom:10px">${srvPills}</div></div><div style="text-align:center"><div style="font-size:0.5rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:3px">Contacto</div><div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div>`;
+  if(layout===7)return`<div style="position:absolute;inset:0;background:linear-gradient(to bottom,#1B2820 0%,#1B2820 48%,#C4622D 48%,#C4622D 100%)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;padding:16px 20px"><div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.5)">${pi.flag} ${pi.nome}</div></div><div><div style="font-size:0.58rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:#fff;line-height:0.92;margin-bottom:4px">${primeiroNome}${resto?`<br><em style="font-size:1.4rem;opacity:0.7">${resto}</em>`:''}</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.45)">📍 ${cidade}</div></div></div><div style="padding-top:12px"><div style="font-size:0.82rem;font-style:italic;font-weight:700;color:#fff;line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">${srv.map(s=>`<span style="font-size:0.58rem;padding:2px 8px;background:rgba(255,255,255,0.15);border-radius:10px;color:#fff">${s}</span>`).join('')}</div><div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div>`;
+  if(layout===8)return`<div style="position:absolute;inset:0;background:rgba(27,40,32,0.93)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:16px 20px;text-align:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div><div style="width:60px;height:60px;border-radius:50%;background:#C4622D;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;color:#fff;margin:0 auto 10px;border:3px solid rgba(255,255,255,0.15)">${iniciais}</div><div style="font-size:0.58rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;line-height:0.95;margin-bottom:4px">${primeiroNome}${resto?`<br><em style="font-size:1.2rem;opacity:0.7">${resto}</em>`:''}</div><div style="width:30px;height:2px;background:#C4622D;margin:8px auto"></div><div style="font-size:0.75rem;font-style:italic;color:rgba(255,255,255,0.8);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:5px;margin-bottom:8px">${srvPills}</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.4);margin-bottom:4px">📍 ${cidade} · ${pi.flag}</div></div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div>`;
+  if(layout===9)return`<div style="position:absolute;inset:0;background:linear-gradient(115deg,rgba(27,40,32,0.98) 0%,rgba(27,40,32,0.98) 52%,rgba(0,0,0,0.15) 52%)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 20px;width:60%"><div><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:8px">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;color:#C4622D;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;line-height:0.95;margin-bottom:4px">${primeiroNome}${resto?`<br><em style="font-size:1.3rem;opacity:0.7">${resto}</em>`:''}</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.45);margin-bottom:10px">📍 ${cidade}</div></div><div><div style="width:24px;height:2px;background:#C4622D;margin-bottom:8px"></div><div style="font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="margin-bottom:10px">${srv.map(s=>`<div style="font-size:0.58rem;color:rgba(255,255,255,0.65);border-left:2px solid #C4622D;padding-left:6px;margin-bottom:4px">${s}</div>`).join('')}</div><div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div>`;
+  return`<div style="position:absolute;inset:0;background:rgba(0,0,0,0.78)"></div><div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#C4622D"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 20px 22px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;background:#C4622D;color:#fff;padding:3px 9px;border-radius:4px">${pi.flag}</div></div><div><div style="font-size:0.55rem;color:#C4622D;text-transform:uppercase;letter-spacing:0.18em;margin-bottom:6px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;line-height:0.88;letter-spacing:-2px;margin-bottom:5px">${primeiroNome}${resto?`<br>${resto}`:''}</div><div style="font-size:0.62rem;color:rgba(255,255,255,0.4);margin-bottom:14px">📍 ${cidade}, ${pi.nome}</div><div style="width:100%;height:1px;background:linear-gradient(to right,#C4622D,rgba(255,255,255,0.05));margin-bottom:12px"></div><div style="font-family:'Playfair Display',serif;font-size:0.85rem;font-style:italic;color:rgba(255,255,255,0.8);line-height:1.4;margin-bottom:12px">"${slogan}"</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">${srvHtml}</div><div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:0.5rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.12em">Contacto</div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div></div>`;
+}
+
 async function gerarPanfleto(){
   const nome=document.getElementById('nome').value.trim();
   const servico=document.getElementById('servico').value;
@@ -636,61 +479,32 @@ async function gerarPanfleto(){
   const contacto=document.getElementById('contacto').value.trim();
   const pais=document.getElementById('pais').value;
   const ingles=document.getElementById('toggleIngles').checked;
-  if(!nome||!servico||!cidade||!pais){alert('Por favor preenche o nome, serviço, cidade e país.');return;}
-
-  // Verificar limite por IP
-  try {
-    const limitRes = await fetch('/api/generate-panfleto', { method: 'POST', headers: {'Content-Type':'application/json'}, body: '{}' });
-    if (limitRes.status === 429) {
-      alert('Atingiste o limite de 1 panfleto gratuito por dia.\n\nRemove a marca d\'água por apenas €1,90 ou faz upgrade para Premium! 🚀');
-      window.open('https://pay.hotmart.com/Y105390443O', '_blank');
-      return;
-    }
-  } catch(e) { /* continua mesmo se falhar */ }
-
+  if(!nome||!servico||!cidade||!pais){alert('Por favor preencha o nome, serviço, cidade e país.');return;}
+  try{const r=await fetch('/api/generate-panfleto',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(r.status===429){alert('Você atingiu o limite de 1 panfleto gratuito por dia.\n\nRemova a marca d\'água por apenas €1,90 ou faça upgrade para Premium! 🚀');window.open('https://pay.hotmart.com/Y105390443O','_blank');return;}}catch(e){}
   document.getElementById('loading').classList.add('show');
   setTimeout(()=>{
     const pi=PAISES[pais];
     const idioma=ingles?'en':(pi.idioma||'en');
     let fotoId;
-    if(fotoModo==='escolher'&&fotoEscolhida!==null){
-      fotoId=(BANCO[servico]||BANCO.outro)[fotoEscolhida];
-    } else {
-      const pool=[...(BANCO[servico]||BANCO.outro),...(FOTOS_PAIS[pais]||FOTOS_PAIS.pt)];
-      let idx; do{idx=Math.floor(Math.random()*pool.length);}while(idx===ultimaFoto&&pool.length>1);
-      ultimaFoto=idx; fotoId=pool[idx];
-    }
-    const sl=(SLOGANS[servico]||SLOGANS_G)[idioma]||SLOGANS_G.en;
-    let si; do{si=Math.floor(Math.random()*sl.length);}while(si===ultimoSlogan&&sl.length>1);
+    if(fotoModo==='escolher'&&fotoEscolhida!==null){fotoId=(BANCO[servico]||BANCO.outro)[fotoEscolhida];}
+    else{const pool=[...(BANCO[servico]||BANCO.outro),...(FOTOS_PAIS[pais]||FOTOS_PAIS.pt)];let idx;do{idx=Math.floor(Math.random()*pool.length);}while(idx===ultimaFoto&&pool.length>1);ultimaFoto=idx;fotoId=pool[idx];}
+    const sl=getSlogans(servico,idioma);
+    let si;do{si=Math.floor(Math.random()*sl.length);}while(si===ultimoSlogan&&sl.length>1);
     ultimoSlogan=si;
-    const srv=(SERVICOS_TEXTO[servico]||SERVICOS_TEXTO.outro)[idioma]||SERVICOS_TEXTO.outro.en;
+    const srv=getSrv(servico,idioma);
     const partes=nome.trim().split(' ');
     const primeiroNome=partes[0];
     const resto=partes.slice(1).join(' ');
     const iniciais=partes.map(p=>p[0]).join('').substring(0,2).toUpperCase();
-    const fotoSrc=fotoUrl(fotoId,900);
+    const nomeHtml=`${primeiroNome}${resto?`<br><em style="font-style:italic;color:rgba(255,255,255,0.65);font-size:1.65rem">${resto}</em>`:''}`;
     const slogan=sl[si];
     const setor=SETOR_LABELS[servico];
     const layout=layoutModo==='escolher'&&layoutEscolhido?layoutEscolhido:Math.ceil(Math.random()*10);
-    // Foto — mantém no pf-foto original
-    document.getElementById('pf-foto').src=fotoSrc;
-    // Aplica filtro de foto por layout
     const filtros=['brightness(0.55)','brightness(0.5)','brightness(0.08) saturate(0)','brightness(0.45)','brightness(0.35)','brightness(0.4)','brightness(0.2) saturate(0)','brightness(0.15) saturate(0)','brightness(0.5)','brightness(0.2) saturate(0.3)'];
-    document.getElementById('pf-foto').style.filter=filtros[layout-1]||filtros[0];
-    // Gera overlay
-    let overlay='';
-    const nomeHtml=`${primeiroNome}${resto?`<br><em style="font-style:italic;color:rgba(255,255,255,0.65);font-size:1.65rem">${resto}</em>`:''}`;
-    if(layout===1){overlay=`<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.5) 0%,transparent 35%,transparent 40%,rgba(0,0,0,0.85) 65%,rgba(0,0,0,0.98) 100%)"></div><div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#C4622D;z-index:4"></div><div style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%) rotate(-32deg);font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:rgba(255,255,255,0.05);white-space:nowrap;pointer-events:none;letter-spacing:5px;text-transform:uppercase;z-index:5">CurrículoEU</div><div style="position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;justify-content:space-between;padding:14px 18px 20px 18px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Playfair Display',serif;font-size:0.85rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;font-weight:600;color:#fff;background:rgba(196,98,45,0.85);padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:0.1em">${pi.flag} ${pi.nome}</div></div><div><div style="font-size:0.55rem;font-weight:600;text-transform:uppercase;letter-spacing:0.18em;color:#f5956a;display:flex;align-items:center;gap:6px;margin-bottom:6px"><div style="width:16px;height:1.5px;background:#C4622D"></div>${setor}</div><div style="font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:#fff;line-height:0.92;letter-spacing:-1px;margin-bottom:5px">${nomeHtml}</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.48);margin-bottom:13px">📍 ${cidade}, ${pi.nome}</div><div style="width:100%;height:1px;background:linear-gradient(to right,#C4622D,rgba(255,255,255,0.08));margin-bottom:11px"></div><div style="font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">${srv.map(s=>`<div style="font-size:0.57rem;font-weight:500;color:rgba(255,255,255,0.7);border-left:2px solid #C4622D;padding-left:6px;line-height:1.3">${s}</div>`).join('')}</div><div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:11px"><div style="font-size:0.5rem;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);margin-bottom:3px">Contacto</div><div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div></div>`;
-    }else if(layout===2){overlay=`<div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(27,40,32,0.98) 0%,rgba(27,40,32,0.95) 45%,rgba(0,0,0,0.1) 100%)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 20px;width:58%"><div><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div style="width:24px;height:2px;background:#C4622D;margin:8px 0"></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;line-height:1;margin-bottom:6px">${primeiroNome}${resto?`<br><span style="color:rgba(255,255,255,0.6);font-size:1.2rem">${resto}</span>`:''}</div></div><div><div style="font-family:'Playfair Display',serif;font-size:0.82rem;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.4;margin-bottom:12px">"${slogan}"</div><div style="margin-bottom:12px">${srv.map(s=>`<div style="font-size:0.6rem;color:rgba(255,255,255,0.65);border-left:2px solid #C4622D;padding-left:6px;margin-bottom:4px;line-height:1.4">${s}</div>`).join('')}</div><div style="font-size:0.58rem;color:rgba(255,255,255,0.4);margin-bottom:2px">📍 ${cidade} · ${pi.flag}</div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div>`;
-    }else if(layout===3){overlay=`<div style="position:absolute;inset:0;background:rgba(250,247,242,0.94)"></div><div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#C4622D"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 20px 22px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#1B2820">Currículo<span style="color:#C4622D">EU</span></div><div style="font-size:0.58rem;background:#1B2820;color:#fff;padding:3px 9px;border-radius:4px">${pi.flag} ${pi.nome}</div></div><div><div style="width:30px;height:2px;background:#C4622D;margin-bottom:10px"></div><div style="font-size:0.6rem;color:#C4622D;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:#1B2820;line-height:0.95;margin-bottom:4px">${primeiroNome}${resto?`<br><span style="color:#C4622D">${resto}</span>`:''}</div><div style="font-size:0.62rem;color:#888;margin-bottom:12px">📍 ${cidade}, ${pi.nome}</div><div style="height:1px;background:linear-gradient(to right,#C4622D,rgba(27,40,32,0.1));margin-bottom:10px"></div><div style="font-size:0.8rem;font-style:italic;color:#333;line-height:1.5;margin-bottom:10px">"${slogan}"</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px">${srv.map(s=>`<span style="font-size:0.58rem;padding:3px 8px;border:0.5px solid #ddd;border-radius:10px;color:#555">${s}</span>`).join('')}</div><div style="border-top:1px solid rgba(27,40,32,0.1);padding-top:10px"><div style="font-size:0.5rem;color:#aaa;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:2px">Contacto</div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1B2820">${contacto||'—'}</div></div></div></div>`;
-    }else if(layout===4){overlay=`<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(196,98,45,0.92) 0%,rgba(27,40,32,0.6) 35%,transparent 55%,rgba(0,0,0,0.92) 100%)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 20px"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:rgba(255,255,255,0.7)">EU</span></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.8)">${pi.flag} ${pi.nome}</div></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:#fff;line-height:0.95">${primeiroNome}${resto?`<br><em style="font-style:italic;font-size:1.4rem;opacity:0.85">${resto}</em>`:''}</div></div><div><div style="font-family:'Playfair Display',serif;font-size:0.85rem;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="margin-bottom:12px">${srv.map(s=>`<div style="font-size:0.6rem;color:rgba(255,255,255,0.7);padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.1)">${s}</div>`).join('')}</div><div style="display:flex;justify-content:space-between;align-items:flex-end"><div style="font-size:0.6rem;color:rgba(255,255,255,0.5)">📍 ${cidade}</div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div></div>`;
-    }else if(layout===5){overlay=`<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(196,98,45,0.95) 0%,rgba(196,98,45,0.2) 30%,transparent 50%,rgba(0,0,0,0.96) 75%)"></div><div style="position:absolute;top:0;left:0;width:4px;height:100%;background:#fff"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 20px 22px"><div><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:6px">Currículo<span style="color:rgba(255,255,255,0.6)">EU</span></div><div style="font-size:0.6rem;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#fff;line-height:0.92;text-transform:uppercase;letter-spacing:-1px">${primeiroNome}${resto?`<br>${resto}`:''}</div></div><div><div style="width:40px;height:3px;background:#fff;margin-bottom:10px"></div><div style="font-size:0.82rem;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="margin-bottom:12px">${srv.map(s=>`<div style="font-size:0.6rem;color:rgba(255,255,255,0.75);display:flex;align-items:center;gap:6px;margin-bottom:4px"><span style="width:5px;height:5px;background:#fff;border-radius:50%;flex-shrink:0"></span>${s}</div>`).join('')}</div><div style="background:rgba(255,255,255,0.12);border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:0.6rem;color:rgba(255,255,255,0.6)">📍 ${cidade} · ${pi.flag}</div><div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div></div>`;
-    }else if(layout===6){overlay=`<div style="position:absolute;inset:0;background:rgba(0,0,0,0.55)"></div><div style="position:absolute;inset:8px;border:2px solid rgba(255,255,255,0.25);border-radius:6px;z-index:4;pointer-events:none"></div><div style="position:absolute;inset:14px;border:1px solid rgba(196,98,45,0.5);border-radius:4px;z-index:4;pointer-events:none"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:24px"><div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:6px">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.12em">${setor}</div></div><div style="text-align:center"><div style="width:30px;height:2px;background:#C4622D;margin:0 auto 10px"></div><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:#fff;line-height:0.95;margin-bottom:4px">${primeiroNome}${resto?`<br><em style="font-size:1.3rem;opacity:0.75">${resto}</em>`:''}</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.5);margin-bottom:12px">📍 ${cidade} · ${pi.flag}</div><div style="font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:5px;margin-bottom:10px">${srv.map(s=>`<span style="font-size:0.55rem;padding:2px 8px;border:0.5px solid rgba(255,255,255,0.3);border-radius:10px;color:rgba(255,255,255,0.75)">${s}</span>`).join('')}</div></div><div style="text-align:center"><div style="font-size:0.5rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:3px">Contacto</div><div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div>`;
-    }else if(layout===7){overlay=`<div style="position:absolute;inset:0;background:linear-gradient(to bottom,#1B2820 0%,#1B2820 48%,#C4622D 48%,#C4622D 100%)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;padding:16px 20px"><div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;color:rgba(255,255,255,0.5)">${pi.flag} ${pi.nome}</div></div><div><div style="font-size:0.58rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:#fff;line-height:0.92;margin-bottom:4px">${primeiroNome}${resto?`<br><em style="font-size:1.4rem;opacity:0.7">${resto}</em>`:''}</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.45)">📍 ${cidade}</div></div></div><div style="padding-top:12px"><div style="font-size:0.82rem;font-style:italic;font-weight:700;color:#fff;line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">${srv.map(s=>`<span style="font-size:0.58rem;padding:2px 8px;background:rgba(255,255,255,0.15);border-radius:10px;color:#fff">${s}</span>`).join('')}</div><div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div>`;
-    }else if(layout===8){overlay=`<div style="position:absolute;inset:0;background:rgba(27,40,32,0.93)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:16px 20px;text-align:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div><div style="width:60px;height:60px;border-radius:50%;background:#C4622D;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;color:#fff;margin:0 auto 10px;border:3px solid rgba(255,255,255,0.15)">${iniciais}</div><div style="font-size:0.58rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;line-height:0.95;margin-bottom:4px">${primeiroNome}${resto?`<br><em style="font-size:1.2rem;opacity:0.7">${resto}</em>`:''}</div><div style="width:30px;height:2px;background:#C4622D;margin:8px auto"></div><div style="font-size:0.75rem;font-style:italic;color:rgba(255,255,255,0.8);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:5px;margin-bottom:8px">${srv.map(s=>`<span style="font-size:0.55rem;padding:2px 8px;border:0.5px solid rgba(255,255,255,0.2);border-radius:10px;color:rgba(255,255,255,0.7)">${s}</span>`).join('')}</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.4);margin-bottom:4px">📍 ${cidade} · ${pi.flag}</div></div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div>`;
-    }else if(layout===9){overlay=`<div style="position:absolute;inset:0;background:linear-gradient(115deg,rgba(27,40,32,0.98) 0%,rgba(27,40,32,0.98) 52%,rgba(0,0,0,0.15) 52%)"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 20px;width:60%"><div><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:8px">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;color:#C4622D;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;line-height:0.95;margin-bottom:4px">${primeiroNome}${resto?`<br><em style="font-size:1.3rem;opacity:0.7">${resto}</em>`:''}</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.45);margin-bottom:10px">📍 ${cidade}</div></div><div><div style="width:24px;height:2px;background:#C4622D;margin-bottom:8px"></div><div style="font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.4;margin-bottom:10px">"${slogan}"</div><div style="margin-bottom:10px">${srv.map(s=>`<div style="font-size:0.58rem;color:rgba(255,255,255,0.65);border-left:2px solid #C4622D;padding-left:6px;margin-bottom:4px">${s}</div>`).join('')}</div><div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div>`;
-    }else{overlay=`<div style="position:absolute;inset:0;background:rgba(0,0,0,0.78)"></div><div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#C4622D"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 20px 22px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;background:#C4622D;color:#fff;padding:3px 9px;border-radius:4px">${pi.flag}</div></div><div><div style="font-size:0.55rem;color:#C4622D;text-transform:uppercase;letter-spacing:0.18em;margin-bottom:6px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;line-height:0.88;letter-spacing:-2px;margin-bottom:5px">${primeiroNome}${resto?`<br>${resto}`:''}</div><div style="font-size:0.62rem;color:rgba(255,255,255,0.4);margin-bottom:14px">📍 ${cidade}, ${pi.nome}</div><div style="width:100%;height:1px;background:linear-gradient(to right,#C4622D,rgba(255,255,255,0.05));margin-bottom:12px"></div><div style="font-family:'Playfair Display',serif;font-size:0.85rem;font-style:italic;color:rgba(255,255,255,0.8);line-height:1.4;margin-bottom:12px">"${slogan}"</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">${srv.map(s=>`<div style="font-size:0.57rem;color:rgba(255,255,255,0.6);border-left:2px solid #C4622D;padding-left:6px;line-height:1.3">${s}</div>`).join('')}</div><div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:0.5rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.12em">Contacto</div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div></div>`;}
-    document.getElementById("pf-overlay").innerHTML=overlay;
+    const img=document.getElementById('pf-foto');
+    img.src=fotoUrl(fotoId,900);
+    img.style.filter=filtros[layout-1]||filtros[0];
+    document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidade,slogan,srv,contacto,iniciais);
     document.getElementById('loading').classList.remove('show');
     const msg=encodeURIComponent(`"${slogan}"\n\n📍 ${cidade}\n📞 ${contacto||''}\n\n✨ curriculos-eu.vercel.app`);
     document.getElementById('btnWA').href=`https://wa.me/?text=${msg}`;
@@ -701,7 +515,19 @@ async function gerarPanfleto(){
 
 function novoPanel(){document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
 
-const faqs=[["O panfleto é mesmo grátis?","Sim! A versão gratuita inclui uma marca d'água. Para removê-la, paga apenas €1,90."],["Em que idioma sai o panfleto?","No idioma do país selecionado. Podes também ativar 'Inglês universal' para gerar sempre em inglês."],["A frase do panfleto é sempre a mesma?","Não! Há 10 variações por serviço em cada idioma. Nunca repete a mesma duas vezes seguidas."],["As fotos de fundo mudam?","Sim — aleatório escolhe entre fotos do serviço e do país. No modo 'Escolher' tens acesso à galeria completa."],["Como partilho o panfleto?","Faz screenshot e partilha no WhatsApp, Nextdoor, Facebook ou imprime."],["O que é a opção 'Inglês universal'?","Gera o panfleto em inglês independentemente do país. Útil para Suécia, Bélgica ou mercados internacionais."],["Posso criar panfletos para vários países?","Sim! Cada país tem fotos e idioma diferentes."],["Quanto tempo demora a gerar?","Menos de 1 segundo — tudo é gerado localmente."],["Posso remover a marca d'água?","Sim. Ao pagar €1,90 recebes uma versão limpa. Ou subscreve o Premium (€7,90/mês) para gerações ilimitadas."],["O serviço funciona para autónomos?","Foi criado a pensar em prestadores de serviços independentes."],["Posso usar o mesmo panfleto em países diferentes?","Recomendamos gerar uma versão por país — o idioma e os textos são adaptados ao mercado local."]];
+// FAQ
+const faqs=[
+  ["O panfleto é mesmo grátis?","Sim! A versão gratuita inclui uma marca d'água discreta. Para removê-la, pague apenas €1,90 — pagamento único, sem mensalidade. Ou assine o Premium (€7,90/mês) para gerações ilimitadas sem marca d'água."],
+  ["Em que idioma sai o panfleto?","No idioma do país selecionado: português para Portugal, inglês para Reino Unido e Irlanda, alemão para Alemanha e Áustria, etc. Você também pode ativar a opção 'Inglês universal' para gerar sempre em inglês."],
+  ["A frase do panfleto é sempre a mesma?","Não! Há várias variações por serviço em cada idioma, e o sistema nunca repete a mesma frase duas vezes seguidas. Cada geração é única."],
+  ["Como compartilho o panfleto?","Faça screenshot e compartilhe no WhatsApp, Nextdoor, Facebook ou imprima para distribuir na vizinhança. É assim que a maioria dos clientes começa a aparecer."],
+  ["Posso criar panfletos para vários países?","Sim! Gere uma versão para cada país onde atua — o idioma e os textos são adaptados automaticamente ao mercado local."],
+  ["Quanto tempo demora para gerar?","Menos de 1 segundo — tudo é gerado localmente no seu navegador, sem espera."],
+  ["Posso remover a marca d'água?","Sim. Pague €1,90 para remover a marca d'água de um panfleto (pagamento único), ou assine o Premium (€7,90/mês) para gerações ilimitadas sem marca d'água e com mais recursos."],
+  ["O serviço funciona para autônomos?","Foi criado especialmente para prestadores de serviços independentes — limpeza, cabeleireiro, babysitter, construção, jardinagem e muito mais."],
+  ["Meus dados ficam salvos?","Não armazenamos nenhum dado pessoal. Tudo é processado localmente no seu navegador e não fica guardado em nossos servidores."],
+  ["Posso usar o mesmo panfleto em países diferentes?","Recomendamos gerar uma versão por país — o idioma e os textos adaptados ao mercado local aumentam muito a eficácia do panfleto."],
+];
 const faqEl=document.getElementById('faqList');
 faqs.forEach(([q,a])=>{faqEl.innerHTML+=`<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>${q}</span><span class="icon">+</span></div><div class="faq-a">${a}</div></div>`;});
 </script>
