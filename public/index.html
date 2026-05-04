@@ -3,224 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CurrículoEU — Currículos para Imigrantes na Europa</title>
-<meta name="description" content="Gere em 30 segundos um currículo profissional adaptado ao formato exigido em Portugal, Irlanda, Alemanha e mais 9 países europeus. Feito para brasileiros imigrantes.">
+<title>CurrículoEU — Seu currículo no formato europeu, em 30 segundos</title>
+<meta name="description" content="Brasileiro na Europa? Seu currículo está no formato errado — e por isso você não está sendo chamado. Gere o formato certo gratuitamente em 30 segundos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --tc: #C4622D;
-  --tcd: #1B2820;
-  --g: #1a6b4a;
-  --g2: #145a3d;
-  --cream: #FAF7F2;
-  --light: #F2EDE6;
-  --text: #1a1a1a;
-  --muted: #6b7280;
-  --border: #e5e0d8;
-  --radius: 12px;
+  --tc: #C4622D; --tcd: #1B2820; --g: #1a6b4a; --g2: #145a3d;
+  --cream: #FAF7F2; --light: #F2EDE6; --text: #1a1a1a;
+  --muted: #6b7280; --border: #e5e0d8; --radius: 12px;
   --shadow: 0 4px 24px rgba(27,40,32,0.10);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; }
 
-/* ── NAV ── */
-nav {
-  background: var(--tcd);
-  position: sticky; top: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 5%; height: 64px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
-}
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  color: #fff; font-size: 1.4rem; font-weight: 900;
-  text-decoration: none; letter-spacing: -0.5px;
-}
+/* NAV */
+nav { background: var(--tcd); position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 64px; box-shadow: 0 2px 16px rgba(0,0,0,0.18); }
+.nav-logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.4rem; font-weight: 900; text-decoration: none; letter-spacing: -0.5px; }
 .nav-logo span { color: var(--tc); }
 .nav-links { display: flex; gap: 8px; align-items: center; }
-.nav-links a {
-  color: rgba(255,255,255,0.82); text-decoration: none;
-  font-size: 0.9rem; font-weight: 500;
-  padding: 6px 14px; border-radius: 6px;
-  transition: background 0.18s, color 0.18s;
-}
+.nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 6px 14px; border-radius: 6px; transition: background 0.18s, color 0.18s; }
 .nav-links a:hover { background: rgba(255,255,255,0.10); color: #fff; }
-.nav-cta {
-  background: var(--tc) !important; color: #fff !important;
-  font-weight: 600 !important; padding: 8px 18px !important;
-}
+.nav-cta { background: var(--tc) !important; color: #fff !important; font-weight: 600 !important; padding: 8px 18px !important; }
 .nav-cta:hover { background: #b3561f !important; }
 
-/* ── HERO ── */
-.hero {
-  position: relative; min-height: 92vh;
-  display: flex; align-items: center;
-  overflow: hidden;
-}
-.hero-slideshow {
-  position: absolute; inset: 0; z-index: 0;
-}
-.hero-slideshow .slide {
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center;
-  opacity: 0; transition: opacity 1.2s ease;
-}
+/* HERO */
+.hero { position: relative; min-height: 92vh; display: flex; align-items: center; overflow: hidden; }
+.hero-slideshow { position: absolute; inset: 0; z-index: 0; }
+.hero-slideshow .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease; }
 .hero-slideshow .slide.active { opacity: 1; }
-.hero-overlay {
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(120deg, rgba(27,40,32,0.87) 0%, rgba(196,98,45,0.45) 100%);
-}
-.hero-content {
-  position: relative; z-index: 2;
-  max-width: 1100px; margin: 0 auto; padding: 0 5%;
-  display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center;
-  width: 100%;
-}
+.hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(120deg, rgba(27,40,32,0.92) 0%, rgba(196,98,45,0.45) 100%); }
+.hero-content { position: relative; z-index: 2; max-width: 860px; margin: 0 auto; padding: 0 5%; width: 100%; }
 .hero-text { color: #fff; }
-.hero-badge {
-  display: inline-block;
-  background: rgba(196,98,45,0.22); border: 1px solid rgba(196,98,45,0.5);
-  color: #f5c09a; font-size: 0.78rem; font-weight: 600;
-  padding: 5px 14px; border-radius: 20px; letter-spacing: 0.06em;
-  text-transform: uppercase; margin-bottom: 20px;
-}
-.hero-text h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  font-weight: 900; line-height: 1.1;
-  margin-bottom: 20px; letter-spacing: -1px;
-}
+.hero-badge { display: inline-block; background: rgba(196,98,45,0.22); border: 1px solid rgba(196,98,45,0.5); color: #f5c09a; font-size: 0.78rem; font-weight: 600; padding: 5px 14px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 24px; }
+.hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3.6rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
 .hero-text h1 span { color: var(--tc); }
-.hero-text p {
-  font-size: 1.1rem; opacity: 0.88; max-width: 500px;
-  margin-bottom: 28px; line-height: 1.65;
-}
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-.btn-primary {
-  background: var(--tc); color: #fff;
-  padding: 15px 30px; border-radius: 8px;
-  font-size: 1rem; font-weight: 700;
-  text-decoration: none; border: none; cursor: pointer;
-  transition: background 0.18s, transform 0.15s;
-  display: inline-block;
-}
+.hero-text p { font-size: 1.1rem; opacity: 0.85; max-width: 580px; margin-bottom: 32px; line-height: 1.7; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.btn-primary { background: var(--tc); color: #fff; padding: 16px 32px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: background 0.18s, transform 0.15s; display: inline-block; }
 .btn-primary:hover { background: #b3561f; transform: translateY(-1px); }
-.hero-text-link {
-  color: rgba(255,255,255,0.65); font-size: 0.88rem;
-  text-decoration: underline; text-underline-offset: 3px;
-  cursor: pointer; background: none; border: none;
-  transition: color 0.15s;
-}
-.hero-text-link:hover { color: #fff; }
-.hero-trust {
-  display: flex; flex-wrap: wrap; gap: 16px; margin-top: 18px;
-}
-.hero-trust span {
-  color: rgba(255,255,255,0.72); font-size: 0.8rem;
-  display: flex; align-items: center; gap: 5px;
-}
-.hero-trust .check { color: #6ee7b7; font-size: 0.85rem; }
+.hero-microcopy { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 8px; }
+.hero-trust { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; }
+.hero-trust span { color: rgba(255,255,255,0.7); font-size: 0.82rem; display: flex; align-items: center; gap: 6px; }
+.hero-trust .check { color: #6ee7b7; }
 
-/* ── MOCKUP CURRÍCULO ── */
-.hero-mockup {
-  background: #fff; border-radius: 14px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-  overflow: hidden; font-size: 0.72rem;
-  transform: perspective(900px) rotateY(-4deg);
-  animation: floatMock 4s ease-in-out infinite;
-}
-@keyframes floatMock {
-  0%,100% { transform: perspective(900px) rotateY(-4deg) translateY(0); }
-  50% { transform: perspective(900px) rotateY(-4deg) translateY(-8px); }
-}
-.mock-header {
-  background: var(--g); color: #fff;
-  padding: 18px 20px 14px; display: flex; align-items: center; gap: 14px;
-}
-.mock-avatar {
-  width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(255,255,255,0.25);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; font-weight: 700; color: #fff;
-  border: 2px solid rgba(255,255,255,0.4);
-  flex-shrink: 0;
-}
-.mock-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; }
-.mock-role { font-size: 0.78rem; opacity: 0.82; }
-.mock-body { padding: 14px 18px; }
-.mock-section-title {
-  font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.08em; color: var(--g);
-  border-bottom: 1.5px solid var(--g); padding-bottom: 3px;
-  margin: 10px 0 7px;
-}
-.mock-line { height: 7px; border-radius: 4px; background: #e8e8e8; margin-bottom: 5px; }
-.mock-line.short { width: 60%; }
-.mock-line.medium { width: 80%; }
-.mock-line.full { width: 100%; }
-.mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-.mock-tag {
-  background: #eef7f3; color: var(--g); font-size: 0.6rem;
-  padding: 3px 7px; border-radius: 4px; font-weight: 600;
-}
-.mock-contact { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-.mock-contact span {
-  background: var(--light); color: var(--muted);
-  font-size: 0.58rem; padding: 3px 7px; border-radius: 3px;
-}
-.mock-badge {
-  position: absolute; bottom: -10px; right: -10px;
-  background: var(--tc); color: #fff;
-  font-size: 0.65rem; font-weight: 700;
-  padding: 6px 12px; border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(196,98,45,0.4);
-}
-.hero-mockup-wrap { position: relative; }
+/* PROBLEMA */
+.problema { background: #fff; padding: 80px 5%; }
+.problema-wrap { max-width: 860px; margin: 0 auto; }
+.section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--tc); margin-bottom: 12px; display: block; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--tcd); margin-bottom: 12px; letter-spacing: -0.5px; line-height: 1.15; }
+.section-sub { color: var(--muted); font-size: 1rem; max-width: 620px; margin-bottom: 40px; line-height: 1.7; }
+.problema-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.problema-card { padding: 28px 24px; border: 1.5px solid var(--border); border-radius: 16px; }
+.problema-icon { font-size: 1.8rem; margin-bottom: 14px; }
+.problema-title { font-size: 0.95rem; font-weight: 700; color: var(--tcd); margin-bottom: 8px; }
+.problema-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
 
-/* ── SECTION WRAPPER ── */
-.section { padding: 80px 5%; max-width: 1100px; margin: 0 auto; }
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 900; color: var(--tcd);
-  margin-bottom: 12px; letter-spacing: -0.5px;
-}
-.section-sub { color: var(--muted); font-size: 1rem; max-width: 520px; margin-bottom: 48px; }
+/* BEFORE/AFTER */
+.before-after { background: var(--light); padding: 80px 5%; }
+.before-after-wrap { max-width: 1100px; margin: 0 auto; }
+.before-after-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; align-items: start; }
 
-/* ── COMO FUNCIONA ── */
-.how-section {
-  background: #fff; padding: 80px 5%;
-}
+/* COMO FUNCIONA */
+.how-section { background: #fff; padding: 80px 5%; }
 .how-wrap { max-width: 1100px; margin: 0 auto; }
-.how-steps {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px;
-}
-.how-step {
-  text-align: center; padding: 32px 24px;
-  border: 1.5px solid var(--border); border-radius: 16px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
+.how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+.how-step { text-align: center; padding: 32px 24px; border: 1.5px solid var(--border); border-radius: 16px; transition: border-color 0.2s, box-shadow 0.2s; }
 .how-step:hover { border-color: var(--g); box-shadow: 0 8px 28px rgba(26,107,74,0.08); }
-.how-number {
-  width: 48px; height: 48px; border-radius: 50%;
-  background: var(--tcd); color: #fff;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem; font-weight: 900;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 16px;
-}
+.how-number { width: 48px; height: 48px; border-radius: 50%; background: var(--tcd); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
 .how-step h3 { font-size: 1.05rem; font-weight: 700; color: var(--tcd); margin-bottom: 8px; }
 .how-step p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
-.how-time {
-  display: inline-block; margin-top: 12px;
-  background: #eef7f3; color: var(--g);
-  font-size: 0.75rem; font-weight: 600;
-  padding: 4px 12px; border-radius: 20px;
-}
+.how-time { display: inline-block; margin-top: 12px; background: #eef7f3; color: var(--g); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
 
-/* ── FORMULÁRIO ── */
+/* SETORES */
+.carousel-wrap { position: relative; overflow: hidden; padding: 0 48px; }
+.carousel-track { display: flex; gap: 16px; transition: transform 0.35s cubic-bezier(.4,0,.2,1); }
+.sector-card { flex: 0 0 200px; background: #fff; border-radius: var(--radius); padding: 24px 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1.5px solid var(--border); transition: transform 0.18s, box-shadow 0.18s; }
+.sector-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
+.sector-icon { font-size: 2rem; margin-bottom: 10px; }
+.sector-name { font-weight: 600; font-size: 0.9rem; color: var(--tcd); margin-bottom: 4px; }
+.sector-desc { font-size: 0.78rem; color: var(--muted); }
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--tcd); color: #fff; border: none; border-radius: 50%; width: 38px; height: 38px; font-size: 1rem; cursor: pointer; z-index: 2; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+.carousel-btn:hover { background: var(--tc); }
+.carousel-btn.prev { left: 0; }
+.carousel-btn.next { right: 0; }
+
+/* DEMONSTRAÇÃO / FORMULÁRIO */
 #gerar { background: var(--tcd); padding: 80px 5%; }
 .form-wrap { max-width: 1100px; margin: 0 auto; }
 .form-wrap .section-title { color: #fff; }
@@ -229,67 +98,33 @@ nav {
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-group.full { grid-column: 1 / -1; }
 label { color: rgba(255,255,255,0.75); font-size: 0.82rem; font-weight: 500; }
-input, select, textarea {
-  background: rgba(255,255,255,0.07);
-  border: 1.5px solid rgba(255,255,255,0.15);
-  border-radius: 8px; padding: 11px 14px;
-  color: #fff; font-size: 0.95rem; font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.18s, background 0.18s;
-  width: 100%;
-}
+input, select, textarea { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 11px 14px; color: #fff; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; transition: border-color 0.18s, background 0.18s; width: 100%; }
 input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35); }
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--tc);
-  background: rgba(255,255,255,0.10);
-}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--tc); background: rgba(255,255,255,0.10); }
 select option { background: #1B2820; }
 textarea { resize: vertical; min-height: 100px; }
-
-/* CHIPS DE SETOR */
 .chips-label { color: rgba(255,255,255,0.75); font-size: 0.82rem; font-weight: 500; margin-bottom: 8px; }
-.chips-grid {
-  display: flex; flex-wrap: wrap; gap: 8px;
-  grid-column: 1 / -1;
-}
-.chip {
-  background: rgba(255,255,255,0.07);
-  border: 1.5px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.75);
-  padding: 7px 14px; border-radius: 20px;
-  font-size: 0.82rem; cursor: pointer;
-  transition: all 0.15s; user-select: none;
-}
+.chips-grid { display: flex; flex-wrap: wrap; gap: 8px; grid-column: 1 / -1; }
+.chip { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.75); padding: 7px 14px; border-radius: 20px; font-size: 0.82rem; cursor: pointer; transition: all 0.15s; user-select: none; }
 .chip:hover { border-color: var(--tc); color: #fff; }
 .chip.selected { background: var(--tc); border-color: var(--tc); color: #fff; font-weight: 600; }
-
-.form-privacy-note {
-  grid-column: 1 / -1;
-  color: rgba(255,255,255,0.45); font-size: 0.75rem;
-  text-align: center; margin-top: -4px;
-}
+.form-privacy-note { grid-column: 1 / -1; color: rgba(255,255,255,0.45); font-size: 0.75rem; text-align: center; margin-top: -4px; }
 .form-privacy-note a { color: rgba(255,255,255,0.55); }
-
-.btn-gerar {
-  background: var(--tc); color: #fff;
-  border: none; border-radius: 8px;
-  padding: 15px 36px; font-size: 1.05rem; font-weight: 700;
-  cursor: pointer; width: 100%;
-  margin-top: 10px; grid-column: 1 / -1;
-  transition: background 0.18s, transform 0.15s;
-  font-family: 'DM Sans', sans-serif;
-}
+.btn-gerar { background: var(--tc); color: #fff; border: none; border-radius: 8px; padding: 15px 36px; font-size: 1.05rem; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; grid-column: 1 / -1; transition: background 0.18s, transform 0.15s; font-family: 'DM Sans', sans-serif; }
 .btn-gerar:hover { background: #b3561f; transform: translateY(-1px); }
+.toggle-switch { position: relative; width: 42px; height: 22px; flex-shrink: 0; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; cursor: pointer; inset: 0; background: rgba(255,255,255,0.15); border-radius: 22px; transition: 0.2s; }
+.toggle-slider:before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.2s; }
+input:checked + .toggle-slider { background: var(--tc); }
+input:checked + .toggle-slider:before { transform: translateX(20px); }
 
-/* ── RESULTADO CV — 5 LAYOUTS POR PAÍS ── */
+/* RESULTADO CV */
 #resultado { display: none; }
 .cv-wrap { max-width: 860px; margin: 60px auto; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
 .cv-section { margin-bottom: 20px; }
 .cv-item { margin-bottom: 12px; }
 .cv-watermark { text-align: center; padding: 12px; background: #fff8f5; border-top: 1.5px solid #fde8da; font-size: 0.78rem; color: var(--tc); font-weight: 600; }
-.cv-watermark a { color: var(--tc); }
-
-/* ── LAYOUT A: NL/DE/AT/CH ── */
 .cv-nl .cv-header { padding: 26px 36px 18px; border-bottom: 2px solid var(--tcd); }
 .cv-nl .cv-name { font-size: 1.8rem; font-weight: 500; color: var(--tcd); letter-spacing: -0.5px; }
 .cv-nl .cv-role { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
@@ -306,8 +141,6 @@ textarea { resize: vertical; min-height: 100px; }
 .cv-nl .cv-skill-fill { height: 100%; background: var(--tcd); }
 .cv-nl .cv-lang-tag { font-size: 0.75rem; color: var(--muted); display: block; margin-bottom: 4px; }
 .cv-nl .cv-dica { background: #f5f5f5; border-left: 3px solid var(--tcd); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
-
-/* ── LAYOUT B: UK/IE ── */
 .cv-uk .cv-header { padding: 28px 36px 18px; }
 .cv-uk .cv-name { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--tcd); }
 .cv-uk .cv-role { font-size: 0.72rem; color: var(--tc); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 3px; }
@@ -322,8 +155,6 @@ textarea { resize: vertical; min-height: 100px; }
 .cv-uk .cv-tag-pill { font-size: 0.72rem; padding: 3px 10px; border: 0.5px solid #e5e0d8; border-radius: 2px; color: var(--muted); }
 .cv-uk .cv-lang-tag { font-size: 0.75rem; color: var(--tcd); margin-right: 14px; display: inline-block; }
 .cv-uk .cv-dica { background: #fff8f5; border-left: 3px solid var(--tc); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
-
-/* ── LAYOUT C: FR/BE ── */
 .cv-fr .cv-stripe { height: 4px; background: linear-gradient(90deg, var(--tc) 0%, var(--tcd) 100%); }
 .cv-fr .cv-header { padding: 18px 28px 14px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; }
 .cv-fr .cv-name { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; color: var(--tcd); }
@@ -343,8 +174,6 @@ textarea { resize: vertical; min-height: 100px; }
 .cv-fr .cv-skill-fill { height: 100%; background: var(--tc); }
 .cv-fr .cv-lang-tag { font-size: 0.72rem; display: block; color: var(--tcd); margin-bottom: 4px; }
 .cv-fr .cv-dica { background: #fff8f5; border-left: 3px solid var(--tc); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
-
-/* ── LAYOUT D: PT/ES ── */
 .cv-pt .cv-header { background: var(--tcd); color: #fff; padding: 28px 36px; }
 .cv-pt .cv-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; letter-spacing: -0.5px; }
 .cv-pt .cv-role { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-top: 3px; }
@@ -363,8 +192,6 @@ textarea { resize: vertical; min-height: 100px; }
 .cv-pt .cv-skill-fill { height: 100%; background: var(--tc); }
 .cv-pt .cv-lang-tag { display: inline-block; font-size: 0.7rem; background: #fff; border: 1px solid #ddd9d0; border-radius: 3px; padding: 2px 8px; margin: 2px 3px 2px 0; color: var(--tcd); }
 .cv-pt .cv-dica { background: #fff8f5; border-left: 3px solid var(--tc); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
-
-/* ── LAYOUT E: IT/SE ── */
 .cv-it .cv-header { padding: 22px 30px; display: flex; align-items: center; gap: 18px; border-bottom: 0.5px solid #e5e0d8; }
 .cv-it .cv-avatar { width: 54px; height: 54px; border-radius: 50%; background: var(--tc); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; font-weight: 600; flex-shrink: 0; }
 .cv-it .cv-name { font-size: 1.6rem; font-weight: 500; color: var(--tcd); }
@@ -382,285 +209,121 @@ textarea { resize: vertical; min-height: 100px; }
 .cv-it .cv-lang-tag { font-size: 0.75rem; color: var(--tcd); margin-right: 14px; display: inline-block; }
 .cv-it .cv-dica { background: #fff8f5; border-left: 3px solid var(--tc); padding: 10px 14px; font-size: 0.8rem; color: var(--tcd); line-height: 1.6; margin-top: 12px; }
 
-/* ── WATERMARK BANNER ── */
-.cv-watermark-banner {
-  max-width: 860px; margin: 0 auto;
-  background: linear-gradient(135deg, #fff8f5 0%, #fff3ee 100%);
-  border: 2px solid #fde8da;
-  border-top: none;
-  padding: 20px 28px;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 20px; flex-wrap: wrap;
-  box-shadow: 0 8px 24px rgba(196,98,45,0.10);
-}
+/* WATERMARK BANNER */
+.cv-watermark-banner { max-width: 860px; margin: 0 auto; background: linear-gradient(135deg, #fff8f5 0%, #fff3ee 100%); border: 2px solid #fde8da; border-top: none; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; box-shadow: 0 8px 24px rgba(196,98,45,0.10); }
 .cv-watermark-banner-text p { font-size: 0.95rem; color: var(--tcd); font-weight: 700; margin-bottom: 3px; }
 .cv-watermark-banner-text span { font-size: 0.78rem; color: var(--muted); }
 .cv-watermark-banner-btns { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.btn-avulso {
-  background: #fff; color: var(--tc);
-  border: 2px solid var(--tc);
-  padding: 10px 20px; border-radius: 8px;
-  font-weight: 700; font-size: 0.88rem;
-  text-decoration: none; white-space: nowrap;
-  transition: all 0.18s; display: inline-block;
-}
+.btn-avulso { background: #fff; color: var(--tc); border: 2px solid var(--tc); padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 0.88rem; text-decoration: none; white-space: nowrap; transition: all 0.18s; display: inline-block; }
 .btn-avulso:hover { background: var(--tc); color: #fff; }
-.btn-assinar {
-  background: var(--g); color: #fff;
-  border: 2px solid var(--g);
-  padding: 10px 20px; border-radius: 8px;
-  font-weight: 700; font-size: 0.88rem;
-  text-decoration: none; white-space: nowrap;
-  transition: background 0.18s; display: inline-block;
-}
+.btn-assinar { background: var(--g); color: #fff; border: 2px solid var(--g); padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 0.88rem; text-decoration: none; white-space: nowrap; transition: background 0.18s; display: inline-block; }
 .btn-assinar:hover { background: var(--g2); border-color: var(--g2); }
 .btn-assinar-note { font-size: 0.7rem; color: var(--muted); display: block; text-align: center; margin-top: 3px; }
-
-/* BOTÕES PÓS-CV */
-.cv-actions {
-  display: flex; gap: 12px; justify-content: center;
-  flex-wrap: wrap; padding: 24px 5% 60px;
-}
-.btn-wa {
-  background: #25D366; color: #fff;
-  padding: 13px 28px; border-radius: 8px;
-  font-size: 0.95rem; font-weight: 600;
-  border: none; cursor: pointer; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: background 0.18s;
-}
+.cv-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; padding: 24px 5% 60px; }
+.btn-wa { background: #25D366; color: #fff; padding: 13px 28px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 0.18s; }
 .btn-wa:hover { background: #1ebe5c; }
-.btn-premium {
-  background: var(--tc); color: #fff;
-  padding: 13px 28px; border-radius: 8px;
-  font-size: 0.95rem; font-weight: 600;
-  border: none; cursor: pointer; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: background 0.18s;
-}
-.btn-premium:hover { background: #b3561f; }
 
-/* ── CARROSSEL SETORES ── */
-.carousel-wrap { position: relative; overflow: hidden; padding: 0 48px; }
-.carousel-track {
-  display: flex; gap: 16px;
-  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
-}
-.sector-card {
-  flex: 0 0 200px; background: #fff;
-  border-radius: var(--radius); padding: 24px 20px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  border: 1.5px solid var(--border);
-  transition: transform 0.18s, box-shadow 0.18s;
-  cursor: default;
-}
-.sector-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
-.sector-icon { font-size: 2rem; margin-bottom: 10px; }
-.sector-name { font-weight: 600; font-size: 0.9rem; color: var(--tcd); margin-bottom: 4px; }
-.sector-desc { font-size: 0.78rem; color: var(--muted); }
-.carousel-btn {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  background: var(--tcd); color: #fff;
-  border: none; border-radius: 50%; width: 38px; height: 38px;
-  font-size: 1rem; cursor: pointer; z-index: 2;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-}
-.carousel-btn:hover { background: var(--tc); }
-.carousel-btn.prev { left: 0; }
-.carousel-btn.next { right: 0; }
-
-/* ── TESTEMUNHOS ── */
-.testimonials { background: var(--tcd); padding: 80px 5%; }
-.testimonials-wrap { max-width: 1100px; margin: 0 auto; }
-.testimonials .section-title { color: #fff; }
-.testimonials .section-sub { color: rgba(255,255,255,0.6); }
-.testimonials-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
-}
-.testimonial-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 16px; padding: 28px 24px;
-}
-.testimonial-stars { color: #f5a623; font-size: 0.9rem; margin-bottom: 14px; }
-.testimonial-text {
-  color: rgba(255,255,255,0.85); font-size: 0.9rem;
-  line-height: 1.7; margin-bottom: 20px; font-style: italic;
-}
-.testimonial-author { display: flex; align-items: center; gap: 12px; }
-.testimonial-avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--tc); color: #fff;
-  font-size: 0.85rem; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.testimonial-name { color: #fff; font-weight: 600; font-size: 0.88rem; }
-.testimonial-meta { color: rgba(255,255,255,0.5); font-size: 0.78rem; }
-
-/* ── PORTAIS DE EMPREGO ── */
-.portals-section { background: var(--light); padding: 80px 5%; }
-.portals-wrap { max-width: 1100px; margin: 0 auto; }
-.portals-carousel-wrap { position: relative; overflow: hidden; padding: 0 48px; }
-.portal-card {
-  flex: 0 0 220px; background: #fff;
-  border-radius: var(--radius); padding: 22px 18px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  border: 1.5px solid var(--border);
-  text-align: center;
-}
-.portal-flag { font-size: 2rem; margin-bottom: 8px; }
-.portal-country { font-weight: 700; font-size: 0.85rem; color: var(--tcd); margin-bottom: 8px; }
-.portal-links { display: flex; flex-direction: column; gap: 5px; }
-.portal-links a {
-  color: var(--g); font-size: 0.78rem; text-decoration: none;
-  font-weight: 500; transition: color 0.15s;
-}
-.portal-links a:hover { color: var(--tc); }
-
-/* ── PREÇOS ── */
+/* OFERTA */
 .pricing { background: #fff; padding: 80px 5%; }
-.pricing-wrap { max-width: 860px; margin: 0 auto; }
-.plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 0; }
-.plan {
-  border: 2px solid var(--border); border-radius: 16px;
-  padding: 36px 32px; position: relative;
-  transition: border-color 0.18s, box-shadow 0.18s;
-}
+.pricing-wrap { max-width: 960px; margin: 0 auto; }
+.plans { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.plan { border: 2px solid var(--border); border-radius: 16px; padding: 36px 28px; position: relative; transition: border-color 0.18s, box-shadow 0.18s; }
 .plan:hover { border-color: var(--g); box-shadow: 0 8px 32px rgba(26,107,74,0.10); }
 .plan.premium { border-color: var(--g); background: #f7fdf9; }
-.plan-badge {
-  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-  background: var(--g); color: #fff;
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
-  text-transform: uppercase; padding: 4px 14px; border-radius: 20px;
-}
+.plan-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--g); color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; white-space: nowrap; }
 .plan-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
 .plan-price { font-size: 2.4rem; font-weight: 800; color: var(--tcd); margin-bottom: 4px; }
 .plan-price span { font-size: 1rem; font-weight: 400; color: var(--muted); }
 .plan-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
+.plan-usecase { font-size: 0.78rem; color: var(--muted); font-style: italic; text-align: center; margin-top: 12px; }
 .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
 .plan-features li { font-size: 0.88rem; display: flex; align-items: center; gap: 8px; }
 .plan-features li::before { content: "✓"; color: var(--g); font-weight: 700; flex-shrink: 0; }
 .plan-features li.no::before { content: "✗"; color: #d1d5db; }
 .plan-features li.no { color: var(--muted); }
-.btn-plan {
-  display: block; width: 100%; text-align: center;
-  padding: 13px; border-radius: 8px;
-  font-weight: 700; font-size: 0.95rem; cursor: pointer;
-  text-decoration: none; border: none;
-  transition: all 0.18s;
-}
-.btn-plan-free {
-  background: transparent; border: 2px solid var(--border);
-  color: var(--tcd);
-}
+.btn-plan { display: block; width: 100%; text-align: center; padding: 13px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-decoration: none; border: none; transition: all 0.18s; }
+.btn-plan-free { background: transparent; border: 2px solid var(--border); color: var(--tcd); }
 .btn-plan-free:hover { border-color: var(--tcd); }
-.btn-plan-premium {
-  background: var(--g); color: #fff;
-}
+.btn-plan-premium { background: var(--g); color: #fff; }
 .btn-plan-premium:hover { background: var(--g2); }
-.plan-guarantee {
-  display: flex; align-items: center; gap: 6px;
-  margin-top: 14px; justify-content: center;
-  color: var(--g); font-size: 0.78rem; font-weight: 600;
-}
+.plan-guarantee { display: flex; align-items: center; gap: 6px; margin-top: 14px; justify-content: center; color: var(--g); font-size: 0.78rem; font-weight: 600; }
 
-/* ── FAQ ── */
-.faq { padding: 80px 5%; }
+/* GARANTIA */
+.garantia { background: var(--tcd); padding: 64px 5%; text-align: center; }
+.garantia-wrap { max-width: 680px; margin: 0 auto; }
+.garantia-icon { font-size: 3rem; margin-bottom: 20px; }
+.garantia h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; color: #fff; margin-bottom: 16px; }
+.garantia p { color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
+.garantia-badges { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.garantia-badge { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.75); font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 20px; }
+
+/* TRANSPARÊNCIA */
+.transparencia { background: var(--light); padding: 80px 5%; }
+.transparencia-wrap { max-width: 760px; margin: 0 auto; }
+.transparencia p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 16px; }
+
+/* FAQ */
+.faq { padding: 80px 5%; background: #fff; }
 .faq-wrap { max-width: 780px; margin: 0 auto; }
 .faq-item { border-bottom: 1.5px solid var(--border); padding: 18px 0; }
-.faq-q {
-  font-weight: 600; font-size: 0.95rem; cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center;
-  gap: 16px;
-}
+.faq-q { font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .faq-q .icon { color: var(--g); font-size: 1.2rem; transition: transform 0.2s; flex-shrink: 0; }
 .faq-item.open .icon { transform: rotate(45deg); }
 .faq-a { font-size: 0.88rem; color: var(--muted); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
 .faq-item.open .faq-a { max-height: 300px; padding-top: 10px; }
 
-/* ── FOOTER ── */
-footer {
-  background: var(--tcd); color: rgba(255,255,255,0.65);
-  padding: 50px 5% 30px;
-}
+/* CTA FINAL */
+.cta-final { background: var(--tc); padding: 80px 5%; text-align: center; }
+.cta-final h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+.cta-final p { color: rgba(255,255,255,0.8); font-size: 1rem; margin-bottom: 32px; }
+.btn-cta-final { background: #fff; color: var(--tc); padding: 18px 40px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; display: inline-block; transition: transform 0.15s; }
+.btn-cta-final:hover { transform: translateY(-2px); }
+.cta-final-micro { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-top: 14px; }
+
+/* PORTAIS */
+.portals-section { background: var(--light); padding: 80px 5%; }
+.portals-wrap { max-width: 1100px; margin: 0 auto; }
+.portals-carousel-wrap { position: relative; overflow: hidden; padding: 0 48px; }
+.portal-card { flex: 0 0 220px; background: #fff; border-radius: var(--radius); padding: 22px 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1.5px solid var(--border); text-align: center; }
+.portal-flag { font-size: 2rem; margin-bottom: 8px; }
+.portal-country { font-weight: 700; font-size: 0.85rem; color: var(--tcd); margin-bottom: 8px; }
+.portal-links { display: flex; flex-direction: column; gap: 5px; }
+.portal-links a { color: var(--g); font-size: 0.78rem; text-decoration: none; font-weight: 500; transition: color 0.15s; }
+.portal-links a:hover { color: var(--tc); }
+
+/* FOOTER */
+footer { background: var(--tcd); color: rgba(255,255,255,0.65); padding: 50px 5% 30px; }
 .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
 .footer-brand .nav-logo { display: block; margin-bottom: 12px; }
 .footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
 .footer-col h4 { color: #fff; font-size: 0.88rem; font-weight: 700; margin-bottom: 14px; }
 .footer-col a { display: block; color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.82rem; margin-bottom: 8px; transition: color 0.15s; }
 .footer-col a:hover { color: var(--tc); }
-.footer-bottom {
-  max-width: 1100px; margin: 32px auto 0; padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  font-size: 0.78rem;
-  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-}
+.footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.78rem; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .footer-bottom a { color: rgba(255,255,255,0.45); text-decoration: none; }
 .footer-bottom a:hover { color: var(--tc); }
 
-/* ── LOADING ── */
-.loading-overlay {
-  display: none; position: fixed; inset: 0; z-index: 200;
-  background: rgba(27,40,32,0.88); backdrop-filter: blur(4px);
-  flex-direction: column; align-items: center; justify-content: center; gap: 20px;
-}
+/* LOADING */
+.loading-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(27,40,32,0.88); backdrop-filter: blur(4px); flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
 .loading-overlay.show { display: flex; }
-.spinner {
-  width: 48px; height: 48px; border-radius: 50%;
-  border: 4px solid rgba(255,255,255,0.15);
-  border-top-color: var(--tc);
-  animation: spin 0.8s linear infinite;
-}
+.spinner { width: 48px; height: 48px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.15); border-top-color: var(--tc); animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-overlay p { color: #fff; font-size: 1rem; opacity: 0.85; }
 
-.toggle-switch { position: relative; width: 42px; height: 22px; flex-shrink: 0; }
-.toggle-switch input { opacity: 0; width: 0; height: 0; }
-.toggle-slider { position: absolute; cursor: pointer; inset: 0; background: rgba(255,255,255,0.15); border-radius: 22px; transition: 0.2s; }
-.toggle-slider:before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.2s; }
-input:checked + .toggle-slider { background: var(--tc); }
-input:checked + .toggle-slider:before { transform: translateX(20px); }
-
-/* ── MODAL PRIVACIDADE ── */
-.modal-overlay {
-  display: none; position: fixed; inset: 0; z-index: 300;
-  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
-  align-items: center; justify-content: center;
-  padding: 20px;
-}
+/* MODAIS */
+.modal-overlay { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
 .modal-overlay.show { display: flex; }
-.modal-box {
-  background: #fff; border-radius: 16px;
-  max-width: 640px; width: 100%;
-  max-height: 80vh; overflow-y: auto;
-  padding: 40px;
-}
+.modal-box { background: #fff; border-radius: 16px; max-width: 640px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 40px; }
 .modal-box h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 16px; color: var(--tcd); }
 .modal-box h3 { font-size: 1rem; font-weight: 700; color: var(--tcd); margin: 20px 0 8px; }
 .modal-box p, .modal-box li { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
 .modal-box ul { padding-left: 18px; margin-bottom: 8px; }
-.modal-close {
-  display: block; margin-top: 28px; width: 100%;
-  padding: 12px; border-radius: 8px;
-  background: var(--tcd); color: #fff;
-  border: none; cursor: pointer;
-  font-size: 0.95rem; font-weight: 600;
-  font-family: 'DM Sans', sans-serif;
-}
+.modal-close { display: block; margin-top: 28px; width: 100%; padding: 12px; border-radius: 8px; background: var(--tcd); color: #fff; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 600; font-family: 'DM Sans', sans-serif; }
 
-/* ── BEFORE/AFTER GRID ── */
-.before-after-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 32px; align-items: start;
-}
-
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
+.before-after-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
 @media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; }
-  .hero-mockup-wrap { display: none; }
   .form-grid { grid-template-columns: 1fr; }
   .form-group.full { grid-column: 1; }
   .cv-body { grid-template-columns: 1fr; }
@@ -669,19 +332,20 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   .footer-inner { grid-template-columns: 1fr; }
   .chips-grid { grid-column: 1; }
   .how-steps { grid-template-columns: 1fr; }
-  .testimonials-grid { grid-template-columns: 1fr; }
   .before-after-grid { grid-template-columns: 1fr; }
+  .problema-grid { grid-template-columns: 1fr; }
   .nav-links a { font-size: 0.8rem; padding: 6px 8px; }
   .nav-cta { padding: 6px 12px !important; font-size: 0.8rem !important; }
   .cv-watermark-banner { flex-direction: column; align-items: flex-start; }
   .cv-watermark-banner-btns { width: 100%; flex-direction: column; }
   .btn-avulso, .btn-assinar { width: 100%; text-align: center; }
+  .garantia-badges { flex-direction: column; align-items: center; }
 }
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">Currículo<span>EU</span></a>
   <div class="nav-links">
@@ -691,7 +355,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- 1. HERO -->
 <section class="hero">
   <div class="hero-slideshow" id="slideshow">
     <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1400&q=80')"></div>
@@ -703,95 +367,63 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-text">
-      <div class="hero-badge">🌍 Feito para brasileiros na Europa</div>
-      <h1>Brasileiro na Europa?<br>Seu currículo está no <span>formato errado.</span></h1>
-      <p>Recrutadores europeus descartam candidaturas em segundos — não pelo perfil, mas pelo formato errado. Gere em 30 segundos um currículo adaptado ao padrão de Portugal, Irlanda, Alemanha e mais 9 países.</p>
+      <div class="hero-badge">🌍 Para brasileiros na Europa</div>
+      <h1>Seu currículo brasileiro está a fazer você <span>perder empregos na Europa.</span></h1>
+      <p>Recrutadores em Portugal, Irlanda, Alemanha e mais 9 países descartam currículos fora do padrão local — independente do seu perfil. Gere o seu no formato certo em 30 segundos, gratuitamente.</p>
       <div class="hero-actions">
         <a href="#gerar" class="btn-primary">Gerar meu currículo europeu grátis →</a>
-        <a href="/verificador" class="hero-text-link">Verificar meu currículo atual</a>
       </div>
+      <p class="hero-microcopy">Sem cadastro · Sem cartão · Resultado em 30 segundos</p>
       <div class="hero-trust">
         <span><span class="check">✓</span> Grátis para começar</span>
-        <span><span class="check">✓</span> Sem cadastro ou cartão</span>
-        <span><span class="check">✓</span> Resultado em 30 segundos</span>
-      </div>
-    </div>
-    <div class="hero-mockup-wrap">
-      <div class="hero-mockup">
-        <div class="mock-header">
-          <div class="mock-avatar">JC</div>
-          <div>
-            <div class="mock-name">João Costa</div>
-            <div class="mock-role">Cozinheiro · Restaurante</div>
-          </div>
-        </div>
-        <div class="mock-body">
-          <div class="mock-section-title">Experiência</div>
-          <div class="mock-line full"></div>
-          <div class="mock-line medium"></div>
-          <div class="mock-line short"></div>
-          <div class="mock-section-title">Competências</div>
-          <div class="mock-contact">
-            <span>Cozinha Portuguesa</span><span>Gestão de equipa</span>
-            <span>Higiene HACCP</span><span>Preparação fria</span>
-          </div>
-          <div class="mock-section-title">Formação</div>
-          <div class="mock-line medium"></div>
-          <div class="mock-line short"></div>
-          <div class="mock-grid">
-            <div class="mock-tag">✓ Adaptado a PT</div>
-            <div class="mock-tag">✓ Em Português</div>
-          </div>
-        </div>
-      </div>
-      <div class="mock-badge">✨ Gerado em 30 seg</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── COMO FUNCIONA ── -->
-<section class="how-section">
-  <div class="how-wrap">
-    <h2 class="section-title">Como funciona</h2>
-    <p class="section-sub">Três passos simples. Nenhum conhecimento técnico necessário.</p>
-    <div class="how-steps">
-      <div class="how-step">
-        <div class="how-number">1</div>
-        <h3>Preencha seus dados</h3>
-        <p>Nome, país de destino, setor de trabalho e um resumo da sua experiência. Leva menos de 2 minutos.</p>
-        <span class="how-time">⏱ ~2 minutos</span>
-      </div>
-      <div class="how-step">
-        <div class="how-number">2</div>
-        <h3>A IA adapta ao seu país</h3>
-        <p>Nosso sistema conhece o formato exigido em cada país: foto ou sem foto, estilo do texto, vocabulário técnico do setor.</p>
-        <span class="how-time">⏱ ~30 segundos</span>
-      </div>
-      <div class="how-step">
-        <div class="how-number">3</div>
-        <h3>Baixe e candidate-se</h3>
-        <p>Currículo pronto no padrão local. Compartilhe pelo WhatsApp ou baixe o PDF limpo (Premium) para enviar às vagas.</p>
-        <span class="how-time">⏱ Imediato</span>
+        <span><span class="check">✓</span> 12 países europeus</span>
+        <span><span class="check">✓</span> 18 setores profissionais</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── ANTES / DEPOIS ── -->
-<section style="background:#fff; padding: 80px 5%;">
-  <div style="max-width: 1100px; margin: 0 auto;">
-    <h2 class="section-title">O currículo certo faz toda a diferença</h2>
-    <p class="section-sub">Veja como um cozinheiro brasileiro candidatando-se em Portugal apresenta o mesmo perfil de formas completamente diferentes — e qual deles chama atenção do recrutador.</p>
+<!-- 2. PROBLEMA -->
+<section class="problema">
+  <div class="problema-wrap">
+    <span class="section-label">O problema real</span>
+    <h2 class="section-title">Por que tantos brasileiros na Europa não conseguem entrevistas?</h2>
+    <p class="section-sub">Não é a falta de experiência. Não é o idioma. É o currículo no formato errado.</p>
+    <div class="problema-grid">
+      <div class="problema-card">
+        <div class="problema-icon">🇬🇧</div>
+        <div class="problema-title">Reino Unido e Irlanda</div>
+        <div class="problema-desc">Foto e data de nascimento são proibidos. O currículo deve ter no máximo 2 páginas com foco total em resultados mensuráveis.</div>
+      </div>
+      <div class="problema-card">
+        <div class="problema-icon">🇩🇪</div>
+        <div class="problema-title">Alemanha e Áustria</div>
+        <div class="problema-desc">Uma foto profissional é esperada. O Lebenslauf tem formato tabelar e inclui dados pessoais que no Brasil seriam considerados invasivos.</div>
+      </div>
+      <div class="problema-card">
+        <div class="problema-icon">🇵🇹</div>
+        <div class="problema-title">Portugal e Espanha</div>
+        <div class="problema-desc">O "objetivo profissional" não existe aqui. O que se usa é um "perfil profissional" direto, técnico e específico ao setor.</div>
+      </div>
+    </div>
+    <div style="margin-top: 40px; padding: 28px 32px; background: var(--light); border-radius: 16px; border-left: 4px solid var(--tc);">
+      <p style="font-size: 1rem; color: var(--tcd); line-height: 1.7;">Um currículo brasileiro — com CPF, estado civil, "objetivo profissional" genérico e lista de habilidades vagas como "proatividade" — é descartado nos primeiros 10 segundos. <strong>Não porque você não serve para a vaga. Mas porque parece que você não conhece as regras locais.</strong></p>
+    </div>
+  </div>
+</section>
 
+<!-- 3. ANTES VS DEPOIS -->
+<section class="before-after">
+  <div class="before-after-wrap">
+    <span class="section-label">Prova visual</span>
+    <h2 class="section-title">O mesmo profissional. Dois resultados completamente diferentes.</h2>
+    <p class="section-sub">Veja como um cozinheiro brasileiro candidatando-se em Portugal apresenta o mesmo perfil — e qual deles o recrutador chama para entrevista.</p>
     <div class="before-after-grid">
-
-      <!-- ANTES: Brasil -->
       <div>
         <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-          <span style="background:#fee2e2; color:#dc2626; font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:20px; text-transform:uppercase; letter-spacing:0.05em;">❌ Formato Brasileiro</span>
+          <span style="background:#fee2e2; color:#dc2626; font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:20px; text-transform:uppercase;">❌ Formato Brasileiro</span>
         </div>
-        <div style="border: 2px solid #fca5a5; border-radius: 12px; overflow:hidden; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; background:#fff; opacity: 0.85;">
-          <!-- Header Brasil -->
+        <div style="border: 2px solid #fca5a5; border-radius: 12px; overflow:hidden; font-size: 0.78rem; background:#fff; opacity: 0.85;">
           <div style="background: #1e3a5f; color:#fff; padding: 20px 22px;">
             <div style="font-size:1.1rem; font-weight:700; margin-bottom:2px;">JOÃO CARLOS DA SILVA COSTA</div>
             <div style="font-size:0.7rem; opacity:0.7; margin-bottom:8px;">Cozinheiro Profissional</div>
@@ -803,42 +435,27 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
           </div>
           <div style="padding: 16px 22px;">
-            <!-- Objetivo -->
             <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#1e3a5f; border-bottom:1.5px solid #1e3a5f; padding-bottom:3px; margin-bottom:8px;">OBJETIVO PROFISSIONAL</div>
             <p style="font-size:0.72rem; color:#444; line-height:1.5; margin-bottom:14px;">Busco uma oportunidade de crescimento profissional onde eu possa aplicar meus conhecimentos culinários e contribuir para o sucesso da empresa, agregando valor à equipe de trabalho com dedicação e comprometimento.</p>
-            <!-- Experiência -->
-            <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#1e3a5f; border-bottom:1.5px solid #1e3a5f; padding-bottom:3px; margin-bottom:8px;">EXPERIÊNCIA PROFISSIONAL</div>
-            <div style="margin-bottom:10px;">
-              <div style="font-size:0.75rem; font-weight:600; color:#222;">Cozinheiro — Restaurante Bom Sabor Ltda.</div>
-              <div style="font-size:0.68rem; color:#888;">Mar/2019 – Nov/2023 | São Paulo, SP</div>
-              <div style="font-size:0.7rem; color:#555; margin-top:3px; line-height:1.5;">Responsável pela preparação dos pratos do cardápio, controle de estoque, higienização da cozinha e coordenação de 2 ajudantes de cozinha.</div>
-            </div>
-            <!-- Formação -->
-            <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#1e3a5f; border-bottom:1.5px solid #1e3a5f; padding-bottom:3px; margin-bottom:8px;">FORMAÇÃO ACADÊMICA</div>
-            <div style="font-size:0.72rem; color:#444; margin-bottom:14px;">Técnico em Cozinha — SENAC São Paulo (2018)</div>
-            <!-- Habilidades -->
             <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#1e3a5f; border-bottom:1.5px solid #1e3a5f; padding-bottom:3px; margin-bottom:8px;">HABILIDADES</div>
             <div style="font-size:0.7rem; color:#555; line-height:1.7;">• Trabalho em equipe &nbsp;•&nbsp; Organização &nbsp;•&nbsp; Proatividade<br>• Pontualidade &nbsp;•&nbsp; Comunicação &nbsp;•&nbsp; Responsabilidade</div>
           </div>
         </div>
-        <div style="margin-top:12px; background:#fee2e2; border-radius:8px; padding:12px 16px;">
-          <p style="font-size:0.78rem; color:#dc2626; font-weight:600; margin-bottom:4px;">Por que não funciona em Portugal:</p>
-          <ul style="font-size:0.75rem; color:#7f1d1d; line-height:1.8; padding-left:16px;">
-            <li>CPF, estado civil e CNH são desnecessários e invasivos</li>
-            <li>"Objetivo profissional" genérico é descartado na Europa</li>
-            <li>Habilidades genéricas sem contexto técnico da área</li>
-            <li>Formato visual desatualizado para o mercado português</li>
+        <div style="margin-top:12px; background:#fee2e2; border-radius:8px; padding:14px 18px;">
+          <p style="font-size:0.82rem; color:#dc2626; font-weight:700; margin-bottom:6px;">Por que é descartado em Portugal:</p>
+          <ul style="font-size:0.78rem; color:#7f1d1d; line-height:1.9; padding-left:18px;">
+            <li>CPF, estado civil e CNH são invasivos e desnecessários</li>
+            <li>"Objetivo profissional" genérico é ignorado na Europa</li>
+            <li>Habilidades vagas sem contexto técnico real</li>
+            <li>O recrutador vê falta de conhecimento das normas locais</li>
           </ul>
         </div>
       </div>
-
-      <!-- DEPOIS: Portugal -->
       <div>
         <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-          <span style="background:#dcfce7; color:#15803d; font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:20px; text-transform:uppercase; letter-spacing:0.05em;">✓ Formato Europeu (Portugal)</span>
+          <span style="background:#dcfce7; color:#15803d; font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:20px; text-transform:uppercase;">✓ Formato Europeu (Portugal)</span>
         </div>
-        <div style="border: 2px solid #86efac; border-radius: 12px; overflow:hidden; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; background:#fff;">
-          <!-- Header Portugal -->
+        <div style="border: 2px solid #86efac; border-radius: 12px; overflow:hidden; font-size: 0.78rem; background:#fff;">
           <div style="background: var(--tcd); color:#fff; padding: 20px 22px;">
             <div style="font-size:1.1rem; font-weight:700; margin-bottom:2px;">João Costa</div>
             <div style="font-size:0.7rem; color: var(--tc); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px;">Cozinheiro · Restauração</div>
@@ -848,63 +465,74 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
               <span style="font-size:0.68rem; opacity:0.65;">📍 Lisboa, Portugal</span>
             </div>
           </div>
-          <div style="display:grid; grid-template-columns: 160px 1fr;">
-            <!-- Sidebar -->
-            <div style="background:#f5f3ee; padding:18px 14px; border-right:1px solid #e5e0d8;">
+          <div style="display:grid; grid-template-columns: 150px 1fr;">
+            <div style="background:#f5f3ee; padding:16px 14px; border-right:1px solid #e5e0d8;">
               <div style="font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--tcd); border-bottom:1.5px solid var(--tcd); padding-bottom:3px; margin-bottom:8px;">Competências</div>
-              <div style="font-size:0.68rem; color:#555; line-height:1.9;">
-                Cozinha Mediterrânea<br>
-                Gestão de brigada<br>
-                Normas HACCP<br>
-                Mise en place<br>
-                Confeção de frios<br>
-                Fichas técnicas
-              </div>
+              <div style="font-size:0.68rem; color:#555; line-height:1.9;">Cozinha Mediterrânea<br>Gestão de brigada<br>Normas HACCP<br>Mise en place<br>Fichas técnicas</div>
               <div style="font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--tcd); border-bottom:1.5px solid var(--tcd); padding-bottom:3px; margin:14px 0 8px;">Idiomas</div>
-              <div style="font-size:0.68rem; color:#555; line-height:1.9;">
-                Português · Nativo<br>
-                Inglês · B1
-              </div>
+              <div style="font-size:0.68rem; color:#555; line-height:1.9;">Português · Nativo<br>Inglês · B1</div>
             </div>
-            <!-- Main -->
-            <div style="padding:18px 20px;">
+            <div style="padding:16px 18px;">
               <div style="font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--tcd); border-bottom:1.5px solid var(--tcd); padding-bottom:3px; margin-bottom:8px;">Perfil Profissional</div>
-              <p style="font-size:0.72rem; color:#444; line-height:1.55; margin-bottom:12px;">Cozinheiro com 5 anos de experiência em restauração de média e alta dimensão. Especializado em cozinha mediterrânea e gestão de equipas em ambiente de ritmo acelerado. Disponível imediatamente.</p>
-              <div style="font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--tcd); border-bottom:1.5px solid var(--tcd); padding-bottom:3px; margin-bottom:8px;">Experiência Profissional</div>
-              <div style="margin-bottom:10px;">
-                <div style="font-size:0.75rem; font-weight:600; color:#222;">Cozinheiro de Partida</div>
-                <div style="font-size:0.68rem; color:#888;">Restaurante Bom Sabor · 2019 – 2023</div>
-                <div style="font-size:0.7rem; color:#555; margin-top:3px; line-height:1.5;">Responsável pela secção de frios e entradas. Coordenação de 2 elementos. Controlo de qualidade e conformidade HACCP.</div>
-              </div>
-              <div style="font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--tcd); border-bottom:1.5px solid var(--tcd); padding-bottom:3px; margin-bottom:8px;">Formação</div>
-              <div style="font-size:0.72rem; color:#444;">Técnico de Cozinha — SENAC · 2018</div>
+              <p style="font-size:0.72rem; color:#444; line-height:1.55; margin-bottom:12px;">Cozinheiro com 5 anos de experiência em restauração de média e alta dimensão. Especializado em cozinha mediterrânea e gestão de equipas. Disponível imediatamente.</p>
+              <div style="font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--tcd); border-bottom:1.5px solid var(--tcd); padding-bottom:3px; margin-bottom:8px;">Experiência</div>
+              <div style="font-size:0.75rem; font-weight:600; color:#222;">Cozinheiro de Partida</div>
+              <div style="font-size:0.68rem; color:#888; margin-bottom:4px;">Restaurante Bom Sabor · 2019–2023</div>
+              <div style="font-size:0.7rem; color:#555; line-height:1.5;">Secção de frios e entradas. Coordenação de 2 elementos. Controlo HACCP.</div>
             </div>
           </div>
         </div>
-        <div style="margin-top:12px; background:#dcfce7; border-radius:8px; padding:12px 16px;">
-          <p style="font-size:0.78rem; color:#15803d; font-weight:600; margin-bottom:4px;">Por que funciona em Portugal:</p>
-          <ul style="font-size:0.75rem; color:#14532d; line-height:1.8; padding-left:16px;">
-            <li>Sem dados pessoais irrelevantes (CPF, estado civil)</li>
-            <li>Perfil profissional direto e específico ao setor</li>
-            <li>Competências técnicas relevantes para restauração</li>
-            <li>Formato visual limpo, reconhecido pelos recrutadores locais</li>
+        <div style="margin-top:12px; background:#dcfce7; border-radius:8px; padding:14px 18px;">
+          <p style="font-size:0.82rem; color:#15803d; font-weight:700; margin-bottom:6px;">Por que funciona em Portugal:</p>
+          <ul style="font-size:0.78rem; color:#14532d; line-height:1.9; padding-left:18px;">
+            <li>Sem dados pessoais irrelevantes</li>
+            <li>Perfil direto e específico ao setor</li>
+            <li>Competências técnicas reais e relevantes</li>
+            <li>Formato que o recrutador local reconhece</li>
           </ul>
         </div>
       </div>
     </div>
-
-    <!-- CTA abaixo do comparativo -->
     <div style="text-align:center; margin-top:48px;">
-      <p style="font-size:1rem; color:var(--muted); margin-bottom:20px;">O CurrículoEU gera automaticamente o formato certo para cada país — em segundos.</p>
-      <a href="#gerar" class="btn-primary" style="font-size:1rem; padding:15px 36px;">Gerar meu currículo europeu grátis →</a>
+      <p style="font-size:1rem; color:var(--muted); margin-bottom:20px;">O CurrículoEU gera o formato correto automaticamente — você só preenche seus dados.</p>
+      <a href="#gerar" class="btn-primary">Gerar meu currículo no formato certo →</a>
     </div>
   </div>
 </section>
 
-<!-- ── SETORES CARROSSEL ── -->
+<!-- 4. COMO FUNCIONA -->
+<section class="how-section">
+  <div class="how-wrap">
+    <span class="section-label">Simples e rápido</span>
+    <h2 class="section-title">Três passos. Menos de 3 minutos.</h2>
+    <p class="section-sub">Não precisa saber inglês avançado, não precisa conhecer as normas locais. O sistema faz tudo.</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-number">1</div>
+        <h3>Preencha seus dados</h3>
+        <p>Nome, país de destino, setor de trabalho e um resumo da sua experiência. Não precisa ser perfeito — o sistema adapta.</p>
+        <span class="how-time">⏱ ~2 minutos</span>
+      </div>
+      <div class="how-step">
+        <div class="how-number">2</div>
+        <h3>A IA adapta ao padrão local</h3>
+        <p>Nossa inteligência artificial conhece as normas de cada país: idioma, se incluir foto, quais seções usar, vocabulário técnico do setor.</p>
+        <span class="how-time">⏱ ~30 segundos</span>
+      </div>
+      <div class="how-step">
+        <div class="how-number">3</div>
+        <h3>Currículo pronto para enviar</h3>
+        <p>Documento no formato exato exigido no país escolhido. Compartilhe pelo WhatsApp ou baixe o PDF limpo com o plano pago.</p>
+        <span class="how-time">⏱ Imediato</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. SETORES -->
 <div style="padding: 70px 5% 50px; max-width: 1100px; margin: 0 auto;">
   <h2 class="section-title">18 setores profissionais</h2>
-  <p class="section-sub">Currículos adaptados ao vocabulário e formato de cada área de trabalho.</p>
+  <p class="section-sub">Currículos adaptados ao vocabulário técnico de cada área.</p>
   <div class="carousel-wrap">
     <button class="carousel-btn prev" onclick="slideCarousel('sectors', 1)">‹</button>
     <div class="carousel-track" id="sectors">
@@ -931,13 +559,13 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   </div>
 </div>
 
-<!-- ── FORMULÁRIO ── -->
+<!-- 6. FORMULÁRIO / DEMONSTRAÇÃO -->
 <section id="gerar">
   <div class="form-wrap">
-    <h2 class="section-title">Criar meu currículo</h2>
-    <p class="section-sub">Preencha os campos abaixo e receba um currículo profissional adaptado ao seu país.</p>
+    <span class="section-label" style="color: rgba(255,255,255,0.55);">Veja o resultado antes de pagar</span>
+    <h2 class="section-title">Gere seu currículo agora — é grátis</h2>
+    <p class="section-sub">Preencha abaixo e veja o resultado com seus próprios olhos. Só pague se gostar.</p>
     <div class="form-grid" id="form">
-
       <div class="form-group">
         <label>Nome completo</label>
         <input type="text" id="nome" placeholder="ex: João Costa">
@@ -968,7 +596,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         <label>E-mail</label>
         <input type="email" id="email" placeholder="ex: joao@email.com">
       </div>
-
       <div class="form-group full">
         <div class="chips-label">Setor de trabalho</div>
         <div class="chips-grid" id="chipsGrid">
@@ -993,7 +620,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         </div>
         <input type="hidden" id="setor">
       </div>
-
       <div class="form-group full">
         <label>Experiência profissional</label>
         <textarea id="experiencia" placeholder="Ex: 3 anos como cozinheiro em restaurante italiano. Especialidade em massas e gestão de cozinha para 80 pessoas/dia."></textarea>
@@ -1006,7 +632,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         <label>Idiomas</label>
         <input type="text" id="idiomas" placeholder="Ex: Português (nativo), Inglês (intermediário B1), Espanhol (básico)">
       </div>
-
       <div class="form-group full" style="display:flex;align-items:center;gap:12px;">
         <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
           <div class="toggle-switch">
@@ -1016,29 +641,18 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
           🇬🇧 Gerar sempre em inglês (mais universal)
         </label>
       </div>
-
-      <button class="btn-gerar" onclick="gerarCV()">✨ Gerar Currículo Grátis</button>
-
-      <p class="form-privacy-note">🔒 Seus dados não são armazenados em nossos servidores. <a href="/privacidade" onclick="abrirPrivacidade(event)">Política de Privacidade</a></p>
+      <button class="btn-gerar" onclick="gerarCV()">✨ Gerar meu currículo grátis agora</button>
+      <p class="form-privacy-note">🔒 Seus dados não são armazenados. <a href="/privacidade" onclick="abrirPrivacidade(event)">Política de Privacidade</a></p>
     </div>
   </div>
 </section>
 
-<!-- ── RESULTADO ── -->
+<!-- RESULTADO -->
 <div id="resultado">
   <div class="cv-wrap" id="cvWrap">
-    <div class="cv-header">
-      <div class="cv-name" id="cv-nome"></div>
-      <div class="cv-role" id="cv-cargo"></div>
-      <div class="cv-contact-tags" id="cv-contacts"></div>
-    </div>
-    <div class="cv-body">
-      <div class="cv-sidebar" id="cv-sidebar"></div>
-      <div class="cv-main" id="cv-main"></div>
-    </div>
-    <div class="cv-watermark">
-      🔒 Versão gratuita — remova a marca d'água abaixo
-    </div>
+    <div class="cv-header"><div class="cv-name" id="cv-nome"></div><div class="cv-role" id="cv-cargo"></div><div class="cv-contact-tags" id="cv-contacts"></div></div>
+    <div class="cv-body"><div class="cv-sidebar" id="cv-sidebar"></div><div class="cv-main" id="cv-main"></div></div>
+    <div class="cv-watermark">🔒 Versão gratuita — remova a marca d'água abaixo</div>
   </div>
   <div class="cv-watermark-banner">
     <div class="cv-watermark-banner-text">
@@ -1064,56 +678,13 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   </div>
 </div>
 
-<!-- ── TESTEMUNHOS ── -->
-<!-- ATENÇÃO: Substitua estes depoimentos por testemunhos reais assim que tiver clientes -->
-<section class="testimonials">
-  <div class="testimonials-wrap">
-    <h2 class="section-title">Brasileiros que conseguiram emprego</h2>
-    <p class="section-sub">Histórias reais de imigrantes que usaram o CurrículoEU.</p>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Mandei mais de 30 currículos no formato brasileiro e não recebi nenhuma resposta. Usei o CurrículoEU para adaptar para Portugal e na semana seguinte já tinha entrevista."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">RC</div>
-          <div>
-            <div class="testimonial-name">Rafael C.</div>
-            <div class="testimonial-meta">Cozinheiro · Porto, Portugal</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Não sabia que na Irlanda o currículo tem formato diferente. Aqui não se coloca foto nem data de nascimento. A ferramenta fez tudo automaticamente, incrível!"</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">AS</div>
-          <div>
-            <div class="testimonial-name">Ana S.</div>
-            <div class="testimonial-meta">Limpeza · Dublin, Irlanda</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Tinha visto de trabalho há 4 meses e não conseguia emprego. O problema era o currículo. Com o formato alemão adaptado pela IA, em 2 semanas estava trabalhando."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">MO</div>
-          <div>
-            <div class="testimonial-name">Marcos O.</div>
-            <div class="testimonial-meta">Construção · Berlim, Alemanha</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── PREÇOS ── -->
+<!-- 7. OFERTA -->
 <section class="pricing">
   <div class="pricing-wrap">
-    <h2 class="section-title">Planos simples e transparentes</h2>
-    <p class="section-sub" style="margin-bottom: 36px;">Comece de graça. Pague só se gostar do resultado.</p>
-    <div class="plans" style="grid-template-columns: 1fr 1fr 1fr;">
+    <span class="section-label">Escolha como continuar</span>
+    <h2 class="section-title">Simples e transparente</h2>
+    <p class="section-sub" style="margin-bottom: 40px;">Comece de graça. Veja o resultado. Só pague se gostar.</p>
+    <div class="plans">
       <div class="plan">
         <div class="plan-name">Gratuito</div>
         <div class="plan-price">€0</div>
@@ -1127,8 +698,8 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
           <li class="no">Download PDF limpo</li>
           <li class="no">Currículos ilimitados</li>
         </ul>
-        <a href="#gerar" class="btn-plan btn-plan-free">Criar grátis</a>
-        <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:12px;">Quero ver como fica antes de pagar</p>
+        <a href="#gerar" class="btn-plan btn-plan-free">Começar grátis</a>
+        <p class="plan-usecase">Quero ver como fica antes de pagar</p>
       </div>
       <div class="plan" style="border-color: var(--tc);">
         <div class="plan-badge" style="background: var(--tc);">💳 Pagamento único</div>
@@ -1144,8 +715,8 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
           <li>Download PDF limpo</li>
           <li class="no">Currículos ilimitados</li>
         </ul>
-        <a href="https://curriculoeu.lemonsqueezy.com/checkout/buy/8a4b184b-4633-4585-b1f2-b1d6fee52a30" target="_blank" class="btn-plan" style="background: var(--tc); color: #fff;">Comprar este currículo →</a>
-        <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:12px;">Só preciso de um currículo agora</p>
+        <a href="https://curriculoeu.lemonsqueezy.com/checkout/buy/8a4b184b-4633-4585-b1f2-b1d6fee52a30" target="_blank" class="btn-plan" style="background: var(--tc); color: #fff;">Quero só este currículo →</a>
+        <p class="plan-usecase">Só preciso de um currículo agora</p>
       </div>
       <div class="plan premium">
         <div class="plan-badge">⭐ Mais inteligente</div>
@@ -1161,24 +732,52 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
           <li>Download PDF limpo</li>
           <li>Carta de apresentação</li>
         </ul>
-        <a href="https://curriculoeu.lemonsqueezy.com/checkout/buy/cc662aee-9705-410c-b5bf-c69cfaec2981" target="_blank" class="btn-plan btn-plan-premium">Começar 5 dias grátis →</a>
+        <a href="https://curriculoeu.lemonsqueezy.com/checkout/buy/cc662aee-9705-410c-b5bf-c69cfaec2981" target="_blank" class="btn-plan btn-plan-premium">Começar com 5 dias grátis →</a>
         <div class="plan-guarantee">🛡️ Cancele em 1 clique, sem compromisso</div>
-        <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:10px;">Estou em busca ativa e vou me candidatar a várias vagas</p>
+        <p class="plan-usecase">Estou em busca ativa — vou me candidatar a várias vagas</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FAQ ── -->
+<!-- 8. GARANTIA -->
+<section class="garantia">
+  <div class="garantia-wrap">
+    <div class="garantia-icon">🛡️</div>
+    <h2>Sem risco para você</h2>
+    <p>Comece de graça — veja o resultado antes de pagar qualquer coisa. Se assinar o Premium e não ficar satisfeito nos primeiros 7 dias, devolvemos o valor integral. Sem perguntas, sem burocracia. Basta enviar um email para <strong style="color:#fff;">suporte@curriculos.eu</strong>.</p>
+    <p style="color: rgba(255,255,255,0.55); font-size: 0.88rem;">Acreditamos no produto. Por isso não precisamos prender ninguém.</p>
+    <div class="garantia-badges">
+      <span class="garantia-badge">✓ Garantia de 7 dias</span>
+      <span class="garantia-badge">✓ Cancele quando quiser</span>
+      <span class="garantia-badge">✓ Sem contrato</span>
+      <span class="garantia-badge">✓ Grátis para começar</span>
+    </div>
+  </div>
+</section>
+
+<!-- 9. TRANSPARÊNCIA -->
+<section class="transparencia">
+  <div class="transparencia-wrap">
+    <span class="section-label">Por que criamos isso</span>
+    <h2 class="section-title">A origem do CurrículoEU</h2>
+    <p>Vimos brasileiros com anos de experiência, com visto em dia, totalmente legalizados — sendo ignorados por recrutadores europeus. Não por falta de qualificação, mas por um detalhe que ninguém conta: o formato do currículo.</p>
+    <p>Criamos o CurrículoEU para resolver isso de forma simples, rápida e acessível. Uma ferramenta que qualquer brasileiro na Europa pode usar — mesmo sem saber o idioma local, mesmo sem entender as normas de cada país.</p>
+    <p><strong>Não somos uma agência de empregos. Não prometemos vaga.</strong> Prometemos que o seu currículo vai chegar ao recrutador no formato que ele espera — e que vai ser lido.</p>
+  </div>
+</section>
+
+<!-- 10. FAQ -->
 <section class="faq">
   <div class="faq-wrap">
+    <span class="section-label">Dúvidas comuns</span>
     <h2 class="section-title">Perguntas frequentes</h2>
-    <p class="section-sub" style="margin-bottom: 36px;">Tem dúvidas? Aqui estão as respostas mais comuns.</p>
+    <p class="section-sub" style="margin-bottom: 36px;">Respostas diretas, sem enrolação.</p>
     <div id="faqList"></div>
   </div>
 </section>
 
-<!-- ── PORTAIS DE EMPREGO ── -->
+<!-- PORTAIS -->
 <section class="portals-section">
   <div class="portals-wrap">
     <h2 class="section-title">Portais de emprego por país</h2>
@@ -1201,7 +800,15 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- 11. CTA FINAL -->
+<section class="cta-final">
+  <h2>Seu próximo emprego na Europa começa com o currículo certo.</h2>
+  <p>Não deixe que um detalhe de formatação custe uma oportunidade real. Gere agora — é gratuito para começar.</p>
+  <a href="#gerar" class="btn-cta-final">Gerar meu currículo europeu grátis →</a>
+  <p class="cta-final-micro">Sem cadastro · Sem cartão · Resultado em 30 segundos</p>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -1231,17 +838,17 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
   </div>
 </footer>
 
-<!-- ── LOADING ── -->
+<!-- LOADING -->
 <div class="loading-overlay" id="loading">
   <div class="spinner"></div>
   <p>Gerando seu currículo com IA...</p>
 </div>
 
-<!-- ── MODAL: POLÍTICA DE PRIVACIDADE ── -->
+<!-- MODAL PRIVACIDADE -->
 <div class="modal-overlay" id="modalPrivacidade">
   <div class="modal-box">
     <h2>Política de Privacidade</h2>
-    <p>Última atualização: Janeiro de 2026. Esta política descreve como o CurrículoEU recolhe, usa e protege seus dados pessoais, em conformidade com o Regulamento Geral de Proteção de Dados (RGPD/GDPR).</p>
+    <p>Última atualização: Janeiro de 2026. Esta política descreve como o CurrículoEU recolhe, usa e protege seus dados pessoais, em conformidade com o RGPD/GDPR.</p>
     <h3>Quais dados recolhemos</h3>
     <p>Para gerar seu currículo, recolhemos temporariamente: nome, e-mail, telefone, informações de experiência profissional e formação. Esses dados são usados exclusivamente para gerar o documento solicitado.</p>
     <h3>Como usamos seus dados</h3>
@@ -1254,13 +861,11 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     <p>Podemos usar cookies técnicos essenciais para o funcionamento do site. Nenhum dado é usado para publicidade direcionada.</p>
     <h3>Seus direitos (GDPR)</h3>
     <p>Tem direito a acesso, retificação, eliminação e portabilidade dos seus dados. Para exercer esses direitos, contacte: <strong>suporte@curriculos.eu</strong></p>
-    <h3>Contacto</h3>
-    <p>Para qualquer questão relacionada com privacidade: <strong>suporte@curriculos.eu</strong></p>
     <button class="modal-close" onclick="fecharModal('modalPrivacidade')">Fechar</button>
   </div>
 </div>
 
-<!-- ── MODAL: TERMOS DE USO ── -->
+<!-- MODAL TERMOS -->
 <div class="modal-overlay" id="modalTermos">
   <div class="modal-box">
     <h2>Termos de Uso</h2>
@@ -1271,18 +876,18 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     <p>O plano gratuito permite a geração de 2 currículos gratuitos, com marca d'água. Para uso ilimitado, é necessário o Plano Premium.</p>
     <h3>Plano Premium</h3>
     <p>A subscrição é gerida pelo Lemon Squeezy. Pode cancelar a qualquer momento diretamente pela plataforma, sem qualquer custo adicional. O cancelamento tem efeito no final do período já pago.</p>
+    <h3>Garantia</h3>
+    <p>Oferecemos garantia de reembolso de 7 dias para o Plano Premium. Basta enviar um email para suporte@curriculos.eu dentro desse prazo.</p>
     <h3>Responsabilidade</h3>
-    <p>O CurrículoEU não garante a obtenção de emprego. O serviço fornece uma ferramenta de apoio à candidatura. Os resultados dependem de múltiplos fatores alheios ao serviço.</p>
-    <h3>Propriedade intelectual</h3>
-    <p>O conteúdo do currículo gerado é de propriedade do utilizador. O código e design do site são propriedade do CurrículoEU.</p>
+    <p>O CurrículoEU não garante a obtenção de emprego. O serviço fornece uma ferramenta de apoio à candidatura.</p>
     <h3>Contacto</h3>
-    <p>Dúvidas sobre os termos: <strong>suporte@curriculos.eu</strong></p>
+    <p>Dúvidas: <strong>suporte@curriculos.eu</strong></p>
     <button class="modal-close" onclick="fecharModal('modalTermos')">Fechar</button>
   </div>
 </div>
 
 <script>
-// ── SLIDESHOW ──
+// SLIDESHOW
 let slide = 0;
 const slides = document.querySelectorAll('.slide');
 setInterval(() => {
@@ -1291,7 +896,7 @@ setInterval(() => {
   slides[slide].classList.add('active');
 }, 4000);
 
-// ── CHIPS ──
+// CHIPS
 let setorSelecionado = '';
 function selectChip(el) {
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
@@ -1300,7 +905,7 @@ function selectChip(el) {
   document.getElementById('setor').value = setorSelecionado;
 }
 
-// ── CARROSSEL ──
+// CARROSSEL
 const positions = {};
 function slideCarousel(id, dir) {
   const track = document.getElementById(id);
@@ -1312,7 +917,7 @@ function slideCarousel(id, dir) {
   track.style.transform = `translateX(${positions[id]}px)`;
 }
 
-// ── MODAIS ──
+// MODAIS
 function abrirPrivacidade(e) { e.preventDefault(); document.getElementById('modalPrivacidade').classList.add('show'); }
 function abrirTermos(e) { e.preventDefault(); document.getElementById('modalTermos').classList.add('show'); }
 function fecharModal(id) { document.getElementById(id).classList.remove('show'); }
@@ -1320,77 +925,51 @@ document.querySelectorAll('.modal-overlay').forEach(m => {
   m.addEventListener('click', (e) => { if (e.target === m) m.classList.remove('show'); });
 });
 
-// ── FAQ ──
+// FAQ
 const faqs = [
-  ["O currículo é realmente grátis?", "Sim! Você pode gerar 1 currículo por sessão completamente grátis. A versão gratuita inclui uma pequena marca d'água. Para remover, o plano Premium custa €7,90/mês com 5 dias grátis."],
-  ["Em que idioma sai o currículo?", "O currículo é gerado no idioma do país selecionado. Para Portugal sai em português, Espanha em espanhol, Reino Unido/Irlanda em inglês, Alemanha/Áustria/Suíça em alemão, Países Baixos em neerlandês, etc. Você também pode ativar a opção 'Gerar em inglês' para um currículo mais universal."],
-  ["O formato é adequado para cada país?", "Sim. Cada país tem suas normas. No Reino Unido não se coloca foto nem data de nascimento. Na Alemanha é comum incluir foto e dados pessoais. O sistema adapta automaticamente o formato ao país escolhido."],
-  ["Preciso criar uma conta?", "Não! Você pode gerar seu currículo sem criar conta ou fornecer e-mail. Para o plano Premium, o Lemon Squeezy gerencia a subscrição."],
-  ["Posso usar o currículo para múltiplos países?", "Sim, gere uma versão diferente para cada país que precisar. O Premium permite gerações ilimitadas."],
-  ["O que inclui o Plano Premium?", "Currículos ilimitados, sem marca d'água, download PDF limpo, carta de apresentação adaptada ao país, e acesso a todas as atualizações futuras."],
-  ["Como funciona o programa de afiliados?", "Você ganha 30% recorrente por cada cliente que trouxer. Registre-se como afiliado pelo Lemon Squeezy e receba comissão todos os meses."],
-  ["O que é o Verificador de Currículo?", "Uma ferramenta gratuita onde você cola seu currículo atual e a IA dá uma pontuação de 0 a 100, aponta problemas críticos e sugere melhorias."],
-  ["O que é o Gerador de Panfleto?", "Você cria um panfleto profissional para promover seus serviços (limpeza, cabeleireiro, etc.) com foto, texto persuasivo no idioma do país e seu contato — muito mais eficaz do que uma mensagem simples no WhatsApp."],
-  ["Posso cancelar o Premium quando quiser?", "Sim, sem compromisso. Cancele pelo Lemon Squeezy a qualquer momento e não será cobrado no mês seguinte."],
-  ["Meus dados pessoais são seguros?", "Sim. Não armazenamos seus dados pessoais. As informações são processadas apenas para gerar o currículo e não ficam guardadas em nossos servidores. Consulte nossa Política de Privacidade para mais detalhes."],
-  ["Funciona para brasileiros na Europa?", "Sim! A plataforma foi criada pensando especialmente em imigrantes de língua portuguesa. Funciona perfeitamente para brasileiros em Portugal, Irlanda, Alemanha, Países Baixos e em qualquer outro país europeu."],
-  ["Posso editar o currículo depois de gerado?", "Neste momento o currículo é gerado e você pode compartilhar ou baixar. A edição manual estará disponível em breve na versão Premium."],
-  ["Tenho pouca experiência. O currículo funciona?", "Sim! Você pode descrever estágios, trabalho voluntário, experiências informais. A IA apresenta tudo da forma mais profissional possível para o contexto local."],
-  ["Quanto tempo demora para gerar o currículo?", "Normalmente entre 20 e 45 segundos, dependendo da sua conexão com a internet."],
+  ["Isso realmente funciona?", "O sistema gera currículos no formato exato exigido em cada país, com vocabulário técnico do seu setor e no idioma local. O resultado é um documento que respeita as normas locais — o que aumenta significativamente as chances de o seu currículo ser lido."],
+  ["O currículo é realmente grátis?", "Sim! Você pode gerar 2 currículos gratuitamente, sem cadastro e sem cartão. A versão gratuita inclui uma marca d'água discreta. Só pague se gostar do resultado."],
+  ["Em que idioma sai o currículo?", "No idioma do país selecionado. Para Portugal sai em português, para a Irlanda/Reino Unido em inglês, Alemanha em alemão, Países Baixos em neerlandês, etc. Você também pode ativar 'Gerar em inglês' para um currículo mais universal."],
+  ["Preciso ter muito texto para preencher?", "Não. Escreva o que sabe, mesmo que seja pouco. O sistema adapta e profissionaliza o conteúdo. Estágios, trabalho informal, cursos — tudo conta."],
+  ["E se eu não falar o idioma do país?", "Não precisa. O currículo é gerado automaticamente no idioma do país escolhido. Você preenche em português, o sistema cuida do resto."],
+  ["Qual a diferença entre Avulso e Premium?", "O Avulso é para quem precisa de um currículo agora, sem compromisso — pagamento único de €4,90. O Premium é para quem está em busca ativa e vai candidatar-se a várias vagas — €7,90/mês com currículos ilimitados."],
+  ["Posso cancelar o Premium a qualquer momento?", "Sim. Cancele pelo Lemon Squeezy quando quiser, sem multa e sem aviso prévio. O acesso continua até o fim do período já pago."],
+  ["Como funciona a garantia de 7 dias?", "Se assinar o Premium e não ficar satisfeito nos primeiros 7 dias, devolvemos o valor integral. Basta enviar um email para suporte@curriculos.eu. Sem perguntas."],
+  ["Os meus dados ficam guardados?", "Não. As informações são processadas para gerar o currículo e não ficam armazenadas nos nossos servidores."],
+  ["O que é o Gerador de Panfleto?", "Uma ferramenta gratuita para criar panfletos profissionais para divulgar seus serviços (limpeza, cabeleireiro, etc.) no WhatsApp — com texto no idioma do país e visual profissional."],
 ];
 const faqEl = document.getElementById('faqList');
 faqs.forEach(([q, a]) => {
-  faqEl.innerHTML += `
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>${q}</span><span class="icon">+</span>
-      </div>
-      <div class="faq-a">${a}</div>
-    </div>`;
+  faqEl.innerHTML += `<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>${q}</span><span class="icon">+</span></div><div class="faq-a">${a}</div></div>`;
 });
 
-// ── PAÍSES ──
+// PAÍSES
 const PAIS_INFO = {
-  pt: { nome: 'Portugal', idioma: 'Portugues', flag: '🇵🇹' },
-  es: { nome: 'Espanha', idioma: 'Espanhol', flag: '🇪🇸' },
-  uk: { nome: 'Reino Unido', idioma: 'Ingles', flag: '🇬🇧' },
-  de: { nome: 'Alemanha', idioma: 'Alemao', flag: '🇩🇪' },
-  nl: { nome: 'Países Baixos', idioma: 'Neerlandes', flag: '🇳🇱' },
-  fr: { nome: 'França', idioma: 'Frances', flag: '🇫🇷' },
-  it: { nome: 'Itália', idioma: 'Italiano', flag: '🇮🇹' },
-  ie: { nome: 'Irlanda', idioma: 'Ingles', flag: '🇮🇪' },
-  ch: { nome: 'Suíça', idioma: 'Alemao', flag: '🇨🇭' },
-  be: { nome: 'Bélgica', idioma: 'Frances', flag: '🇧🇪' },
-  at: { nome: 'Áustria', idioma: 'Alemao', flag: '🇦🇹' },
-  se: { nome: 'Suécia', idioma: 'Ingles', flag: '🇸🇪' },
+  pt:{nome:'Portugal',idioma:'Portugues',flag:'🇵🇹'},es:{nome:'Espanha',idioma:'Espanhol',flag:'🇪🇸'},
+  uk:{nome:'Reino Unido',idioma:'Ingles',flag:'🇬🇧'},de:{nome:'Alemanha',idioma:'Alemao',flag:'🇩🇪'},
+  nl:{nome:'Países Baixos',idioma:'Neerlandes',flag:'🇳🇱'},fr:{nome:'França',idioma:'Frances',flag:'🇫🇷'},
+  it:{nome:'Itália',idioma:'Italiano',flag:'🇮🇹'},ie:{nome:'Irlanda',idioma:'Ingles',flag:'🇮🇪'},
+  ch:{nome:'Suíça',idioma:'Alemao',flag:'🇨🇭'},be:{nome:'Bélgica',idioma:'Frances',flag:'🇧🇪'},
+  at:{nome:'Áustria',idioma:'Alemao',flag:'🇦🇹'},se:{nome:'Suécia',idioma:'Ingles',flag:'🇸🇪'},
 };
-
 const SETOR_NOMES = {
-  restaurante: 'Restaurante', hotel: 'Hotel', limpeza: 'Limpeza',
-  construcao: 'Construção', domestico: 'Serviços Domésticos', cuidados: 'Cuidados',
-  armazem: 'Armazém / Logística', comercio: 'Comércio / Varejo', beleza: 'Beleza / Estética',
-  motorista: 'Motorista / Entregas', agricultura: 'Agricultura', fitness: 'Fitness / Personal Trainer',
-  ti: 'Tecnologia de Informação', bares: 'Bares / Pub', seguranca: 'Segurança',
-  educacao_infantil: 'Educação Infantil', marketing: 'Marketing Digital', eletricista: 'Eletricista',
+  restaurante:'Restaurante',hotel:'Hotel',limpeza:'Limpeza',construcao:'Construção',
+  domestico:'Serviços Domésticos',cuidados:'Cuidados',armazem:'Armazém / Logística',
+  comercio:'Comércio / Varejo',beleza:'Beleza / Estética',motorista:'Motorista / Entregas',
+  agricultura:'Agricultura',fitness:'Fitness / Personal Trainer',ti:'Tecnologia de Informação',
+  bares:'Bares / Pub',seguranca:'Segurança',educacao_infantil:'Educação Infantil',
+  marketing:'Marketing Digital',eletricista:'Eletricista',
 };
-
 const TITULOS = {
-  'Neerlandes': { perfil:'Professioneel Profiel', experiencia:'Werkervaring', formacao:'Opleiding', competencias:'Vaardigheden', idiomas:'Talen', mercado:'Markt' },
-  'Alemao': { perfil:'Berufsprofil', experiencia:'Berufserfahrung', formacao:'Ausbildung', competencias:'Kompetenzen', idiomas:'Sprachen', mercado:'Markt' },
-  'Frances': { perfil:'Profil Professionnel', experiencia:'Expérience Professionnelle', formacao:'Formation', competencias:'Compétences', idiomas:'Langues', mercado:'Marché' },
-  'Ingles': { perfil:'Professional Profile', experiencia:'Work Experience', formacao:'Education', competencias:'Skills', idiomas:'Languages', mercado:'Market' },
-  'Espanhol': { perfil:'Perfil Profesional', experiencia:'Experiencia Profesional', formacao:'Formación', competencias:'Competencias', idiomas:'Idiomas', mercado:'Mercado' },
-  'Italiano': { perfil:'Profilo Professionale', experiencia:'Esperienza Professionale', formacao:'Formazione', competencias:'Competenze', idiomas:'Lingue', mercado:'Mercato' },
-  'Portugues': { perfil:'Perfil Profissional', experiencia:'Experiência Profissional', formacao:'Formação', competencias:'Competências', idiomas:'Idiomas', mercado:'Mercado' },
+  'Neerlandes':{perfil:'Professioneel Profiel',experiencia:'Werkervaring',formacao:'Opleiding',competencias:'Vaardigheden',idiomas:'Talen'},
+  'Alemao':{perfil:'Berufsprofil',experiencia:'Berufserfahrung',formacao:'Ausbildung',competencias:'Kompetenzen',idiomas:'Sprachen'},
+  'Frances':{perfil:'Profil Professionnel',experiencia:'Expérience Professionnelle',formacao:'Formation',competencias:'Compétences',idiomas:'Langues'},
+  'Ingles':{perfil:'Professional Profile',experiencia:'Work Experience',formacao:'Education',competencias:'Skills',idiomas:'Languages'},
+  'Espanhol':{perfil:'Perfil Profesional',experiencia:'Experiencia Profesional',formacao:'Formación',competencias:'Competencias',idiomas:'Idiomas'},
+  'Italiano':{perfil:'Profilo Professionale',experiencia:'Esperienza Professionale',formacao:'Formazione',competencias:'Competenze',idiomas:'Lingue'},
+  'Portugues':{perfil:'Perfil Profissional',experiencia:'Experiência Profissional',formacao:'Formação',competencias:'Competências',idiomas:'Idiomas'},
 };
-
-const LAYOUT_PAIS = {
-  nl:'nl', de:'nl', at:'nl', ch:'nl',
-  uk:'uk', ie:'uk',
-  fr:'fr', be:'fr',
-  pt:'pt', es:'pt',
-  it:'it', se:'it'
-};
+const LAYOUT_PAIS = {nl:'nl',de:'nl',at:'nl',ch:'nl',uk:'uk',ie:'uk',fr:'fr',be:'fr',pt:'pt',es:'pt',it:'it',se:'it'};
 
 function renderCV(cv, nome, pais, setor, telefone, email, paisInfo, idioma) {
   document.getElementById('loading').classList.remove('show');
@@ -1398,132 +977,34 @@ function renderCV(cv, nome, pais, setor, telefone, email, paisInfo, idioma) {
   const layout = LAYOUT_PAIS[pais] || 'pt';
   const wrap = document.getElementById('cvWrap');
   wrap.className = `cv-wrap cv-${layout}`;
-
   const iniciais = nome.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
-
   let headerHTML = '';
   if (layout === 'fr') {
-    headerHTML = `
-      <div class="cv-stripe"></div>
-      <div class="cv-header">
-        <div>
-          <div class="cv-name">${nome}</div>
-          <div class="cv-role">${cv.cargo}</div>
-        </div>
-        <div class="cv-contacts">
-          ${email ? `<span class="cv-tag">✉ ${email}</span>` : ''}
-          ${telefone ? `<span class="cv-tag">☎ ${telefone}</span>` : ''}
-          <span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span>
-        </div>
-      </div>`;
+    headerHTML = `<div class="cv-stripe"></div><div class="cv-header"><div><div class="cv-name">${nome}</div><div class="cv-role">${cv.cargo}</div></div><div class="cv-contacts">${email?`<span class="cv-tag">✉ ${email}</span>`:''} ${telefone?`<span class="cv-tag">☎ ${telefone}</span>`:''}<span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span></div></div>`;
   } else if (layout === 'it') {
-    headerHTML = `
-      <div class="cv-header">
-        <div class="cv-avatar">${iniciais}</div>
-        <div>
-          <div class="cv-name">${nome}</div>
-          <div class="cv-role">${cv.cargo}</div>
-          <div class="cv-contacts">
-            ${email ? `<span class="cv-tag">✉ ${email}</span>` : ''}
-            ${telefone ? `<span class="cv-tag">☎ ${telefone}</span>` : ''}
-            <span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span>
-          </div>
-        </div>
-      </div>`;
+    headerHTML = `<div class="cv-header"><div class="cv-avatar">${iniciais}</div><div><div class="cv-name">${nome}</div><div class="cv-role">${cv.cargo}</div><div class="cv-contacts">${email?`<span class="cv-tag">✉ ${email}</span>`:''} ${telefone?`<span class="cv-tag">☎ ${telefone}</span>`:''}<span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span></div></div></div>`;
   } else {
-    headerHTML = `
-      <div class="cv-header">
-        <div class="cv-name">${nome}</div>
-        <div class="cv-role">${cv.cargo}</div>
-        <div class="cv-contacts">
-          ${email ? `<span class="cv-tag">✉ ${email}</span>` : ''}
-          ${telefone ? `<span class="cv-tag">☎ ${telefone}</span>` : ''}
-          <span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span>
-        </div>
-      </div>`;
+    headerHTML = `<div class="cv-header"><div class="cv-name">${nome}</div><div class="cv-role">${cv.cargo}</div><div class="cv-contacts">${email?`<span class="cv-tag">✉ ${email}</span>`:''} ${telefone?`<span class="cv-tag">☎ ${telefone}</span>`:''}<span class="cv-tag">${paisInfo.flag} ${paisInfo.nome}</span></div></div>`;
   }
-
   const dicaHTML = cv.dica_pais ? `<div class="cv-dica"><strong>💡</strong> ${cv.dica_pais}</div>` : '';
-  const skillsHTML = cv.competencias.map((c,i) => `
-    <div class="cv-skill-bar">
-      <div class="cv-skill-name">${c}</div>
-      <div class="cv-skill-track"><div class="cv-skill-fill" style="width:${95-i*8}%"></div></div>
-    </div>`).join('');
+  const skillsHTML = cv.competencias.map((c,i) => `<div class="cv-skill-bar"><div class="cv-skill-name">${c}</div><div class="cv-skill-track"><div class="cv-skill-fill" style="width:${95-i*8}%"></div></div></div>`).join('');
   const langHTML = cv.idiomas.map(l => `<span class="cv-lang-tag">${l.idioma} · ${l.nivel}</span>`).join('');
-  const expHTML = cv.experiencia.map(e => `
-    <div class="cv-item">
-      <div class="cv-item-title">${e.titulo}</div>
-      <div class="cv-item-sub">${e.empresa} · ${e.periodo}</div>
-      <div class="cv-item-desc">${e.descricao}</div>
-    </div>`).join('');
-  const formHTML = cv.formacao.map(f => `
-    <div class="cv-item">
-      <div class="cv-item-title">${f.titulo}</div>
-      <div class="cv-item-sub">${f.instituicao} · ${f.ano}</div>
-    </div>`).join('');
+  const expHTML = cv.experiencia.map(e => `<div class="cv-item"><div class="cv-item-title">${e.titulo}</div><div class="cv-item-sub">${e.empresa} · ${e.periodo}</div><div class="cv-item-desc">${e.descricao}</div></div>`).join('');
+  const formHTML = cv.formacao.map(f => `<div class="cv-item"><div class="cv-item-title">${f.titulo}</div><div class="cv-item-sub">${f.instituicao} · ${f.ano}</div></div>`).join('');
   const tagPillsHTML = cv.competencias.map(c => `<span class="cv-tag-pill">${c}</span>`).join('');
-
   let bodyHTML = '';
   if (layout === 'nl') {
-    bodyHTML = `<div class="cv-body">
-      <div>
-        <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
-        <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
-        ${dicaHTML}
-      </div>
-      <div>
-        <div class="cv-section"><div class="cv-section-title">${t.competencias}</div>${skillsHTML}</div>
-        <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
-      </div>
-    </div>`;
+    bodyHTML = `<div class="cv-body"><div><div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div><div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>${dicaHTML}</div><div><div class="cv-section"><div class="cv-section-title">${t.competencias}</div>${skillsHTML}</div><div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div></div></div>`;
   } else if (layout === 'uk') {
-    bodyHTML = `<div class="cv-body">
-      <div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p></div>
-      <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
-      <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
-      <div class="cv-section"><div class="cv-section-title">${t.competencias}</div><div class="cv-tags">${tagPillsHTML}</div></div>
-      <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
-      ${dicaHTML}
-    </div>`;
+    bodyHTML = `<div class="cv-body"><div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p></div><div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div><div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div><div class="cv-section"><div class="cv-section-title">${t.competencias}</div><div class="cv-tags">${tagPillsHTML}</div></div><div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>${dicaHTML}</div>`;
   } else if (layout === 'fr') {
-    bodyHTML = `<div class="cv-body">
-      <div class="cv-sidebar">
-        <div class="cv-section"><div class="cv-section-title">${t.competencias}</div>${skillsHTML}</div>
-        <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
-      </div>
-      <div class="cv-main">
-        <div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.82rem;line-height:1.65;color:#444;">${cv.resumo}</p></div>
-        <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
-        <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
-        ${dicaHTML}
-      </div>
-    </div>`;
+    bodyHTML = `<div class="cv-body"><div class="cv-sidebar"><div class="cv-section"><div class="cv-section-title">${t.competencias}</div>${skillsHTML}</div><div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div></div><div class="cv-main"><div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.82rem;line-height:1.65;color:#444;">${cv.resumo}</p></div><div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div><div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>${dicaHTML}</div></div>`;
   } else if (layout === 'pt') {
-    bodyHTML = `<div class="cv-body">
-      <div class="cv-sidebar">
-        <div class="cv-section"><div class="cv-section-title">${t.competencias}</div>${skillsHTML}</div>
-        <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
-      </div>
-      <div class="cv-main">
-        <div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p></div>
-        <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
-        <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
-        ${dicaHTML}
-      </div>
-    </div>`;
+    bodyHTML = `<div class="cv-body"><div class="cv-sidebar"><div class="cv-section"><div class="cv-section-title">${t.competencias}</div>${skillsHTML}</div><div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div></div><div class="cv-main"><div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p></div><div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div><div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>${dicaHTML}</div></div>`;
   } else if (layout === 'it') {
-    bodyHTML = `<div class="cv-body">
-      <div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p></div>
-      <div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div>
-      <div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div>
-      <div class="cv-section"><div class="cv-section-title">${t.competencias}</div><div class="cv-tags">${tagPillsHTML}</div></div>
-      <div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>
-      ${dicaHTML}
-    </div>`;
+    bodyHTML = `<div class="cv-body"><div class="cv-section"><div class="cv-section-title">${t.perfil}</div><p style="font-size:0.85rem;line-height:1.65;color:#444;">${cv.resumo}</p></div><div class="cv-section"><div class="cv-section-title">${t.experiencia}</div>${expHTML}</div><div class="cv-section"><div class="cv-section-title">${t.formacao}</div>${formHTML}</div><div class="cv-section"><div class="cv-section-title">${t.competencias}</div><div class="cv-tags">${tagPillsHTML}</div></div><div class="cv-section"><div class="cv-section-title">${t.idiomas}</div>${langHTML}</div>${dicaHTML}</div>`;
   }
-
   wrap.innerHTML = headerHTML + bodyHTML + `<div class="cv-watermark">🔒 Versão gratuita — remova a marca d'água abaixo</div>`;
-
   document.getElementById('resultado').style.display = 'block';
   document.getElementById('resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
   const msg = encodeURIComponent(`Olá! Gerei meu currículo para ${paisInfo.nome} com o CurrículoEU 🎉\n👉 curriculos-eu.vercel.app`);
@@ -1539,72 +1020,23 @@ async function gerarCV() {
   const experiencia = document.getElementById('experiencia').value.trim();
   const formacao = document.getElementById('formacao').value.trim();
   const idiomas = document.getElementById('idiomas').value.trim();
-
-  if (!nome || !pais || !setor) {
-    alert('Por favor preencha o nome, país e setor.');
-    return;
-  }
-
+  if (!nome || !pais || !setor) { alert('Por favor preencha o nome, país e setor.'); return; }
   const paisInfo = PAIS_INFO[pais];
   const usarIngles = document.getElementById('toggleIngles').checked;
   const idioma = usarIngles ? 'Ingles' : paisInfo.idioma;
   const loading = document.getElementById('loading');
   loading.classList.add('show');
-
-  const prompt = `Cria um currículo profissional para um imigrante brasileiro.
-
-Dados:
-- Nome: ${nome}
-- País de destino: ${paisInfo.nome} (${pais})
-- Setor: ${SETOR_NOMES[setor]}
-- Telefone: ${telefone || 'não fornecido'}
-- Email: ${email || 'não fornecido'}
-- Experiência: ${experiencia || 'sem informação adicional'}
-- Formação: ${formacao || 'sem informação adicional'}
-- Idiomas: ${idiomas || 'não fornecido'}
-
-IMPORTANTE: Gera o currículo 100% em ${idioma}. Adapta às normas de ${paisInfo.nome}.
-Responde APENAS com JSON sem markdown:
-{
-  "cargo": "título em ${idioma}",
-  "resumo": "2-3 frases de perfil em ${idioma}",
-  "experiencia": [{"titulo": "...", "empresa": "...", "periodo": "...", "descricao": "..."}],
-  "formacao": [{"titulo": "...", "instituicao": "...", "ano": "..."}],
-  "competencias": ["comp 1", "comp 2", "comp 3", "comp 4", "comp 5"],
-  "idiomas": [{"idioma": "...", "nivel": "..."}],
-  "dica_pais": "dica importante em ${idioma} para trabalhar em ${paisInfo.nome} neste setor"
-}`;
-
+  const prompt = `Cria um currículo profissional para um imigrante brasileiro.\nDados:\n- Nome: ${nome}\n- País de destino: ${paisInfo.nome} (${pais})\n- Setor: ${SETOR_NOMES[setor]}\n- Telefone: ${telefone||'não fornecido'}\n- Email: ${email||'não fornecido'}\n- Experiência: ${experiencia||'sem informação adicional'}\n- Formação: ${formacao||'sem informação adicional'}\n- Idiomas: ${idiomas||'não fornecido'}\nIMPORTANTE: Gera o currículo 100% em ${idioma}. Adapta às normas de ${paisInfo.nome}.\nResponde APENAS com JSON sem markdown:\n{"cargo":"título em ${idioma}","resumo":"2-3 frases de perfil em ${idioma}","experiencia":[{"titulo":"...","empresa":"...","periodo":"...","descricao":"..."}],"formacao":[{"titulo":"...","instituicao":"...","ano":"..."}],"competencias":["comp 1","comp 2","comp 3","comp 4","comp 5"],"idiomas":[{"idioma":"...","nivel":"..."}],"dica_pais":"dica importante em ${idioma} para trabalhar em ${paisInfo.nome} neste setor"}`;
   try {
-    const res = await fetch('/api/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    if (res.status === 429) {
-      loading.classList.remove('show');
-      alert('Você atingiu o limite de currículos gratuitos. Faça upgrade para Premium para gerações ilimitadas! 🚀');
-      return;
-    }
+    const res = await fetch('/api/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] }) });
+    if (res.status === 429) { loading.classList.remove('show'); alert('Você atingiu o limite de currículos gratuitos. Faça upgrade para Premium para gerações ilimitadas! 🚀'); return; }
     const data = await res.json();
     const text = data.content[0].text.replace(/```json|```/g, '').trim();
     const cv = JSON.parse(text);
     renderCV(cv, nome, pais, setor, telefone, email, paisInfo, idioma);
   } catch(e) {
     loading.classList.remove('show');
-    renderCV({
-      cargo: SETOR_NOMES[setor],
-      resumo: `Profissional com experiência em ${SETOR_NOMES[setor]}, motivado para trabalhar em ${paisInfo.nome}. Adaptável, responsável e com vontade de crescer profissionalmente.`,
-      experiencia: [{ titulo: SETOR_NOMES[setor], empresa: 'Empresa Anterior', periodo: '2021 – 2024', descricao: experiencia || 'Experiência profissional relevante na área.' }],
-      formacao: [{ titulo: formacao || 'Formação Profissional', instituicao: 'Instituto', ano: '2020' }],
-      competencias: ['Trabalho em equipe', 'Pontualidade', 'Responsabilidade', 'Comunicação', 'Adaptabilidade'],
-      idiomas: [{ idioma: 'Português', nivel: 'Nativo' }, { idioma: paisInfo.idioma, nivel: 'Básico' }],
-      dica_pais: `Mencione sempre sua disponibilidade imediata e disposição para aprender o idioma local de ${paisInfo.nome}.`
-    }, nome, pais, setor, telefone, email, paisInfo, idioma);
+    renderCV({ cargo: SETOR_NOMES[setor], resumo: `Profissional com experiência em ${SETOR_NOMES[setor]}, motivado para trabalhar em ${paisInfo.nome}. Adaptável, responsável e com vontade de crescer profissionalmente.`, experiencia: [{ titulo: SETOR_NOMES[setor], empresa: 'Empresa Anterior', periodo: '2021 – 2024', descricao: experiencia || 'Experiência profissional relevante na área.' }], formacao: [{ titulo: formacao || 'Formação Profissional', instituicao: 'Instituto', ano: '2020' }], competencias: ['Trabalho em equipe', 'Pontualidade', 'Responsabilidade', 'Comunicação', 'Adaptabilidade'], idiomas: [{ idioma: 'Português', nivel: 'Nativo' }, { idioma: paisInfo.idioma, nivel: 'Básico' }], dica_pais: `Mencione sempre sua disponibilidade imediata e disposição para aprender o idioma local de ${paisInfo.nome}.` }, nome, pais, setor, telefone, email, paisInfo, idioma);
   }
 }
 </script>
