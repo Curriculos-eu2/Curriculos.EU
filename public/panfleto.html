@@ -66,7 +66,9 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .layout-picker-wrap { grid-column: 1 / -1; }
 .layout-picker-label { color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
 .layout-modo-btns { display: flex; gap: 6px; }
-.layout-modo-btn { background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65); font-size: 0.72rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.15s; }
+.idioma-btn { background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65); font-size: 0.82rem; font-weight: 600; padding: 7px 16px; border-radius: 20px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
+.idioma-btn.active { background: var(--tc); border-color: var(--tc); color: #fff; }
+.idioma-btn:hover { border-color: var(--tc); color: #fff; }
 .layout-modo-btn.active { background: var(--tc); border-color: var(--tc); color: #fff; }
 .layout-galeria { display: none; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 8px; }
 .layout-galeria.show { display: grid; }
@@ -275,13 +277,12 @@ footer a:hover { color: var(--tc); }
           <textarea id="descricao" rows="3" style="background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;padding:11px 14px;color:#fff;font-size:0.9rem;font-family:'DM Sans',sans-serif;width:100%;resize:vertical;" placeholder="Ex: Limpeza doméstica €15/hora · Disponível fins de semana · Amsterdã e arredores"></textarea>
         </div>
         <div class="idioma-toggle">
-          <label>
-            <div class="toggle-switch">
-              <input type="checkbox" id="toggleIngles">
-              <span class="toggle-slider"></span>
-            </div>
-            🇬🇧 Gerar sempre em inglês (mais universal)
-          </label>
+          <label style="color:rgba(255,255,255,0.75);font-size:0.82rem;font-weight:500;margin-bottom:8px;display:block">🌐 Idioma do panfleto</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="idioma-btn active" data-idioma="pais" onclick="setIdioma(this)">🌍 Idioma do país</button>
+            <button class="idioma-btn" data-idioma="pt" onclick="setIdioma(this)">🇧🇷 Português</button>
+            <button class="idioma-btn" data-idioma="en" onclick="setIdioma(this)">🇬🇧 Inglês</button>
+          </div>
         </div>
         <div class="layout-picker-wrap">
           <div class="layout-picker-label">
@@ -429,6 +430,7 @@ const SETOR_LABELS={limpeza:'Limpeza Doméstica',cabeleireiro:'Cabeleireiro(a)',
 
 let ultimaFoto=-1,ultimoSlogan=-1,fotoModo='auto',fotoEscolhida=null,layoutModo='auto',layoutEscolhido=null;
 
+function setIdioma(btn){document.querySelectorAll('.idioma-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 function setLayoutModo(modo,btn){layoutModo=modo;layoutEscolhido=null;document.querySelectorAll('.layout-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('layoutGaleria');if(modo==='escolher'){g.classList.add('show');renderLayoutGaleria();}else g.classList.remove('show');}
 
 function renderLayoutGaleria(){
@@ -488,56 +490,98 @@ function buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidade,slogan,
   return`<div style="position:absolute;inset:0;background:rgba(0,0,0,0.78)"></div><div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#C4622D"></div><div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 20px 22px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff">Currículo<span style="color:#f5956a">EU</span></div><div style="font-size:0.58rem;background:#C4622D;color:#fff;padding:3px 9px;border-radius:4px">${pi.flag}</div></div><div><div style="font-size:0.55rem;color:#C4622D;text-transform:uppercase;letter-spacing:0.18em;margin-bottom:6px">${setor}</div><div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;line-height:0.88;letter-spacing:-2px;margin-bottom:5px">${primeiroNome}${resto?`<br>${resto}`:''}</div><div style="font-size:0.62rem;color:rgba(255,255,255,0.4);margin-bottom:14px">📍 ${cidade}, ${pi.nome}</div><div style="width:100%;height:1px;background:linear-gradient(to right,#C4622D,rgba(255,255,255,0.05));margin-bottom:12px"></div><div style="font-family:'Playfair Display',serif;font-size:0.85rem;font-style:italic;color:rgba(255,255,255,0.8);line-height:1.4;margin-bottom:12px">"${slogan}"</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">${srvHtml}</div><div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:0.5rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.12em">Contacto</div><div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff">${contacto||'—'}</div></div></div></div>`;
 }
 
-async function gerarPanfleto(){
+async async function gerarPanfleto(){
   const nome=document.getElementById('nome').value.trim();
   const servico=document.getElementById('servico').value;
   const cidade=document.getElementById('cidade').value.trim();
   const contacto=document.getElementById('contacto').value.trim();
   const pais=document.getElementById('pais').value;
-  const ingles=document.getElementById('toggleIngles').checked;
+  const ingles=document.getElementById('toggleIngles')?.checked||false;
   const descricao=document.getElementById('descricao')?.value.trim()||'';
+  const idiomaEscolhido=document.querySelector('.idioma-btn.active')?.dataset.idioma||'pais';
   if(!nome||!servico||!cidade||!pais){alert('Por favor preencha o nome, serviço, cidade e país.');return;}
   document.getElementById('loading').classList.add('show');
-  setTimeout(()=>{
-    const pi=PAISES[pais];
-    const idioma=ingles?'en':(pi.idioma||'en');
-    let fotoId;
-    if(fotoModo==='escolher'&&fotoEscolhida!==null){fotoId=(BANCO[servico]||BANCO.outro)[fotoEscolhida];}
-    else{const pool=[...(BANCO[servico]||BANCO.outro),...(FOTOS_PAIS[pais]||FOTOS_PAIS.pt)];let idx;do{idx=Math.floor(Math.random()*pool.length);}while(idx===ultimaFoto&&pool.length>1);ultimaFoto=idx;fotoId=pool[idx];}
-    const sl=getSlogans(servico,idioma);
-    let si;do{si=Math.floor(Math.random()*sl.length);}while(si===ultimoSlogan&&sl.length>1);
-    ultimoSlogan=si;
-    const srvBase=getSrv(servico,idioma);
-    const srv=descricao ? descricao.split(/[·\n,]/).map(s=>s.trim()).filter(Boolean).slice(0,3) : srvBase;
-    const partes=nome.trim().split(' ');
-    const primeiroNome=partes[0];
-    const resto=partes.slice(1).join(' ');
-    const iniciais=partes.map(p=>p[0]).join('').substring(0,2).toUpperCase();
-    const nomeHtml=`${primeiroNome}${resto?`<br><em style="font-style:italic;color:rgba(255,255,255,0.65);font-size:1.65rem">${resto}</em>`:''}`;
-    const slogan=sl[si];
-    const setor=SETOR_LABELS[servico];
-    const layout=layoutModo==='escolher'&&layoutEscolhido?layoutEscolhido:Math.ceil(Math.random()*10);
-    const filtros=['brightness(0.55)','brightness(0.5)','brightness(0.08) saturate(0)','brightness(0.45)','brightness(0.35)','brightness(0.4)','brightness(0.2) saturate(0)','brightness(0.15) saturate(0)','brightness(0.5)','brightness(0.2) saturate(0.3)'];
-    const filtro=filtros[layout-1]||filtros[0];
+  const pi=PAISES[pais];
+  const idioma=idiomaEscolhido==='en'?'en':idiomaEscolhido==='pt'?'pt':(pi.idioma||'en');
+  let fotoId;
+  if(fotoModo==='escolher'&&fotoEscolhida!==null){fotoId=(BANCO[servico]||BANCO.outro)[fotoEscolhida];}
+  else{const pool=[...(BANCO[servico]||BANCO.outro),...(FOTOS_PAIS[pais]||FOTOS_PAIS.pt)];let idx;do{idx=Math.floor(Math.random()*pool.length);}while(idx===ultimaFoto&&pool.length>1);ultimaFoto=idx;fotoId=pool[idx];}
+  const sl=getSlogans(servico,idioma);
+  let si;do{si=Math.floor(Math.random()*sl.length);}while(si===ultimoSlogan&&sl.length>1);
+  ultimoSlogan=si;
+  const srvBase=getSrv(servico,idioma);
+  let srv=srvBase;
+  let cidadeProcessada=cidade;
 
-    function mostrarPanfleto(imgSrc) {
-      const img=document.getElementById('pf-foto');
-      img.src=imgSrc;
-      img.style.filter=filtro;
-      document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidade,slogan,srv,contacto,iniciais);
-      document.getElementById('loading').classList.remove('show');
-      const msg=encodeURIComponent(`"${slogan}"\n\n📍 ${cidade}\n📞 ${contacto||''}\n\n✨ curriculos-eu.vercel.app`);
-      document.getElementById('btnWA').href=`https://wa.me/?text=${msg}`;
-      document.getElementById('resultado').style.display='block';
-      document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
+  // Processar campos via API: traduzir cidade e melhorar/traduzir descrição
+  if(idioma!=='pt'||descricao){
+    const IDIOMA_NOMES={pt:'português do Brasil',en:'inglês',nl:'neerlandês',de:'alemão',fr:'francês',es:'espanhol',it:'italiano'};
+    const idiomaAlvo=IDIOMA_NOMES[idioma]||'inglês';
+    try{
+      const prompt=`Você é um assistente de tradução e copywriting para panfletos profissionais.
+Idioma alvo: ${idiomaAlvo}
+
+Tarefas:
+1. CIDADE: Traduza/adapte o nome da cidade "${cidade}" para ${idiomaAlvo}. Se já estiver correto no idioma alvo, mantenha igual.
+2. DESCRIÇÃO: ${descricao ? `Melhore e corrija o seguinte texto, mantendo o significado original. Se estiver muito longo, resuma em até 3 pontos curtos. Traduza para ${idiomaAlvo}:\n"${descricao}"` : 'Não há descrição.'}
+
+Responda APENAS com JSON válido, sem explicações:
+{"cidade":"cidade traduzida","descricao":["ponto 1","ponto 2","ponto 3"]}
+
+Se não houver descrição, use descricao:[].`;
+
+      const resp=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:prompt}]})});
+      const rd=await resp.json();
+      const texto=rd.content?.[0]?.text?.trim().replace(/```json|```/g,'')||'{}';
+      const resultado=JSON.parse(texto);
+      if(resultado.cidade) cidadeProcessada=resultado.cidade;
+      if(resultado.descricao&&resultado.descricao.length>0) srv=resultado.descricao.slice(0,3);
+    }catch(e){
+      // fallback: usa campos originais
+      if(descricao) srv=descricao.split(/[·\n,]/).map(s=>s.trim()).filter(Boolean).slice(0,3);
     }
+  } else if(descricao) {
+    // Português: apenas melhora/corrige sem traduzir
+    try{
+      const prompt=`Melhore e corrija este texto para um panfleto profissional em português do Brasil. Mantenha o significado original. Se muito longo, resuma em até 3 pontos curtos. Responda APENAS com JSON: {"descricao":["ponto 1","ponto 2","ponto 3"]}\n\nTexto: "${descricao}"`;
+      const resp=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:200,messages:[{role:'user',content:prompt}]})});
+      const rd=await resp.json();
+      const texto=rd.content?.[0]?.text?.trim().replace(/```json|```/g,'')||'{}';
+      const resultado=JSON.parse(texto);
+      if(resultado.descricao&&resultado.descricao.length>0) srv=resultado.descricao.slice(0,3);
+      else srv=descricao.split(/[·\n,]/).map(s=>s.trim()).filter(Boolean).slice(0,3);
+    }catch(e){
+      srv=descricao.split(/[·\n,]/).map(s=>s.trim()).filter(Boolean).slice(0,3);
+    }
+  }
+  const partes=nome.trim().split(' ');
+  const primeiroNome=partes[0];
+  const resto=partes.slice(1).join(' ');
+  const iniciais=partes.map(p=>p[0]).join('').substring(0,2).toUpperCase();
+  const nomeHtml=`${primeiroNome}${resto?`<br><em style="font-style:italic;color:rgba(255,255,255,0.65);font-size:1.65rem">${resto}</em>`:''}`;
+  const slogan=sl[si];
+  const setor=SETOR_LABELS[servico];
+  const layout=layoutModo==='escolher'&&layoutEscolhido?layoutEscolhido:Math.ceil(Math.random()*10);
+  const filtros=['brightness(0.55)','brightness(0.5)','brightness(0.08) saturate(0)','brightness(0.45)','brightness(0.35)','brightness(0.4)','brightness(0.2) saturate(0)','brightness(0.15) saturate(0)','brightness(0.5)','brightness(0.2) saturate(0.3)'];
+  const filtro=filtros[layout-1]||filtros[0];
 
-    const preload=new Image();
-    preload.crossOrigin='anonymous';
-    preload.onload=()=>mostrarPanfleto(preload.src);
-    preload.onerror=()=>mostrarPanfleto('');
-    preload.src=fotoUrl(fotoId,900);
-  },500);
+  function mostrarPanfleto(imgSrc){
+    const img=document.getElementById('pf-foto');
+    img.src=imgSrc;
+    img.style.filter=filtro;
+    document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidadeProcessada,slogan,srv,contacto,iniciais);
+    document.getElementById('loading').classList.remove('show');
+    const msg=encodeURIComponent(`"${slogan}"\n\n📍 ${cidade}\n📞 ${contacto||''}\n\n✨ curriculos-eu.vercel.app`);
+    document.getElementById('btnWA').href=`https://wa.me/?text=${msg}`;
+    document.getElementById('resultado').style.display='block';
+    document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  const preload=new Image();
+  preload.crossOrigin='anonymous';
+  preload.onload=()=>mostrarPanfleto(preload.src);
+  preload.onerror=()=>mostrarPanfleto('');
+  preload.src=fotoUrl(fotoId,900);
 }
 
 function novoPanel(){document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
