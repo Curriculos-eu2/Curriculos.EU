@@ -273,22 +273,22 @@ footer a:hover { color: var(--tc); }
           <label>Descrição do serviço (opcional)</label>
           <textarea id="descricao" rows="3" style="background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;padding:11px 14px;color:#fff;font-size:0.9rem;font-family:'DM Sans',sans-serif;width:100%;resize:vertical;" placeholder="Ex: Limpeza doméstica €15/hora · Disponível fins de semana · Amsterdã e arredores"></textarea>
         </div>
-        <div class="layout-picker-wrap">
-          <div class="layout-picker-label">
+        <div class="foto-picker-wrap">
+          <div class="foto-picker-label">
             <span>🌐 Idioma do panfleto</span>
-            <div style="display:flex; gap:4px;">
-              <button class="layout-modo-btn active" data-idioma="pais" onclick="setIdioma(this)">País</button>
-              <button class="layout-modo-btn" data-idioma="pt" onclick="setIdioma(this)">🇧🇷 PT</button>
-              <button class="layout-modo-btn" data-idioma="en" onclick="setIdioma(this)">🇬🇧 EN</button>
+            <div class="foto-modo-btns">
+              <button class="foto-modo-btn active" data-idioma="pais" onclick="setIdioma(this)">País</button>
+              <button class="foto-modo-btn" data-idioma="pt" onclick="setIdioma(this)">🇧🇷 PT</button>
+              <button class="foto-modo-btn" data-idioma="en" onclick="setIdioma(this)">🇬🇧 EN</button>
             </div>
           </div>
         </div>
-        <div class="layout-picker-wrap">
-          <div class="layout-picker-label">
+        <div class="foto-picker-wrap">
+          <div class="foto-picker-label">
             <span>🎨 Layout do panfleto</span>
-            <div class="layout-modo-btns">
-              <button class="layout-modo-btn active" onclick="setLayoutModo('auto',this)">🎲 Aleatório</button>
-              <button class="layout-modo-btn" onclick="setLayoutModo('escolher',this)">🖼️ Escolher</button>
+            <div class="foto-modo-btns">
+              <button class="foto-modo-btn active" onclick="setLayoutModo('auto',this)">🎲 Aleatório</button>
+              <button class="foto-modo-btn" onclick="setLayoutModo('escolher',this)">🖼️ Escolher</button>
             </div>
           </div>
           <div class="layout-galeria" id="layoutGaleria"></div>
@@ -429,8 +429,8 @@ const SETOR_LABELS={limpeza:'Limpeza Doméstica',cabeleireiro:'Cabeleireiro(a)',
 
 let ultimaFoto=-1,ultimoSlogan=-1,fotoModo='auto',fotoEscolhida=null,layoutModo='auto',layoutEscolhido=null;
 
-function setIdioma(btn){document.querySelectorAll('[data-idioma]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
-function setLayoutModo(modo,btn){layoutModo=modo;layoutEscolhido=null;document.querySelectorAll('.layout-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('layoutGaleria');if(modo==='escolher'){g.classList.add('show');renderLayoutGaleria();}else g.classList.remove('show');}
+function setIdioma(btn){btn.closest('.foto-modo-btns').querySelectorAll('.foto-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function setLayoutModo(modo,btn){layoutModo=modo;layoutEscolhido=null;btn.closest('.foto-modo-btns').querySelectorAll('.foto-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('layoutGaleria');if(modo==='escolher'){g.classList.add('show');renderLayoutGaleria();}else g.classList.remove('show');}
 
 function renderLayoutGaleria(){
   const g=document.getElementById('layoutGaleria');g.innerHTML='';
@@ -456,7 +456,7 @@ function renderLayoutGaleria(){
   });
 }
 
-function setFotoModo(modo,btn){fotoModo=modo;fotoEscolhida=null;document.querySelectorAll('.foto-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('fotoGaleria');if(modo==='escolher'){g.classList.add('show');renderGaleria();}else g.classList.remove('show');}
+function setFotoModo(modo,btn){fotoModo=modo;fotoEscolhida=null;btn.closest('.foto-modo-btns').querySelectorAll('.foto-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('fotoGaleria');if(modo==='escolher'){g.classList.add('show');renderGaleria();}else g.classList.remove('show');}
 
 function renderGaleria(){
   const s=document.getElementById('servico').value||'outro';
