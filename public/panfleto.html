@@ -270,9 +270,9 @@ footer a:hover { color: var(--tc); }
             <option value="se">🇸🇪 Suécia</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Anos de experiência (opcional)</label>
-          <input type="text" id="anos" placeholder="ex: 5">
+        <div class="form-group full">
+          <label>Descrição do serviço (opcional)</label>
+          <textarea id="descricao" rows="3" style="background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;padding:11px 14px;color:#fff;font-size:0.9rem;font-family:'DM Sans',sans-serif;width:100%;resize:vertical;" placeholder="Ex: Limpeza doméstica €15/hora · Disponível fins de semana · Amsterdã e arredores"></textarea>
         </div>
         <div class="idioma-toggle">
           <label>
@@ -495,6 +495,7 @@ async function gerarPanfleto(){
   const contacto=document.getElementById('contacto').value.trim();
   const pais=document.getElementById('pais').value;
   const ingles=document.getElementById('toggleIngles').checked;
+  const descricao=document.getElementById('descricao')?.value.trim()||'';
   if(!nome||!servico||!cidade||!pais){alert('Por favor preencha o nome, serviço, cidade e país.');return;}
   try{const r=await fetch('/api/generate-panfleto',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(r.status===429){alert('Você atingiu o limite de 2 panfletos gratuitos.\n\nRemova a marca d\'água por apenas €1,90 ou faça upgrade para Premium! 🚀');window.open('https://curriculoeu.lemonsqueezy.com/checkout/buy/a454ba08-9507-4a92-af38-ad31aa7cb114','_blank');return;}}catch(e){}
   document.getElementById('loading').classList.add('show');
@@ -507,7 +508,8 @@ async function gerarPanfleto(){
     const sl=getSlogans(servico,idioma);
     let si;do{si=Math.floor(Math.random()*sl.length);}while(si===ultimoSlogan&&sl.length>1);
     ultimoSlogan=si;
-    const srv=getSrv(servico,idioma);
+    const srvBase=getSrv(servico,idioma);
+    const srv=descricao ? descricao.split(/[·\n,]/).map(s=>s.trim()).filter(Boolean).slice(0,3) : srvBase;
     const partes=nome.trim().split(' ');
     const primeiroNome=partes[0];
     const resto=partes.slice(1).join(' ');
@@ -517,15 +519,25 @@ async function gerarPanfleto(){
     const setor=SETOR_LABELS[servico];
     const layout=layoutModo==='escolher'&&layoutEscolhido?layoutEscolhido:Math.ceil(Math.random()*10);
     const filtros=['brightness(0.55)','brightness(0.5)','brightness(0.08) saturate(0)','brightness(0.45)','brightness(0.35)','brightness(0.4)','brightness(0.2) saturate(0)','brightness(0.15) saturate(0)','brightness(0.5)','brightness(0.2) saturate(0.3)'];
-    const img=document.getElementById('pf-foto');
-    img.src=fotoUrl(fotoId,900);
-    img.style.filter=filtros[layout-1]||filtros[0];
-    document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidade,slogan,srv,contacto,iniciais);
-    document.getElementById('loading').classList.remove('show');
-    const msg=encodeURIComponent(`"${slogan}"\n\n📍 ${cidade}\n📞 ${contacto||''}\n\n✨ curriculos-eu.vercel.app`);
-    document.getElementById('btnWA').href=`https://wa.me/?text=${msg}`;
-    document.getElementById('resultado').style.display='block';
-    document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
+    const filtro=filtros[layout-1]||filtros[0];
+
+    function mostrarPanfleto(imgSrc) {
+      const img=document.getElementById('pf-foto');
+      img.src=imgSrc;
+      img.style.filter=filtro;
+      document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidade,slogan,srv,contacto,iniciais);
+      document.getElementById('loading').classList.remove('show');
+      const msg=encodeURIComponent(`"${slogan}"\n\n📍 ${cidade}\n📞 ${contacto||''}\n\n✨ curriculos-eu.vercel.app`);
+      document.getElementById('btnWA').href=`https://wa.me/?text=${msg}`;
+      document.getElementById('resultado').style.display='block';
+      document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    const preload=new Image();
+    preload.crossOrigin='anonymous';
+    preload.onload=()=>mostrarPanfleto(preload.src);
+    preload.onerror=()=>mostrarPanfleto('');
+    preload.src=fotoUrl(fotoId,900);
   },500);
 }
 
