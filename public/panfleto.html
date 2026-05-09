@@ -65,10 +65,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 /* LAYOUT PICKER */
 .layout-picker-wrap { grid-column: 1 / -1; }
 .layout-picker-label { color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
-.layout-modo-btns { display: flex; gap: 6px; }
-.idioma-btn { background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65); font-size: 0.82rem; font-weight: 600; padding: 7px 16px; border-radius: 20px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
-.idioma-btn.active { background: var(--tc); border-color: var(--tc); color: #fff; }
-.idioma-btn:hover { border-color: var(--tc); color: #fff; }
+.layout-modo-btns { display: flex; gap: 6px; flex-wrap: wrap; }
 .layout-modo-btn.active { background: var(--tc); border-color: var(--tc); color: #fff; }
 .layout-galeria { display: none; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 8px; }
 .layout-galeria.show { display: grid; }
@@ -276,12 +273,14 @@ footer a:hover { color: var(--tc); }
           <label>Descrição do serviço (opcional)</label>
           <textarea id="descricao" rows="3" style="background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;padding:11px 14px;color:#fff;font-size:0.9rem;font-family:'DM Sans',sans-serif;width:100%;resize:vertical;" placeholder="Ex: Limpeza doméstica €15/hora · Disponível fins de semana · Amsterdã e arredores"></textarea>
         </div>
-        <div class="idioma-toggle">
-          <label style="color:rgba(255,255,255,0.75);font-size:0.82rem;font-weight:500;margin-bottom:8px;display:block">🌐 Idioma do panfleto</label>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="idioma-btn active" data-idioma="pais" onclick="setIdioma(this)">🌍 Idioma do país</button>
-            <button class="idioma-btn" data-idioma="pt" onclick="setIdioma(this)">🇧🇷 Português</button>
-            <button class="idioma-btn" data-idioma="en" onclick="setIdioma(this)">🇬🇧 Inglês</button>
+        <div class="layout-picker-wrap">
+          <div class="layout-picker-label">
+            <span>🌐 Idioma do panfleto</span>
+            <div class="layout-modo-btns">
+              <button class="layout-modo-btn active" data-idioma="pais" onclick="setIdioma(this)">🌍 País</button>
+              <button class="layout-modo-btn" data-idioma="pt" onclick="setIdioma(this)">🇧🇷 Português</button>
+              <button class="layout-modo-btn" data-idioma="en" onclick="setIdioma(this)">🇬🇧 Inglês</button>
+            </div>
           </div>
         </div>
         <div class="layout-picker-wrap">
@@ -430,7 +429,7 @@ const SETOR_LABELS={limpeza:'Limpeza Doméstica',cabeleireiro:'Cabeleireiro(a)',
 
 let ultimaFoto=-1,ultimoSlogan=-1,fotoModo='auto',fotoEscolhida=null,layoutModo='auto',layoutEscolhido=null;
 
-function setIdioma(btn){document.querySelectorAll('.idioma-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function setIdioma(btn){document.querySelectorAll('[data-idioma]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 function setLayoutModo(modo,btn){layoutModo=modo;layoutEscolhido=null;document.querySelectorAll('.layout-modo-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const g=document.getElementById('layoutGaleria');if(modo==='escolher'){g.classList.add('show');renderLayoutGaleria();}else g.classList.remove('show');}
 
 function renderLayoutGaleria(){
@@ -498,7 +497,7 @@ async async function gerarPanfleto(){
   const pais=document.getElementById('pais').value;
   const ingles=document.getElementById('toggleIngles')?.checked||false;
   const descricao=document.getElementById('descricao')?.value.trim()||'';
-  const idiomaEscolhido=document.querySelector('.idioma-btn.active')?.dataset.idioma||'pais';
+  const idiomaEscolhido=document.querySelector('[data-idioma].active')?.dataset.idioma||'pais';
   if(!nome||!servico||!cidade||!pais){alert('Por favor preencha o nome, serviço, cidade e país.');return;}
   document.getElementById('loading').classList.add('show');
   const pi=PAISES[pais];
@@ -518,12 +517,12 @@ async async function gerarPanfleto(){
     const IDIOMA_NOMES={pt:'português do Brasil',en:'inglês',nl:'neerlandês',de:'alemão',fr:'francês',es:'espanhol',it:'italiano'};
     const idiomaAlvo=IDIOMA_NOMES[idioma]||'inglês';
     try{
-      const prompt=`Você é um assistente de tradução e copywriting para panfletos profissionais.
+      const prompt=`Você é um assistente de copywriting para panfletos profissionais.
 Idioma alvo: ${idiomaAlvo}
 
 Tarefas:
-1. CIDADE: Traduza/adapte o nome da cidade "${cidade}" para ${idiomaAlvo}. Se já estiver correto no idioma alvo, mantenha igual.
-2. DESCRIÇÃO: ${descricao ? `Melhore e corrija o seguinte texto, mantendo o significado original. Se estiver muito longo, resuma em até 3 pontos curtos. Traduza para ${idiomaAlvo}:\n"${descricao}"` : 'Não há descrição.'}
+1. CIDADE: Traduza/adapte o nome da cidade "${cidade}" para ${idiomaAlvo}. Se já estiver correto, mantenha igual.
+2. DESCRIÇÃO: ${descricao ? `Corrija erros e melhore o texto mantendo TODO o conteúdo original. Só reduza se for absolutamente necessário (mais de 5 pontos). Traduza para ${idiomaAlvo}. Separe os pontos com ·:\n"${descricao}"` : 'Não há descrição.'}
 
 Responda APENAS com JSON válido, sem explicações:
 {"cidade":"cidade traduzida","descricao":["ponto 1","ponto 2","ponto 3"]}
@@ -543,7 +542,7 @@ Se não houver descrição, use descricao:[].`;
   } else if(descricao) {
     // Português: apenas melhora/corrige sem traduzir
     try{
-      const prompt=`Melhore e corrija este texto para um panfleto profissional em português do Brasil. Mantenha o significado original. Se muito longo, resuma em até 3 pontos curtos. Responda APENAS com JSON: {"descricao":["ponto 1","ponto 2","ponto 3"]}\n\nTexto: "${descricao}"`;
+      const prompt=`Corrija erros e melhore este texto para um panfleto profissional em português do Brasil. Mantenha TODO o conteúdo original. Só reduza se tiver mais de 5 pontos. Responda APENAS com JSON: {"descricao":["ponto 1","ponto 2","ponto 3"]}\n\nTexto: "${descricao}"`;
       const resp=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:200,messages:[{role:'user',content:prompt}]})});
       const rd=await resp.json();
       const texto=rd.content?.[0]?.text?.trim().replace(/```json|```/g,'')||'{}';
