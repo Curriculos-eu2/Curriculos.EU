@@ -497,7 +497,6 @@ async function gerarPanfleto(){
   const ingles=document.getElementById('toggleIngles').checked;
   const descricao=document.getElementById('descricao')?.value.trim()||'';
   if(!nome||!servico||!cidade||!pais){alert('Por favor preencha o nome, serviço, cidade e país.');return;}
-  try{const r=await fetch('/api/generate-panfleto',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(r.status===429){alert('Você atingiu o limite de 2 panfletos gratuitos.\n\nRemova a marca d\'água por apenas €1,90 ou faça upgrade para Premium! 🚀');window.open('https://curriculoeu.lemonsqueezy.com/checkout/buy/a454ba08-9507-4a92-af38-ad31aa7cb114','_blank');return;}}catch(e){}
   document.getElementById('loading').classList.add('show');
   setTimeout(()=>{
     const pi=PAISES[pais];
