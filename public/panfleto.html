@@ -576,11 +576,29 @@ Se não houver descrição, use descricao:[].`;
     document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
   }
 
-  const preload=new Image();
-  preload.crossOrigin='anonymous';
-  preload.onload=()=>mostrarPanfleto(preload.src);
-  preload.onerror=()=>mostrarPanfleto('');
-  preload.src=fotoUrl(fotoId,900);
+  // Pool de fotos para retry automático
+  const fotoPool=[...(BANCO[servico]||BANCO.outro),...(FOTOS_PAIS[pais]||FOTOS_PAIS.pt)].filter(id=>id!==fotoId);
+  let tentativa=0;
+
+  function tentarCarregarFoto(id){
+    const preload=new Image();
+    preload.crossOrigin='anonymous';
+    preload.onload=()=>mostrarPanfleto(preload.src);
+    preload.onerror=()=>{
+      // Tenta outra foto do pool antes de desistir
+      if(tentativa<3&&fotoPool.length>0){
+        tentativa++;
+        const proxId=fotoPool.splice(Math.floor(Math.random()*fotoPool.length),1)[0];
+        tentarCarregarFoto(proxId);
+      } else {
+        // Último recurso: fundo escuro mas panfleto gerado
+        mostrarPanfleto('');
+      }
+    };
+    preload.src=fotoUrl(id,900);
+  }
+
+  tentarCarregarFoto(fotoId);
 }
 
 function novoPanel(){document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
