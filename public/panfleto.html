@@ -590,42 +590,43 @@ Se não houver descrição, use descricao:[].`;
   const filtros=['brightness(0.55)','brightness(0.5)','brightness(0.08) saturate(0)','brightness(0.45)','brightness(0.35)','brightness(0.4)','brightness(0.2) saturate(0)','brightness(0.15) saturate(0)','brightness(0.5)','brightness(0.2) saturate(0.3)'];
   const filtro=filtros[layout-1]||filtros[0];
 
-  function mostrarPanfleto(dataUrl){
+  function mostrarPanfleto(preloadImg){
     if(_minhaGeracao!==_geracaoAtual) return;
     const geracaoEsta=_minhaGeracao;
+
+    // 1. Mostra o HTML exatamente como antes (URL original — display perfeito)
     const imgEl=document.getElementById('pf-foto');
     imgEl.style.filter=filtro;
-    imgEl.src=dataUrl||'';
+    imgEl.src=preloadImg?preloadImg.src:'';
     document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidadeProcessada,slogan,srv,contacto,iniciais,valor);
     document.getElementById('loading').classList.remove('show');
     document.getElementById('resultado').style.display='block';
     document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
-    // Gera canvas do layout real após render completo
+
+    // 2. Gera canvas para partilhar usando o preloadImg já carregado (sem re-fetch)
     _panfletoCanvas=null;
-    setTimeout(()=>{
-      if(geracaoEsta!==_geracaoAtual) return;
-      const el=document.getElementById('pfArte');
-      const W=el.offsetWidth||400, H=el.offsetHeight||500;
-      const cv=document.createElement('canvas');
-      cv.width=W*2; cv.height=H*2;
-      const ctx=cv.getContext('2d');
-      ctx.scale(2,2);
-      ctx.fillStyle='#1B2820';
-      ctx.fillRect(0,0,W,H);
-      if(dataUrl){
+    if(preloadImg){
+      setTimeout(()=>{
+        if(geracaoEsta!==_geracaoAtual) return;
+        const el=document.getElementById('pfArte');
+        const W=el.offsetWidth||400, H=el.offsetHeight||500;
+        const cv=document.createElement('canvas');
+        cv.width=W*2; cv.height=H*2;
+        const ctx=cv.getContext('2d');
+        ctx.scale(2,2);
+        // Fundo escuro
+        ctx.fillStyle='#1B2820'; ctx.fillRect(0,0,W,H);
+        // Imagem com filtro (preloadImg ainda está em memória com CORS)
         try{
-          const tmp=document.getElementById('pf-foto');
           ctx.filter=filtro;
-          ctx.drawImage(tmp,0,0,W,H);
+          ctx.drawImage(preloadImg,0,0,W,H);
           ctx.filter='none';
         }catch(e){}
-      }
-      // Overlay em canvas usando o mesmo buildOverlay renderizado
-      const overlayEl=document.getElementById('pf-overlay');
-      // Usa dados do overlay para desenhar elementos essenciais
-      desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidadeProcessada,valor,iniciais);
-      _panfletoCanvas=cv;
-    },500);
+        // Overlay com layout adaptado
+        desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidadeProcessada,valor,iniciais);
+        _panfletoCanvas=cv;
+      },400);
+    }
   }
 
   // Pool de fotos para retry automático
@@ -637,15 +638,7 @@ Se não houver descrição, use descricao:[].`;
     preload.crossOrigin='anonymous';
     preload.onload=()=>{
       if(_minhaGeracao!==_geracaoAtual) return;
-      // Converte para base64 no mesmo contexto CORS — sem re-fetch
-      let dataUrl=null;
-      try{
-        const c=document.createElement('canvas');
-        c.width=preload.naturalWidth; c.height=preload.naturalHeight;
-        c.getContext('2d').drawImage(preload,0,0);
-        dataUrl=c.toDataURL('image/jpeg',0.9);
-      }catch(e){}
-      mostrarPanfleto(dataUrl);
+      mostrarPanfleto(preload);
     };
     preload.onerror=()=>{
       if(_minhaGeracao!==_geracaoAtual) return;
