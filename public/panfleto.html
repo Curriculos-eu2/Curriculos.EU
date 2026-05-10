@@ -346,7 +346,6 @@ footer a:hover { color: var(--tc); }
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <!-- FAQ -->
 <section class="faq">
@@ -589,45 +588,18 @@ Se não houver descrição, use descricao:[].`;
   const filtros=['brightness(0.55)','brightness(0.5)','brightness(0.08) saturate(0)','brightness(0.45)','brightness(0.35)','brightness(0.4)','brightness(0.2) saturate(0)','brightness(0.15) saturate(0)','brightness(0.5)','brightness(0.2) saturate(0.3)'];
   const filtro=filtros[layout-1]||filtros[0];
 
-  function toDataURL(img, src){
-    return new Promise(resolve=>{
-      const c=document.createElement('canvas');
-      c.width=img.naturalWidth||400; c.height=img.naturalHeight||500;
-      const ctx=c.getContext('2d');
-      try{ ctx.drawImage(img,0,0); resolve(c.toDataURL('image/jpeg',0.85)); }
-      catch(e){ resolve(src); }
-    });
-  }
-
-  function mostrarPanfleto(imgSrc){
-    const img=document.getElementById('pf-foto');
-    img.style.filter=filtro;
-    if(imgSrc){
-      // Converte para base64 para evitar CORS no html2canvas
-      const c=document.createElement('canvas');
-      const tmpImg=document.createElement('img');
-      tmpImg.crossOrigin='anonymous';
-      tmpImg.onload=()=>{
-        try{
-          c.width=tmpImg.naturalWidth; c.height=tmpImg.naturalHeight;
-          c.getContext('2d').drawImage(tmpImg,0,0);
-          img.src=c.toDataURL('image/jpeg',0.85);
-        }catch(e){ img.src=imgSrc; }
-      };
-      tmpImg.onerror=()=>{ img.src=''; };
-      tmpImg.src=imgSrc;
-    } else {
-      img.src='';
-    }
+  function mostrarPanfleto(bgImg){
+    // Mostra panfleto HTML para visualização
+    const imgEl=document.getElementById('pf-foto');
+    imgEl.style.filter=filtro;
+    imgEl.src=bgImg?bgImg.src:'';
     document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidadeProcessada,slogan,srv,contacto,iniciais,valor);
     document.getElementById('loading').classList.remove('show');
-    const msg=encodeURIComponent(`"${slogan}"\n\n📍 ${cidade}\n📞 ${contacto||''}\n\n✨ curriculos-eu.vercel.app`);
-    window._waMsg=msg;
     document.getElementById('resultado').style.display='block';
     document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
-    // Pré-gera o blob em background enquanto utilizador vê o panfleto
-    _panfletoBlob=null; _panfletoGerandoBlob=false;
-    setTimeout(gerarBlob, 1500);
+
+    // Gera canvas diretamente da imagem já carregada (sem html2canvas)
+    _panfletoCanvas=desenharCanvas(bgImg,filtro,nome,setor,slogan,srv,contacto,cidadeProcessada,valor,pi);
   }
 
   // Pool de fotos para retry automático
@@ -637,16 +609,14 @@ Se não houver descrição, use descricao:[].`;
   function tentarCarregarFoto(id){
     const preload=new Image();
     preload.crossOrigin='anonymous';
-    preload.onload=()=>mostrarPanfleto(preload.src);
+    preload.onload=()=>mostrarPanfleto(preload);
     preload.onerror=()=>{
-      // Tenta outra foto do pool antes de desistir
       if(tentativa<3&&fotoPool.length>0){
         tentativa++;
         const proxId=fotoPool.splice(Math.floor(Math.random()*fotoPool.length),1)[0];
         tentarCarregarFoto(proxId);
       } else {
-        // Último recurso: fundo escuro mas panfleto gerado
-        mostrarPanfleto('');
+        mostrarPanfleto(null);
       }
     };
     preload.src=fotoUrl(id,900);
@@ -655,71 +625,180 @@ Se não houver descrição, use descricao:[].`;
   tentarCarregarFoto(fotoId);
 }
 
-// Blob pré-gerado para compartilhar/salvar
-let _panfletoBlob = null;
-let _panfletoGerandoBlob = false;
+// ── CANVAS RENDERER (sem html2canvas) ──
+let _panfletoCanvas=null;
 
-async function gerarBlob(){
-  if(_panfletoBlob||_panfletoGerandoBlob) return;
-  _panfletoGerandoBlob=true;
-  try{
-    const el=document.getElementById('pfArte');
-    const canvas=await html2canvas(el,{
-      scale:2,useCORS:true,allowTaint:true,
-      backgroundColor:'#1B2820',logging:false
-    });
-    canvas.toBlob(blob=>{ _panfletoBlob=blob; _panfletoGerandoBlob=false; },'image/png');
-  }catch(e){ _panfletoGerandoBlob=false; }
+function rRect(ctx,x,y,w,h,r){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
 }
 
-function compartilharImagem(){
-  if(_panfletoBlob){
-    const file=new File([_panfletoBlob],'panfleto.png',{type:'image/png'});
-    if(navigator.share){
-      navigator.share({files:[file],title:'Meu Panfleto'}).catch(()=>baixarBlob());
-    } else { baixarBlob(); }
-  } else {
-    // Blob ainda não pronto — gera agora
-    const btn=document.getElementById('btnWA');
-    btn.innerHTML='⏳ Aguarde...'; btn.disabled=true;
-    html2canvas(document.getElementById('pfArte'),{
-      scale:2,useCORS:true,allowTaint:true,
-      backgroundColor:'#1B2820',logging:false
-    }).then(canvas=>{
-      canvas.toBlob(blob=>{
-        _panfletoBlob=blob;
-        btn.innerHTML='<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.14 1.541 5.876L0 24l6.304-1.518A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.031-1.385l-.36-.214-3.742.981.998-3.648-.235-.374A9.787 9.787 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg> Compartilhar';
-        btn.disabled=false;
-        baixarBlob(); // fallback após gerar
-      },'image/png');
-    }).catch(()=>{ btn.innerHTML='Compartilhar'; btn.disabled=false; });
+function wrapText(ctx,text,x,y,maxW,lineH){
+  const words=text.split(' ');let line='';let ly=y;
+  for(const w of words){
+    const t=line+w+' ';
+    if(ctx.measureText(t).width>maxW&&line){ctx.fillText(line.trim(),x,ly);line=w+' ';ly+=lineH;}
+    else line=t;
   }
+  ctx.fillText(line.trim(),x,ly);
+  return ly;
 }
 
-function baixarBlob(){
-  if(!_panfletoBlob) return;
-  const url=URL.createObjectURL(_panfletoBlob);
+function desenharCanvas(bgImg,filtro,nome,setor,slogan,srv,contacto,cidade,valor,pi){
+  const W=800,H=1000;
+  const cv=document.createElement('canvas');
+  cv.width=W;cv.height=H;
+  const ctx=cv.getContext('2d');
+
+  // 1. Fundo
+  if(bgImg&&bgImg.naturalWidth>0){
+    try{
+      ctx.filter=filtro||'brightness(0.5)';
+      ctx.drawImage(bgImg,0,0,W,H);
+      ctx.filter='none';
+    }catch(e){ctx.fillStyle='#1B2820';ctx.fillRect(0,0,W,H);}
+  } else {
+    ctx.fillStyle='#1B2820';ctx.fillRect(0,0,W,H);
+  }
+
+  // 2. Gradiente overlay
+  const g=ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'rgba(0,0,0,0.45)');
+  g.addColorStop(0.45,'rgba(0,0,0,0.05)');
+  g.addColorStop(0.65,'rgba(0,0,0,0.25)');
+  g.addColorStop(1,'rgba(0,0,0,0.96)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+
+  // 3. Faixa lateral
+  ctx.fillStyle='rgba(255,255,255,0.25)';
+  ctx.fillRect(0,0,7,H);
+
+  // 4. Branding topo
+  ctx.font='bold 26px sans-serif';
+  ctx.fillStyle='rgba(255,255,255,0.75)';
+  ctx.fillText('Currículo',48,64);
+  const bw=ctx.measureText('Currículo').width;
+  ctx.fillStyle='#C4622D';
+  ctx.fillText('EU',48+bw,64);
+  // Flag
+  ctx.font='32px sans-serif';
+  ctx.fillText(pi.flag,W-72,64);
+
+  // 5. Setor
+  ctx.font='500 23px sans-serif';
+  ctx.fillStyle='rgba(255,255,255,0.55)';
+  ctx.fillText(setor.toUpperCase(),48,110);
+
+  // 6. Nome
+  const partes=nome.trim().split(' ');
+  const pNome=partes[0];
+  const rNome=partes.slice(1).join(' ');
+  let fs=110;
+  ctx.font=`bold ${fs}px serif`;
+  while(ctx.measureText(pNome).width>W-96&&fs>60){fs-=4;ctx.font=`bold ${fs}px serif`;}
+  ctx.fillStyle='#ffffff';
+  ctx.fillText(pNome,48,240);
+  let afterNome=240;
+  if(rNome){
+    const fs2=Math.round(fs*0.58);
+    ctx.font=`italic ${fs2}px serif`;
+    ctx.fillStyle='rgba(255,255,255,0.65)';
+    ctx.fillText(rNome,48,240+fs2+10);
+    afterNome=240+fs2+20;
+  }
+
+  // 7. Divisória
+  ctx.fillStyle='rgba(255,255,255,0.35)';
+  ctx.fillRect(48,afterNome+20,70,3);
+
+  // 8. Cidade
+  ctx.font='400 26px sans-serif';
+  ctx.fillStyle='rgba(255,255,255,0.5)';
+  ctx.fillText('📍 '+cidade,48,afterNome+68);
+
+  // 9. Slogan
+  let sloganY=afterNome+130;
+  ctx.font='italic 32px serif';
+  ctx.fillStyle='rgba(255,255,255,0.92)';
+  const lastSloganY=wrapText(ctx,'"'+slogan+'"',48,sloganY,W-96,44);
+
+  // 10. Bullets
+  let bulletY=lastSloganY+58;
+  srv.slice(0,3).forEach(s=>{
+    ctx.fillStyle='rgba(255,255,255,0.35)';
+    ctx.fillRect(48,bulletY-18,4,30);
+    ctx.font='500 27px sans-serif';
+    ctx.fillStyle='rgba(255,255,255,0.78)';
+    // Trunca se muito longo
+    let txt=s;
+    while(ctx.measureText(txt).width>W-120&&txt.length>10)txt=txt.slice(0,-4)+'...';
+    ctx.fillText(txt,62,bulletY);
+    bulletY+=50;
+  });
+
+  // 11. Caixa contacto (bottom)
+  const boxY=H-130;
+  ctx.fillStyle='rgba(255,255,255,0.1)';
+  rRect(ctx,48,boxY,W-96,82,12);
+  ctx.fill();
+
+  ctx.font='400 20px sans-serif';
+  ctx.fillStyle='rgba(255,255,255,0.45)';
+  ctx.fillText('CONTACTO',72,boxY+26);
+
+  ctx.font='bold 36px serif';
+  ctx.fillStyle='#ffffff';
+  ctx.fillText(contacto||'—',72,boxY+62);
+
+  if(valor){
+    ctx.font='bold 30px sans-serif';
+    ctx.fillStyle='#C4622D';
+    ctx.textAlign='right';
+    ctx.fillText(valor,W-64,boxY+62);
+    ctx.textAlign='left';
+  }
+
+  // 12. Watermark rodapé
+  ctx.font='400 20px sans-serif';
+  ctx.fillStyle='rgba(255,255,255,0.22)';
+  ctx.textAlign='center';
+  ctx.fillText('curriculos-eu.vercel.app',W/2,H-22);
+  ctx.textAlign='left';
+
+  return cv;
+}
+
+// ── SHARE / SAVE ──
+function _baixar(blob,nome){
+  const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
-  a.href=url; a.download='panfleto.png'; a.click();
+  a.href=url;a.download=nome||'panfleto.png';a.click();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 
-function salvarImagem(){
-  if(_panfletoBlob){ baixarBlob(); return; }
-  const btn=document.getElementById('btnSalvar');
-  btn.textContent='⏳ Preparando...'; btn.disabled=true;
-  html2canvas(document.getElementById('pfArte'),{
-    scale:2,useCORS:true,allowTaint:true,
-    backgroundColor:'#1B2820',logging:false
-  }).then(canvas=>{
-    canvas.toBlob(blob=>{
-      _panfletoBlob=blob; btn.textContent='⬇️ Salvar foto'; btn.disabled=false;
-      baixarBlob();
-    },'image/png');
-  }).catch(()=>{ btn.textContent='⬇️ Salvar foto'; btn.disabled=false; });
+function compartilharImagem(){
+  if(!_panfletoCanvas){alert('Panfleto ainda a carregar, tente de novo em segundos.');return;}
+  _panfletoCanvas.toBlob(blob=>{
+    if(!blob){alert('Erro ao gerar imagem.');return;}
+    const file=new File([blob],'panfleto.png',{type:'image/png'});
+    if(navigator.share){
+      navigator.share({files:[file],title:'Meu Panfleto'})
+        .catch(e=>{ if(e.name!=='AbortError') _baixar(blob,'panfleto.png'); });
+    } else {
+      _baixar(blob,'panfleto.png');
+    }
+  },'image/png');
 }
 
-function novoPanel(){_panfletoBlob=null;_panfletoGerandoBlob=false;document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
+function salvarImagem(){
+  if(!_panfletoCanvas){alert('Panfleto ainda a carregar, tente de novo em segundos.');return;}
+  _panfletoCanvas.toBlob(blob=>{ if(blob) _baixar(blob,'panfleto.png'); },'image/png');
+}
+
+function novoPanel(){_panfletoCanvas=null;document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
 
 // FAQ
 const faqs=[
