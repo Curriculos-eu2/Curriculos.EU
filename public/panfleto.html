@@ -522,6 +522,8 @@ async function gerarPanfleto(){
   const descricao=document.getElementById('descricao')?.value.trim()||'';
   const idiomaEscolhido=document.querySelector('[data-idioma].active')?.dataset.idioma||'pais';
   if(!nome||!servico||!cidade||!pais){alert('Por favor preencha o nome, serviço, cidade e país.');return;}
+  _panfletoCanvas=null;
+  const _minhaGeracao=++_geracaoAtual;
   document.getElementById('loading').classList.add('show');
   const pi=PAISES[pais];
   const idioma=idiomaEscolhido==='en'?'en':idiomaEscolhido==='pt'?'pt':(pi.idioma||'en');
@@ -589,7 +591,8 @@ Se não houver descrição, use descricao:[].`;
   const filtro=filtros[layout-1]||filtros[0];
 
   function mostrarPanfleto(bgImg){
-    // Mostra panfleto HTML para visualização
+    // Ignora se já foi iniciada uma geração mais recente
+    if(_minhaGeracao!==_geracaoAtual) return;
     const imgEl=document.getElementById('pf-foto');
     imgEl.style.filter=filtro;
     imgEl.src=bgImg?bgImg.src:'';
@@ -627,6 +630,7 @@ Se não houver descrição, use descricao:[].`;
 
 // ── CANVAS RENDERER (sem html2canvas) ──
 let _panfletoCanvas=null;
+let _geracaoAtual=0;
 
 function rRect(ctx,x,y,w,h,r){
   ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);
@@ -798,7 +802,7 @@ function salvarImagem(){
   _panfletoCanvas.toBlob(blob=>{ if(blob) _baixar(blob,'panfleto.png'); },'image/png');
 }
 
-function novoPanel(){_panfletoCanvas=null;document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
+function novoPanel(){_panfletoCanvas=null;_geracaoAtual++;document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
 
 // FAQ
 const faqs=[
