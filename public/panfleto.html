@@ -678,39 +678,68 @@ function wrapText(ctx,text,x,y,maxW,lineH){
 }
 
 function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidade,valor,iniciais){
-  const P=Math.round(W*0.09); // padding lateral
-  const dark=layout!==3;
-  const textC=dark?'#fff':'#1B2820';
-  const subC=dark?'rgba(255,255,255,0.55)':'rgba(27,40,32,0.55)';
+  const P=Math.round(W*0.09);
 
-  // Gradiente
-  if(dark){
-    const g=ctx.createLinearGradient(0,0,0,H);
-    g.addColorStop(0,'rgba(0,0,0,0.52)');
-    g.addColorStop(0.42,'rgba(0,0,0,0.08)');
+  // ── 4 ESTILOS VISUAIS conforme layout ──
+  // Estilo A: escuro clássico (1,2,6,7)
+  // Estilo B: gradiente topo forte (4,5)
+  // Estilo C: minimalista claro (3)
+  // Estilo D: dark premium centrado (8,9,10)
+  let estilo='A';
+  if(layout===3) estilo='C';
+  else if(layout===4||layout===5) estilo='B';
+  else if(layout===8||layout===9||layout===10) estilo='D';
+
+  const dark=estilo!=='C';
+  const textC=dark?'#fff':'#1B2820';
+  const subC=dark?'rgba(255,255,255,0.55)':'rgba(27,40,32,0.5)';
+  const centered=estilo==='D';
+
+  // ── GRADIENTE por estilo ──
+  const g=ctx.createLinearGradient(0,0,0,H);
+  if(estilo==='A'){
+    g.addColorStop(0,'rgba(0,0,0,0.55)');
+    g.addColorStop(0.4,'rgba(0,0,0,0.08)');
     g.addColorStop(0.62,'rgba(0,0,0,0.22)');
     g.addColorStop(1,'rgba(0,0,0,0.97)');
     ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    // Faixa lateral esquerda
     ctx.fillStyle='rgba(255,255,255,0.18)'; ctx.fillRect(0,0,5,H);
+  } else if(estilo==='B'){
+    // Gradiente forte no topo
+    g.addColorStop(0,'rgba(0,0,0,0.82)');
+    g.addColorStop(0.38,'rgba(0,0,0,0.22)');
+    g.addColorStop(0.6,'rgba(0,0,0,0.12)');
+    g.addColorStop(1,'rgba(0,0,0,0.97)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    // Linha superior
+    ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.fillRect(0,0,W,4);
+  } else if(estilo==='C'){
+    // Fundo claro com overlay mínimo
+    ctx.fillStyle='rgba(250,247,242,0.55)'; ctx.fillRect(0,0,W,H);
+    // Linha lateral esquerda laranja
+    ctx.fillStyle='#C4622D'; ctx.fillRect(0,0,5,H);
+  } else { // D: dark premium
+    g.addColorStop(0,'rgba(0,0,0,0.4)');
+    g.addColorStop(0.35,'rgba(0,0,0,0.05)');
+    g.addColorStop(0.65,'rgba(0,0,0,0.35)');
+    g.addColorStop(1,'rgba(0,0,0,0.98)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
   }
 
-  // ── FUNDO fixo: caixa contacto + watermark ──
+  // ── CAIXA CONTACTO (fixo no fundo) ──
   const boxH=Math.round(H*0.14);
   const boxY=H-Math.round(H*0.04)-boxH;
-
   ctx.fillStyle=dark?'rgba(255,255,255,0.12)':'rgba(27,40,32,0.1)';
   rRect(ctx,P,boxY,W-P*2,boxH,8); ctx.fill();
-
   const lbF=Math.round(H*0.028);
   ctx.font=`400 ${lbF}px sans-serif`;
   ctx.fillStyle=subC;
   ctx.fillText('CONTACTO',P+16,boxY+Math.round(boxH*0.35));
-
   const cF=Math.round(H*0.056);
   ctx.font=`bold ${cF}px serif`;
   ctx.fillStyle=textC;
   ctx.fillText(contacto||'—',P+16,boxY+Math.round(boxH*0.82));
-
   if(valor){
     ctx.font=`bold ${Math.round(H*0.048)}px sans-serif`;
     ctx.fillStyle='#C4622D';
@@ -731,9 +760,10 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   const bY=Math.round(H*0.088);
   ctx.font=`bold ${bF}px sans-serif`;
   ctx.fillStyle=dark?'rgba(255,255,255,0.75)':'rgba(27,40,32,0.75)';
-  ctx.fillText('Currículo',P,bY);
+  const bX=centered?P:P;
+  ctx.fillText('Currículo',bX,bY);
   const bw=ctx.measureText('Currículo').width;
-  ctx.fillStyle='#C4622D'; ctx.fillText('EU',P+bw,bY);
+  ctx.fillStyle='#C4622D'; ctx.fillText('EU',bX+bw,bY);
   ctx.font=`${Math.round(H*0.055)}px sans-serif`;
   ctx.fillText(pi.flag,W-P-Math.round(H*0.03),bY);
 
@@ -742,27 +772,34 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   const sY=Math.round(H*0.158);
   ctx.font=`500 ${sF}px sans-serif`;
   ctx.fillStyle=subC;
-  ctx.fillText(setor.toUpperCase(),P,sY);
+  if(centered){ctx.textAlign='center';ctx.fillText(setor.toUpperCase(),W/2,sY);ctx.textAlign='left';}
+  else ctx.fillText(setor.toUpperCase(),P,sY);
 
   // ── NOME ──
-  const nStart=Math.round(H*0.22);
+  const nStart=Math.round(H*(estilo==='B'?0.2:0.22));
   let nF=Math.round(H*0.17);
   ctx.font=`bold ${nF}px serif`;
-  while(ctx.measureText(primeiroNome).width>W-P*2-8&&nF>Math.round(H*0.07)){nF=Math.round(nF*0.92);ctx.font=`bold ${nF}px serif`;}
-  ctx.fillStyle=textC;
-  ctx.fillText(primeiroNome,P,nStart+Math.round(nF*0.85));
+  const nMaxW=W-P*2-8;
+  while(ctx.measureText(primeiroNome).width>nMaxW&&nF>Math.round(H*0.07)){nF=Math.round(nF*0.92);ctx.font=`bold ${nF}px serif`;}
+  ctx.fillStyle=estilo==='B'?'#fff':textC;
+  const nX=centered?W/2:P;
+  if(centered)ctx.textAlign='center';
+  ctx.fillText(primeiroNome,nX,nStart+Math.round(nF*0.85));
   let nBottom=nStart+Math.round(nF*0.92);
   if(resto){
     const rF=Math.round(nF*0.5);
     ctx.font=`italic ${rF}px serif`;
     ctx.fillStyle=dark?'rgba(255,255,255,0.6)':'rgba(27,40,32,0.6)';
-    ctx.fillText(resto,P,nBottom+Math.round(rF*1.05));
+    ctx.fillText(resto,nX,nBottom+Math.round(rF*1.05));
     nBottom+=Math.round(rF*1.15);
   }
+  ctx.textAlign='left';
 
   // Divisória
-  ctx.fillStyle=dark?'rgba(255,255,255,0.3)':'rgba(196,98,45,0.7)';
-  ctx.fillRect(P,nBottom+Math.round(H*0.016),Math.round(W*0.14),2);
+  const divC=estilo==='C'?'#C4622D':'rgba(255,255,255,0.3)';
+  ctx.fillStyle=divC;
+  const dX=centered?W/2-Math.round(W*0.07):P;
+  ctx.fillRect(dX,nBottom+Math.round(H*0.016),Math.round(W*0.14),2);
 
   // Cidade
   const ciFSize=Math.round(H*0.036);
@@ -771,27 +808,27 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   ctx.fillStyle=subC;
   let ciT='📍 '+cidade;
   while(ctx.measureText(ciT).width>W-P*2&&ciT.length>8)ciT=ciT.slice(0,-4)+'...';
-  ctx.fillText(ciT,P,ciY);
+  if(centered){ctx.textAlign='center';ctx.fillText(ciT,W/2,ciY);ctx.textAlign='left';}
+  else ctx.fillText(ciT,P,ciY);
 
   // ── SLOGAN ──
   const slFSize=Math.round(H*0.044);
   const slStart=ciY+Math.round(H*0.068);
   const slLineH=Math.round(slFSize*1.32);
-  const slMaxW=W-P*2;
   ctx.font=`italic ${slFSize}px serif`;
   ctx.fillStyle=dark?'rgba(255,255,255,0.9)':'rgba(27,40,32,0.9)';
   const slWords=('"'+slogan+'"').split(' ');
   let slLine='',slLy=slStart,slLines=0;
   for(const w of slWords){
     const t=slLine+w+' ';
-    if(ctx.measureText(t).width>slMaxW&&slLine&&slLines<3){
+    if(ctx.measureText(t).width>W-P*2&&slLine&&slLines<3){
       ctx.fillText(slLine.trim(),P,slLy);slLine=w+' ';slLy+=slLineH;slLines++;
     }else slLine=t;
   }
   if(slLines<3)ctx.fillText(slLine.trim(),P,slLy);
   let afterSlogan=slLy+Math.round(H*0.038);
 
-  // ── BULLETS (só se couber antes da caixa de contacto) ──
+  // ── BULLETS ──
   const bSpace=boxY-16-afterSlogan;
   if(bSpace>0&&srv.length>0){
     const blF=Math.round(H*0.034);
@@ -800,7 +837,7 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
     srv.slice(0,3).forEach((s,i)=>{
       const by=afterSlogan+i*blLineH+Math.round(blF*0.8);
       if(by+blF<boxY-6){
-        ctx.fillStyle=dark?'rgba(255,255,255,0.28)':'rgba(196,98,45,0.6)';
+        ctx.fillStyle=estilo==='C'?'#C4622D':'rgba(255,255,255,0.28)';
         ctx.fillRect(P,by-Math.round(blF*0.62),3,Math.round(blF*0.8));
         ctx.fillStyle=dark?'rgba(255,255,255,0.75)':'rgba(27,40,32,0.75)';
         let t=s;while(ctx.measureText(t).width>W-P*2-14&&t.length>8)t=t.slice(0,-4)+'...';
@@ -819,8 +856,12 @@ function _baixar(blob,nome){
 }
 
 function compartilharImagem(){
-  if(!_panfletoCanvas){alert('Panfleto ainda a carregar, tente de novo em segundos.');return;}
-  _panfletoCanvas.toBlob(blob=>{
+  if(!_panfletoCanvas){
+    alert('A imagem ainda está a ser preparada. Aguarda 1-2 segundos e tenta de novo.');
+    return;
+  }
+  const canvasAtual=_panfletoCanvas;
+  canvasAtual.toBlob(blob=>{
     if(!blob){alert('Erro ao gerar imagem.');return;}
     const file=new File([blob],'panfleto.png',{type:'image/png'});
     if(navigator.share){
@@ -833,7 +874,10 @@ function compartilharImagem(){
 }
 
 function salvarImagem(){
-  if(!_panfletoCanvas){alert('Panfleto ainda a carregar, tente de novo em segundos.');return;}
+  if(!_panfletoCanvas){
+    alert('A imagem ainda está a ser preparada. Aguarda 1-2 segundos e tenta de novo.');
+    return;
+  }
   _panfletoCanvas.toBlob(blob=>{ if(blob) _baixar(blob,'panfleto.png'); },'image/png');
 }
 
