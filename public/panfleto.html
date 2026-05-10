@@ -321,7 +321,7 @@ footer a:hover { color: var(--tc); }
 <div id="resultado">
   <div class="resultado-wrap">
     <h2>Seu panfleto está pronto! 🎉</h2>
-    <p>Clique em "Compartilhar" para enviar a imagem direto no WhatsApp.</p>
+    <p>Salve ou compartilhe o panfleto diretamente no WhatsApp.</p>
     <div class="panfleto-arte" id="pfArte">
       <div class="pf-bg"><img id="pf-foto" src="" alt="fundo"></div>
       <div id="pf-overlay"></div>
@@ -336,9 +336,12 @@ footer a:hover { color: var(--tc); }
     <div class="result-actions">
       <button id="btnWA" class="btn-wa" onclick="compartilharImagem()">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.14 1.541 5.876L0 24l6.304-1.518A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.031-1.385l-.36-.214-3.742.981.998-3.648-.235-.374A9.787 9.787 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-        Compartilhar no WhatsApp
+        Compartilhar
       </button>
-      <button class="btn-novo" onclick="novoPanel()">← Criar novo panfleto</button>
+      <button id="btnSalvar" class="btn-novo" onclick="salvarImagem()" style="background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.3);color:#fff;">
+        ⬇️ Salvar foto
+      </button>
+      <button class="btn-novo" onclick="novoPanel()">← Novo panfleto</button>
     </div>
   </div>
 </div>
@@ -382,14 +385,14 @@ footer a:hover { color: var(--tc); }
 <div class="modal-overlay" id="modalPrivacidade">
   <div class="modal-box">
     <h2>Política de Privacidade</h2>
-    <p>Última atualização: Janeiro de 2026. Esta política descreve como o CurrículoEU recolhe, usa e protege seus dados pessoais, em conformidade com o RGPD/GDPR.</p>
-    <h3>Quais dados recolhemos</h3>
-    <p>Para gerar seu panfleto, recolhemos temporariamente: nome, cidade, contato e tipo de serviço. Esses dados são usados exclusivamente para gerar o panfleto solicitado.</p>
+    <p>Última atualização: Janeiro de 2026. Esta política descreve como o CurrículoEU coleta, usa e protege seus dados pessoais, em conformidade com o RGPD/GDPR/GDPR.</p>
+    <h3>Quais dados coletamos</h3>
+    <p>Para gerar seu panfleto, coletamos temporariamente: nome, cidade, contato e tipo de serviço. Esses dados são usados exclusivamente para gerar o panfleto solicitado.</p>
     <h3>Como usamos seus dados</h3>
     <ul>
       <li>Os dados são processados localmente para gerar o panfleto.</li>
       <li>Não armazenamos seus dados pessoais após a geração.</li>
-      <li>Não vendemos nem partilhamos seus dados com terceiros para fins comerciais.</li>
+      <li>Não vendemos nem compartilhamos seus dados com terceiros para fins comerciais.</li>
     </ul>
     <h3>Seus direitos (GDPR)</h3>
     <p>Você tem direito a acesso, retificação e eliminação dos seus dados. Para exercer esses direitos, entre em contacto: <strong>suporte@curriculos.eu</strong></p>
@@ -426,7 +429,7 @@ const FOTOS_PAIS={pt:["1555881400-74d7acaacd8b","1582555590-a0e3e2d1fd4b","15266
 const BANCO={limpeza:["1581578731548-c64695cc6952","1527515637462-cff94eecc1ac","1584820927498-cfe5211fd8bf","1600585154340-be6161a56a0c","1555881400-74d7acaacd8b","1512470876302-972faa2aa9a4","1513635269975-59663e0ac1ad","1499856871958-5b9627545d1a"],jardim:["1416879595882-3373a0480b5b","1523348837708-15d4a09cfac2","1508193638397-1c4234db14d8","1590089415225-401ed6f9db8e","1555881400-74d7acaacd8b","1513635269975-59663e0ac1ad"],construcao:["1504307651254-35680f356dfd","1565008576549-57569a49371d","1541888946425-d81bb19240f5","1581091226825-a6a2a5aee158","1467269204594-9661b134dd2b","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],cozinha:["1556909114-f6e7ad7d3136","1466637574441-749b8f19452f","1551218808-94e220e084d2","1590089415225-401ed6f9db8e","1499856871958-5b9627545d1a","1534430480872-3498386e7856","1555881400-74d7acaacd8b"],babysitter:["1587654780291-39c9404d746b","1476703993599-0035a21b17a9","1503454537195-1dcabb73ffb9","1544717302-de2939b7ef71","1508193638397-1c4234db14d8","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],cabeleireiro:["1560066984-138dadb4c035","1522337360788-8b13dee7a37e","1605497788044-5a32c7078486","1534438327276-14e5300c3a48","1512470876302-972faa2aa9a4","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],motorista:["1449965408869-eaa3f722e40d","1519003722824-194d4455a60c","1494976388531-d1058494cdd8","1534430480872-3498386e7856","1512470876302-972faa2aa9a4","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],fitness:["1534438327276-14e5300c3a48","1571019613454-1cb2f99b2d8b","1526506118085-60ce8714f8c5","1574680096145-d05b474e2155","1508193638397-1c4234db14d8","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],beleza:["1519823551278-64ac92734fb1","1570172619644-dfd03ed5d881","1487412947147-5cebf100ffc2","1596704017254-9b121068fb31","1512470876302-972faa2aa9a4","1499856871958-5b9627545d1a","1555881400-74d7acaacd8b"],pintura:["1562259929-b4e1fd3aef09","1589939705384-5185137a7f0f","1600585152220-90363fe7e115","1467269204594-9661b134dd2b","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],cuidados:["1576091160399-112ba8d25d1d","1559839734-2b71ea197ec2","1493894473891-10fc1e5dbd22","1582750433449-648ed127bb54","1508193638397-1c4234db14d8","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"],outro:["1521737604893-d14cc237f11d","1497366216548-37526070297c","1454165804606-c3d57bc86b40","1542744094-3a31f272c490","1512470876302-972faa2aa9a4","1513635269975-59663e0ac1ad","1555881400-74d7acaacd8b"]};
 function fotoUrl(id,w){return`https://images.unsplash.com/photo-${id}?w=${w||900}&q=85&fit=crop`;}
 
-const SLOGANS_BASE={limpeza:{pt:["Limpeza que faz a diferença — na sua casa, no seu dia.","A sua casa merece o melhor — e eu estou aqui para isso.","Cada detalhe cuidado, para que não precise preocupar.","O seu lar, sempre impecável — sem esforço da sua parte.","Porque um lar limpo é um lar feliz.","O cuidado que a sua casa merece, nas mãos certas.","Limpeza com dedicação — porque o seu tempo é precioso.","Profissionalismo em cada visita, resultado em cada detalhe."],en:["Cleaning that makes a difference — every single day.","Your home deserves the best — and I'm here for that.","Every detail taken care of, so you don't have to worry.","Your home, always spotless — without any effort from you.","Because a clean home is a happy home.","The care your home deserves, in the right hands.","Cleaning with dedication — because your time is precious.","Professionalism at every visit, results in every detail."],de:["Sauberkeit, die den Unterschied macht — jeden Tag.","Ihr Zuhause verdient das Beste — ich bin für Sie da.","Jedes Detail gepflegt, damit Sie sich keine Sorgen machen.","Ihr Heim, immer makellos — ganz ohne Aufwand Ihrerseits.","Ein sauberes Zuhause ist ein glückliches Zuhause.","Die Pflege, die Ihr Heim verdient — in guten Händen.","Reinigung mit Hingabe — weil Ihre Zeit kostbar ist.","Professionalität bei jedem Besuch, Ergebnis in jedem Detail."],nl:["Schoonmaak die het verschil maakt — elke dag opnieuw.","Uw huis verdient het beste — en ik ben er voor u.","Elk detail verzorgd, zodat u zich geen zorgen hoeft te maken.","Uw thuis, altijd onberispelijk — zonder moeite van uw kant.","Want een schoon huis is een gelukkig huis.","De zorg die uw huis verdient, in goede handen.","Schoonmaken met toewijding — want uw tijd is kostbaar.","Vakmanschap bij elk bezoek, resultaat in elk detail."],fr:["Un nettoyage qui fait la différence — chaque jour.","Votre maison mérite le meilleur — je suis là pour ça.","Chaque détail soigné, pour que vous n'ayez pas à vous inquiéter.","Votre foyer, toujours impeccable — sans effort de votre part.","Parce qu'un foyer propre est un foyer heureux.","Le soin que votre maison mérite, entre de bonnes mains.","Nettoyage avec dévouement — parce que votre temps est précieux.","Professionnalisme à chaque visite, résultat à chaque détail."],it:["Pulizia che fa la differenza — ogni giorno.","La tua casa merita il meglio — e io sono qui per questo.","Ogni dettaglio curato, perché tu non debba preoccuparti.","Il tuo nido, sempre impeccabile — senza sforzo da parte tua.","Perché una casa pulita è una casa felice.","La cura che la tua casa merita, in mani esperte.","Pulizia con dedizione — perché il tuo tempo è prezioso.","Professionalità ad ogni visita, risultato in ogni dettaglio."],es:["Limpieza que marca la diferencia — en tu hogar, cada día.","Tu casa merece lo mejor — y yo estoy aquí para eso.","Cada detalle cuidado, para que no tengas que preocuparte.","Tu hogar, siempre impecable — sin esfuerzo de tu parte.","Porque un hogar limpio es un hogar feliz.","El cuidado que tu casa merece, en manos expertas.","Limpieza con dedicación — porque tu tiempo es valioso.","Profesionalismo en cada visita, resultado en cada detalle."]}};
+const SLOGANS_BASE={limpeza:{pt:["Limpeza que faz a diferença — na sua casa, no seu dia.","Sua casa merece o melhor — e estou aqui para isso.","Cada detalhe cuidado, para que você não precise se preocupar.","Seu lar, sempre impecável — sem esforço da sua parte.","Porque um lar limpo é um lar feliz.","O cuidado que sua casa merece, nas mãos certas.","Limpeza com dedicação — porque seu tempo é precioso.","Profissionalismo em cada visita, resultado em cada detalhe."],en:["Cleaning that makes a difference — every single day.","Your home deserves the best — and I'm here for that.","Every detail taken care of, so you don't have to worry.","Your home, always spotless — without any effort from you.","Because a clean home is a happy home.","The care your home deserves, in the right hands.","Cleaning with dedication — because your time is precious.","Professionalism at every visit, results in every detail."],de:["Sauberkeit, die den Unterschied macht — jeden Tag.","Ihr Zuhause verdient das Beste — ich bin für Sie da.","Jedes Detail gepflegt, damit Sie sich keine Sorgen machen.","Ihr Heim, immer makellos — ganz ohne Aufwand Ihrerseits.","Ein sauberes Zuhause ist ein glückliches Zuhause.","Die Pflege, die Ihr Heim verdient — in guten Händen.","Reinigung mit Hingabe — weil Ihre Zeit kostbar ist.","Professionalität bei jedem Besuch, Ergebnis in jedem Detail."],nl:["Schoonmaak die het verschil maakt — elke dag opnieuw.","Uw huis verdient het beste — en ik ben er voor u.","Elk detail verzorgd, zodat u zich geen zorgen hoeft te maken.","Uw thuis, altijd onberispelijk — zonder moeite van uw kant.","Want een schoon huis is een gelukkig huis.","De zorg die uw huis verdient, in goede handen.","Schoonmaken met toewijding — want uw tijd is kostbaar.","Vakmanschap bij elk bezoek, resultaat in elk detail."],fr:["Un nettoyage qui fait la différence — chaque jour.","Votre maison mérite le meilleur — je suis là pour ça.","Chaque détail soigné, pour que vous n'ayez pas à vous inquiéter.","Votre foyer, toujours impeccable — sans effort de votre part.","Parce qu'un foyer propre est un foyer heureux.","Le soin que votre maison mérite, entre de bonnes mains.","Nettoyage avec dévouement — parce que votre temps est précieux.","Professionnalisme à chaque visite, résultat à chaque détail."],it:["Pulizia che fa la differenza — ogni giorno.","La tua casa merita il meglio — e io sono qui per questo.","Ogni dettaglio curato, perché tu non debba preoccuparti.","Il tuo nido, sempre impeccabile — senza sforzo da parte tua.","Perché una casa pulita è una casa felice.","La cura che la tua casa merita, in mani esperte.","Pulizia con dedizione — perché il tuo tempo è prezioso.","Professionalità ad ogni visita, risultato in ogni dettaglio."],es:["Limpieza que marca la diferencia — en tu hogar, cada día.","Tu casa merece lo mejor — y yo estoy aquí para eso.","Cada detalle cuidado, para que no tengas que preocuparte.","Tu hogar, siempre impecable — sin esfuerzo de tu parte.","Porque un hogar limpio es un hogar feliz.","El cuidado que tu casa merece, en manos expertas.","Limpieza con dedicación — porque tu tiempo es valioso.","Profesionalismo en cada visita, resultado en cada detalle."]}};
 const SLOGANS_G={pt:["Serviço profissional, resultado garantido.","Qualidade que se nota, confiança que se sente.","O melhor serviço, ao seu alcance.","Dedicação total em cada trabalho.","Porque você merece o melhor.","Resultados que falam por si.","Sempre disponível, sempre profissional.","O seu serviço de confiança na cidade."],en:["Professional service, guaranteed results.","Quality you notice, trust you feel.","The best service, within your reach.","Total dedication in every job.","Because you deserve the best.","Results that speak for themselves.","Always available, always professional.","Your trusted local service."],de:["Professioneller Service, garantierte Ergebnisse.","Qualität, die man merkt, Vertrauen, das man spürt.","Der beste Service, in greifbarer Nähe.","Volle Hingabe bei jedem Auftrag.","Weil Sie das Beste verdienen.","Ergebnisse, die für sich sprechen.","Immer verfügbar, immer professionell.","Ihr vertrauenswürdiger lokaler Service."],nl:["Professionele service, gegarandeerde resultaten.","Kwaliteit die opvalt, vertrouwen dat voelbaar is.","De beste service, binnen handbereik.","Volledige toewijding bij elke opdracht.","Omdat u het beste verdient.","Resultaten die voor zichzelf spreken.","Altijd beschikbaar, altijd professioneel.","Uw vertrouwde lokale service."],fr:["Service professionnel, résultats garantis.","Qualité qui se remarque, confiance qui se ressent.","Le meilleur service, à votre portée.","Dévouement total dans chaque travail.","Parce que vous méritez le meilleur.","Des résultats qui parlent d'eux-mêmes.","Toujours disponible, toujours professionnel.","Votre service local de confiance."],it:["Servizio professionale, risultati garantiti.","Qualità che si nota, fiducia che si sente.","Il miglior servizio, alla tua portata.","Dedizione totale in ogni lavoro.","Perché meriti il meglio.","Risultati che parlano da soli.","Sempre disponibile, sempre professionale.","Il tuo servizio locale di fiducia."],es:["Servicio profesional, resultados garantizados.","Calidad que se nota, confianza que se siente.","El mejor servicio, a tu alcance.","Dedicación total en cada trabajo.","Porque mereces lo mejor.","Resultados que hablan por sí solos.","Siempre disponible, siempre profesional.","Tu servicio local de confianza."]};
 function getSlogans(servico,idioma){const s=SLOGANS_BASE[servico];if(s&&s[idioma])return s[idioma];return SLOGANS_G[idioma]||SLOGANS_G.en;}
 
@@ -622,6 +625,9 @@ Se não houver descrição, use descricao:[].`;
     window._waMsg=msg;
     document.getElementById('resultado').style.display='block';
     document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
+    // Pré-gera o blob em background enquanto utilizador vê o panfleto
+    _panfletoBlob=null; _panfletoGerandoBlob=false;
+    setTimeout(gerarBlob, 1500);
   }
 
   // Pool de fotos para retry automático
@@ -649,60 +655,78 @@ Se não houver descrição, use descricao:[].`;
   tentarCarregarFoto(fotoId);
 }
 
-async function compartilharImagem(){
-  const btn=document.getElementById('btnWA');
-  const orig=btn.innerHTML;
-  btn.innerHTML='⏳ Preparando imagem...';
-  btn.disabled=true;
+// Blob pré-gerado para compartilhar/salvar
+let _panfletoBlob = null;
+let _panfletoGerandoBlob = false;
 
-  const fallback=(blob)=>{
-    if(blob){
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement('a');
-      a.href=url; a.download='panfleto.png'; a.click();
-      setTimeout(()=>URL.revokeObjectURL(url),1000);
-    } else {
-      window.open(`https://wa.me/?text=${window._waMsg||''}`, '_blank');
-    }
-    btn.innerHTML=orig; btn.disabled=false;
-  };
-
+async function gerarBlob(){
+  if(_panfletoBlob||_panfletoGerandoBlob) return;
+  _panfletoGerandoBlob=true;
   try{
     const el=document.getElementById('pfArte');
-    const canvas=await Promise.race([
-      html2canvas(el,{scale:2,useCORS:true,allowTaint:false,backgroundColor:null,logging:false}),
-      new Promise((_,reject)=>setTimeout(()=>reject('timeout'),8000))
-    ]);
+    const canvas=await html2canvas(el,{
+      scale:2,useCORS:true,allowTaint:true,
+      backgroundColor:'#1B2820',logging:false
+    });
+    canvas.toBlob(blob=>{ _panfletoBlob=blob; _panfletoGerandoBlob=false; },'image/png');
+  }catch(e){ _panfletoGerandoBlob=false; }
+}
 
-    canvas.toBlob(async(blob)=>{
-      if(!blob){ fallback(null); return; }
-      const file=new File([blob],'panfleto.png',{type:'image/png'});
-
-      if(navigator.share){
-        try{
-          await navigator.share({files:[file],title:'Meu Panfleto'});
-          btn.innerHTML=orig; btn.disabled=false;
-        }catch(e){
-          // Usuário cancelou (AbortError) ou não suporta files — baixa a imagem
-          fallback(blob);
-        }
-      } else {
-        fallback(blob);
-      }
-    },'image/png');
-  }catch(e){
-    fallback(null);
+function compartilharImagem(){
+  if(_panfletoBlob){
+    const file=new File([_panfletoBlob],'panfleto.png',{type:'image/png'});
+    if(navigator.share){
+      navigator.share({files:[file],title:'Meu Panfleto'}).catch(()=>baixarBlob());
+    } else { baixarBlob(); }
+  } else {
+    // Blob ainda não pronto — gera agora
+    const btn=document.getElementById('btnWA');
+    btn.innerHTML='⏳ Aguarde...'; btn.disabled=true;
+    html2canvas(document.getElementById('pfArte'),{
+      scale:2,useCORS:true,allowTaint:true,
+      backgroundColor:'#1B2820',logging:false
+    }).then(canvas=>{
+      canvas.toBlob(blob=>{
+        _panfletoBlob=blob;
+        btn.innerHTML='<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.14 1.541 5.876L0 24l6.304-1.518A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.031-1.385l-.36-.214-3.742.981.998-3.648-.235-.374A9.787 9.787 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg> Compartilhar';
+        btn.disabled=false;
+        baixarBlob(); // fallback após gerar
+      },'image/png');
+    }).catch(()=>{ btn.innerHTML='Compartilhar'; btn.disabled=false; });
   }
 }
 
-function novoPanel(){document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
+function baixarBlob(){
+  if(!_panfletoBlob) return;
+  const url=URL.createObjectURL(_panfletoBlob);
+  const a=document.createElement('a');
+  a.href=url; a.download='panfleto.png'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function salvarImagem(){
+  if(_panfletoBlob){ baixarBlob(); return; }
+  const btn=document.getElementById('btnSalvar');
+  btn.textContent='⏳ Preparando...'; btn.disabled=true;
+  html2canvas(document.getElementById('pfArte'),{
+    scale:2,useCORS:true,allowTaint:true,
+    backgroundColor:'#1B2820',logging:false
+  }).then(canvas=>{
+    canvas.toBlob(blob=>{
+      _panfletoBlob=blob; btn.textContent='⬇️ Salvar foto'; btn.disabled=false;
+      baixarBlob();
+    },'image/png');
+  }).catch(()=>{ btn.textContent='⬇️ Salvar foto'; btn.disabled=false; });
+}
+
+function novoPanel(){_panfletoBlob=null;_panfletoGerandoBlob=false;document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
 
 // FAQ
 const faqs=[
   ["O panfleto é mesmo grátis?","Sim! A versão gratuita inclui uma marca d'água discreta. Para removê-la, pague apenas €1,90 — pagamento único, sem mensalidade. Ou assine o Premium (€7,90/mês) para gerações ilimitadas sem marca d'água."],
   ["Em que idioma sai o panfleto?","No idioma do país selecionado: português para Portugal, inglês para Reino Unido e Irlanda, alemão para Alemanha e Áustria, etc. Você também pode ativar a opção 'Inglês universal' para gerar sempre em inglês."],
   ["A frase do panfleto é sempre a mesma?","Não! Há várias variações por serviço em cada idioma, e o sistema nunca repete a mesma frase duas vezes seguidas. Cada geração é única."],
-  ["Como compartilho o panfleto?","Faça screenshot e compartilhe no WhatsApp, Nextdoor, Facebook ou imprima para distribuir na vizinhança. É assim que a maioria dos clientes começa a aparecer."],
+  ["Como compartilho o panfleto?","Faça screenshot e comcompartilhe no WhatsApp, Nextdoor, Facebook ou imprima para distribuir na vizinhança. É assim que a maioria dos clientes começa a aparecer."],
   ["Posso criar panfletos para vários países?","Sim! Gere uma versão para cada país onde atua — o idioma e os textos são adaptados automaticamente ao mercado local."],
   ["Quanto tempo demora para gerar?","Menos de 1 segundo — tudo é gerado localmente no seu navegador, sem espera."],
   ["Posso remover a marca d'água?","Sim. Pague €1,90 para remover a marca d'água de um panfleto (pagamento único), ou assine o Premium (€7,90/mês) para gerações ilimitadas sem marca d'água e com mais recursos."],
