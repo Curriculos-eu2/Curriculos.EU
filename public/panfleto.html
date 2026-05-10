@@ -590,19 +590,42 @@ Se não houver descrição, use descricao:[].`;
   const filtros=['brightness(0.55)','brightness(0.5)','brightness(0.08) saturate(0)','brightness(0.45)','brightness(0.35)','brightness(0.4)','brightness(0.2) saturate(0)','brightness(0.15) saturate(0)','brightness(0.5)','brightness(0.2) saturate(0.3)'];
   const filtro=filtros[layout-1]||filtros[0];
 
-  function mostrarPanfleto(bgImg){
-    // Ignora se já foi iniciada uma geração mais recente
+  function mostrarPanfleto(dataUrl){
     if(_minhaGeracao!==_geracaoAtual) return;
+    const geracaoEsta=_minhaGeracao;
     const imgEl=document.getElementById('pf-foto');
     imgEl.style.filter=filtro;
-    imgEl.src=bgImg?bgImg.src:'';
+    imgEl.src=dataUrl||'';
     document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidadeProcessada,slogan,srv,contacto,iniciais,valor);
     document.getElementById('loading').classList.remove('show');
     document.getElementById('resultado').style.display='block';
     document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
-
-    // Gera canvas diretamente da imagem já carregada (sem html2canvas)
-    _panfletoCanvas=desenharCanvas(bgImg,filtro,nome,setor,slogan,srv,contacto,cidadeProcessada,valor,pi);
+    // Gera canvas do layout real após render completo
+    _panfletoCanvas=null;
+    setTimeout(()=>{
+      if(geracaoEsta!==_geracaoAtual) return;
+      const el=document.getElementById('pfArte');
+      const W=el.offsetWidth||400, H=el.offsetHeight||500;
+      const cv=document.createElement('canvas');
+      cv.width=W*2; cv.height=H*2;
+      const ctx=cv.getContext('2d');
+      ctx.scale(2,2);
+      ctx.fillStyle='#1B2820';
+      ctx.fillRect(0,0,W,H);
+      if(dataUrl){
+        try{
+          const tmp=document.getElementById('pf-foto');
+          ctx.filter=filtro;
+          ctx.drawImage(tmp,0,0,W,H);
+          ctx.filter='none';
+        }catch(e){}
+      }
+      // Overlay em canvas usando o mesmo buildOverlay renderizado
+      const overlayEl=document.getElementById('pf-overlay');
+      // Usa dados do overlay para desenhar elementos essenciais
+      desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidadeProcessada,valor,iniciais);
+      _panfletoCanvas=cv;
+    },500);
   }
 
   // Pool de fotos para retry automático
@@ -612,15 +635,25 @@ Se não houver descrição, use descricao:[].`;
   function tentarCarregarFoto(id){
     const preload=new Image();
     preload.crossOrigin='anonymous';
-    preload.onload=()=>mostrarPanfleto(preload);
+    preload.onload=()=>{
+      if(_minhaGeracao!==_geracaoAtual) return;
+      // Converte para base64 no mesmo contexto CORS — sem re-fetch
+      let dataUrl=null;
+      try{
+        const c=document.createElement('canvas');
+        c.width=preload.naturalWidth; c.height=preload.naturalHeight;
+        c.getContext('2d').drawImage(preload,0,0);
+        dataUrl=c.toDataURL('image/jpeg',0.9);
+      }catch(e){}
+      mostrarPanfleto(dataUrl);
+    };
     preload.onerror=()=>{
+      if(_minhaGeracao!==_geracaoAtual) return;
       if(tentativa<3&&fotoPool.length>0){
         tentativa++;
         const proxId=fotoPool.splice(Math.floor(Math.random()*fotoPool.length),1)[0];
         tentarCarregarFoto(proxId);
-      } else {
-        mostrarPanfleto(null);
-      }
+      } else { mostrarPanfleto(null); }
     };
     preload.src=fotoUrl(id,900);
   }
@@ -651,7 +684,133 @@ function wrapText(ctx,text,x,y,maxW,lineH){
   return ly;
 }
 
-function desenharCanvas(bgImg,filtro,nome,setor,slogan,srv,contacto,cidade,valor,pi){
+function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidade,valor,iniciais){
+  // Gradiente base (adapta por layout)
+  let g;
+  if(layout===3){
+    // Minimalista — claro
+    g=ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'rgba(250,247,242,0.0)');
+    g.addColorStop(1,'rgba(250,247,242,0.0)');
+  } else {
+    g=ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'rgba(0,0,0,0.42)');
+    g.addColorStop(0.45,'rgba(0,0,0,0.06)');
+    g.addColorStop(0.65,'rgba(0,0,0,0.28)');
+    g.addColorStop(1,'rgba(0,0,0,0.97)');
+  }
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+
+  const textColor = layout===3 ? '#1B2820' : '#ffffff';
+  const subColor  = layout===3 ? 'rgba(27,40,32,0.55)' : 'rgba(255,255,255,0.55)';
+  const divColor  = layout===3 ? 'rgba(196,98,45,0.8)' : 'rgba(255,255,255,0.35)';
+
+  // Faixa lateral
+  if(layout!==3){
+    ctx.fillStyle='rgba(255,255,255,0.2)';
+    ctx.fillRect(0,0,6,H);
+  }
+
+  // Branding topo
+  ctx.font='bold 22px sans-serif';
+  ctx.fillStyle=layout===3?'rgba(27,40,32,0.7)':'rgba(255,255,255,0.7)';
+  ctx.fillText('Currículo',36,54);
+  const bw=ctx.measureText('Currículo').width;
+  ctx.fillStyle='#C4622D';
+  ctx.fillText('EU',36+bw,54);
+  ctx.font='28px sans-serif';
+  ctx.fillText(pi.flag,W-58,54);
+
+  // Setor
+  ctx.font='500 20px sans-serif';
+  ctx.fillStyle=subColor;
+  ctx.fillText(setor.toUpperCase(),36,94);
+
+  // Nome — posição varia por layout
+  let nomeY = layout===8 ? H/2-60 : 200; // Avatar Centrado: centro; resto: topo
+  if(layout===8){ ctx.textAlign='center'; }
+
+  let fs=90;
+  ctx.font=`bold ${fs}px serif`;
+  while(ctx.measureText(primeiroNome).width>(layout===8?W-80:W-72)&&fs>50){fs-=4;ctx.font=`bold ${fs}px serif`;}
+  ctx.fillStyle=textColor;
+  const x=layout===8?W/2:36;
+  ctx.fillText(primeiroNome,x,nomeY);
+  let afterNome=nomeY;
+  if(resto){
+    const fs2=Math.round(fs*0.55);
+    ctx.font=`italic ${fs2}px serif`;
+    ctx.fillStyle=layout===3?'rgba(27,40,32,0.6)':'rgba(255,255,255,0.62)';
+    ctx.fillText(resto,x,nomeY+fs2+8);
+    afterNome=nomeY+fs2+18;
+  }
+  ctx.textAlign='left';
+
+  // Divisória
+  ctx.fillStyle=divColor;
+  const dx=layout===8?W/2-35:36;
+  ctx.fillRect(dx,afterNome+16,70,3);
+
+  // Cidade
+  ctx.font='400 22px sans-serif';
+  ctx.fillStyle=subColor;
+  const cx2=layout===8?W/2:36;
+  if(layout===8) ctx.textAlign='center';
+  ctx.fillText('📍 '+cidade,cx2,afterNome+56);
+  ctx.textAlign='left';
+
+  // Slogan
+  let sY=afterNome+110;
+  ctx.font='italic 28px serif';
+  ctx.fillStyle=layout===3?'rgba(27,40,32,0.88)':'rgba(255,255,255,0.9)';
+  const maxW=W-72;
+  let line='',ly=sY;
+  const swords=('"'+slogan+'"').split(' ');
+  for(const w of swords){
+    const t=line+w+' ';
+    if(ctx.measureText(t).width>maxW&&line){ctx.fillText(line.trim(),36,ly);line=w+' ';ly+=38;}
+    else line=t;
+  }
+  ctx.fillText(line.trim(),36,ly);
+  let bY=ly+52;
+
+  // Bullets
+  srv.slice(0,3).forEach(s=>{
+    ctx.fillStyle=layout===3?'rgba(196,98,45,0.7)':'rgba(255,255,255,0.3)';
+    ctx.fillRect(36,bY-16,4,26);
+    ctx.font='500 23px sans-serif';
+    ctx.fillStyle=layout===3?'rgba(27,40,32,0.75)':'rgba(255,255,255,0.75)';
+    let txt=s;
+    while(ctx.measureText(txt).width>W-80&&txt.length>10)txt=txt.slice(0,-4)+'...';
+    ctx.fillText(txt,50,bY);
+    bY+=44;
+  });
+
+  // Caixa contacto
+  const boxY=H-112;
+  ctx.fillStyle=layout===3?'rgba(27,40,32,0.08)':'rgba(255,255,255,0.1)';
+  rRect(ctx,36,boxY,W-72,76,10); ctx.fill();
+  ctx.font='400 17px sans-serif';
+  ctx.fillStyle=layout===3?'rgba(27,40,32,0.4)':'rgba(255,255,255,0.4)';
+  ctx.fillText('CONTACTO',58,boxY+22);
+  ctx.font='bold 30px serif';
+  ctx.fillStyle=textColor;
+  ctx.fillText(contacto||'—',58,boxY+54);
+  if(valor){
+    ctx.font='bold 26px sans-serif';
+    ctx.fillStyle='#C4622D';
+    ctx.textAlign='right';
+    ctx.fillText(valor,W-48,boxY+54);
+    ctx.textAlign='left';
+  }
+
+  // Watermark
+  ctx.font='400 17px sans-serif';
+  ctx.fillStyle=layout===3?'rgba(27,40,32,0.2)':'rgba(255,255,255,0.2)';
+  ctx.textAlign='center';
+  ctx.fillText('curriculos-eu.vercel.app',W/2,H-18);
+  ctx.textAlign='left';
+}
   const W=800,H=1000;
   const cv=document.createElement('canvas');
   cv.width=W;cv.height=H;
