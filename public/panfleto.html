@@ -655,41 +655,43 @@ async function compartilharImagem(){
   btn.innerHTML='⏳ Preparando imagem...';
   btn.disabled=true;
 
-  // Timeout de segurança — se demorar mais de 8s, faz fallback
-  const timeout=setTimeout(()=>{
-    window.open(`https://wa.me/?text=${window._waMsg||''}`, '_blank');
+  const fallback=(blob)=>{
+    if(blob){
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url; a.download='panfleto.png'; a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+    } else {
+      window.open(`https://wa.me/?text=${window._waMsg||''}`, '_blank');
+    }
     btn.innerHTML=orig; btn.disabled=false;
-  }, 8000);
+  };
 
   try{
     const el=document.getElementById('pfArte');
-    const canvas=await html2canvas(el,{
-      scale:2, useCORS:true, allowTaint:false,
-      backgroundColor:null, logging:false,
-      imageTimeout: 5000
-    });
-    clearTimeout(timeout);
+    const canvas=await Promise.race([
+      html2canvas(el,{scale:2,useCORS:true,allowTaint:false,backgroundColor:null,logging:false}),
+      new Promise((_,reject)=>setTimeout(()=>reject('timeout'),8000))
+    ]);
+
     canvas.toBlob(async(blob)=>{
-      if(navigator.share && navigator.canShare && navigator.canShare({files:[new File([blob],'panfleto.png',{type:'image/png'})]})){
+      if(!blob){ fallback(null); return; }
+      const file=new File([blob],'panfleto.png',{type:'image/png'});
+
+      if(navigator.share){
         try{
-          await navigator.share({
-            files:[new File([blob],'panfleto.png',{type:'image/png'})],
-            title:'Meu Panfleto Profissional'
-          });
-        }catch(e){}
+          await navigator.share({files:[file],title:'Meu Panfleto'});
+          btn.innerHTML=orig; btn.disabled=false;
+        }catch(e){
+          // Usuário cancelou (AbortError) ou não suporta files — baixa a imagem
+          fallback(blob);
+        }
       } else {
-        const url=URL.createObjectURL(blob);
-        const a=document.createElement('a');
-        a.href=url; a.download='panfleto.png'; a.click();
-        URL.revokeObjectURL(url);
-        setTimeout(()=>{ window.open(`https://wa.me/?text=${window._waMsg||''}`, '_blank'); }, 800);
+        fallback(blob);
       }
-      btn.innerHTML=orig; btn.disabled=false;
     },'image/png');
   }catch(e){
-    clearTimeout(timeout);
-    window.open(`https://wa.me/?text=${window._waMsg||''}`, '_blank');
-    btn.innerHTML=orig; btn.disabled=false;
+    fallback(null);
   }
 }
 
