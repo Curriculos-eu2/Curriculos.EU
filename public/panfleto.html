@@ -861,14 +861,15 @@ function compartilharImagem(){
     return;
   }
   const canvasAtual=_panfletoCanvas;
+  const nomeUnico=`panfleto_${Date.now()}.png`;
   canvasAtual.toBlob(blob=>{
     if(!blob){alert('Erro ao gerar imagem.');return;}
-    const file=new File([blob],'panfleto.png',{type:'image/png'});
+    const file=new File([blob],nomeUnico,{type:'image/png'});
     if(navigator.share){
       navigator.share({files:[file],title:'Meu Panfleto'})
-        .catch(e=>{ if(e.name!=='AbortError') _baixar(blob,'panfleto.png'); });
+        .catch(e=>{ if(e.name!=='AbortError') _baixar(blob,nomeUnico); });
     } else {
-      _baixar(blob,'panfleto.png');
+      _baixar(blob,nomeUnico);
     }
   },'image/png');
 }
@@ -878,7 +879,7 @@ function salvarImagem(){
     alert('A imagem ainda está a ser preparada. Aguarda 1-2 segundos e tenta de novo.');
     return;
   }
-  _panfletoCanvas.toBlob(blob=>{ if(blob) _baixar(blob,'panfleto.png'); },'image/png');
+  _panfletoCanvas.toBlob(blob=>{ if(blob) _baixar(blob,`panfleto_${Date.now()}.png`); },'image/png');
 }
 
 function novoPanel(){_panfletoCanvas=null;_geracaoAtual++;document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
