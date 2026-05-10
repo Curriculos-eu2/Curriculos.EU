@@ -586,10 +586,36 @@ Se não houver descrição, use descricao:[].`;
   const filtros=['brightness(0.55)','brightness(0.5)','brightness(0.08) saturate(0)','brightness(0.45)','brightness(0.35)','brightness(0.4)','brightness(0.2) saturate(0)','brightness(0.15) saturate(0)','brightness(0.5)','brightness(0.2) saturate(0.3)'];
   const filtro=filtros[layout-1]||filtros[0];
 
+  function toDataURL(img, src){
+    return new Promise(resolve=>{
+      const c=document.createElement('canvas');
+      c.width=img.naturalWidth||400; c.height=img.naturalHeight||500;
+      const ctx=c.getContext('2d');
+      try{ ctx.drawImage(img,0,0); resolve(c.toDataURL('image/jpeg',0.85)); }
+      catch(e){ resolve(src); }
+    });
+  }
+
   function mostrarPanfleto(imgSrc){
     const img=document.getElementById('pf-foto');
-    img.src=imgSrc;
     img.style.filter=filtro;
+    if(imgSrc){
+      // Converte para base64 para evitar CORS no html2canvas
+      const c=document.createElement('canvas');
+      const tmpImg=document.createElement('img');
+      tmpImg.crossOrigin='anonymous';
+      tmpImg.onload=()=>{
+        try{
+          c.width=tmpImg.naturalWidth; c.height=tmpImg.naturalHeight;
+          c.getContext('2d').drawImage(tmpImg,0,0);
+          img.src=c.toDataURL('image/jpeg',0.85);
+        }catch(e){ img.src=imgSrc; }
+      };
+      tmpImg.onerror=()=>{ img.src=''; };
+      tmpImg.src=imgSrc;
+    } else {
+      img.src='';
+    }
     document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidadeProcessada,slogan,srv,contacto,iniciais,valor);
     document.getElementById('loading').classList.remove('show');
     const msg=encodeURIComponent(`"${slogan}"\n\n📍 ${cidade}\n📞 ${contacto||''}\n\n✨ curriculos-eu.vercel.app`);
@@ -628,41 +654,42 @@ async function compartilharImagem(){
   const orig=btn.innerHTML;
   btn.innerHTML='⏳ Preparando imagem...';
   btn.disabled=true;
+
+  // Timeout de segurança — se demorar mais de 8s, faz fallback
+  const timeout=setTimeout(()=>{
+    window.open(`https://wa.me/?text=${window._waMsg||''}`, '_blank');
+    btn.innerHTML=orig; btn.disabled=false;
+  }, 8000);
+
   try{
     const el=document.getElementById('pfArte');
     const canvas=await html2canvas(el,{
-      scale:2, useCORS:true, allowTaint:true,
-      backgroundColor:null, logging:false
+      scale:2, useCORS:true, allowTaint:false,
+      backgroundColor:null, logging:false,
+      imageTimeout: 5000
     });
+    clearTimeout(timeout);
     canvas.toBlob(async(blob)=>{
-      // Tenta Web Share API (mobile - compartilha imagem direto)
       if(navigator.share && navigator.canShare && navigator.canShare({files:[new File([blob],'panfleto.png',{type:'image/png'})]})){
         try{
           await navigator.share({
             files:[new File([blob],'panfleto.png',{type:'image/png'})],
             title:'Meu Panfleto Profissional'
           });
-        }catch(e){
-          // Usuário cancelou — não é erro
-        }
+        }catch(e){}
       } else {
-        // Fallback: baixa a imagem + abre WhatsApp com texto
         const url=URL.createObjectURL(blob);
         const a=document.createElement('a');
         a.href=url; a.download='panfleto.png'; a.click();
         URL.revokeObjectURL(url);
-        setTimeout(()=>{
-          window.open(`https://wa.me/?text=${window._waMsg||''}`, '_blank');
-        }, 800);
+        setTimeout(()=>{ window.open(`https://wa.me/?text=${window._waMsg||''}`, '_blank'); }, 800);
       }
-      btn.innerHTML=orig;
-      btn.disabled=false;
+      btn.innerHTML=orig; btn.disabled=false;
     },'image/png');
   }catch(e){
-    // Fallback final: abre WhatsApp com texto
+    clearTimeout(timeout);
     window.open(`https://wa.me/?text=${window._waMsg||''}`, '_blank');
-    btn.innerHTML=orig;
-    btn.disabled=false;
+    btn.innerHTML=orig; btn.disabled=false;
   }
 }
 
