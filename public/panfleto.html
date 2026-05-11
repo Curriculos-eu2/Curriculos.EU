@@ -522,7 +522,7 @@ async function gerarPanfleto(){
   const descricao=document.getElementById('descricao')?.value.trim()||'';
   const idiomaEscolhido=document.querySelector('[data-idioma].active')?.dataset.idioma||'pais';
   if(!nome||!servico||!cidade||!pais){alert('Por favor preencha o nome, serviço, cidade e país.');return;}
-  _panfletoCanvas=null;
+  _panfletoBlob=null;
   const _minhaGeracao=++_geracaoAtual;
   document.getElementById('loading').classList.add('show');
   const pi=PAISES[pais];
@@ -594,7 +594,7 @@ Se não houver descrição, use descricao:[].`;
     if(_minhaGeracao!==_geracaoAtual) return;
     const geracaoEsta=_minhaGeracao;
 
-    // 1. Mostra o HTML exatamente como antes (URL original — display perfeito)
+    // Mostra HTML (display perfeito com URL original)
     const imgEl=document.getElementById('pf-foto');
     imgEl.style.filter=filtro;
     imgEl.src=preloadImg?preloadImg.src:'';
@@ -603,30 +603,26 @@ Se não houver descrição, use descricao:[].`;
     document.getElementById('resultado').style.display='block';
     document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
 
-    // 2. Gera canvas para partilhar usando o preloadImg já carregado (sem re-fetch)
-    _panfletoCanvas=null;
-    if(preloadImg){
-      setTimeout(()=>{
-        if(geracaoEsta!==_geracaoAtual) return;
-        const el=document.getElementById('pfArte');
-        const W=el.offsetWidth||400, H=el.offsetHeight||500;
-        const cv=document.createElement('canvas');
-        cv.width=W*2; cv.height=H*2;
-        const ctx=cv.getContext('2d');
-        ctx.scale(2,2);
-        // Fundo escuro
-        ctx.fillStyle='#1B2820'; ctx.fillRect(0,0,W,H);
-        // Imagem com filtro (preloadImg ainda está em memória com CORS)
-        try{
-          ctx.filter=filtro;
-          ctx.drawImage(preloadImg,0,0,W,H);
-          ctx.filter='none';
-        }catch(e){}
-        // Overlay com layout adaptado
-        desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidadeProcessada,valor,iniciais);
-        _panfletoCanvas=cv;
-      },400);
-    }
+    // Pré-gera blob em background (async OK aqui — não é clique do utilizador)
+    _panfletoBlob=null;
+    setTimeout(()=>{
+      if(geracaoEsta!==_geracaoAtual) return;
+      const el=document.getElementById('pfArte');
+      const W=el.offsetWidth||400, H=el.offsetHeight||500;
+      const cv=document.createElement('canvas');
+      cv.width=W*2; cv.height=H*2;
+      const ctx=cv.getContext('2d');
+      ctx.scale(2,2);
+      ctx.fillStyle='#1B2820'; ctx.fillRect(0,0,W,H);
+      if(preloadImg){
+        try{ctx.filter=filtro;ctx.drawImage(preloadImg,0,0,W,H);ctx.filter='none';}catch(e){}
+      }
+      desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidadeProcessada,valor,iniciais);
+      // Guarda blob — pronto para partilha síncrona
+      cv.toBlob(blob=>{
+        if(geracaoEsta===_geracaoAtual) _panfletoBlob=blob;
+      },'image/png');
+    },600);
   }
 
   // Pool de fotos para retry automático
@@ -654,8 +650,8 @@ Se não houver descrição, use descricao:[].`;
   tentarCarregarFoto(fotoId);
 }
 
-// ── CANVAS RENDERER (sem html2canvas) ──
-let _panfletoCanvas=null;
+// ── CANVAS RENDERER ──
+let _panfletoBlob=null;
 let _geracaoAtual=0;
 
 function rRect(ctx,x,y,w,h,r){
@@ -856,33 +852,36 @@ function _baixar(blob,nome){
 }
 
 function compartilharImagem(){
-  if(!_panfletoCanvas){
-    alert('A imagem ainda está a ser preparada. Aguarda 1-2 segundos e tenta de novo.');
+  if(!_panfletoBlob){
+    alert('Aguarda 2 segundos após gerar o panfleto e tenta de novo.');
     return;
   }
-  const canvasAtual=_panfletoCanvas;
-  const nomeUnico=`panfleto_${Date.now()}.png`;
-  canvasAtual.toBlob(blob=>{
-    if(!blob){alert('Erro ao gerar imagem.');return;}
-    const file=new File([blob],nomeUnico,{type:'image/png'});
-    if(navigator.share){
-      navigator.share({files:[file],title:'Meu Panfleto'})
-        .catch(e=>{ if(e.name!=='AbortError') _baixar(blob,nomeUnico); });
-    } else {
-      _baixar(blob,nomeUnico);
-    }
-  },'image/png');
+  // Cria File de forma síncrona (blob já está pronto)
+  // navigator.share chamado directamente no clique — iOS aceita!
+  const nome=`panfleto_${Date.now()}.png`;
+  const file=new File([_panfletoBlob],nome,{type:'image/png'});
+  if(navigator.share){
+    navigator.share({files:[file],title:'Meu Panfleto'})
+      .catch(e=>{ if(e.name!=='AbortError') _baixar(_panfletoBlob,nome); });
+  } else {
+    _baixar(_panfletoBlob,nome);
+  }
 }
 
 function salvarImagem(){
-  if(!_panfletoCanvas){
-    alert('A imagem ainda está a ser preparada. Aguarda 1-2 segundos e tenta de novo.');
+  if(!_panfletoBlob){
+    alert('Aguarda 2 segundos após gerar o panfleto e tenta de novo.');
     return;
   }
-  _panfletoCanvas.toBlob(blob=>{ if(blob) _baixar(blob,`panfleto_${Date.now()}.png`); },'image/png');
+  _baixar(_panfletoBlob,`panfleto_${Date.now()}.png`);
 }
 
-function novoPanel(){_panfletoCanvas=null;_geracaoAtual++;document.getElementById('resultado').style.display='none';document.getElementById('gerar').scrollIntoView({behavior:'smooth'});}
+function novoPanel(){
+  _panfletoBlob=null;
+  _geracaoAtual++;
+  document.getElementById('resultado').style.display='none';
+  document.getElementById('gerar').scrollIntoView({behavior:'smooth'});
+}
 
 // FAQ
 const faqs=[
