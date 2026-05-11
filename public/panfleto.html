@@ -772,8 +772,8 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   else ctx.fillText(setor.toUpperCase(),P,sY);
 
   // ── NOME ──
-  const nStart=Math.round(H*(estilo==='B'?0.16:0.17));
-  let nF=Math.round(H*0.17);
+  const nStart=Math.round(H*0.16);
+  let nF=Math.round(H*0.145);
   ctx.font=`bold ${nF}px serif`;
   const nMaxW=W-P*2-8;
   while(ctx.measureText(primeiroNome).width>nMaxW&&nF>Math.round(H*0.07)){nF=Math.round(nF*0.92);ctx.font=`bold ${nF}px serif`;}
@@ -783,11 +783,11 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   ctx.fillText(primeiroNome,nX,nStart+Math.round(nF*0.85));
   let nBottom=nStart+Math.round(nF*0.92);
   if(resto){
-    const rF=Math.round(nF*0.5);
+    const rF=Math.round(nF*0.52);
     ctx.font=`italic ${rF}px serif`;
     ctx.fillStyle=dark?'rgba(255,255,255,0.6)':'rgba(27,40,32,0.6)';
-    ctx.fillText(resto,nX,nBottom+Math.round(rF*1.1));
-    nBottom+=Math.round(rF*1.3);
+    ctx.fillText(resto,nX,nBottom+Math.round(rF*1.0));
+    nBottom=nBottom+Math.round(rF*1.1);
   }
   ctx.textAlign='left';
 
@@ -795,11 +795,11 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   const divC=estilo==='C'?'#C4622D':'rgba(255,255,255,0.3)';
   ctx.fillStyle=divC;
   const dX=centered?W/2-Math.round(W*0.07):P;
-  ctx.fillRect(dX,nBottom+Math.round(H*0.022),Math.round(W*0.14),2);
+  ctx.fillRect(dX,nBottom+Math.round(H*0.018),Math.round(W*0.14),2);
 
   // Cidade
-  const ciFSize=Math.round(H*0.036);
-  const ciY=nBottom+Math.round(H*0.09);
+  const ciFSize=Math.round(H*0.034);
+  const ciY=nBottom+Math.round(H*0.068);
   ctx.font=`400 ${ciFSize}px sans-serif`;
   ctx.fillStyle=subC;
   let ciT='📍 '+cidade;
@@ -808,38 +808,37 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   else ctx.fillText(ciT,P,ciY);
 
   // ── SLOGAN ──
-  const slFSize=Math.round(H*0.042);
-  const slStart=ciY+Math.round(H*0.082);
-  const slLineH=Math.round(slFSize*1.5);
+  const slFSize=Math.round(H*0.037);
+  const slStart=ciY+Math.round(H*0.058);
+  const slLineH=Math.round(H*0.065);
   ctx.font=`italic ${slFSize}px serif`;
   ctx.fillStyle=dark?'rgba(255,255,255,0.9)':'rgba(27,40,32,0.9)';
   const slWords=('"'+slogan+'"').split(' ');
   let slLine='',slLy=slStart,slLines=0;
   for(const w of slWords){
     const t=slLine+w+' ';
-    if(ctx.measureText(t).width>W-P*2&&slLine&&slLines<3){
+    if(ctx.measureText(t).width>W-P*2&&slLine&&slLines<2){
       ctx.fillText(slLine.trim(),P,slLy);slLine=w+' ';slLy+=slLineH;slLines++;
     }else slLine=t;
   }
-  if(slLines<3)ctx.fillText(slLine.trim(),P,slLy);
-  let afterSlogan=slLy+Math.round(H*0.055);
+  ctx.fillText(slLine.trim(),P,slLy);
+  let afterSlogan=slLy+Math.round(H*0.036);
 
-  // ── BULLETS ──
-  const bSpace=boxY-16-afterSlogan;
+  // ── BULLETS (sempre 3 se disponíveis) ──
+  const bSpace=boxY-14-afterSlogan;
   if(bSpace>0&&srv.length>0){
-    const blF=Math.round(H*0.036);
-    const blLineH=Math.min(Math.round(bSpace/Math.min(srv.length,3)),Math.round(H*0.095));
+    const blF=Math.round(H*0.034);
+    const blCount=Math.min(srv.length,3);
+    const blLineH=Math.round(bSpace/blCount);
     ctx.font=`500 ${blF}px sans-serif`;
-    srv.slice(0,3).forEach((s,i)=>{
-      const by=afterSlogan+i*blLineH+Math.round(blF*0.85);
-      if(by+blF<boxY-6){
-        ctx.fillStyle=estilo==='C'?'#C4622D':'rgba(255,255,255,0.28)';
-        ctx.fillRect(P,by-Math.round(blF*0.62),3,Math.round(blF*0.85));
-        ctx.fillStyle=dark?'rgba(255,255,255,0.78)':'rgba(27,40,32,0.75)';
-        let t=s;while(ctx.measureText(t).width>W-P*2-14&&t.length>8)t=t.slice(0,-4)+'...';
-        ctx.fillText(t,P+14,by);
-      }
-    });
+    for(let i=0;i<blCount;i++){
+      const by=afterSlogan+i*blLineH+Math.round(blF*0.82);
+      ctx.fillStyle=estilo==='C'?'#C4622D':'rgba(255,255,255,0.28)';
+      ctx.fillRect(P,by-Math.round(blF*0.6),3,Math.round(blF*0.8));
+      ctx.fillStyle=dark?'rgba(255,255,255,0.78)':'rgba(27,40,32,0.75)';
+      let t=srv[i];while(ctx.measureText(t).width>W-P*2-14&&t.length>8)t=t.slice(0,-4)+'...';
+      ctx.fillText(t,P+14,by);
+    }
   }
 }
 
