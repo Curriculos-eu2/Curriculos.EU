@@ -603,26 +603,13 @@ Se não houver descrição, use descricao:[].`;
     document.getElementById('resultado').style.display='block';
     document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
 
-    // Pré-gera blob capturando o HTML exactamente como está no preview
+    // Pré-gera blob — tenta html2canvas, fallback para canvas manual
     _panfletoBlob=null;
-    setTimeout(async()=>{
-      if(geracaoEsta!==_geracaoAtual) return;
+    const _imgDataUrl=dataUrl;
+    const _preloadRef=preloadImg;
+
+    function _gerarFallbackBlob(){
       try{
-        // html2canvas já tem a imagem em base64 no imgEl.src — sem CORS
-        const el=document.getElementById('pfArte');
-        const cv=await html2canvas(el,{
-          scale:2,
-          useCORS:true,
-          allowTaint:true,
-          backgroundColor:null,
-          logging:false,
-          ignoreElements:(node)=>node.classList&&node.classList.contains('cv-watermark-banner')
-        });
-        cv.toBlob(blob=>{
-          if(geracaoEsta===_geracaoAtual) _panfletoBlob=blob;
-        },'image/png');
-      }catch(e){
-        // Fallback: canvas manual se html2canvas falhar
         const el=document.getElementById('pfArte');
         const W=el.offsetWidth||400, H=el.offsetHeight||500;
         const cv=document.createElement('canvas');
@@ -630,15 +617,40 @@ Se não houver descrição, use descricao:[].`;
         const ctx=cv.getContext('2d');
         ctx.scale(2,2);
         ctx.fillStyle='#1B2820'; ctx.fillRect(0,0,W,H);
-        if(preloadImg&&preloadImg.naturalWidth>0){
-          try{ctx.drawImage(preloadImg,0,0,W,H);ctx.fillStyle='rgba(0,0,0,0.52)';ctx.fillRect(0,0,W,H);}catch(e2){}
+        if(_preloadRef&&_preloadRef.naturalWidth>0){
+          try{ctx.drawImage(_preloadRef,0,0,W,H);}catch(e2){}
         }
+        ctx.fillStyle='rgba(0,0,0,0.52)'; ctx.fillRect(0,0,W,H);
         desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidadeProcessada,valor,iniciais);
         cv.toBlob(blob=>{
-          if(geracaoEsta===_geracaoAtual) _panfletoBlob=blob;
+          if(geracaoEsta===_geracaoAtual&&blob) _panfletoBlob=blob;
         },'image/png');
+      }catch(e3){}
+    }
+
+    setTimeout(()=>{
+      if(geracaoEsta!==_geracaoAtual) return;
+      const el=document.getElementById('pfArte');
+      // Tenta html2canvas se disponível
+      if(typeof html2canvas==='function'){
+        const timer=setTimeout(()=>{
+          // html2canvas demorou demasiado — usa fallback
+          if(!_panfletoBlob&&geracaoEsta===_geracaoAtual) _gerarFallbackBlob();
+        },4000);
+        html2canvas(el,{scale:2,useCORS:true,allowTaint:true,backgroundColor:null,logging:false})
+          .then(cv=>{
+            clearTimeout(timer);
+            if(geracaoEsta!==_geracaoAtual) return;
+            cv.toBlob(blob=>{
+              if(geracaoEsta===_geracaoAtual&&blob) _panfletoBlob=blob;
+              else _gerarFallbackBlob();
+            },'image/png');
+          })
+          .catch(()=>{ clearTimeout(timer); _gerarFallbackBlob(); });
+      } else {
+        _gerarFallbackBlob();
       }
-    },800);
+    },1000);
   }
 
   // Pool de fotos para retry automático
@@ -857,11 +869,29 @@ function _baixar(blob,nome){
 
 function compartilharImagem(){
   if(!_panfletoBlob){
-    alert('Aguarda 2 segundos após gerar o panfleto e tenta de novo.');
+    // Aguarda até 5s pelo blob antes de desistir
+    const btn=document.getElementById('btnWA');
+    const orig=btn.innerHTML;
+    btn.innerHTML='⏳ A preparar...'; btn.disabled=true;
+    let tentativas=0;
+    const esperar=setInterval(()=>{
+      tentativas++;
+      if(_panfletoBlob){
+        clearInterval(esperar);
+        btn.innerHTML=orig; btn.disabled=false;
+        _partilharBlob();
+      } else if(tentativas>10){
+        clearInterval(esperar);
+        btn.innerHTML=orig; btn.disabled=false;
+        alert('Não foi possível gerar a imagem. Tenta gerar o panfleto novamente.');
+      }
+    },500);
     return;
   }
-  // Cria File de forma síncrona (blob já está pronto)
-  // navigator.share chamado directamente no clique — iOS aceita!
+  _partilharBlob();
+}
+
+function _partilharBlob(){
   const nome=`panfleto_${Date.now()}.png`;
   const file=new File([_panfletoBlob],nome,{type:'image/png'});
   if(navigator.share){
