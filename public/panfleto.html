@@ -614,11 +614,18 @@ Se não houver descrição, use descricao:[].`;
       const ctx=cv.getContext('2d');
       ctx.scale(2,2);
       ctx.fillStyle='#1B2820'; ctx.fillRect(0,0,W,H);
-      if(preloadImg){
-        try{ctx.filter=filtro;ctx.drawImage(preloadImg,0,0,W,H);ctx.filter='none';}catch(e){}
+      if(preloadImg&&preloadImg.naturalWidth>0){
+        try{
+          // ctx.filter tem suporte limitado em iOS antigo — usa overlay em vez disso
+          ctx.drawImage(preloadImg,0,0,W,H);
+          // Escurece com overlay semitransparente (funciona em todos os browsers)
+          ctx.fillStyle='rgba(0,0,0,0.52)';
+          ctx.fillRect(0,0,W,H);
+        }catch(e){
+          ctx.fillStyle='#1B2820'; ctx.fillRect(0,0,W,H);
+        }
       }
       desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidadeProcessada,valor,iniciais);
-      // Guarda blob — pronto para partilha síncrona
       cv.toBlob(blob=>{
         if(geracaoEsta===_geracaoAtual) _panfletoBlob=blob;
       },'image/png');
@@ -691,53 +698,36 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   const subC=dark?'rgba(255,255,255,0.55)':'rgba(27,40,32,0.5)';
   const centered=estilo==='D';
 
-  // ── GRADIENTE por estilo ──
+  // ── GRADIENTE (reforça escurecimento no topo e base) ──
   const g=ctx.createLinearGradient(0,0,0,H);
-  if(estilo==='A'){
-    g.addColorStop(0,'rgba(0,0,0,0.55)');
-    g.addColorStop(0.4,'rgba(0,0,0,0.08)');
-    g.addColorStop(0.62,'rgba(0,0,0,0.22)');
-    g.addColorStop(1,'rgba(0,0,0,0.97)');
-    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-    // Faixa lateral esquerda
-    ctx.fillStyle='rgba(255,255,255,0.18)'; ctx.fillRect(0,0,5,H);
-  } else if(estilo==='B'){
-    // Gradiente forte no topo
-    g.addColorStop(0,'rgba(0,0,0,0.82)');
-    g.addColorStop(0.38,'rgba(0,0,0,0.22)');
-    g.addColorStop(0.6,'rgba(0,0,0,0.12)');
-    g.addColorStop(1,'rgba(0,0,0,0.97)');
-    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-    // Linha superior
-    ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.fillRect(0,0,W,4);
-  } else if(estilo==='C'){
-    // Fundo claro com overlay mínimo
-    ctx.fillStyle='rgba(250,247,242,0.55)'; ctx.fillRect(0,0,W,H);
-    // Linha lateral esquerda laranja
+  if(estilo==='C'){
+    ctx.fillStyle='rgba(250,247,242,0.6)'; ctx.fillRect(0,0,W,H);
     ctx.fillStyle='#C4622D'; ctx.fillRect(0,0,5,H);
-  } else { // D: dark premium
-    g.addColorStop(0,'rgba(0,0,0,0.4)');
-    g.addColorStop(0.35,'rgba(0,0,0,0.05)');
-    g.addColorStop(0.65,'rgba(0,0,0,0.35)');
-    g.addColorStop(1,'rgba(0,0,0,0.98)');
+  } else {
+    // Gradiente suave — foto já está escurecida com overlay
+    g.addColorStop(0,'rgba(0,0,0,0.35)');
+    g.addColorStop(0.5,'rgba(0,0,0,0.0)');
+    g.addColorStop(1,'rgba(0,0,0,0.75)');
     ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    if(estilo==='A') { ctx.fillStyle='rgba(255,255,255,0.2)'; ctx.fillRect(0,0,5,H); }
+    if(estilo==='B') { ctx.fillStyle='rgba(255,255,255,0.25)'; ctx.fillRect(0,0,W,4); }
   }
 
   // ── CAIXA CONTACTO (fixo no fundo) ──
-  const boxH=Math.round(H*0.14);
-  const boxY=H-Math.round(H*0.04)-boxH;
-  ctx.fillStyle=dark?'rgba(255,255,255,0.12)':'rgba(27,40,32,0.1)';
+  const boxH=Math.round(H*0.15);
+  const boxY=H-Math.round(H*0.05)-boxH;
+  ctx.fillStyle=dark?'rgba(255,255,255,0.13)':'rgba(27,40,32,0.1)';
   rRect(ctx,P,boxY,W-P*2,boxH,8); ctx.fill();
-  const lbF=Math.round(H*0.028);
+  const lbF=Math.round(H*0.03);
   ctx.font=`400 ${lbF}px sans-serif`;
   ctx.fillStyle=subC;
   ctx.fillText('CONTACTO',P+16,boxY+Math.round(boxH*0.35));
-  const cF=Math.round(H*0.056);
+  const cF=Math.round(H*0.06);
   ctx.font=`bold ${cF}px serif`;
   ctx.fillStyle=textC;
   ctx.fillText(contacto||'—',P+16,boxY+Math.round(boxH*0.82));
   if(valor){
-    ctx.font=`bold ${Math.round(H*0.048)}px sans-serif`;
+    ctx.font=`bold ${Math.round(H*0.05)}px sans-serif`;
     ctx.fillStyle='#C4622D';
     ctx.textAlign='right';
     ctx.fillText(valor,W-P-8,boxY+Math.round(boxH*0.82));
@@ -745,61 +735,59 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   }
 
   // Watermark
-  ctx.font=`400 ${Math.round(H*0.025)}px sans-serif`;
-  ctx.fillStyle=dark?'rgba(255,255,255,0.18)':'rgba(27,40,32,0.18)';
+  ctx.font=`400 ${Math.round(H*0.026)}px sans-serif`;
+  ctx.fillStyle=dark?'rgba(255,255,255,0.2)':'rgba(27,40,32,0.2)';
   ctx.textAlign='center';
-  ctx.fillText('curriculos-eu.vercel.app',W/2,H-Math.round(H*0.01));
+  ctx.fillText('curriculos-eu.vercel.app',W/2,H-Math.round(H*0.012));
   ctx.textAlign='left';
 
   // ── TOPO: branding ──
-  const bF=Math.round(H*0.042);
-  const bY=Math.round(H*0.088);
+  const bF=Math.round(H*0.044);
+  const bY=Math.round(H*0.09);
   ctx.font=`bold ${bF}px sans-serif`;
-  ctx.fillStyle=dark?'rgba(255,255,255,0.75)':'rgba(27,40,32,0.75)';
-  const bX=centered?P:P;
-  ctx.fillText('Currículo',bX,bY);
+  ctx.fillStyle=dark?'rgba(255,255,255,0.85)':'rgba(27,40,32,0.8)';
+  ctx.fillText('Currículo',P,bY);
   const bw=ctx.measureText('Currículo').width;
-  ctx.fillStyle='#C4622D'; ctx.fillText('EU',bX+bw,bY);
-  ctx.font=`${Math.round(H*0.055)}px sans-serif`;
-  ctx.fillText(pi.flag,W-P-Math.round(H*0.03),bY);
+  ctx.fillStyle='#C4622D'; ctx.fillText('EU',P+bw,bY);
+  ctx.font=`${Math.round(H*0.056)}px sans-serif`;
+  ctx.fillText(pi.flag,W-P-Math.round(H*0.04),bY);
 
   // Setor
-  const sF=Math.round(H*0.034);
-  const sY=Math.round(H*0.158);
+  const sF=Math.round(H*0.035);
+  const sY=Math.round(H*0.16);
   ctx.font=`500 ${sF}px sans-serif`;
   ctx.fillStyle=subC;
-  if(centered){ctx.textAlign='center';ctx.fillText(setor.toUpperCase(),W/2,sY);ctx.textAlign='left';}
-  else ctx.fillText(setor.toUpperCase(),P,sY);
+  ctx.fillText(setor.toUpperCase(),P,sY);
 
   // ── NOME ──
-  const nStart=Math.round(H*0.16);
-  let nF=Math.round(H*0.145);
+  const nStart=Math.round(H*0.17);
+  let nF=Math.round(H*0.16);
   ctx.font=`bold ${nF}px serif`;
   const nMaxW=W-P*2-8;
   while(ctx.measureText(primeiroNome).width>nMaxW&&nF>Math.round(H*0.07)){nF=Math.round(nF*0.92);ctx.font=`bold ${nF}px serif`;}
-  ctx.fillStyle=estilo==='B'?'#fff':textC;
+  ctx.fillStyle=textC;
   const nX=centered?W/2:P;
   if(centered)ctx.textAlign='center';
-  ctx.fillText(primeiroNome,nX,nStart+Math.round(nF*0.85));
-  let nBottom=nStart+Math.round(nF*0.92);
+  ctx.fillText(primeiroNome,nX,nStart+Math.round(nF*0.88));
+  let nBottom=nStart+Math.round(nF*0.95);
   if(resto){
-    const rF=Math.round(nF*0.52);
+    const rF=Math.round(nF*0.54);
     ctx.font=`italic ${rF}px serif`;
-    ctx.fillStyle=dark?'rgba(255,255,255,0.6)':'rgba(27,40,32,0.6)';
-    ctx.fillText(resto,nX,nBottom+Math.round(rF*1.0));
-    nBottom=nBottom+Math.round(rF*1.1);
+    ctx.fillStyle=dark?'rgba(255,255,255,0.62)':'rgba(27,40,32,0.62)';
+    ctx.fillText(resto,nX,nBottom+Math.round(rF*1.05));
+    nBottom=nBottom+Math.round(rF*1.2);
   }
   ctx.textAlign='left';
 
   // Divisória
-  const divC=estilo==='C'?'#C4622D':'rgba(255,255,255,0.3)';
+  const divC=estilo==='C'?'#C4622D':'rgba(255,255,255,0.32)';
   ctx.fillStyle=divC;
   const dX=centered?W/2-Math.round(W*0.07):P;
-  ctx.fillRect(dX,nBottom+Math.round(H*0.018),Math.round(W*0.14),2);
+  ctx.fillRect(dX,nBottom+Math.round(H*0.022),Math.round(W*0.12),2);
 
   // Cidade
-  const ciFSize=Math.round(H*0.034);
-  const ciY=nBottom+Math.round(H*0.068);
+  const ciFSize=Math.round(H*0.036);
+  const ciY=nBottom+Math.round(H*0.075);
   ctx.font=`400 ${ciFSize}px sans-serif`;
   ctx.fillStyle=subC;
   let ciT='📍 '+cidade;
@@ -808,11 +796,11 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
   else ctx.fillText(ciT,P,ciY);
 
   // ── SLOGAN ──
-  const slFSize=Math.round(H*0.037);
-  const slStart=ciY+Math.round(H*0.058);
-  const slLineH=Math.round(H*0.065);
+  const slFSize=Math.round(H*0.04);
+  const slStart=ciY+Math.round(H*0.072);
+  const slLineH=Math.round(H*0.068);
   ctx.font=`italic ${slFSize}px serif`;
-  ctx.fillStyle=dark?'rgba(255,255,255,0.9)':'rgba(27,40,32,0.9)';
+  ctx.fillStyle=dark?'rgba(255,255,255,0.92)':'rgba(27,40,32,0.92)';
   const slWords=('"'+slogan+'"').split(' ');
   let slLine='',slLy=slStart,slLines=0;
   for(const w of slWords){
@@ -822,20 +810,20 @@ function desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan
     }else slLine=t;
   }
   ctx.fillText(slLine.trim(),P,slLy);
-  let afterSlogan=slLy+Math.round(H*0.036);
+  let afterSlogan=slLy+Math.round(H*0.048);
 
-  // ── BULLETS (sempre 3 se disponíveis) ──
+  // ── BULLETS ──
   const bSpace=boxY-14-afterSlogan;
   if(bSpace>0&&srv.length>0){
-    const blF=Math.round(H*0.034);
     const blCount=Math.min(srv.length,3);
     const blLineH=Math.round(bSpace/blCount);
+    const blF=Math.round(Math.min(blLineH*0.55,H*0.036));
     ctx.font=`500 ${blF}px sans-serif`;
     for(let i=0;i<blCount;i++){
-      const by=afterSlogan+i*blLineH+Math.round(blF*0.82);
-      ctx.fillStyle=estilo==='C'?'#C4622D':'rgba(255,255,255,0.28)';
-      ctx.fillRect(P,by-Math.round(blF*0.6),3,Math.round(blF*0.8));
-      ctx.fillStyle=dark?'rgba(255,255,255,0.78)':'rgba(27,40,32,0.75)';
+      const by=afterSlogan+i*blLineH+Math.round(blF*0.85);
+      ctx.fillStyle=estilo==='C'?'#C4622D':'rgba(255,255,255,0.3)';
+      ctx.fillRect(P,by-Math.round(blF*0.6),3,Math.round(blF*0.85));
+      ctx.fillStyle=dark?'rgba(255,255,255,0.8)':'rgba(27,40,32,0.78)';
       let t=srv[i];while(ctx.measureText(t).width>W-P*2-14&&t.length>8)t=t.slice(0,-4)+'...';
       ctx.fillText(t,P+14,by);
     }
