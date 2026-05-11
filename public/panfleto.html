@@ -590,46 +590,55 @@ Se não houver descrição, use descricao:[].`;
   const filtros=['brightness(0.55)','brightness(0.5)','brightness(0.08) saturate(0)','brightness(0.45)','brightness(0.35)','brightness(0.4)','brightness(0.2) saturate(0)','brightness(0.15) saturate(0)','brightness(0.5)','brightness(0.2) saturate(0.3)'];
   const filtro=filtros[layout-1]||filtros[0];
 
-  function mostrarPanfleto(preloadImg){
+  function mostrarPanfleto(preloadImg,dataUrl){
     if(_minhaGeracao!==_geracaoAtual) return;
     const geracaoEsta=_minhaGeracao;
 
-    // Mostra HTML (display perfeito com URL original)
+    // Usa base64 se disponível (html2canvas não terá CORS), senão URL original
     const imgEl=document.getElementById('pf-foto');
     imgEl.style.filter=filtro;
-    imgEl.src=preloadImg?preloadImg.src:'';
+    imgEl.src=dataUrl||preloadImg.src;
     document.getElementById('pf-overlay').innerHTML=buildOverlay(layout,pi,setor,primeiroNome,resto,nomeHtml,cidadeProcessada,slogan,srv,contacto,iniciais,valor);
     document.getElementById('loading').classList.remove('show');
     document.getElementById('resultado').style.display='block';
     document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
 
-    // Pré-gera blob em background (async OK aqui — não é clique do utilizador)
+    // Pré-gera blob capturando o HTML exactamente como está no preview
     _panfletoBlob=null;
-    setTimeout(()=>{
+    setTimeout(async()=>{
       if(geracaoEsta!==_geracaoAtual) return;
-      const el=document.getElementById('pfArte');
-      const W=el.offsetWidth||400, H=el.offsetHeight||500;
-      const cv=document.createElement('canvas');
-      cv.width=W*2; cv.height=H*2;
-      const ctx=cv.getContext('2d');
-      ctx.scale(2,2);
-      ctx.fillStyle='#1B2820'; ctx.fillRect(0,0,W,H);
-      if(preloadImg&&preloadImg.naturalWidth>0){
-        try{
-          // ctx.filter tem suporte limitado em iOS antigo — usa overlay em vez disso
-          ctx.drawImage(preloadImg,0,0,W,H);
-          // Escurece com overlay semitransparente (funciona em todos os browsers)
-          ctx.fillStyle='rgba(0,0,0,0.52)';
-          ctx.fillRect(0,0,W,H);
-        }catch(e){
-          ctx.fillStyle='#1B2820'; ctx.fillRect(0,0,W,H);
+      try{
+        // html2canvas já tem a imagem em base64 no imgEl.src — sem CORS
+        const el=document.getElementById('pfArte');
+        const cv=await html2canvas(el,{
+          scale:2,
+          useCORS:true,
+          allowTaint:true,
+          backgroundColor:null,
+          logging:false,
+          ignoreElements:(node)=>node.classList&&node.classList.contains('cv-watermark-banner')
+        });
+        cv.toBlob(blob=>{
+          if(geracaoEsta===_geracaoAtual) _panfletoBlob=blob;
+        },'image/png');
+      }catch(e){
+        // Fallback: canvas manual se html2canvas falhar
+        const el=document.getElementById('pfArte');
+        const W=el.offsetWidth||400, H=el.offsetHeight||500;
+        const cv=document.createElement('canvas');
+        cv.width=W*2; cv.height=H*2;
+        const ctx=cv.getContext('2d');
+        ctx.scale(2,2);
+        ctx.fillStyle='#1B2820'; ctx.fillRect(0,0,W,H);
+        if(preloadImg&&preloadImg.naturalWidth>0){
+          try{ctx.drawImage(preloadImg,0,0,W,H);ctx.fillStyle='rgba(0,0,0,0.52)';ctx.fillRect(0,0,W,H);}catch(e2){}
         }
+        desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidadeProcessada,valor,iniciais);
+        cv.toBlob(blob=>{
+          if(geracaoEsta===_geracaoAtual) _panfletoBlob=blob;
+        },'image/png');
       }
-      desenharOverlayCanvas(ctx,W,H,layout,pi,setor,primeiroNome,resto,slogan,srv,contacto,cidadeProcessada,valor,iniciais);
-      cv.toBlob(blob=>{
-        if(geracaoEsta===_geracaoAtual) _panfletoBlob=blob;
-      },'image/png');
-    },600);
+    },800);
   }
 
   // Pool de fotos para retry automático
@@ -641,7 +650,15 @@ Se não houver descrição, use descricao:[].`;
     preload.crossOrigin='anonymous';
     preload.onload=()=>{
       if(_minhaGeracao!==_geracaoAtual) return;
-      mostrarPanfleto(preload);
+      // Converte para base64 no mesmo contexto CORS — html2canvas não precisa re-fetch
+      let dataUrl=null;
+      try{
+        const tmp=document.createElement('canvas');
+        tmp.width=preload.naturalWidth; tmp.height=preload.naturalHeight;
+        tmp.getContext('2d').drawImage(preload,0,0);
+        dataUrl=tmp.toDataURL('image/jpeg',0.92);
+      }catch(e){ dataUrl=null; }
+      mostrarPanfleto(preload,dataUrl);
     };
     preload.onerror=()=>{
       if(_minhaGeracao!==_geracaoAtual) return;
@@ -649,7 +666,7 @@ Se não houver descrição, use descricao:[].`;
         tentativa++;
         const proxId=fotoPool.splice(Math.floor(Math.random()*fotoPool.length),1)[0];
         tentarCarregarFoto(proxId);
-      } else { mostrarPanfleto(null); }
+      } else { mostrarPanfleto(null,null); }
     };
     preload.src=fotoUrl(id,900);
   }
@@ -870,7 +887,9 @@ function novoPanel(){
   document.getElementById('gerar').scrollIntoView({behavior:'smooth'});
 }
 
-// FAQ
+// html2canvas carregado via CDN
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 const faqs=[
   ["O panfleto é mesmo grátis?","Sim! A versão gratuita inclui uma marca d'água discreta. Para removê-la, pague apenas €1,90 — pagamento único, sem mensalidade. Ou assine o Premium (€7,90/mês) para gerações ilimitadas sem marca d'água."],
   ["Em que idioma sai o panfleto?","No idioma do país selecionado: português para Portugal, inglês para Reino Unido e Irlanda, alemão para Alemanha e Áustria, etc. Você também pode ativar a opção 'Inglês universal' para gerar sempre em inglês."],
